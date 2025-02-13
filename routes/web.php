@@ -9,6 +9,8 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('roles/{idrol}/edit', [RolController::class, 'edit']);
+
 Route::get('roles', [RolController::class, 'index']);
 Route::post('roles', [RolController::class, 'store']);
 Route::get('roles/{idrol}', [RolController::class, 'show']);

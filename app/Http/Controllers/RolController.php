@@ -20,11 +20,22 @@ class RolController extends Controller
         $this->actualizarRol = new ActualizarRol($repositorioRol);
     }
 
-    public function index()
+   /* public function index()
     {
         $roles = $this->repositorioRol->obtenerTodos();
         return response()->json($roles);
+    }*/
+
+
+
+    public function index()
+    {
+        $roles = $this->repositorioRol->obtenerTodos();
+        return view('index', compact('roles')); // Eliminamos el dd($roles);
     }
+    
+
+
 
     public function store(Request $request)
     {
@@ -52,4 +63,15 @@ class RolController extends Controller
         $this->repositorioRol->eliminar($idrol);
         return response()->json(['mensaje' => 'Rol eliminado correctamente'], 200);
     }
+
+
+    public function edit($idrol)
+{
+    $rol = $this->repositorioRol->obtenerPorId($idrol);
+    return response()->json($rol);
 }
+
+}
+
+
+

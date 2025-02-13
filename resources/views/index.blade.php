@@ -974,7 +974,7 @@
   </button>
 </div>
 
-<!-- Formulario desplegable para Agregar Rol -->
+<!-- Formulario desplegable para Agregar Rol 
 <div class="collapse" id="formAgregarRol">
   <div class="card card-body">
     <form id="formAgregarRolForm">
@@ -1004,15 +1004,43 @@
       </div>
     </form>
   </div>
-</div>
+</div>  -->
+
+
+
+<form id="formAgregarRolForm" method="POST" action="{{ url('roles') }}">
+  @csrf
+  <div class="mb-3">
+    <label for="idrol" class="form-label font-w600 text-black">ID Rol</label>
+    <input type="text" class="form-control" name="idrol" placeholder="Ingrese ID del rol">
+  </div>
+  <div class="mb-3">
+    <label for="nombrerol" class="form-label font-w600 text-black">Nombre Rol</label>
+    <input type="text" class="form-control" name="nombrerol" placeholder="Ingrese nombre del rol">
+  </div>
+  <div class="mb-3">
+    <label for="condicionrol" class="form-label font-w600 text-black">Condición Rol</label>
+    <select class="form-select" name="condicionrol">
+      <option value="Activo">Activo</option>
+      <option value="Inactivo">Inactivo</option>
+    </select>
+  </div>
+  <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-secondary me-2" data-bs-toggle="collapse" data-bs-target="#formAgregarRol">
+      <i class="fa fa-times"></i> Cancelar
+    </button>
+    <button type="submit" class="btn btn-primary">
+      <i class="fa fa-save"></i> Guardar
+    </button>
+  </div>
+</form>
 
 
 
 
 
 
-
-<!-- Tabla de roles -->
+<!-- Tabla de roles 
 <div class="table-responsive">
   <table class="table border-hover tr-rounded card-table cardtbl-link">
     <thead class="bg-light">
@@ -1065,7 +1093,104 @@
       </tr>
     </tbody>
   </table>
+</div>  -->
+
+<!-- Tabla de roles -->
+<div class="table-responsive">
+  <table class="table border-hover tr-rounded card-table cardtbl-link">
+    <thead class="bg-light">
+      <tr>
+        <th class="font-w600 text-black">ID Rol</th>
+        <th class="font-w600 text-black">Nombre Rol</th>
+        <th class="font-w600 text-black">Condición Rol</th>
+        <th class="font-w600 text-black">Acciones</th>
+      </tr>
+    </thead>
+
+
+
+
+	
+    <tbody>
+    <?php if (isset($roles) && count($roles) > 0): ?>
+        <?php foreach ($roles as $rol): ?>
+            <tr>
+                <td><?= htmlspecialchars($rol->idrol) ?></td>
+                <td><?= htmlspecialchars($rol->nombrerol) ?></td>
+                <td><?= htmlspecialchars($rol->condicionrol) ?></td>
+                <td>
+                    <a href="#" class="btn btn-success btn-sm me-1" onclick="editarRol(<?= $rol->idrol ?>)">
+                        <i class="fa fa-pencil"></i> Editar
+                    </a>
+                    <form action="<?= url('roles', $rol->idrol) ?>" method="POST" class="d-inline">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="<?= csrf_token() ?>">
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash"></i> Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td colspan="4">No hay roles disponibles</td>
+        </tr>
+    <?php endif; ?>
+</tbody>
+
+  </table>
 </div>
+
+
+
+<!-- Editar roles -->
+
+<div class="collapse" id="formEditarRol">
+  <div class="card card-body">
+    <form id="formEditarRolForm" method="POST" action="">
+      @csrf
+      @method('PUT')
+      <input type="hidden" name="idrol" id="editIdRol">
+      <div class="mb-3">
+        <label for="editNombreRol" class="form-label font-w600 text-black">Nombre Rol</label>
+        <input type="text" class="form-control" name="nombrerol" id="editNombreRol" placeholder="Ingrese nombre del rol">
+      </div>
+      <div class="mb-3">
+        <label for="editCondicionRol" class="form-label font-w600 text-black">Condición Rol</label>
+        <select class="form-select" name="condicionrol" id="editCondicionRol">
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-secondary me-2" data-bs-toggle="collapse" data-bs-target="#formEditarRol">
+          <i class="fa fa-times"></i> Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary">
+          <i class="fa fa-save"></i> Guardar Cambios
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function editarRol(id) {
+    fetch(`/roles/${id}`)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('editIdRol').value = data.idrol;
+        document.getElementById('editNombreRol').value = data.nombrerol;
+        document.getElementById('editCondicionRol').value = data.condicionrol;
+        document.getElementById('formEditarRolForm').action = `/roles/${id}`;
+        var form = new bootstrap.Collapse(document.getElementById('formEditarRol'));
+        form.show();
+      });
+  }
+</script>
+
+
 
 
 
