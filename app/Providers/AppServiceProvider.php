@@ -12,15 +12,17 @@ class AppServiceProvider extends ServiceProvider
      * Register any application services.
      */
     public function register(): void
-    {
-        $this->app->bind(RepositorioRolInterface::class, RepositorioRol::class);
-    }
+{
+    $this->app->bind(
+        \App\Domain\Repositories\RepositorioPermisoInterface::class,
+        \App\Domain\Repositories\RepositorioPermiso::class
+    );
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        //
-    }
+    // El binding ya existente para roles.
+    $this->app->bind(
+        \App\Domain\Repositories\RepositorioRolInterface::class,
+        \App\Domain\Repositories\RepositorioRol::class
+    );
+}
+
 }

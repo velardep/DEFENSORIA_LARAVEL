@@ -963,6 +963,344 @@
 					</div>
 					<a href="#" class="btn btn-primary mb-2 rounded"><i class="las la-calendar scale5 me-3"></i>Filter Periode</a>
 				</div>	
+
+
+
+
+<!-- Botón para agregar un nuevo Rol (despliega el formulario debajo) -->
+<div class="mb-4">
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#formAgregarRol" aria-expanded="false" aria-controls="formAgregarRol">
+    <i class="fa fa-plus"></i> Agregar Rol
+  </button>
+</div>
+
+<!-- Formulario desplegable para Agregar Rol -->
+<div class="collapse" id="formAgregarRol">
+  <div class="card card-body">
+    <form id="formAgregarRolForm">
+      <div class="mb-3">
+        <label for="idrol" class="form-label font-w600 text-black">ID Rol</label>
+        <input type="text" class="form-control" id="idrol" placeholder="Ingrese ID del rol">
+      </div>
+      <div class="mb-3">
+        <label for="nombrerol" class="form-label font-w600 text-black">Nombre Rol</label>
+        <input type="text" class="form-control" id="nombrerol" placeholder="Ingrese nombre del rol">
+      </div>
+      <div class="mb-3">
+        <label for="condicionrol" class="form-label font-w600 text-black">Condición Rol</label>
+        <select class="form-select" id="condicionrol">
+          <option value="">Seleccione la condición</option>
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-secondary me-2" data-bs-toggle="collapse" data-bs-target="#formAgregarRol" aria-expanded="false" aria-controls="formAgregarRol">
+          <i class="fa fa-times"></i> Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary">
+          <i class="fa fa-save"></i> Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- Tabla de roles -->
+<div class="table-responsive">
+  <table class="table border-hover tr-rounded card-table cardtbl-link">
+    <thead class="bg-light">
+      <tr>
+        <th class="font-w600 text-black">ID Rol</th>
+        <th class="font-w600 text-black">Nombre Rol</th>
+        <th class="font-w600 text-black">Condición Rol</th>
+        <th class="font-w600 text-black">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Administrador</td>
+        <td>Activo</td>
+        <td>
+          <a href="#" class="btn btn-success btn-sm me-1">
+            <i class="fa fa-pencil"></i> Editar
+          </a>
+          <a href="#" class="btn btn-danger btn-sm">
+            <i class="fa fa-trash"></i> Eliminar
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Editor</td>
+        <td>Activo</td>
+        <td>
+          <a href="#" class="btn btn-success btn-sm me-1">
+            <i class="fa fa-pencil"></i> Editar
+          </a>
+          <a href="#" class="btn btn-danger btn-sm">
+            <i class="fa fa-trash"></i> Eliminar
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Usuario</td>
+        <td>Inactivo</td>
+        <td>
+          <a href="#" class="btn btn-success btn-sm me-1">
+            <i class="fa fa-pencil"></i> Editar
+          </a>
+          <a href="#" class="btn btn-danger btn-sm">
+            <i class="fa fa-trash"></i> Eliminar
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+<!-- Botón para agregar un nuevo Permiso -->
+<div class="mb-4">
+  <a href="#" class="btn btn-primary">
+    <i class="fa fa-plus"></i> Agregar Permiso
+  </a>
+</div>
+
+<!-- Tabla de Permisos -->
+<div class="table-responsive">
+  <table class="table border-hover tr-rounded card-table cardtbl-link">
+    <thead class="bg-light">
+      <tr>
+        <th class="font-w600 text-black">ID Permiso</th>
+        <th class="font-w600 text-black">Nombre Permiso</th>
+        <th class="font-w600 text-black">Condición Permiso</th>
+        <th class="font-w600 text-black">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Ver Reportes</td>
+        <td>Activo</td>
+        <td>
+          <a href="#" class="btn btn-success btn-sm me-1">
+            <i class="fa fa-pencil"></i> Editar
+          </a>
+          <a href="#" class="btn btn-danger btn-sm">
+            <i class="fa fa-trash"></i> Eliminar
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Editar Usuarios</td>
+        <td>Activo</td>
+        <td>
+          <a href="#" class="btn btn-success btn-sm me-1">
+            <i class="fa fa-pencil"></i> Editar
+          </a>
+          <a href="#" class="btn btn-danger btn-sm">
+            <i class="fa fa-trash"></i> Eliminar
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Eliminar Posts</td>
+        <td>Inactivo</td>
+        <td>
+          <a href="#" class="btn btn-success btn-sm me-1">
+            <i class="fa fa-pencil"></i> Editar
+          </a>
+          <a href="#" class="btn btn-danger btn-sm">
+            <i class="fa fa-trash"></i> Eliminar
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+<!-- Botón para agregar una nueva Denuncia (despliega el formulario debajo) -->
+<div class="mb-4">
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#formAgregarDenuncia" aria-expanded="false" aria-controls="formAgregarDenuncia">
+    <i class="fa fa-plus"></i> Agregar Denuncia
+  </button>
+</div>
+
+<!-- Formulario desplegable para Agregar Denuncia -->
+<div class="collapse" id="formAgregarDenuncia">
+  <div class="card card-body">
+    <form id="formAgregarDenunciaForm">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="fechaDenuncia" class="form-label font-w600 text-black">Fecha Denuncia</label>
+          <input type="date" class="form-control" id="fechaDenuncia">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="nroDenuncia" class="form-label font-w600 text-black">Número de Denuncia</label>
+          <input type="text" class="form-control" id="nroDenuncia" placeholder="Ingrese el número de denuncia">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="inhabilitado" class="form-label font-w600 text-black">Inhabilitado</label>
+          <select class="form-select" id="inhabilitado">
+            <option value="No">No</option>
+            <option value="Sí">Sí</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="ingreso" class="form-label font-w600 text-black">Ingreso</label>
+          <input type="text" class="form-control" id="ingreso" placeholder="Ingrese el tipo de ingreso">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="especificaIngreso" class="form-label font-w600 text-black">Especifica Ingreso</label>
+          <input type="text" class="form-control" id="especificaIngreso" placeholder="Especificación del ingreso">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="descripcion" class="form-label font-w600 text-black">Descripción</label>
+          <textarea class="form-control" id="descripcion" rows="1" placeholder="Ingrese la descripción"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="procedencia" class="form-label font-w600 text-black">Procedencia</label>
+          <input type="text" class="form-control" id="procedencia" placeholder="Ingrese la procedencia">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="municipio" class="form-label font-w600 text-black">Municipio</label>
+          <input type="text" class="form-control" id="municipio" placeholder="Ingrese el municipio">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="nombreServicio" class="form-label font-w600 text-black">Nombre Servicio</label>
+          <input type="text" class="form-control" id="nombreServicio" placeholder="Ingrese el servicio">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="tipoAtencion" class="form-label font-w600 text-black">Tipo Atención</label>
+          <input type="text" class="form-control" id="tipoAtencion" placeholder="Ingrese el tipo de atención">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="tipoDenuncia" class="form-label font-w600 text-black">Tipo Denuncia</label>
+          <input type="text" class="form-control" id="tipoDenuncia" placeholder="Ingrese el tipo de denuncia">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="estadoOrientaciones" class="form-label font-w600 text-black">Estado Orientaciones</label>
+          <input type="text" class="form-control" id="estadoOrientaciones" placeholder="Ingrese el estado">
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-secondary me-2" data-bs-toggle="collapse" data-bs-target="#formAgregarDenuncia" aria-expanded="false" aria-controls="formAgregarDenuncia">
+          <i class="fa fa-times"></i> Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary">
+          <i class="fa fa-save"></i> Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- Tabla de Denuncias_denuncia -->
+<div class="table-responsive">
+  <table class="table border-hover tr-rounded card-table cardtbl-link">
+    <thead class="bg-light">
+      <tr>
+        <th class="font-w600 text-black">ID</th>
+        <th class="font-w600 text-black">Fecha Denuncia</th>
+        <th class="font-w600 text-black">Nro Denuncia</th>
+        <th class="font-w600 text-black">Inhabilitado</th>
+        <th class="font-w600 text-black">Ingreso</th>
+        <th class="font-w600 text-black">Especifica Ingreso</th>
+        <th class="font-w600 text-black">Descripción</th>
+        <th class="font-w600 text-black">Opinión</th>
+        <th class="font-w600 text-black">Historia</th>
+        <th class="font-w600 text-black">Completa</th>
+        <th class="font-w600 text-black">Archivada</th>
+        <th class="font-w600 text-black">Create</th>
+        <th class="font-w600 text-black">Modificate</th>
+        <th class="font-w600 text-black">Procedencia</th>
+        <th class="font-w600 text-black">Municipio</th>
+        <th class="font-w600 text-black">Otra Inst</th>
+        <th class="font-w600 text-black">Nombre Servicio</th>
+        <th class="font-w600 text-black">Orientación</th>
+        <th class="font-w600 text-black">Tipo Atención</th>
+        <th class="font-w600 text-black">Defensoria ID</th>
+        <th class="font-w600 text-black">Tipologia ID</th>
+        <th class="font-w600 text-black">Tipo Denuncia</th>
+        <th class="font-w600 text-black">Estado Orientaciones</th>
+        <th class="font-w600 text-black">Color</th>
+        <th class="font-w600 text-black">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2023-02-10</td>
+        <td>DEN-001</td>
+        <td>No</td>
+        <td>Online</td>
+        <td>Web</td>
+        <td>Descripción de la denuncia</td>
+        <td>Positiva</td>
+        <td>Historia breve</td>
+        <td>Sí</td>
+        <td>No</td>
+        <td>2023-02-09</td>
+        <td>2023-02-10</td>
+        <td>Local</td>
+        <td>Medellín</td>
+        <td>No</td>
+        <td>Servicio X</td>
+        <td>Orientación A</td>
+        <td>Atención Inmediata</td>
+        <td>10</td>
+        <td>5</td>
+        <td>Tipo A</td>
+        <td>Activas</td>
+        <td>#FF0000</td>
+        <td>
+          <a href="#" class="btn btn-success btn-sm me-1">
+            <i class="fa fa-pencil"></i> Editar
+          </a>
+          <a href="#" class="btn btn-danger btn-sm">
+            <i class="fa fa-trash"></i> Eliminar
+          </a>
+        </td>
+      </tr>
+      <!-- Puedes agregar más filas según sea necesario -->
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+
+
+
 				<div class="row">
 					<div class="col-xl-3 col-xxl-6 col-sm-6">
 						<div class="card">
