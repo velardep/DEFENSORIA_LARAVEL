@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\PermisoController;
 
+
+Route::get('/', function () {
+    return view('index');
+});
+
 Route::get('roles', [RolController::class, 'index']);
 Route::post('roles', [RolController::class, 'store']);
 Route::get('roles/{idrol}', [RolController::class, 'show']);
