@@ -3,10 +3,30 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\OficinaController;
+use App\Models\Oficina;
+
+
+
+Route::get('/oficina', function () {
+    $oficinas = App\Models\Oficina::all();
+    return view('oficina.indexoficina', compact('oficinas'));
+});
+
+
+// Rutas para Oficina
+Route::get('/oficina', [OficinaController::class, 'index']); // Listar oficinas
+Route::get('/oficina/create', [OficinaController::class, 'create']); // Formulario para agregar oficina
+Route::post('/oficina', [OficinaController::class, 'store']); // Guardar nueva oficina
+Route::get('/oficina/{idoficina}/edit', [OficinaController::class, 'edit']); // Formulario de edición
+Route::put('/oficina/{idoficina}', [OficinaController::class, 'update']); // Guardar cambios
+Route::delete('/oficina/{idoficina}', [OficinaController::class, 'destroy']); // Eliminar oficina
+
 
 
 Route::get('/', function () {
-    return view('index');
+    return view(view: 'index
+    ');
 });
 
 Route::get('roles/{idrol}/edit', [RolController::class, 'edit']);
@@ -19,7 +39,7 @@ Route::delete('roles/{idrol}', [RolController::class, 'destroy']);
 
 Route::get('permisos', [PermisoController::class, 'index']);
 Route::post('permisos', [PermisoController::class, 'store']);
-Route::get('permisos/{idpermiso}', [PermisoController::class, 'show']);
+Route::get('permisos/{idpermiso}', action: [PermisoController::class, 'show']);
 Route::put('permisos/{idpermiso}', [PermisoController::class, 'update']);
 Route::delete('permisos/{idpermiso}', [PermisoController::class, 'destroy']);
 
@@ -29,7 +49,32 @@ Route::delete('permisos/{idpermiso}', [PermisoController::class, 'destroy']);
 });*/
 
 
-Route::get('phpinfo', function () {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Route::get('phpinfo', function () {
     $host = env('DB_HOST', '127.0.0.1'); // Asegúrate de proporcionar valores predeterminados
     $port = env('DB_PORT', '5432');
     $database = env('DB_DATABASE', 'defensoria');
@@ -43,4 +88,4 @@ Route::get('phpinfo', function () {
     } catch (PDOException $e) {
         return "Error al conectar con la base de datos: " . $e->getMessage();
     }
-});
+});*/

@@ -9283,7 +9283,7 @@ label {
 
 .loader > span {
   font-size: 60px;
-  color: var(--primary);
+  color:#000000;
   font-family: "franklin gothic medium",sans-serif;
   display: inline-block;
   animation: flip 2.6s infinite linear;
@@ -12234,9 +12234,305 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   top: 7.5rem;
   padding-top: 0;
   z-index: 6;
-  background-color: var(--sidebar-bg);
+  background-color: #D12D27  !important;
   transition: all .2s ease;
   box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.02); }
+
+
+
+
+  .deznav-scroll ul.metismenu li a {
+    color: white !important; /* Color del texto de los enlaces */
+}
+
+.deznav-scroll ul.metismenu li a:hover {
+    color: yellow !important; /* Color al pasar el mouse */
+}
+
+.deznav-scroll ul.metismenu li a i {
+    color: white !important; /* Color de los íconos */
+}
+
+.deznav-scroll .header-profile .header-info span {
+    color: white !important; /* Color del nombre de usuario */
+}
+
+.deznav-scroll .header-profile .header-info small {
+    color: #f5f5f5 !important; /* Color del email */
+}
+
+
+/* Estilos para botones */
+.btn-primary {
+  background-color: #D12D27 !important;
+  border-color: #D12D27 !important;
+  color: white !important;
+}
+
+
+/* MODO OSCURO*/
+/*  MODO OSCURO GENERAL */
+body.dark-mode, 
+.dark-mode .content-body, 
+.dark-mode .deznav, 
+.dark-mode .card, 
+.dark-mode .table, 
+.dark-mode .navbar, 
+.dark-mode .footer {
+    background-color: #121212 !important; /* Fondo oscuro */
+    color: #ffffff !important; /* Texto blanco */
+}
+
+/* Cambiar colores de textos 
+.dark-mode h1, 
+.dark-mode h2, 
+.dark-mode h3, 
+.dark-mode h4, 
+.dark-mode h5, 
+.dark-mode h6, 
+.dark-mode p, 
+.dark-mode .text-black {
+    color: #ffffff !important;
+}*/
+
+/* Sidebar oscuro */
+.dark-mode .deznav {
+    background-color: #1E1E1E !important;
+}
+
+/* Sidebar texto blanco 
+.dark-mode .deznav-scroll ul.metismenu li a {
+    color: #ffffff !important;
+}*/
+
+/* Botones de color rojo Tarija */
+.dark-mode .btn-primary {
+    background-color: #D12D27 !important; 
+    border-color: #D12D27 !important;
+    color: #000000 !important;
+}
+
+/* Cambiar colores de los botones 
+.dark-mode .btn-secondary {
+    background-color: #282828 !important; 
+    border-color: #3a3a3a !important;
+    color: #ffffff !important;
+}*/
+
+/* Cambiar colores de los formularios */
+.dark-mode .form-control {
+    background-color: #333333 !important;
+    color: #ffffff !important;
+    border: 1px solid #444 !important;
+}
+
+/* Color del placeholder */
+.dark-mode .form-control::placeholder {
+    color: #bbbbbb !important;
+}
+
+/* Fondos de las tablas */
+.dark-mode .table {
+  background-color: #242424 !important; /* Gris oscuro en lugar de blanco */
+  color: #ffffff !important; /* Letras blancas */
+  border-color: #000000 !important;
+}
+
+/* Encabezado de la tabla en rojo Tarija  */
+.dark-mode .table thead {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+
+/* Bordes de la tabla */
+.dark-mode .table th, 
+.dark-mode .table td {
+    border-color: #444 !important;
+    color: #ffffff !important; /* Asegurar que el texto no sea negro */
+    background-color: #2a2a2a !important; /* Gris oscuro más claro */
+}
+
+/* Filas alternas en tonos oscuros */
+.dark-mode .table-striped tbody tr:nth-of-type(odd) {
+  background-color: #000000 !important;
+}
+
+.dark-mode .table-striped tbody tr:nth-of-type(even) {
+  background-color: #000000 !important;
+}
+
+/* Hover en filas */
+.dark-mode .table-hover tbody tr:hover {
+  background-color: #D12D27 !important;
+  color: #ffffff !important;
+}
+
+
+/* Footer en modo oscuro */
+.dark-mode .footer {
+    background-color: #1E1E1E !important;
+    color: #ffffff !important;
+}
+
+/* Cambiar iconos del sidebar */
+.dark-mode .deznav-scroll ul.metismenu li a i {
+    color: #ffffff !important;
+}
+
+
+
+
+
+/* NAV HEADER - Fondo negro y letras blancas */
+.nav-header {
+  background-color: #000000 !important; /* Negro sólido */
+  padding: 20px;
+}
+
+/* LOGO - Ajuste para que el fondo no tenga borde visible */
+.nav-header .brand-logo img {
+  filter: brightness(100%); /* Mantiene el logo con su color original */
+}
+
+/* TEXTO "SLIM" - Cambiar a blanco */
+.nav-header .brand-title {
+  color: #ffffff !important;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+
+
+
+
+/* MODO OSCURO */
+body.dark-mode {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+
+/* MODO OSCURO */
+body.dark-mode {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+
+
+/* Corregir el fondo de la barra superior */
+.dark-mode .header {
+  background-color: #000000 !important;
+}
+
+
+/* Estilos para el botón de Modo Oscuro */
+#toggleDarkMode {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Efecto al pasar el mouse */
+#toggleDarkMode:hover {
+  background-color: #f1f1f1 !important;
+  color: #000000 !important;
+  border-color: #333333 !important;
+}
+
+
+
+
+
+/* TABLAS*/
+/* ---- Contenedor Principal de la Tabla ---- */
+.card {
+  width: 50%; /* Ocupar casi toda la pantalla */
+  margin: auto; /* Centrar en la pantalla */
+  padding: 15px;
+}
+
+/* ---- Estilo General de la Tabla ---- */
+#tablaOficinas {
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+/* ---- Encabezados de la Tabla ---- */
+#tablaOficinas thead {
+  background-color: #B22222; /* Rojo oscuro */
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* ---- Filas Alternadas ---- */
+#tablaOficinas tbody tr:nth-child(even) {
+  background-color: #f8f9fa; /* Gris muy claro */
+}
+
+#tablaOficinas tbody tr:nth-child(odd) {
+  background-color: #ffffff; /* Blanco */
+}
+
+/* ---- Hover en Filas ---- */
+#tablaOficinas tbody tr:hover {
+  background-color: #e9ecef !important;
+}
+
+/* ---- Bordes Redondeados en las Celdas ---- */
+#tablaOficinas th,
+#tablaOficinas td {
+  border-radius: 8px;
+  text-align: center;
+  padding: 12px;
+}
+
+/* ---- Hacer la tabla más alta para ocupar pantalla ---- */
+.table-responsive {
+  max-height: 80vh; /* Altura máxima de la tabla */
+  overflow-y: auto; /* Habilitar desplazamiento */
+}
+
+/* ---- Botones Estilizados ---- */
+#tablaOficinas .btn {
+  border-radius: 6px;
+  font-size: 14px;
+  padding: 6px 12px;
+}
+
+/* ---- Botón de Editar ---- */
+.btn-outline-primary {
+  color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+/* ---- Botón de Eliminar ---- */
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+
+
+
+
+
+
   @media only screen and (max-width: 1400px) {
     .deznav {
       top: 5.5rem;
