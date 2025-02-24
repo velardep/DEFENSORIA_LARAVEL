@@ -1,52 +1,65 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Application\UseCases\CrearPermiso;
-use App\Application\UseCases\ActualizarPermiso;
-use App\Domain\Repositories\RepositorioPermisoInterface;
+use App\Models\Permiso;
 
 class PermisoController extends Controller
 {
-    private $crearPermiso;
-    private $repositorioPermiso;
-
-    public function __construct(RepositorioPermisoInterface $repositorioPermiso)
-    {
-        $this->repositorioPermiso = $repositorioPermiso;
-        $this->crearPermiso = new CrearPermiso($repositorioPermiso);
-    }
-
+    // 📌 Mostrar todas las permisos
     public function index()
     {
-        $permisos = $this->repositorioPermiso->obtenerTodos();
-        return response()->json($permisos);
+        $permisos = Permiso::all();
+        return view('permiso.indexpermiso', compact('permisos'));
     }
 
+    // 📌 Mostrar formulario de creación
+    public function create()
+    {
+        return view('permiso.createpermiso'); // Vista de agregar permiso
+    }
+
+    // 📌 Guardar nueva permiso
     public function store(Request $request)
     {
-        $datos = $request->all();
-        $permisoCreado = $this->crearPermiso->ejecutar($datos);
-        return response()->json($permisoCreado, 201);
+        $request->validate([
+            'nombrepermiso' => 'required|string|max:255',
+            'condicionpermiso' => 'required|string',
+        ]);
+
+        Permiso::create($request->all());
+
+        return redirect('/permiso')->with('success', 'Permiso agregada correctamente.');
     }
 
-    public function show($idpermiso)
+    // 📌 Mostrar formulario de edición
+    public function edit($idpermiso)
     {
-        $permiso = $this->repositorioPermiso->obtenerPorId($idpermiso);
-        return response()->json($permiso);
+        $permiso = Permiso::findOrFail($idpermiso);
+        return view('permiso.editpermiso', compact('permiso'));
     }
 
+    // 📌 Actualizar datos de permiso
     public function update(Request $request, $idpermiso)
     {
-        $datos = $request->all();
-        $actualizarPermiso = new ActualizarPermiso($this->repositorioPermiso);
-        $permisoActualizado = $actualizarPermiso->ejecutar($idpermiso, $datos);
-        return response()->json($permisoActualizado);
+        $request->validate([
+            'nombrepermiso' => 'required|string|max:255',
+            'condicionpermiso' => 'required|string',
+        ]);
+
+        $permiso = Permiso::findOrFail($idpermiso);
+        $permiso->update($request->all());
+
+        return redirect('/permiso')->with('success', 'Permiso actualizada correctamente.');
     }
 
+    // 📌 Eliminar permiso
     public function destroy($idpermiso)
     {
-        $this->repositorioPermiso->eliminar($idpermiso);
-        return response()->json(['mensaje' => 'Permiso eliminado correctamente'], 200);
+        $permiso = Permiso::findOrFail($idpermiso);
+        $permiso->delete();
+
+        return redirect('/permiso')->with('success', 'Permiso eliminada correctamente.');
     }
 }

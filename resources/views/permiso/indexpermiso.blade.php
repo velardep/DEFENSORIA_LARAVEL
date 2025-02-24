@@ -3,7 +3,7 @@
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Oficinas</title>
+    <title>Listado de permisos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Style css -->
@@ -19,43 +19,31 @@
     
 
 <div class="container mt-5">
-    <h2 class="text-black">Listado de Oficinas</h2>
+    <h2 class="text-black">Listado de Permisos</h2>
 
-    <!-- BOTÓN PARA AGREGAR OFICINA -->
+    <!-- BOTÓN PARA AGREGAR permiso -->
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#formAgregarOficina">
-            <i class="fa fa-plus"></i> Agregar Oficina
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#formAgregarpermiso">
+            <i class="fa fa-plus"></i> Agregar Permiso
         </button>
     </div>
 
-    <!-- FORMULARIO PARA AGREGAR OFICINA -->
-<div class="collapse" id="formAgregarOficina">
+    <!-- FORMULARIO PARA AGREGAR permiso -->
+<div class="collapse" id="formAgregarpermiso">
     <div class="card card-body shadow-lg p-4 bg-light rounded">
-        <h4 class="text-danger fw-bold text-center">Agregar Oficina</h4>
+        <h4 class="text-danger fw-bold text-center">Agregar permiso</h4>
         <form id="formAgregar">
             @csrf
             <div class="row">
                 <div class="col-md-4">
                     <label class="form-label fw-bold">Nombre</label>
-                    <input type="text" class="form-control input-custom" name="nombreoficina" required>
+                    <input type="text" class="form-control input-custom" name="nombrepermiso" required>
                 </div>
-                <div class="col-md-4">
-                    <label class="form-label fw-bold">Teléfono</label>
-                    <input type="text" class="form-control input-custom" name="telefonooficina" required>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label fw-bold">Tipo</label>
-                    <input type="number" class="form-control input-custom" name="idtipo_oficina" required>
-                </div>
-            </div>
+               
             <div class="row mt-3">
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Condición</label>
-                    <input type="text" class="form-control input-custom" name="condicionoficina" required>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label fw-bold">Dirección</label>
-                    <input type="text" class="form-control input-custom" name="direccionoficina" required>
+                    <input type="text" class="form-control input-custom" name="condicionpermiso" required>
                 </div>
             </div>
             <div class="d-flex justify-content-end mt-4">
@@ -66,38 +54,24 @@
     </div>
 </div>
 
-<!-- FORMULARIO PARA EDITAR OFICINA -->
-<div class="collapse mt-3" id="formEditarOficina">
+<!-- FORMULARIO PARA EDITAR permiso -->
+<div class="collapse mt-3" id="formEditarpermiso">
     <div class="card card-body shadow-lg p-4 bg-light rounded">
-        <h4 class="text-danger fw-bold text-center">Editar Oficina</h4>
+        <h4 class="text-danger fw-bold text-center">Editar Permiso</h4>
         <form id="editForm">
             @csrf
             @method('PUT')
-            <input type="hidden" name="idoficina" id="edit_idoficina">
+            <input type="hidden" name="idpermiso" id="edit_idpermiso">
             <div class="row">
                 <div class="col-md-4">
                     <label class="form-label fw-bold">Nombre</label>
-                    <input type="text" class="form-control input-custom" name="nombreoficina" id="edit_nombreoficina" required>
+                    <input type="text" class="form-control input-custom" name="nombrepermiso" id="edit_nombrepermiso" required>
                 </div>
-                <div class="col-md-4">
-                    <label class="form-label fw-bold">Teléfono</label>
-                    <input type="text" class="form-control input-custom" name="telefonooficina" id="edit_telefonooficina" required>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label fw-bold">Tipo</label>
-                    <input type="number" class="form-control input-custom" name="idtipo_oficina" id="edit_idtipo_oficina" required>
-                </div>
-            </div>
             <div class="row mt-3">
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Condición</label>
-                    <input type="text" class="form-control input-custom" name="condicionoficina" id="edit_condicionoficina" required>
+                    <input type="text" class="form-control input-custom" name="condicionpermiso" id="edit_condicionpermiso" required>
                 </div>
-                <div class="col-md-6">
-                    <label class="form-label fw-bold">Dirección</label>
-                    <input type="text" class="form-control input-custom" name="direccionoficina" id="edit_direccionoficina" required>
-                </div>
-            </div>
             <div class="d-flex justify-content-end mt-4">
                 <button type="button" class="btn btn-secondary me-2" onclick="cerrarFormularioEditar()">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -110,48 +84,38 @@
 
 
 
-   <!-- TABLA DE OFICINAS -->
+   <!-- TABLA DE permisoS -->
 <div class="card mt-3 p-3 shadow-lg rounded bg-white" style="width: 100%; margin: auto;">
     <div class="card-body">
-        <h4 class="text-center text-dark fw-bold">Listado de Oficinas</h4>
+        <h4 class="text-center text-dark fw-bold">Listado de permisos</h4>
         <div class="table-responsive" style="max-height: 70vh; overflow-y: auto;">
-            <table class="table table-hover table-bordered rounded text-dark" id="tablaOficinas">
+            <table class="table table-hover table-bordered rounded text-dark" id="tablapermisos">
                 <thead class="bg-danger text-white text-center">
                     <tr>
                         <th class="p-3">Opciones</th>
                         <th class="p-3">ID</th>
                         <th class="p-3">Nombre</th>
-                        <th class="p-3">Teléfono</th>
-                        <th class="p-3">Tipo</th>
                         <th class="p-3">Condición</th>
-                        <th class="p-3">Dirección</th>
                     </tr>
                 </thead>
-                <tbody id="tbodyOficinas">
-                    @foreach($oficinas as $o)
-                        <tr id="fila-{{ $o->idoficina }}">
+                <tbody id="tbodypermisos">
+                    @foreach($permisos as $o)
+                        <tr id="fila-{{ $o->idpermiso }}">
                             <td class="text-center">
                                 <button class="btn btn-sm btn-outline-primary me-1" 
                                     onclick="mostrarFormularioEditar(
-                                        {{ $o->idoficina }}, 
-                                        '{{ $o->nombreoficina }}', 
-                                        '{{ $o->telefonooficina }}', 
-                                        {{ $o->idtipo_oficina }}, 
-                                        '{{ $o->condicionoficina }}', 
-                                        '{{ $o->direccionoficina }}'
-                                    )">
+                                        {{ $o->idpermiso }}, 
+                                        '{{ $o->nombrepermiso }}', 
+                                        '{{ $o->condicionpermiso }}'                                    )">
                                     <i class="fa fa-pencil"></i> Editar
                                 </button>
-                                <button class="btn btn-sm btn-outline-danger" onclick="eliminarOficina({{ $o->idoficina }})">
+                                <button class="btn btn-sm btn-outline-danger" onclick="eliminarpermiso({{ $o->idpermiso }})">
                                     <i class="fa fa-trash"></i> Eliminar
                                 </button>
                             </td>
-                            <td class="text-center fw-bold">{{ $o->idoficina }}</td>
-                            <td class="text-dark">{{ $o->nombreoficina }}</td>
-                            <td class="text-dark">{{ $o->telefonooficina }}</td>
-                            <td class="text-center text-dark">{{ $o->idtipo_oficina }}</td>
-                            <td class="text-center text-dark">{{ $o->condicionoficina }}</td>
-                            <td class="text-dark">{{ $o->direccionoficina }}</td>
+                            <td class="text-center fw-bold">{{ $o->idpermiso }}</td>
+                            <td class="text-dark">{{ $o->nombrepermiso }}</td>
+                            <td class="text-center text-dark">{{ $o->condicionpermiso }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -167,13 +131,13 @@
 <!-- SCRIPT AJAX PARA GUARDAR Y RECARGAR LA TABLA -->
 <script>
 $(document).ready(function() {
-    // AGREGAR OFICINA
+    // AGREGAR permiso
     $("#formAgregar").submit(function(e) {
         e.preventDefault();
         let formData = new FormData(this); // Evitar que los datos se pasen en la URL
 
         $.ajax({
-            url: "{{ url('/oficina') }}",
+            url: "{{ url('/permiso') }}",
             type: "POST",
             data: formData,
             processData: false, // No procesar los datos en la URL
@@ -182,19 +146,19 @@ $(document).ready(function() {
                 location.reload(); // Recarga la página para mostrar la tabla actualizada
             },
             error: function(error) {
-                console.log("Error al guardar oficina", error);
+                console.log("Error al guardar permiso", error);
             }
         });
     });
 
-    // EDITAR OFICINA
+    // EDITAR permiso
     $("#editForm").submit(function(e) {
         e.preventDefault();
         let id = $("#editForm").attr("data-id");
         let formData = new FormData(this); // Evitar que los datos se pasen en la URL
 
         $.ajax({
-            url: `/oficina/${id}`,
+            url: `/permiso/${id}`,
             type: "POST",
             data: formData,
             processData: false, // No procesar los datos en la URL
@@ -203,35 +167,32 @@ $(document).ready(function() {
                 location.reload(); // Recargar la tabla sin salir de la página
             },
             error: function(error) {
-                console.log("Error al actualizar oficina", error);
+                console.log("Error al actualizar permiso", error);
             }
         });
     });
 });
 
-function mostrarFormularioEditar(id, nombre, telefono, tipo, condicion, direccion) {
+function mostrarFormularioEditar(id, nombre, condicion) {
     // Rellenar los campos del formulario de edición
-    $("#edit_idoficina").val(id);
-    $("#edit_nombreoficina").val(nombre);
-    $("#edit_telefonooficina").val(telefono);
-    $("#edit_idtipo_oficina").val(tipo);
-    $("#edit_condicionoficina").val(condicion);
-    $("#edit_direccionoficina").val(direccion);
+    $("#edit_idpermiso").val(id);
+    $("#edit_nombrepermiso").val(nombre);
+    $("#edit_condicionpermiso").val(condicion);
 
     // Actualizar la acción del formulario
     $("#editForm").attr("data-id", id);
 
     // Mostrar el formulario de edición
-    $("#formEditarOficina").collapse('show');
+    $("#formEditarpermiso").collapse('show');
 }
 
 
-// ELIMINAR OFICINA SIN RECARGAR
-function eliminarOficina(id) {
-    if (!confirm("¿Estás seguro de eliminar esta oficina?")) return;
+// ELIMINAR permiso SIN RECARGAR
+function eliminarpermiso(id) {
+    if (!confirm("¿Estás seguro de eliminar esta permiso?")) return;
 
     $.ajax({
-        url: `/oficina/${id}`,
+        url: `/permiso/${id}`,
         type: "POST",
         data: {
             _method: "DELETE",
@@ -246,18 +207,15 @@ function eliminarOficina(id) {
     });
 }
 function cerrarFormulario() {
-    $('#formAgregarOficina').collapse('hide'); // Cierra correctamente el formulario
+    $('#formAgregarpermiso').collapse('hide'); // Cierra correctamente el formulario
 }
 function cerrarFormularioEditar() {
-    $('#formEditarOficina').collapse('hide'); // Cierra el formulario de edición
+    $('#formEditarpermiso').collapse('hide'); // Cierra el formulario de edición
 
     // Opcional: Limpiar los campos del formulario para que no queden valores cargados
-    $('#edit_idoficina').val('');
-    $('#edit_nombreoficina').val('');
-    $('#edit_telefonooficina').val('');
-    $('#edit_idtipo_oficina').val('');
-    $('#edit_condicionoficina').val('');
-    $('#edit_direccionoficina').val('');
+    $('#edit_idpermiso').val('');
+    $('#edit_nombrepermiso').val('');
+    $('#edit_condicionpermiso').val('');
 }
 
 

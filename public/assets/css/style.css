@@ -12283,27 +12283,11 @@ body.dark-mode,
     color: #ffffff !important; /* Texto blanco */
 }
 
-/* Cambiar colores de textos 
-.dark-mode h1, 
-.dark-mode h2, 
-.dark-mode h3, 
-.dark-mode h4, 
-.dark-mode h5, 
-.dark-mode h6, 
-.dark-mode p, 
-.dark-mode .text-black {
-    color: #ffffff !important;
-}*/
 
 /* Sidebar oscuro */
 .dark-mode .deznav {
     background-color: #1E1E1E !important;
 }
-
-/* Sidebar texto blanco 
-.dark-mode .deznav-scroll ul.metismenu li a {
-    color: #ffffff !important;
-}*/
 
 /* Botones de color rojo Tarija */
 .dark-mode .btn-primary {
@@ -12312,12 +12296,6 @@ body.dark-mode,
     color: #000000 !important;
 }
 
-/* Cambiar colores de los botones 
-.dark-mode .btn-secondary {
-    background-color: #282828 !important; 
-    border-color: #3a3a3a !important;
-    color: #ffffff !important;
-}*/
 
 /* Cambiar colores de los formularios */
 .dark-mode .form-control {
@@ -12441,25 +12419,36 @@ body.dark-mode {
   border-color: #333333 !important;
 }
 
+ul[aria-expanded="false"] li::before {
+  display: none !important;
+}
+
+
+
+
 
 
 
 
 /* TABLAS*/
-/* ---- Contenedor Principal de la Tabla ---- */
-.card {
-  width: 50%; /* Ocupar casi toda la pantalla */
-  margin: auto; /* Centrar en la pantalla */
-  padding: 15px;
+/* ---- Ajustar el Contenedor de la Tabla ---- */
+#oficina-content {
+  width: 100% !important;
+  max-height: 85vh;
+  overflow-y: auto;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* ---- Estilo General de la Tabla ---- */
+/* ---- Estilo de la Tabla ---- */
 #tablaOficinas {
+  width: 100%;
+  max-width: 100%;
   border-radius: 12px;
-  overflow: hidden;
   background: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
 }
 
 /* ---- Encabezados de la Tabla ---- */
@@ -12494,8 +12483,8 @@ body.dark-mode {
 
 /* ---- Hacer la tabla más alta para ocupar pantalla ---- */
 .table-responsive {
-  max-height: 80vh; /* Altura máxima de la tabla */
-  overflow-y: auto; /* Habilitar desplazamiento */
+  max-height: 70vh; /* Ajusta la altura para mostrar más filas */
+  overflow-y: auto; /* Habilita el scroll vertical */
 }
 
 /* ---- Botones Estilizados ---- */
@@ -12526,6 +12515,61 @@ body.dark-mode {
   background-color: #dc3545;
   color: white;
 }
+
+
+
+
+
+/* ---- Ajustes Generales para los Formularios ---- */
+.card.card-body {
+  background-color: #d3d3d3 !important;  /* Fondo gris claro */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ---- Títulos en Negrita y Rojo ---- */
+.card-body h4 {
+  color: #B22222;  /* Rojo oscuro */
+  font-weight: bold;
+}
+
+/* ---- Inputs con Bordes Redondeados ---- */
+.input-custom {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  background: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+
+/* ---- Efecto Hover en Inputs ---- */
+.input-custom:focus {
+  border-color: #B22222;  /* Rojo oscuro */
+  box-shadow: 0 0 8px rgba(178, 34, 34, 0.5);
+}
+
+/* ---- Botones Mejorados ---- */
+.btn-primary {
+  background-color: #B22222 !important; /* Rojo oscuro */
+  border-color: #B22222 !important;
+}
+
+.btn-primary:hover {
+  background-color: #8B0000 !important; /* Rojo más oscuro */
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+
+
+
 
 
 

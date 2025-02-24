@@ -26,7 +26,7 @@
 
 	
 	<!-- PAGE TITLE HERE -->
-	<title>Boltz : Crypto Admin Template</title>
+	<title>SLIM TARIJA</title>
 	
 	<!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="{{asset('assets/images/favicon.png')}}" />
@@ -296,19 +296,40 @@
 							</a>
 						</div>
 					</li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li><a href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-025-dashboard"></i>
 							<span class="nav-text">ADMINISTRACION</span>
 						</a>
                         <ul aria-expanded="false">
-							<li>
+							<!--<li>
 								<a href="javascript:void(0);" id="btn-oficinas">
 									Oficinas
 								</a>
-							</li>
+							</li>-->
 
 							<li><a href="index-2.html">Estados</a></li>
+
 							<li><a href="coin-details.html">Gestion de Usuarios</a></li>
+
+
+							<li><a href="javascript:void(0);" onclick="cargarUsuarios()">
+									<span class="nav-text">Usuarios</span>
+								</a>
+							</li>
+
+
+
+
+							<li><a href="javascript:void(0);" onclick="cargarGrupos()">
+									<span class="nav-text">Grupos</span>
+								</a>
+							</li>
+
+
+
+
+
+
 							<li><a href="my-wallet.html">Gestion de Denuncias</a></li>
 							<li><a href="tranasactions.html">Notificaciones</a></li>
 						</ul>
@@ -393,10 +414,30 @@
 
 
 
-				<!-- Contenedor donde se cargará la tabla de oficinas -->
-				<div id="oficina-content" class="mt-4" style="display: none;">
+				<div id="oficina-content" class="container-fluid mt-4 p-3"
+					style="width: 95%; max-height: 85vh; overflow-y: auto; display: block; margin: auto;">
 					<!-- Aquí se cargará la tabla con AJAX -->
 				</div>
+				<div id="permiso-content" class="container-fluid mt-4 p-3"
+					style="width: 95%; max-height: 85vh; overflow-y: auto; display: none; margin: auto;">
+					<!-- Aquí se cargará la tabla de permisos con AJAX -->
+				</div>
+
+
+
+				<div id="tbodyUsers" class="container-fluid mt-4 p-3" style="width: 95%; max-height: 85vh; overflow-y: auto; display: none; margin: auto;">
+					<!-- Aquí se cargará la tabla de usuarios con AJAX -->
+				</div>
+
+
+
+				<div id="tbodyGroups" class="container-fluid mt-4 p-3" style="width: 95%; max-height: 85vh; overflow-y: auto; display: none; margin: auto;">
+					<!-- Aquí se cargará la tabla de usuarios con AJAX -->
+				</div>
+
+				
+
+
 
 
 
@@ -456,15 +497,17 @@
 
 
 
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<script>
-	$(document).ready(function () {
+	
+	//SCRIPT OFICINA
+	/*$(document).ready(function () {
 		$("#btn-oficinas").click(function () {
 			$("#oficina-content").show(); // Muestra el contenedor donde irá la tabla
+			$("#permiso-content").hide(); // Muestra el contenedor de la tabla de permisos
 
 			$.ajax({
-				url: "{{ url('/oficina') }}", // Ruta que carga la tabla
+				url: "{{ url(path: '/oficina') }}", // Ruta que carga la tabla
 				type: "GET",
 				success: function (data) {
 					$("#oficina-content").html(data); // Inserta la tabla en el div
@@ -475,14 +518,163 @@
 			});
 		});
 	});
-	</script>
+	// Manejar clic en "Gestión de Usuarios"
+    $("#btn-gestion-usuarios").click(function () {
+        $("#permiso-content").show(); // Muestra el contenedor de la tabla de permisos
+        $("#oficina-content").hide(); // Oculta la tabla de oficinas si está abierta
+
+        $.ajax({
+            url: "{{ url('/permiso') }}", // Ruta que carga la tabla de permisos
+            type: "GET",
+            success: function (data) {
+                $("#permiso-content").html(data); // Inserta la tabla en el div
+            },
+            error: function () {
+                alert("Error al cargar la tabla de permisos.");
+            }
+        });
+    });*/
 
 
 
 
 
 
-<script>
+	// SCRIPT AUTH_USER
+	$(document).ready(function() {
+    // Ocultar contenido de usuarios al inicio
+    $("#tbodyUsers").hide();
+
+    // Manejar el clic en el enlace "Usuarios"
+    $("a:contains('Usuarios')").on("click", function () {
+        $("#oficina-content, #permiso-content").hide(); // Ocultar otros módulos
+        $("#tbodyUsers").show(); // Mostrar la sección de usuarios
+        cargarUsuarios(); // Cargar los usuarios
+    });
+	});
+	function cargarUsuarios() {
+    if (window.loadingUsers) return; // Evita llamadas duplicadas
+    window.loadingUsers = true; // Bloquea nuevas llamadas mientras está en proceso
+    $.ajax({
+        url: "/auth_user",
+        type: "GET",
+        cache: false, // Evita obtener una versión en caché
+        success: function(response) {
+            $("#tbodyUsers").html(response);
+            window.loadingUsers = false; // Desbloquea nuevas llamadas
+        },
+        error: function(error) {
+            console.log("Error al cargar usuarios:", error);
+            window.loadingUsers = false; // En caso de error, también desbloquea
+        }
+    });
+}
+
+// Carga usuarios UNA SOLA VEZ al abrir la página
+$(document).ready(function() {
+    cargarUsuarios();
+});
+
+
+
+
+
+
+
+
+
+
+// SCRIPT AUTH_GROUP
+$(document).ready(function() {
+    // Ocultar contenido de usuarios al inicio
+    $("#tbodyGroups").hide();
+
+    // Manejar el clic en el enlace "Usuarios"
+    $("a:contains('Grupos')").on("click", function () {
+        $("#oficina-content, #permiso-content,#tbodyUsers").hide(); // Ocultar otros módulos
+        $("#tbodyGroups").show(); // Mostrar la sección de usuarios
+        cargarGrupos(); // Cargar los usuarios
+    });
+	});
+	function cargarGrupos() {
+    if (window.loadingGroups) return; // Evita llamadas duplicadas
+    window.loadingGroups = true; // Bloquea nuevas llamadas mientras está en proceso
+    $.ajax({
+        url: "/auth_group",
+        type: "GET",
+        cache: false, // Evita obtener una versión en caché
+        success: function(response) {
+            $("#tbodyGroups").html(response);
+            window.loadingGroups = false; // Desbloquea nuevas llamadas
+        },
+        error: function(error) {
+            console.log("Error al cargar grupos:", error);
+            window.loadingGroups = false; // En caso de error, también desbloquea
+        }
+    });
+}
+
+// Carga usuarios UNA SOLA VEZ al abrir la página
+$(document).ready(function() {
+    cargarGrupos();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// MODO DARK
 document.addEventListener("DOMContentLoaded", function () {
     const darkModeToggle = document.getElementById("toggleDarkMode");
     const body = document.body;
@@ -507,8 +699,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
-
-
 
 
     
