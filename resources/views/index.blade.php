@@ -313,12 +313,17 @@
 
 
 							<li><a href="javascript:void(0);" onclick="cargarUsuarios()">
+<<<<<<< HEAD
+=======
+								<i class="flaticon-381-user-7"></i>
+>>>>>>> 561cfc5d (CRUDS)
 									<span class="nav-text">Usuarios</span>
 								</a>
 							</li>
 
 
 
+<<<<<<< HEAD
 
 							<li><a href="javascript:void(0);" onclick="cargarGrupos()">
 									<span class="nav-text">Grupos</span>
@@ -330,6 +335,8 @@
 
 
 
+=======
+>>>>>>> 561cfc5d (CRUDS)
 							<li><a href="my-wallet.html">Gestion de Denuncias</a></li>
 							<li><a href="tranasactions.html">Notificaciones</a></li>
 						</ul>
@@ -430,6 +437,7 @@
 				</div>
 
 
+<<<<<<< HEAD
 
 				<div id="tbodyGroups" class="container-fluid mt-4 p-3" style="width: 95%; max-height: 85vh; overflow-y: auto; display: none; margin: auto;">
 					<!-- Aquí se cargará la tabla de usuarios con AJAX -->
@@ -438,6 +446,8 @@
 				
 
 
+=======
+>>>>>>> 561cfc5d (CRUDS)
 
 
 
@@ -499,8 +509,11 @@
 
 
 	<script>
+<<<<<<< HEAD
 	
 	//SCRIPT OFICINA
+=======
+>>>>>>> 561cfc5d (CRUDS)
 	/*$(document).ready(function () {
 		$("#btn-oficinas").click(function () {
 			$("#oficina-content").show(); // Muestra el contenedor donde irá la tabla
@@ -534,6 +547,47 @@
             }
         });
     });*/
+<<<<<<< HEAD
+=======
+
+	$(document).ready(function() {
+    // Ocultar contenido de usuarios al inicio
+    $("#tbodyUsers").hide();
+
+    // Manejar el clic en el enlace "Usuarios"
+    $("a:contains('Usuarios')").on("click", function () {
+        $("#oficina-content, #permiso-content").hide(); // Ocultar otros módulos
+        $("#tbodyUsers").show(); // Mostrar la sección de usuarios
+        cargarUsuarios(); // Cargar los usuarios
+    });
+});
+	function cargarUsuarios() {
+    if (window.loadingUsers) return; // Evita llamadas duplicadas
+    window.loadingUsers = true; // Bloquea nuevas llamadas mientras está en proceso
+
+    $.ajax({
+        url: "/auth_user",
+        type: "GET",
+        cache: false, // Evita obtener una versión en caché
+        success: function(response) {
+            $("#tbodyUsers").html(response);
+            window.loadingUsers = false; // Desbloquea nuevas llamadas
+        },
+        error: function(error) {
+            console.log("Error al cargar usuarios:", error);
+            window.loadingUsers = false; // En caso de error, también desbloquea
+        }
+    });
+}
+
+// Carga usuarios UNA SOLA VEZ al abrir la página
+$(document).ready(function() {
+    cargarUsuarios();
+});
+
+
+	</script>
+>>>>>>> 561cfc5d (CRUDS)
 
 
 
@@ -701,6 +755,13 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 561cfc5d (CRUDS)
     
 </body>
 </html>

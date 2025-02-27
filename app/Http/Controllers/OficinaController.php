@@ -2,70 +2,83 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Oficina;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use App\Http\Requests\OficinaRequest;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class OficinaController extends Controller
 {
-    // 📌 Mostrar todas las oficinas
-    public function index()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request): View
     {
-        $oficinas = Oficina::all();
-        return view('oficina.indexoficina', compact('oficinas'));
+        $oficinas = Oficina::paginate();
+
+        return view('oficina.index', compact('oficinas'))
+            ->with('i', ($request->input('page', 1) - 1) * $oficinas->perPage());
     }
 
-    // 📌 Mostrar formulario de creación
-    public function create()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(): View
     {
-        return view('oficina.createoficina'); // Vista de agregar oficina
+        $oficina = new Oficina();
+
+        return view('oficina.create', compact('oficina'));
     }
 
-    // 📌 Guardar nueva oficina
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(OficinaRequest $request): RedirectResponse
     {
-        $request->validate([
-            'nombreoficina' => 'required|string|max:255',
-            'telefonooficina' => 'required|string|max:20',
-            'idtipo_oficina' => 'required|integer',
-            'condicionoficina' => 'required|string',
-            'direccionoficina' => 'required|string|max:255',
-        ]);
+        Oficina::create($request->validated());
 
-        Oficina::create($request->all());
-
-        return redirect('/oficina')->with('success', 'Oficina agregada correctamente.');
+        return Redirect::route('oficinas.index')
+            ->with('success', 'Oficina created successfully.');
     }
 
-    // 📌 Mostrar formulario de edición
-    public function edit($idoficina)
+    /**
+     * Display the specified resource.
+     */
+    public function show($id): View
     {
-        $oficina = Oficina::findOrFail($idoficina);
-        return view('oficina.editoficina', compact('oficina'));
+        $oficina = Oficina::find($id);
+
+        return view('oficina.show', compact('oficina'));
     }
 
-    // 📌 Actualizar datos de oficina
-    public function update(Request $request, $idoficina)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id): View
     {
-        $request->validate([
-            'nombreoficina' => 'required|string|max:255',
-            'telefonooficina' => 'required|string|max:20',
-            'idtipo_oficina' => 'required|integer',
-            'condicionoficina' => 'required|string',
-            'direccionoficina' => 'required|string|max:255',
-        ]);
+        $oficina = Oficina::find($id);
 
-        $oficina = Oficina::findOrFail($idoficina);
-        $oficina->update($request->all());
-
-        return redirect('/oficina')->with('success', 'Oficina actualizada correctamente.');
+        return view('oficina.edit', compact('oficina'));
     }
 
-    // 📌 Eliminar oficina
-    public function destroy($idoficina)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(OficinaRequest $request, Oficina $oficina): RedirectResponse
     {
-        $oficina = Oficina::findOrFail($idoficina);
-        $oficina->delete();
+        $oficina->update($request->validated());
 
-        return redirect('/oficina')->with('success', 'Oficina eliminada correctamente.');
+        return Redirect::route('oficinas.index')
+            ->with('success', 'Oficina updated successfully');
+    }
+
+    public function destroy($id): RedirectResponse
+    {
+        Oficina::find($id)->delete();
+
+        return Redirect::route('oficinas.index')
+            ->with('success', 'Oficina deleted successfully');
     }
 }

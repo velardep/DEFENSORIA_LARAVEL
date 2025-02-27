@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\OficinaController;
 use App\Models\Oficina;
 use App\Http\Controllers\PermisoController;
@@ -44,6 +45,42 @@ Route::post('/oficina', [OficinaController::class, 'store']); // Guardar nueva o
 Route::get('/oficina/{idoficina}/edit', [OficinaController::class, 'edit']); // Formulario de edición
 Route::put('/oficina/{idoficina}', [OficinaController::class, 'update']); // Guardar cambios
 Route::delete('/oficina/{idoficina}', [OficinaController::class, 'destroy']); // Eliminar oficina
+=======
+
+use App\Http\Controllers\TipoOficinaController;
+use App\Http\Controllers\OficinaController;
+use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolPermisoController;
+use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\TipologiaController;
+use App\Http\Controllers\DenunciasDenunciaController;
+use App\Http\Controllers\DenunciasTipologiaController;
+use App\Http\Controllers\DenunciasTerapiaController;
+use App\Http\Controllers\DenunciasPersonaController;
+
+Route::resource('tipo-oficinas', TipoOficinaController::class);
+Route::resource('oficinas', OficinaController::class);
+Route::resource('permisos', PermisoController::class);
+Route::resource('roles', RoleController::class);
+Route::resource('rol-permisos', RolPermisoController::class);
+Route::resource('personas', PersonaController::class);
+Route::resource('usuarios', UsuarioController::class);
+Route::resource('tipologias', TipologiaController::class);
+Route::resource('denuncias-denuncias', DenunciasDenunciaController::class);
+Route::resource('denuncias-tipologias', DenunciasTipologiaController::class);
+Route::resource('denuncias-terapias', DenunciasTerapiaController::class);
+Route::resource('denuncias-personas', DenunciasPersonaController::class);
+
+
+
+
+Route::get('/test', function () {
+    return 'Laravel está funcionando correctamente';
+});
+
+>>>>>>> 561cfc5d (CRUDS)
 
 
 
@@ -67,6 +104,7 @@ Route::get('/', function () {
     ');
 });
 
+<<<<<<< HEAD
 /*Route::get('roles/{idrol}/edit', [RolController::class, 'edit']);
 
 Route::get('roles', [RolController::class, 'index']);
@@ -81,30 +119,12 @@ Route::get('permisos/{idpermiso}', action: [PermisoController::class, 'show']);
 Route::put('permisos/{idpermiso}', [PermisoController::class, 'update']);
 Route::delete('permisos/{idpermiso}', [PermisoController::class, 'destroy']);*/
 
+=======
+>>>>>>> 561cfc5d (CRUDS)
 
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -127,3 +147,5 @@ Route::delete('permisos/{idpermiso}', [PermisoController::class, 'destroy']);*/
         return "Error al conectar con la base de datos: " . $e->getMessage();
     }
 });*/
+
+
