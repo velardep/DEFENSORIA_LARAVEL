@@ -29,6 +29,10 @@
                                     {{ $denunciasDenuncia->nro_atencion }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
+                                    <strong>Persons Id:</strong>
+                                    {{ $denunciasDenuncia->persons_id }}
+                                </div>
+                                <div class="form-group mb-2 mb20">
                                     <strong>Inhabilitado:</strong>
                                     {{ $denunciasDenuncia->inhabilitado }}
                                 </div>

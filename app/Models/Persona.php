@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Persona
  *
- * @property $id_persona
  * @property $nombre_persona
  * @property $email
  * @property $telefono
  * @property $id_rol
  * @property $created_at
  * @property $updated_at
+ * @property $id
  *
  * @property Role $role
  * @package App
@@ -29,7 +29,7 @@ class Persona extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['id_persona', 'nombre_persona', 'email', 'telefono', 'id_rol'];
+    protected $fillable = ['nombre_persona', 'email', 'telefono', 'id_rol'];
 
 
     /**

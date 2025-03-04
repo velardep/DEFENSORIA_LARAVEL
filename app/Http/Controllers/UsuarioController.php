@@ -37,10 +37,15 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioRequest $request): RedirectResponse
     {
-        Usuario::create($request->validated());
+        $data = $request->validated();
 
+        // Encripta la contraseña antes de guardarla
+        $data['password'] = bcrypt($request->password);
+    
+        Usuario::create($data);
+    
         return Redirect::route('usuarios.index')
-            ->with('success', 'Usuario created successfully.');
+            ->with('success', 'Usuario creado correctamente.');
     }
 
     /**
@@ -68,6 +73,15 @@ class UsuarioController extends Controller
      */
     public function update(UsuarioRequest $request, Usuario $usuario): RedirectResponse
     {
+        $data = $request->validated();
+
+        // Si el usuario ingresó una nueva contraseña, la encripta
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password);
+        } else {
+            unset($data['password']); // Evita que se sobrescriba con NULL
+        }
+
         $usuario->update($request->validated());
 
         return Redirect::route('usuarios.index')

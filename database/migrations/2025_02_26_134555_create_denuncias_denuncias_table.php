@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->id();
             $table->date('f_denuncia');
             $table->string('nro_atencion', 30);
+            $table->foreignId('persons_id')->nullable()->constrained('denuncias_personas')->onDelete('cascade');
             $table->boolean('inhabilitado');
             $table->string('ingreso', 1)->nullable();
             $table->string('especifica_ingreso', 255)->nullable();

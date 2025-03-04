@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->id();
             $table->string('password', 128);
             $table->timestamp('ultimo_acceso')->nullable();
-            $table->boolean('super_usuario');
+            $table->char('super_usuario', 30);
             $table->string('nombre_usuario', 150);
             $table->string('nombre', 30);
             $table->string('apellidos', 30);

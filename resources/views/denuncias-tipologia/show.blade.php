@@ -21,8 +21,12 @@
                     <div class="card-body bg-white">
                         
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Tipologia Id:</strong>
-                                    {{ $denunciasTipologia->tipologia_id }}
+                                    <strong>Nombre:</strong>
+                                    {{ $denunciasTipologia->nombre }}
+                                </div>
+                                <div class="form-group mb-2 mb20">
+                                    <strong>Procedencia:</strong>
+                                    {{ $denunciasTipologia->procedencia }}
                                 </div>
 
                     </div>

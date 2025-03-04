@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="container-fluid">
+    <h2 class="text-center text-dark my-4"></i> Lista de Permisos</h2> 
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">

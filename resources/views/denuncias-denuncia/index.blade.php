@@ -38,6 +38,7 @@
                                         
 									<th >F Denuncia</th>
 									<th >Nro Atencion</th>
+									<th >Persons Id</th>
 									<th >Inhabilitado</th>
 									<th >Ingreso</th>
 									<th >Especifica Ingreso</th>
@@ -69,6 +70,7 @@
                                             
 										<td >{{ $denunciasDenuncia->f_denuncia }}</td>
 										<td >{{ $denunciasDenuncia->nro_atencion }}</td>
+										<td >{{ $denunciasDenuncia->persons_id }}</td>
 										<td >{{ $denunciasDenuncia->inhabilitado }}</td>
 										<td >{{ $denunciasDenuncia->ingreso }}</td>
 										<td >{{ $denunciasDenuncia->especifica_ingreso }}</td>

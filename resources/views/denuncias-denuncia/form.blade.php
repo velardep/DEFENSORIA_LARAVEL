@@ -12,6 +12,11 @@
             {!! $errors->first('nro_atencion', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
+            <label for="persons_id" class="form-label">{{ __('Persons Id') }}</label>
+            <input type="text" name="persons_id" class="form-control @error('persons_id') is-invalid @enderror" value="{{ old('persons_id', $denunciasDenuncia?->persons_id) }}" id="persons_id" placeholder="Persons Id">
+            {!! $errors->first('persons_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+        <div class="form-group mb-2 mb20">
             <label for="inhabilitado" class="form-label">{{ __('Inhabilitado') }}</label>
             <input type="text" name="inhabilitado" class="form-control @error('inhabilitado') is-invalid @enderror" value="{{ old('inhabilitado', $denunciasDenuncia?->inhabilitado) }}" id="inhabilitado" placeholder="Inhabilitado">
             {!! $errors->first('inhabilitado', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}

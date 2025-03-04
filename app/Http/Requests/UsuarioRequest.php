@@ -22,13 +22,14 @@ class UsuarioRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'super_usuario' => 'required|boolean',
+            'password' => $this->isMethod('post') ? 'required|min:8' : 'nullable|min:8',
+			'super_usuario' => 'required|string',
 			'nombre_usuario' => 'required|string',
 			'nombre' => 'required|string',
 			'apellidos' => 'required|string',
 			'correo' => 'required|string',
-			'is_staff' => 'required|boolean',
-			'activo' => 'required|boolean',
+			'is_staff' => 'required|string',
+			'activo' => 'required|string',
 			'date_joined' => 'required',
 			'id_oficinas' => 'required',
         ];

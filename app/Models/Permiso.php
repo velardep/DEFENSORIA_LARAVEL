@@ -20,16 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Permiso extends Model
 {
-<<<<<<< HEAD
     use HasFactory;
 
-    protected $table = 'permiso'; // Asegúrate de que este nombre coincida con tu tabla en la base de datos
-    protected $primaryKey = 'idpermiso'; // Clave primaria de la tabla
-
-    public $timestamps = false; // ⚠️ Desactiva `created_at` y `updated_at`
-
-    protected $fillable = ['idpermiso', 'nombrepermiso', 'condicionpermiso']; // Define los campos que puedes modificar
-=======
     
     protected $perPage = 20;
 
@@ -49,6 +41,6 @@ class Permiso extends Model
         return $this->hasMany(\App\Models\RolPermiso::class, 'id', 'id_permiso');
     }
     
->>>>>>> 561cfc5d (CRUDS)
+
 }
 

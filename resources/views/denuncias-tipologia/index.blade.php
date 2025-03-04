@@ -36,7 +36,8 @@
                                     <tr>
                                         <th>No</th>
                                         
-									<th >Tipologia Id</th>
+									<th >Nombre</th>
+									<th >Procedencia</th>
 
                                         <th></th>
                                     </tr>
@@ -46,7 +47,8 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-										<td >{{ $denunciasTipologia->tipologia_id }}</td>
+										<td >{{ $denunciasTipologia->nombre }}</td>
+										<td >{{ $denunciasTipologia->procedencia }}</td>
 
                                             <td>
                                                 <form action="{{ route('denuncias-tipologias.destroy', $denunciasTipologia->id) }}" method="POST">

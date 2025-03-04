@@ -2,9 +2,14 @@
     <div class="col-md-12">
         
         <div class="form-group mb-2 mb20">
-            <label for="tipologia_id" class="form-label">{{ __('Tipologia Id') }}</label>
-            <input type="text" name="tipologia_id" class="form-control @error('tipologia_id') is-invalid @enderror" value="{{ old('tipologia_id', $denunciasTipologia?->tipologia_id) }}" id="tipologia_id" placeholder="Tipologia Id">
-            {!! $errors->first('tipologia_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+            <label for="nombre" class="form-label">{{ __('Nombre') }}</label>
+            <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre', $denunciasTipologia?->nombre) }}" id="nombre" placeholder="Nombre">
+            {!! $errors->first('nombre', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+        <div class="form-group mb-2 mb20">
+            <label for="procedencia" class="form-label">{{ __('Procedencia') }}</label>
+            <input type="text" name="procedencia" class="form-control @error('procedencia') is-invalid @enderror" value="{{ old('procedencia', $denunciasTipologia?->procedencia) }}" id="procedencia" placeholder="Procedencia">
+            {!! $errors->first('procedencia', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
     </div>

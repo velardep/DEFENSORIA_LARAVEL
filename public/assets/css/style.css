@@ -285,6 +285,17 @@ body {
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important; }
 
+
+
+  #usuarios-content {
+    width: 100%;
+    min-height: 100vh;
+    overflow: visible;
+}
+
+
+
+  
 hr {
   margin: 1rem 0;
   color: inherit;

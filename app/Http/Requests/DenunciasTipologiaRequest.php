@@ -22,7 +22,8 @@ class DenunciasTipologiaRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'tipologia_id' => 'required',
+			'nombre' => 'required|string',
+			'procedencia' => 'required|string',
         ];
     }
 }

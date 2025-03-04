@@ -10,7 +10,9 @@ return new class extends Migration {
     {
         Schema::create('denuncias_tipologias', function (Blueprint $table) {
             $table->id();
-            $table->integer('tipologia_id')->constrained('tipologias')->onDelete('cascade');
+            $table->string('nombre', 255);
+            $table->string('procedencia', 100);
+
             $table->timestamps();
         });
     }

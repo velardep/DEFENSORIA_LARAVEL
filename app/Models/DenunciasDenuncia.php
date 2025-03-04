@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $id
  * @property $f_denuncia
  * @property $nro_atencion
+ * @property $persons_id
  * @property $inhabilitado
  * @property $ingreso
  * @property $especifica_ingreso
@@ -34,6 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $updated_at
  *
  * @property Oficina $oficina
+ * @property DenunciasPersona $denunciasPersona
  * @property DenunciasTipologia $denunciasTipologia
  * @property DenunciasTerapia[] $denunciasTerapias
  * @package App
@@ -49,7 +51,7 @@ class DenunciasDenuncia extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['f_denuncia', 'nro_atencion', 'inhabilitado', 'ingreso', 'especifica_ingreso', 'descripcion', 'opinion', 'historia', 'completa', 'archivada', 'procedencia', 'municipio', 'otra_inst', 'nombre_servicio', 'orientacion', 'tipo_atencion', 'defensoria_id', 'tipologia_id', 'tipo_denuncia', 'estado_orientaciones', 'estado_actual', 'color'];
+    protected $fillable = ['f_denuncia', 'nro_atencion', 'persons_id', 'inhabilitado', 'ingreso', 'especifica_ingreso', 'descripcion', 'opinion', 'historia', 'completa', 'archivada', 'procedencia', 'municipio', 'otra_inst', 'nombre_servicio', 'orientacion', 'tipo_atencion', 'defensoria_id', 'tipologia_id', 'tipo_denuncia', 'estado_orientaciones', 'estado_actual', 'color'];
 
 
     /**
@@ -58,6 +60,14 @@ class DenunciasDenuncia extends Model
     public function oficina()
     {
         return $this->belongsTo(\App\Models\Oficina::class, 'defensoria_id', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function denunciasPersona()
+    {
+        return $this->belongsTo(\App\Models\DenunciasPersona::class, 'persons_id', 'id');
     }
     
     /**

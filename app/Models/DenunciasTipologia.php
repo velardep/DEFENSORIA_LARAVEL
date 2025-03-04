@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * Class DenunciasTipologia
  *
  * @property $id
- * @property $tipologia_id
+ * @property $nombre
+ * @property $procedencia
  * @property $created_at
  * @property $updated_at
  *
@@ -26,7 +27,7 @@ class DenunciasTipologia extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['tipologia_id'];
+    protected $fillable = ['nombre', 'procedencia'];
 
 
     /**

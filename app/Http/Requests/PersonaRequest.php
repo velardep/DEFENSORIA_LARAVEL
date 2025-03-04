@@ -22,7 +22,6 @@ class PersonaRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'id_persona' => 'required',
 			'nombre_persona' => 'required|string',
 			'email' => 'required|string',
 			'telefono' => 'required|string',

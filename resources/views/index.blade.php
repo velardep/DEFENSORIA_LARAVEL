@@ -301,63 +301,100 @@
 							<span class="nav-text">ADMINISTRACION</span>
 						</a>
                         <ul aria-expanded="false">
-							<!--<li>
-								<a href="javascript:void(0);" id="btn-oficinas">
-									Oficinas
-								</a>
-							</li>-->
+                        <li>
+                            <a href="javascript:void(0);" id="btn-tipo-oficinas">
+                                <i class="fas fa-building"></i>
+                                <span class="nav-text">Tipo de Oficinas</span>
+                            </a>
+                        </li>
 
-							<li><a href="index-2.html">Estados</a></li>
+                        <li>
+                            <a href="javascript:void(0);" id="btn-oficinas">
+                                <i class="fas fa-briefcase"></i>
+                                <span class="nav-text">Oficinas</span>
+                            </a>
+                        </li>
 
-							<li><a href="coin-details.html">Gestion de Usuarios</a></li>
+                        <li>
+                            <a href="javascript:void(0);" id="btn-permisos">
+                                <i class="fas fa-key"></i>
+                                <span class="nav-text">Permisos</span>
+                            </a>
+                        </li>
 
+                        <li>
+                            <a href="javascript:void(0);" id="btn-roles">
+                                <i class="fas fa-user-tie"></i>
+                                <span class="nav-text">Roles</span>
+                            </a>
+                        </li>
 
-							<li><a href="javascript:void(0);" onclick="cargarUsuarios()">
-<<<<<<< HEAD
-=======
-								<i class="flaticon-381-user-7"></i>
->>>>>>> 561cfc5d (CRUDS)
-									<span class="nav-text">Usuarios</span>
-								</a>
-							</li>
+                        <li>
+                            <a href="javascript:void(0);" id="btn-rol-permisos">
+                                <i class="fas fa-user-shield"></i>
+                                <span class="nav-text">Rol Permisos</span>
+                            </a>
+                        </li>
 
+                        <li>
+                            <a href="javascript:void(0);" id="btn-personas">
+                                <i class="fas fa-users"></i>
+                                <span class="nav-text">Personas</span>
+                            </a>
+                        </li>
 
+                        <li>
+                            <a href="javascript:void(0);" id="btn-usuarios">
+                                <i class="fas fa-user"></i>
+                                <span class="nav-text">Usuarios</span>
+                            </a>
+                        </li>
 
-<<<<<<< HEAD
-
-							<li><a href="javascript:void(0);" onclick="cargarGrupos()">
-									<span class="nav-text">Grupos</span>
-								</a>
-							</li>
-
-
-
-
-
-
-=======
->>>>>>> 561cfc5d (CRUDS)
-							<li><a href="my-wallet.html">Gestion de Denuncias</a></li>
-							<li><a href="tranasactions.html">Notificaciones</a></li>
 						</ul>
 
                     </li>
+                    
+
+
+
+
+
                     
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-041-graph"></i>
 							<span class="nav-text">DENUNCIAS</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Iniciar Denuncia</a></li>
-                            <li><a href="./chart-morris.html">Buscar Personas</a></li>
-                            <li><a href="./chart-chartjs.html">Mis Casos</a></li>
-                            <li><a href="./chart-chartist.html">Casos Incompletos</a></li>
-                            <li><a href="./chart-sparkline.html">Archivados</a></li>
-                            <li><a href="./chart-peity.html">Emblematicos</a></li>
-							<li><a href="./chart-peity.html">Registro de Intervencion</a></li>
-                            <li><a href="./chart-peity.html">Registro de Orientacion</a></li>
-                            <li><a href="./chart-peity.html">Explorar Denuncias</a></li>
-							<li><a href="./chart-peity.html">Reportes</a></li>
+
+                        <li>
+                            <a href="javascript:void(0);" id="btn-denuncias-personas">
+                                <i class="fas fa-user-injured"></i>
+                                <span class="nav-text">Denuncia Personas</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0);" id="btn-denuncias-denuncias">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span class="nav-text">Denuncia Denuncias</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0);" id="btn-denuncias-tipologias">
+                                <i class="fas fa-list-alt"></i>
+                                <span class="nav-text">Denuncia Tipologías</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0);" id="btn-denuncias-terapias">
+                                <i class="fas fa-hand-holding-medical"></i>
+                                <span class="nav-text">Denuncia Terapias</span>
+                            </a>
+                        </li>
+
+
                         </ul>
                     </li>
 					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -421,34 +458,52 @@
 
 
 
-				<div id="oficina-content" class="container-fluid mt-4 p-3"
-					style="width: 95%; max-height: 85vh; overflow-y: auto; display: block; margin: auto;">
-					<!-- Aquí se cargará la tabla con AJAX -->
-				</div>
-				<div id="permiso-content" class="container-fluid mt-4 p-3"
-					style="width: 95%; max-height: 85vh; overflow-y: auto; display: none; margin: auto;">
-					<!-- Aquí se cargará la tabla de permisos con AJAX -->
-				</div>
+
+                <div id="tipo-oficinas-content" class="content-section container-fluid mt-4 p-3"
+                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
+                    <!-- Aquí se cargará la vista de oficinas dinámicamente -->
+                </div>
+
+                <div id="oficinas-content" class="content-section container-fluid mt-4 p-3"
+                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
+                </div>
+
+                <div id="permisos-content" class="content-section container-fluid mt-4 p-3"
+                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
+                </div>
+
+                <div id="roles-content" class="content-section container-fluid mt-4 p-3"
+                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
+                </div>
+
+                <div id="rol-permisos-content" class="content-section container-fluid mt-4 p-3"
+                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
+                </div>
+
+                <div id="personas-content" class="content-section container-fluid mt-4 p-3"
+                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
+                </div>
+
+                <div id="usuarios-content" class="content-section container-fluid mt-4 p-3"
+                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
+                </div>
 
 
+                <div id="denuncias-personas-content" class="content-section container-fluid mt-4 p-3"
+                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
+                </div>
 
-				<div id="tbodyUsers" class="container-fluid mt-4 p-3" style="width: 95%; max-height: 85vh; overflow-y: auto; display: none; margin: auto;">
-					<!-- Aquí se cargará la tabla de usuarios con AJAX -->
-				</div>
+                <div id="denuncias-denuncias-content" class="content-section container-fluid mt-4 p-3"
+                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
+                </div>
 
+                <div id="denuncias-tipologias-content" class="content-section container-fluid mt-4 p-3"
+                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
+                </div>
 
-<<<<<<< HEAD
-
-				<div id="tbodyGroups" class="container-fluid mt-4 p-3" style="width: 95%; max-height: 85vh; overflow-y: auto; display: none; margin: auto;">
-					<!-- Aquí se cargará la tabla de usuarios con AJAX -->
-				</div>
-
-				
-
-
-=======
->>>>>>> 561cfc5d (CRUDS)
-
+                <div id="denuncias-terapias-content" class="content-section container-fluid mt-4 p-3"
+                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
+                </div>
 
 
 
@@ -508,260 +563,342 @@
 
 
 
-	<script>
-<<<<<<< HEAD
+<script>
+
+    // TIPO OFICINAS
+    $(document).ready(function () {
+        $("#btn-tipo-oficinas").on("click", function () {
+            $(".content-section").hide(); // Oculta otras secciones
+            $("#tipo-oficinas-content").show(); // Muestra la sección de usuarios
+
+            // Cargar la vista de usuarios con AJAX
+            $.ajax({
+                url: "{{ route('tipo-oficinas.index') }}", // Ruta que retorna la vista de usuarios
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#tipo-oficinas-content").html(response);
+                },
+                error: function (error) {
+                    console.log("Error al cargar tipos de oficinas:", error);
+                }
+            });
+        });
+    });
+
+    // OFICINAS
+    $(document).ready(function () {
+        $("#btn-oficinas").on("click", function () {
+            $(".content-section").hide(); // Oculta otras secciones
+            $("#oficinas-content").show(); // Muestra la sección de usuarios
+
+            // Cargar la vista de usuarios con AJAX
+            $.ajax({
+                url: "{{ route('oficinas.index') }}", // Ruta que retorna la vista de usuarios
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#oficinas-content").html(response);
+                },
+                error: function (error) {
+                    console.log("Error al cargar oficinas:", error);
+                }
+            });
+        });
+    });
+
+    // PERMISOS
+    $(document).ready(function () {
+        $("#btn-permisos").on("click", function () {
+            $(".content-section").hide(); // Oculta otras secciones
+            $("#permisos-content").show(); // Muestra la sección de usuarios
+
+            // Cargar la vista de usuarios con AJAX
+            $.ajax({
+                url: "{{ route('permisos.index') }}", // Ruta que retorna la vista de usuarios
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#permisos-content").html(response);
+                },
+                error: function (error) {
+                    console.log("Error al cargar permisos:", error);
+                }
+            });
+        });
+    });
+
+    // ROLES
+    $(document).ready(function () {
+        $("#btn-roles").on("click", function () {
+            $(".content-section").hide(); // Oculta otras secciones
+            $("#roles-content").show(); // Muestra la sección de usuarios
+
+            // Cargar la vista de usuarios con AJAX
+            $.ajax({
+                url: "{{ route('roles.index') }}", // Ruta que retorna la vista de usuarios
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#roles-content").html(response);
+                },
+                error: function (error) {
+                    console.log("Error al cargar roles:", error);
+                }
+            });
+        });
+    });
 	
-	//SCRIPT OFICINA
-=======
->>>>>>> 561cfc5d (CRUDS)
-	/*$(document).ready(function () {
-		$("#btn-oficinas").click(function () {
-			$("#oficina-content").show(); // Muestra el contenedor donde irá la tabla
-			$("#permiso-content").hide(); // Muestra el contenedor de la tabla de permisos
+    //ROLES PERMISOS
+    $(document).ready(function () {
+        $("#btn-rol-permisos").on("click", function () {
+            $(".content-section").hide(); // Oculta otras secciones
+            $("#rol-permisos-content").show(); // Muestra la sección de usuarios
 
-			$.ajax({
-				url: "{{ url(path: '/oficina') }}", // Ruta que carga la tabla
-				type: "GET",
-				success: function (data) {
-					$("#oficina-content").html(data); // Inserta la tabla en el div
-				},
-				error: function () {
-					alert("Error al cargar la tabla de oficinas.");
-				}
-			});
-		});
-	});
-	// Manejar clic en "Gestión de Usuarios"
-    $("#btn-gestion-usuarios").click(function () {
-        $("#permiso-content").show(); // Muestra el contenedor de la tabla de permisos
-        $("#oficina-content").hide(); // Oculta la tabla de oficinas si está abierta
+            // Cargar la vista de usuarios con AJAX
+            $.ajax({
+                url: "{{ route('rol-permisos.index') }}", // Ruta que retorna la vista de usuarios
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#rol-permisos-content").html(response);
+                },
+                error: function (error) {
+                    console.log("Error al cargar rol-permisos:", error);
+                }
+            });
+        });
+    });
 
-        $.ajax({
-            url: "{{ url('/permiso') }}", // Ruta que carga la tabla de permisos
-            type: "GET",
-            success: function (data) {
-                $("#permiso-content").html(data); // Inserta la tabla en el div
-            },
-            error: function () {
-                alert("Error al cargar la tabla de permisos.");
+    // PERSONAS
+    $(document).ready(function () {
+        $("#btn-personas").on("click", function () {
+            $(".content-section").hide(); // Oculta otras secciones
+            $("#personas-content").show(); // Muestra la sección de usuarios
+
+            // Cargar la vista de usuarios con AJAX
+            $.ajax({
+                url: "{{ route('personas.index') }}", // Ruta que retorna la vista de usuarios
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#personas-content").html(response);
+                },
+                error: function (error) {
+                    console.log("Error al cargar personas:", error);
+                }
+            });
+        });
+    });
+
+	// USUARIOS
+    $(document).ready(function () {
+        $("#btn-usuarios").on("click", function () {
+            $(".content-section").hide(); // Oculta otras secciones
+            $("#usuarios-content").show(); // Muestra la sección de usuarios
+
+            // Cargar la vista de usuarios con AJAX
+            $.ajax({
+                url: "{{ route('usuarios.index') }}", // Ruta que retorna la vista de usuarios
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#usuarios-content").html(response);
+                },
+                error: function (error) {
+                    console.log("Error al cargar usuarios:", error);
+                }
+            });
+        });
+
+
+
+
+
+
+
+        
+        // Mostrar el formulario de CREAR usuario dentro del mismo div
+        $(document).on("click", "#btn-create-user", function (e) {
+            e.preventDefault(); // Evita que la página se recargue
+
+            $.ajax({
+                url: "{{ route('usuarios.create') }}",
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#usuarios-content").html(response); // Muestra el formulario en el mismo contenedor
+                },
+                error: function (error) {
+                    console.log("Error al cargar formulario de creación:", error);
+                }
+            });
+        });
+
+        // Mostrar el formulario de EDITAR usuario dentro del mismo div
+        $(document).on("click", ".btn-edit-user", function (e) {
+            e.preventDefault(); // Evita que la página se recargue
+            var userId = $(this).data("id"); // Obtiene el ID del usuario
+
+            $.ajax({
+                url: "/usuarios/" + userId + "/edit",
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#usuarios-content").html(response); // Muestra el formulario en el mismo contenedor
+                },
+                error: function (error) {
+                    console.log("Error al cargar formulario de edición:", error);
+                }
+            });
+        });
+
+        // Botón para volver a la lista de usuarios después de crear/editar
+        $(document).on("click", "#btn-back-users", function () {
+            $("#btn-usuarios").trigger("click"); // Recarga la lista de usuarios
+        });
+    });
+
+
+
+
+    // DENUNCIA PERSONAS
+    $(document).ready(function () {
+        $("#btn-denuncias-personas").on("click", function () {
+            $(".content-section").hide(); // Oculta otras secciones
+            $("#denuncias-personas-content").show(); // Muestra la sección de usuarios
+
+            // Cargar la vista de usuarios con AJAX
+            $.ajax({
+                url: "{{ route('denuncias-personas.index') }}", // Ruta que retorna la vista de usuarios
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#denuncias-personas-content").html(response);
+                },
+                error: function (error) {
+                    console.log("Error al cargar denuncia personas:", error);
+                }
+            });
+        });
+    });
+
+
+    // DENUNCIA DENUNCIAS
+    $(document).ready(function () {
+        $("#btn-denuncias-denuncias").on("click", function () {
+            $(".content-section").hide(); // Oculta otras secciones
+            $("#denuncias-denuncias-content").show(); // Muestra la sección de usuarios
+
+            // Cargar la vista de usuarios con AJAX
+            $.ajax({
+                url: "{{ route('denuncias-denuncias.index') }}", // Ruta que retorna la vista de usuarios
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#denuncias-denuncias-content").html(response);
+                },
+                error: function (error) {
+                    console.log("Error al cargar denuncias:", error);
+                }
+            });
+        });
+    });
+
+
+    // DENUNCIA TIPOLOGIAS
+    $(document).ready(function () {
+        $("#btn-denuncias-tipologias").on("click", function () {
+            $(".content-section").hide(); // Oculta otras secciones
+            $("#denuncias-tipologias-content").show(); // Muestra la sección de usuarios
+
+            // Cargar la vista de usuarios con AJAX
+            $.ajax({
+                url: "{{ route('denuncias-tipologias.index') }}", // Ruta que retorna la vista de usuarios
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#denuncias-tipologias-content").html(response);
+                },
+                error: function (error) {
+                    console.log("Error al cargar denuncias tipologias:", error);
+                }
+            });
+        });
+    });
+
+
+    // DENUNCIA TERAPIAS
+    $(document).ready(function () {
+        $("#btn-denuncias-terapias").on("click", function () {
+            $(".content-section").hide(); // Oculta otras secciones
+            $("#denuncias-terapias-content").show(); // Muestra la sección de usuarios
+
+            // Cargar la vista de usuarios con AJAX
+            $.ajax({
+                url: "{{ route('denuncias-terapias.index') }}", // Ruta que retorna la vista de usuarios
+                type: "GET",
+                cache: false,
+                success: function (response) {
+                    $("#denuncias-terapias-content").html(response);
+                },
+                error: function (error) {
+                    console.log("Error al cargar denuncias terapias:", error);
+                }
+            });
+        });
+    });
+
+    // MODO DARK
+    document.addEventListener("DOMContentLoaded", function () {
+        const darkModeToggle = document.getElementById("toggleDarkMode");
+        const body = document.body;
+
+        // Verificar si el usuario ya activó el modo oscuro antes
+        if (localStorage.getItem("dark-mode") === "enabled") {
+            body.classList.add("dark-mode");
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+        }
+
+        darkModeToggle.addEventListener("click", function () {
+            body.classList.toggle("dark-mode");
+
+            // Guardar preferencia en localStorage
+            if (body.classList.contains("dark-mode")) {
+                localStorage.setItem("dark-mode", "enabled");
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+            } else {
+                localStorage.setItem("dark-mode", "disabled");
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
             }
         });
-    });*/
-<<<<<<< HEAD
-=======
-
-	$(document).ready(function() {
-    // Ocultar contenido de usuarios al inicio
-    $("#tbodyUsers").hide();
-
-    // Manejar el clic en el enlace "Usuarios"
-    $("a:contains('Usuarios')").on("click", function () {
-        $("#oficina-content, #permiso-content").hide(); // Ocultar otros módulos
-        $("#tbodyUsers").show(); // Mostrar la sección de usuarios
-        cargarUsuarios(); // Cargar los usuarios
     });
-});
-	function cargarUsuarios() {
-    if (window.loadingUsers) return; // Evita llamadas duplicadas
-    window.loadingUsers = true; // Bloquea nuevas llamadas mientras está en proceso
-
-    $.ajax({
-        url: "/auth_user",
-        type: "GET",
-        cache: false, // Evita obtener una versión en caché
-        success: function(response) {
-            $("#tbodyUsers").html(response);
-            window.loadingUsers = false; // Desbloquea nuevas llamadas
-        },
-        error: function(error) {
-            console.log("Error al cargar usuarios:", error);
-            window.loadingUsers = false; // En caso de error, también desbloquea
-        }
-    });
-}
-
-// Carga usuarios UNA SOLA VEZ al abrir la página
-$(document).ready(function() {
-    cargarUsuarios();
-});
-
-
-	</script>
->>>>>>> 561cfc5d (CRUDS)
-
-
-
-
-
-
-	// SCRIPT AUTH_USER
-	$(document).ready(function() {
-    // Ocultar contenido de usuarios al inicio
-    $("#tbodyUsers").hide();
-
-    // Manejar el clic en el enlace "Usuarios"
-    $("a:contains('Usuarios')").on("click", function () {
-        $("#oficina-content, #permiso-content").hide(); // Ocultar otros módulos
-        $("#tbodyUsers").show(); // Mostrar la sección de usuarios
-        cargarUsuarios(); // Cargar los usuarios
-    });
-	});
-	function cargarUsuarios() {
-    if (window.loadingUsers) return; // Evita llamadas duplicadas
-    window.loadingUsers = true; // Bloquea nuevas llamadas mientras está en proceso
-    $.ajax({
-        url: "/auth_user",
-        type: "GET",
-        cache: false, // Evita obtener una versión en caché
-        success: function(response) {
-            $("#tbodyUsers").html(response);
-            window.loadingUsers = false; // Desbloquea nuevas llamadas
-        },
-        error: function(error) {
-            console.log("Error al cargar usuarios:", error);
-            window.loadingUsers = false; // En caso de error, también desbloquea
-        }
-    });
-}
-
-// Carga usuarios UNA SOLA VEZ al abrir la página
-$(document).ready(function() {
-    cargarUsuarios();
-});
-
-
-
-
-
-
-
-
-
-
-// SCRIPT AUTH_GROUP
-$(document).ready(function() {
-    // Ocultar contenido de usuarios al inicio
-    $("#tbodyGroups").hide();
-
-    // Manejar el clic en el enlace "Usuarios"
-    $("a:contains('Grupos')").on("click", function () {
-        $("#oficina-content, #permiso-content,#tbodyUsers").hide(); // Ocultar otros módulos
-        $("#tbodyGroups").show(); // Mostrar la sección de usuarios
-        cargarGrupos(); // Cargar los usuarios
-    });
-	});
-	function cargarGrupos() {
-    if (window.loadingGroups) return; // Evita llamadas duplicadas
-    window.loadingGroups = true; // Bloquea nuevas llamadas mientras está en proceso
-    $.ajax({
-        url: "/auth_group",
-        type: "GET",
-        cache: false, // Evita obtener una versión en caché
-        success: function(response) {
-            $("#tbodyGroups").html(response);
-            window.loadingGroups = false; // Desbloquea nuevas llamadas
-        },
-        error: function(error) {
-            console.log("Error al cargar grupos:", error);
-            window.loadingGroups = false; // En caso de error, también desbloquea
-        }
-    });
-}
-
-// Carga usuarios UNA SOLA VEZ al abrir la página
-$(document).ready(function() {
-    cargarGrupos();
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// MODO DARK
-document.addEventListener("DOMContentLoaded", function () {
-    const darkModeToggle = document.getElementById("toggleDarkMode");
-    const body = document.body;
-
-    // Verificar si el usuario ya activó el modo oscuro antes
-    if (localStorage.getItem("dark-mode") === "enabled") {
-        body.classList.add("dark-mode");
-        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-    }
-
-    darkModeToggle.addEventListener("click", function () {
-        body.classList.toggle("dark-mode");
-
-        // Guardar preferencia en localStorage
-        if (body.classList.contains("dark-mode")) {
-            localStorage.setItem("dark-mode", "enabled");
-            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-        } else {
-            localStorage.setItem("dark-mode", "disabled");
-            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
-        }
-    });
-});
 </script>
 
 
-<<<<<<< HEAD
-=======
 
 
 
 
->>>>>>> 561cfc5d (CRUDS)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 </body>
 </html>
