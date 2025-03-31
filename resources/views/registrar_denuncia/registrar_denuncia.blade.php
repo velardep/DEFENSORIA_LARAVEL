@@ -267,6 +267,9 @@
             Header end ti-comment-alt
         ***********************************-->
 
+
+
+
         <!--**********************************
             Sidebar start
         ***********************************-->
@@ -301,59 +304,7 @@
 							<span class="nav-text">ADMINISTRACION</span>
 						</a>
                         <ul aria-expanded="false">
-                        <li>
-                            <a href="javascript:void(0);" id="btn-tipo-oficinas">
-                                <i class="fas fa-building"></i>
-                                <span class="nav-text">Tipo de Oficinas</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0);" id="btn-oficinas">
-                                <i class="fas fa-briefcase"></i>
-                                <span class="nav-text">Oficinas</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0);" id="btn-permisos">
-                                <i class="fas fa-key"></i>
-                                <span class="nav-text">Permisos</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0);" id="btn-roles">
-                                <i class="fas fa-user-tie"></i>
-                                <span class="nav-text">Roles</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0);" id="btn-rol-permisos">
-                                <i class="fas fa-user-shield"></i>
-                                <span class="nav-text">Rol Permisos</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0);" id="btn-personas">
-                                <i class="fas fa-users"></i>
-                                <span class="nav-text">Personas</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0);" id="btn-usuarios">
-                                <i class="fas fa-user"></i>
-                                <span class="nav-text">Usuarios</span>
-                            </a>
-                        </li>
-
-						</ul>
-
-                    </li>
-                    
+                        
 
 
 
@@ -368,40 +319,13 @@
 
                         
                         <li>
-    <a href="javascript:void(0);" id="btn-registrar-denuncia">
-        <i class="fas fa-clipboard-list"></i>
-        <span class="nav-text">Registrar Denuncia</span>
-    </a>
-</li>
+                        <a href="javascript:void(0);" id="btn-mostrar-formularios">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span class="nav-text">Registrar Denuncia</span>
+                        </a>
+                    </li>
 
-
-                        <li>
-                            <a href="javascript:void(0);" id="btn-denuncias-personas">
-                                <i class="fas fa-user-injured"></i>
-                                <span class="nav-text">Denuncia Personas</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0);" id="btn-denuncias-denuncias">
-                                <i class="fas fa-exclamation-circle"></i>
-                                <span class="nav-text">Denuncia Denuncias</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0);" id="btn-denuncias-tipologias">
-                                <i class="fas fa-list-alt"></i>
-                                <span class="nav-text">Denuncia Tipologías</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0);" id="btn-denuncias-terapias">
-                                <i class="fas fa-hand-holding-medical"></i>
-                                <span class="nav-text">Denuncia Terapias</span>
-                            </a>
-                        </li>
+                        
 
 
 
@@ -447,159 +371,443 @@
         <!--**********************************
             Sidebar end
         ***********************************-->
-		
-		<!--**********************************
-            Content body start
-        ***********************************-->
+
+
+
+
+
+
+
+
+        <!-- Contenido -->
         <div class="content-body">
-            <!-- row -->
-			<div class="container-fluid">
-				<div class="mb-sm-4 d-flex flex-wrap align-items-center text-head">
-					<h2 class="font-w600 mb-2 me-auto">Servicio de Denuncias</h2>
-					<div class="weather-btn mb-2">
-						<span class="fs-22 font-w600 d-flex"><i class="fa fa-cloud me-3 ms-3"></i>21</span>
-						<select class="form-control style-3 default-select">
-							<option>Medan, IDN</option>
-							<option>Jakarta, IDN</option>
-							<option>Surabaya, IDN</option>
-						</select>
-					</div>
-					<a href="#" class="btn btn-primary mb-2 rounded"><i class="las la-calendar scale5 me-3"></i>Filter Periode</a>
-				</div>	
+            <div class="container-fluid">
+                <div id="formularios-container" style="display: none;">
+                        <div class="card-header bg-black text-white">
+                            <h4 class="mb-0"><i class="fas fa-clipboard-list me-2"></i> Registro de Denuncia</h4>
+                        </div>
+                        <div class="card-body">
 
+                            {{-- Documento --}}
+                            <form id="form-documento">
+                            @csrf
+                                @include('documento.form', [
+                                    'documento' => $documento,
+                                    'tiposDocumento' => $tiposDocumento
+                                ])
+                            </form>
+                            {{-- Contenedor para mostrar el documento guardado --}}
+                            <div id="documento-table-container" class="mt-4"></div>
 
+                            <hr>
 
+                            {{-- Víctima --}}
+                            <form id="form-victima">
+                            @include('victima.form', [
+                                'victima' => $victima,
+                                'documentos' => $documentos
+                            ])
+                            {{-- Contenedor donde se mostrará la víctima guardada --}}
+                            <div id="victima-table-container" class="mt-4"></div>
+                            </form>
 
-                <div id="tipo-oficinas-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                    <!-- Aquí se cargará la vista de oficinas dinámicamente -->
+                            <hr>
+
+                            {{-- Agresor --}}
+                            <form id="form-agresor">
+
+                            @include('agresor.form', ['agresor' => $agresor])
+
+                             <!-- Contenedor para mostrar mensaje de éxito o error -->
+                            <div id="agresor-table-container" class="mt-4"></div>
+                            </form>
+                            <hr>
+
+                            {{-- Domicilio --}}
+                            <form id="form-domicilio">
+                            @include('domicilio.form', [
+                                'domicilio' => $domicilio,
+                                'victimas' => $victimas,
+                                'agresores' => $agresores
+                            ])
+                            <!-- Contenedor para mostrar mensaje de éxito -->
+                            <div id="domicilio-table-container" class="mt-4"></div>
+                            </form>
+                            <hr>
+
+                            {{-- Domicilio Trabajo --}}
+                            @include('domicilio-trabajo.form', [
+                                'domicilioTrabajo' => $domicilioTrabajo,
+                                'agresores' => $agresores
+                            ])
+
+                            <hr>
+
+                            {{-- Denuncia --}}
+                            @include('denuncia.form', [
+                                'denuncia' => $denuncia,
+                                'victimas' => $victimas,
+                                'agresores' => $agresores,
+                                'tiposViolencia' => $tiposViolencia,
+                                'violencias' => $violencias
+                            ])
+
+                        </div>
                 </div>
-
-                <div id="oficinas-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                </div>
-
-                <div id="permisos-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                </div>
-
-                <div id="roles-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                </div>
-
-                <div id="rol-permisos-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                </div>
-
-                <div id="personas-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                </div>
-
-                <div id="usuarios-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                </div>
-
-
-                <div id="denuncias-personas-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                </div>
-
-                <div id="denuncias-denuncias-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                </div>
-
-                <div id="denuncias-tipologias-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                </div>
-
-                <div id="denuncias-terapias-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                </div>
-
-
-                <div id="registrar-denuncia-content" class="content-section container-fluid mt-4 p-3"
-                    style="width: 100%; height: 100%; overflow-y: auto; display: none; padding: 20px; background: white;">
-                </div>
-
-
-
-
-        <!--**********************************
-            Content body end
-        ***********************************-->
-		
-		
-		
-        <!--**********************************
-            Footer start
-        ***********************************-->
-        <div class="footer">
-		
-            <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="https://dexignzone.com/" target="_blank">DexignZone</a> 2021</p>
             </div>
         </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
 
-		<!--**********************************
-           Support ticket button start
-        ***********************************-->
-		
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
+        <!-- Footer -->
+        <div class="footer">
+            <div class="copyright text-center">
+                <p>Desarrollado con 💙 por SLIM Tarija</p>
+            </div>
+        </div>
 
+    </div> <!-- /main-wrapper -->
 
-	</div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
+    <!-- Scripts -->
+    <script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/chart.js/Chart.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.min.js') }}"></script>
+    <script src="{{ asset('assets/js/deznav-init.js') }}"></script>
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required vendors -->
-    <script src="{{asset('assets/vendor/global/global.min.js')}}"></script>
-	<script src="{{asset('assets/vendor/chart.js/Chart.bundle.min.js')}}"></script>
-	<script src="{{asset('assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script>
-	
-	<!-- Apex Chart -->
-	<script src="{{asset('assets/vendor/apexchart/apexchart.js')}}"></script>
-	<script src="{{asset('assets/vendor/owl-carousel/owl.carousel.js')}}"></script>
-	
-	<!-- Dashboard 1 -->
-	<script src="{{asset('assets/js/dashboard/dashboard-1.js')}}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const btnMostrar = document.getElementById('btn-mostrar-formularios');
+            const contenedor = document.getElementById('formularios-container');
 
-    <script src="{{asset('assets/js/custom.min.js')}}"></script>
-	<script src="{{asset('assets/js/deznav-init.js')}}"></script>
-	
+            btnMostrar.addEventListener('click', () => {
+                contenedor.style.display = 'block';
+                btnMostrar.disabled = true;
+                btnMostrar.textContent = 'Formularios Cargados';
+            });
+        });
+    </script>
 
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('form-documento');
 
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Evita el envío tradicional
+
+        const formData = new FormData(form);
+
+        fetch("{{ route('documento.store') }}", {
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Muestra el resultado y limpia el formulario
+            document.getElementById('documento-table-container').innerHTML = `
+                <div class="alert alert-success">✅ Documento guardado: <strong>${data.numero}</strong> - ${data.expedido}</div>
+            `;
+            form.reset();
+        })
+        .catch(() => {
+    alert('Error al guardar. Verifica los campos.');
+});
+
+    });
+});
+</script>
+
+
+<script>
+    const routeVictimaStore = "{{ route('victimas.store') }}";
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('form-victima');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Evita que recargue la página
+
+        const formData = new FormData(form);
+
+        fetch(routeVictimaStore, {
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Error en la solicitud");
+            return response.json();
+        })
+        .then(data => {
+            // Mostrar resumen de la víctima registrada
+            document.getElementById('victima-table-container').innerHTML = `
+                <div class="alert alert-success">
+                    👤 Víctima guardada: <strong>${data.nombre} ${data.ap_paterno} ${data.ap_materno}</strong>
+                </div>
+            `;
+            form.reset();
+        })
+        .catch(error => {
+            console.error("Error al guardar:", error);
+            alert('Error al guardar la víctima. Verifica los datos o revisa la consola (F12).');
+        });
+    });
+});
+</script>
 
 
 
 <script>
-    document.getElementById("btn-registrar-denuncia").addEventListener("click", function () {
-        // Oculta todos los contenedores
-        document.querySelectorAll(".content-section").forEach(section => section.style.display = "none");
+document.addEventListener("DOMContentLoaded", function () {
+    const formAgresor = document.getElementById('form-agresor');
 
-        // Carga contenido desde la ruta
-        fetch("{{ route('registrar.denuncia') }}")
-            .then(response => response.text())
-            .then(html => {
-                const contentDiv = document.getElementById("registrar-denuncia-content");
-                contentDiv.innerHTML = html;
-                contentDiv.style.display = "block";
-            });
+    formAgresor.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(formAgresor);
+
+        fetch("{{ route('agresor.store') }}", {
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Error en la solicitud");
+            return response.json();
+        })
+        .then(data => {
+            // Mostrar resultado en el contenedor
+            document.getElementById('agresor-table-container').innerHTML = `
+                <div class="alert alert-success">
+                    👨 Agresor guardado: <strong>${data.nombre} ${data.ap_paterno} ${data.ap_materno}</strong>
+                </div>
+            `;
+            formAgresor.reset();
+        })
+        .catch(() => {
+            alert('Error al guardar el agresor. Verifica los campos.');
+        });
     });
+});
+</script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const formDomicilio = document.getElementById('form-domicilio');
+
+    formDomicilio.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(formDomicilio);
+
+        fetch("{{ route('domicilio.store') }}", {
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Error en la solicitud");
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('domicilio-table-container').innerHTML = `
+                <div class="alert alert-success">
+                    🏠 Domicilio guardado: <strong>Zona: ${data.zona_barrio || '-'}, 
+            Calle: ${data.avenida_calle || '-'}, 
+            Teléfono: ${data.telefono_domicilio || '-'}</strong>
+                </div>
+            `;
+            formDomicilio.reset();
+        })
+        .catch(async (error) => {
+    const res = await error.response?.json?.();
+    if (res?.errors) {
+        console.log(res.errors);
+        alert('Errores: ' + JSON.stringify(res.errors));
+    } else {
+        alert('Error al guardar el domicilio. Verifica los campos.');
+    }
+});
+
+    });
+});
 </script>
 
 
 
 
-    
 </body>
 </html>
+
+
+<!--@extends('layouts.app')
+
+@section('content')
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">SLIM Tarija</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<div class="d-flex">
+
+<div class="bg-light border-end p-3" style="width: 250px; min-height: 100vh;">
+        <h5>Menú</h5>
+        <ul class="list-unstyled">
+            <li><button id="btn-mostrar-formularios" class="btn btn-outline-primary w-100 mb-2">Mostrar Formularios</button></li>
+        </ul>
+    </div>
+
+    <div class="container mt-4" style="flex-grow: 1;">
+        <div id="formularios-container" style="display: none;">
+            <h3>Registrar Denuncia</h3>
+
+            {{-- Documento --}}
+            @include('documento.form', [
+                'documento' => $documento,
+                'tiposDocumento' => $tiposDocumento
+            ])
+
+            <hr>
+
+            {{-- Víctima --}}
+            @include('victima.form', [
+                'victima' => $victima,
+                'documentos' => $documentos
+            ])
+
+            <hr>
+
+            {{-- Agresor --}}
+            @include('agresor.form', ['agresor' => $agresor])
+
+            <hr>
+
+            {{-- Domicilio --}}
+            @include('domicilio.form', [
+                'domicilio' => $domicilio,
+                'victimas' => $victimas,
+                'agresores' => $agresores
+            ])
+
+            <hr>
+
+            {{-- Domicilio Trabajo --}}
+            @include('domicilio-trabajo.form', [
+                'domicilioTrabajo' => $domicilioTrabajo,
+                'agresores' => $agresores
+            ])
+
+            <hr>
+
+            {{-- Denuncia --}}
+            @include('denuncia.form', [
+                'denuncia' => $denuncia,
+                'victimas' => $victimas,
+                'agresores' => $agresores,
+                'tiposViolencia' => $tiposViolencia,
+                'violencias' => $violencias
+            ])
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const btnMostrar = document.getElementById('btn-mostrar-formularios');
+        const contenedor = document.getElementById('formularios-container');
+
+        btnMostrar.addEventListener('click', () => {
+            contenedor.style.display = 'block';
+            btnMostrar.disabled = true;
+            btnMostrar.textContent = 'Formularios Cargados';
+        });
+    });
+</script>
+@endsection
+
+            -->
+
+
+
+
+<!--@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h3>Registrar Denuncia</h3>
+
+    
+    
+
+    {{-- Documento --}}
+    @include('documento.form', [
+        'documento' => $documento,
+        'tiposDocumento' => $tiposDocumento
+    ])
+
+    <hr>
+
+    {{-- Víctima --}}
+    @include('victima.form', [
+        'victima' => $victima,
+        'documentos' => $documentos
+    ])
+
+    <hr>
+
+    {{-- Agresor --}}
+    @include('agresor.form', ['agresor' => $agresor])
+
+    <hr>
+
+    {{-- Domicilio --}}
+    @include('domicilio.form', [
+        'domicilio' => $domicilio,
+        'victimas' => $victimas,
+        'agresores' => $agresores
+    ])
+
+    <hr>
+
+    {{-- Domicilio Trabajo --}}
+    @include('domicilio-trabajo.form', [
+        'domicilioTrabajo' => $domicilioTrabajo,
+        'agresores' => $agresores
+    ])
+
+    <hr>
+
+
+    {{-- Denuncia --}}
+    @include('denuncia.form', [
+        'denuncia' => $denuncia,
+        'victimas' => $victimas,
+        'agresores' => $agresores,
+        'tiposViolencia' => $tiposViolencia,
+        'violencias' => $violencias
+    ])
+
+</div>
+
+@endsection
+

@@ -3,34 +3,64 @@
 use Illuminate\Support\Facades\Route;
 
 
-use App\Http\Controllers\TipoOficinaController;
-use App\Http\Controllers\OficinaController;
-use App\Http\Controllers\PermisoController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\RolPermisoController;
-use App\Http\Controllers\PersonaController;
-use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\TipologiaController;
-use App\Http\Controllers\DenunciasDenunciaController;
-use App\Http\Controllers\DenunciasTipologiaController;
-use App\Http\Controllers\DenunciasTerapiaController;
-use App\Http\Controllers\DenunciasPersonaController;
+use App\Http\Controllers\VictimaController;
+use App\Http\Controllers\ViolenciaController;
+use App\Http\Controllers\TipoViolenciaController;
+use App\Http\Controllers\TipoDocumentoController;
+use App\Http\Controllers\DomicilioTrabajoController;
+use App\Http\Controllers\DomicilioController;
+use App\Http\Controllers\DocumentoController;
+use App\Http\Controllers\DenunciaController;
+use App\Http\Controllers\AgresorController;
 
 
 
 
-Route::resource('tipo-oficinas', TipoOficinaController::class);
-Route::resource('oficinas', OficinaController::class);
-Route::resource('permisos', PermisoController::class);
-Route::resource('roles', RoleController::class);
-Route::resource('rol-permisos', RolPermisoController::class);
-Route::resource('personas', PersonaController::class);
-Route::resource('usuarios', UsuarioController::class);
-Route::resource('tipologias', TipologiaController::class);
-Route::resource('denuncias-denuncias', DenunciasDenunciaController::class);
-Route::resource('denuncias-tipologias', DenunciasTipologiaController::class);
-Route::resource('denuncias-terapias', DenunciasTerapiaController::class);
-Route::resource('denuncias-personas', DenunciasPersonaController::class);
+
+Route::resource('victimas', VictimaController::class);
+Route::resource('violencia', ViolenciaController::class);
+Route::resource('tipo-violencia', TipoViolenciaController::class);
+Route::resource('tipo-documento', TipoDocumentoController::class);
+Route::resource('domicilio-trabajos', DomicilioTrabajoController::class);
+Route::resource('domicilio', DomicilioController::class);
+Route::resource('documento', DocumentoController::class);
+Route::resource('denuncia', DenunciaController::class);
+Route::resource('agresor', AgresorController::class);
+
+
+
+
+
+
+/*use App\Models\Domicilio;
+use App\Models\Documento;
+use App\Models\DomicilioTrabajo;
+use App\Models\Agresor;
+use App\Models\Victima;
+use App\Models\TipoDocumento;
+
+
+Route::get('/iniciar', function () {
+    return view('iniciar', [
+        'domicilio' => new Domicilio(),
+        'documento' => new Documento(),
+        'domicilioTrabajo' => new DomicilioTrabajo(),
+        'agresores' => Agresor::all(),
+        'victimas' => Victima::all(),
+        'tiposDocumento' => TipoDocumento::all()
+    ]);
+})->name('iniciar');*/
+
+use App\Http\Controllers\RegistrarDenunciaController;
+
+Route::get('/iniciar', [RegistrarDenunciaController::class, 'create'])->name('registrar.denuncia');
+
+
+
+
+
+
+
 
 
 
@@ -78,7 +108,7 @@ Route::delete('permisos/{idpermiso}', [PermisoController::class, 'destroy']);*/
 /*Route::get('phpinfo', function () {
     $host = env('DB_HOST', '127.0.0.1'); // Asegúrate de proporcionar valores predeterminados
     $port = env('DB_PORT', '5432');
-    $database = env('DB_DATABASE', 'defensoria');
+    $database = env('DB_DATABASE', 'defensoria_2.0');
     $username = env('DB_USERNAME', 'postgres');
     $password = env('DB_PASSWORD', '10330239');
 
@@ -89,6 +119,6 @@ Route::delete('permisos/{idpermiso}', [PermisoController::class, 'destroy']);*/
     } catch (PDOException $e) {
         return "Error al conectar con la base de datos: " . $e->getMessage();
     }
-});*/
-
+});
+*/
 
