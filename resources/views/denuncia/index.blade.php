@@ -1,3 +1,24 @@
+<style>
+    .tabla-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .tabla-denuncias {
+        width: 100%;
+        min-width: 1200px; /* o ajusta según columnas */
+        white-space: nowrap;
+    }
+
+    .tabla-denuncias th,
+    .tabla-denuncias td {
+        white-space: nowrap;
+        padding: 8px 12px;
+        text-align: left;
+    }
+</style>
+
+
 @extends('layouts.app')
 
 @section('template_title')
@@ -16,11 +37,11 @@
                                 {{ __('Denuncia') }}
                             </span>
 
-                             <div class="float-right">
+                            <!-- <div class="float-right">
                                 <a href="{{ route('denuncia.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
-                              </div>
+                              </div>-->
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -30,8 +51,15 @@
                     @endif
 
                     <div class="card-body bg-white">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+
+                        <!--<div class="table-responsive">-->
+
+                        <div class="tabla-container">
+
+
+                            <table id="miTablaDenuncias" class="table table-striped table-hover tabla-denuncias">
+
+                            <!--<table class="table table-striped table-hover">-->
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
@@ -72,11 +100,15 @@
 
                                             <td>
                                                 <form action="{{ route('denuncia.destroy', $denuncia->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('denuncia.show', $denuncia->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('denuncia.edit', $denuncia->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <!--<a class="btn btn-sm btn-primary " href="{{ route('denuncia.show', $denuncia->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a> -->
+                                                    <a href="#" class="btn btn-sm btn-primary btn-show-denuncia" data-id="{{ $denuncia->id }}">
+    <i class="fa fa-fw fa-eye"></i> {{ __('Show') }}
+</a>
+
+                                                   <!-- <a class="btn btn-sm btn-success" href="{{ route('denuncia.edit', $denuncia->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a> -->
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                   <!-- <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button> -->
                                                 </form>
                                             </td>
                                         </tr>

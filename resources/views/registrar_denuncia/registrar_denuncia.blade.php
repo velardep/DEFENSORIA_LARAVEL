@@ -37,8 +37,12 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 	
 </head>
+
 <body>
 
     <!--*******************
@@ -387,63 +391,11 @@
                             <h4 class="mb-0"><i class="fas fa-clipboard-list me-2"></i> Registro de Denuncia</h4>
                         </div>
                         <div class="card-body">
-
-                            {{-- Documento --}}
-                            <form id="form-documento">
-                            @csrf
-                                @include('documento.form', [
-                                    'documento' => $documento,
-                                    'tiposDocumento' => $tiposDocumento
-                                ])
-                            </form>
-                            {{-- Contenedor para mostrar el documento guardado --}}
-                            <div id="documento-table-container" class="mt-4"></div>
-
-                            <hr>
-
-                            {{-- Víctima --}}
-                            <form id="form-victima">
-                            @include('victima.form', [
-                                'victima' => $victima,
-                                'documentos' => $documentos
-                            ])
-                            {{-- Contenedor donde se mostrará la víctima guardada --}}
-                            <div id="victima-table-container" class="mt-4"></div>
-                            </form>
-
-                            <hr>
-
-                            {{-- Agresor --}}
-                            <form id="form-agresor">
-
-                            @include('agresor.form', ['agresor' => $agresor])
-
-                             <!-- Contenedor para mostrar mensaje de éxito o error -->
-                            <div id="agresor-table-container" class="mt-4"></div>
-                            </form>
-                            <hr>
-
-                            {{-- Domicilio --}}
-                            <form id="form-domicilio">
-                            @include('domicilio.form', [
-                                'domicilio' => $domicilio,
-                                'victimas' => $victimas,
-                                'agresores' => $agresores
-                            ])
-                            <!-- Contenedor para mostrar mensaje de éxito -->
-                            <div id="domicilio-table-container" class="mt-4"></div>
-                            </form>
-                            <hr>
-
-                            {{-- Domicilio Trabajo --}}
-                            @include('domicilio-trabajo.form', [
-                                'domicilioTrabajo' => $domicilioTrabajo,
-                                'agresores' => $agresores
-                            ])
-
-                            <hr>
+                            
 
                             {{-- Denuncia --}}
+                            <div id="formulario-denuncia-container">
+                            <form id="form-denuncia">
                             @include('denuncia.form', [
                                 'denuncia' => $denuncia,
                                 'victimas' => $victimas,
@@ -451,6 +403,15 @@
                                 'tiposViolencia' => $tiposViolencia,
                                 'violencias' => $violencias
                             ])
+                            <!-- Contenedor para mostrar resultado -->
+                                <div id="denuncia-table-container" class="mt-4"></div>
+                            </form>
+                            </div>
+
+                            <div id="tabla-denuncia-container" ></div>
+
+                            <div id="formularios-extra-container" class="mt-4" style="display: none;"></div> <!-- Aquí se cargarán los otros formularios -->
+
 
                         </div>
                 </div>
@@ -486,7 +447,7 @@
         });
     </script>
 
-
+{{-- SCRIPT 1: Guarda documento y muestra mensaje --}}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('form-documento');
@@ -512,19 +473,19 @@ document.addEventListener("DOMContentLoaded", function () {
             form.reset();
         })
         .catch(() => {
-    alert('Error al guardar. Verifica los campos.');
-});
+            alert('Error al guardar. Verifica los campos.');
+        });
 
     });
 });
 </script>
 
-
+{{-- SCRIPT 2: Ruta para guardar víctima --}}
 <script>
     const routeVictimaStore = "{{ route('victimas.store') }}";
 </script>
 
-
+{{-- SCRIPT 3: Guarda víctima y muestra mensaje --}}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('form-victima');
@@ -562,8 +523,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-
-
+{{-- SCRIPT 4: Guarda agresor y muestra mensaje --}}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const formAgresor = document.getElementById('form-agresor');
@@ -600,8 +560,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-
-
+{{-- SCRIPT 5: Guarda domicilio y muestra mensaje --}}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const formDomicilio = document.getElementById('form-domicilio');
@@ -633,18 +592,148 @@ document.addEventListener("DOMContentLoaded", function () {
             formDomicilio.reset();
         })
         .catch(async (error) => {
-    const res = await error.response?.json?.();
-    if (res?.errors) {
-        console.log(res.errors);
-        alert('Errores: ' + JSON.stringify(res.errors));
-    } else {
-        alert('Error al guardar el domicilio. Verifica los campos.');
-    }
-});
+            const res = await error.response?.json?.();
+            if (res?.errors) {
+                console.log(res.errors);
+                alert('Errores: ' + JSON.stringify(res.errors));
+            } else {
+                alert('Error al guardar el domicilio. Verifica los campos.');
+            }
+        });
 
     });
 });
 </script>
+
+
+
+
+
+
+
+{{-- SCRIPT 6 (versión extendida): Guarda denuncia y muestra mensaje en pantalla (sin recargar tabla) --}}
+<script>
+/*document.addEventListener("DOMContentLoaded", function () {
+    const formDenuncia = document.getElementById('form-denuncia');
+
+    formDenuncia.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(formDenuncia);
+
+        fetch("{{ route('denuncia.store') }}", {
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            },
+            body: formData
+        })
+        .then(async response => {
+            if (!response.ok) {
+                const error = await response.json();
+                console.error(error);
+                throw new Error("Error en la solicitud");
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('denuncia-table-container').innerHTML = `
+                <div class="alert alert-success">
+                    📝 Denuncia guardada: <strong>${data.num_caso || ''}</strong> - ${data.fecha || ''}
+                </div>
+            `;
+            formDenuncia.reset();
+        })
+        .catch(error => {
+            alert('Error al guardar la denuncia. Verifica los campos o revisa la consola (F12).');
+            console.error("Error detallado:", error);
+        });
+    });
+});*/
+
+</script>
+
+
+{{-- SCRIPT 7 (versión final): Guarda denuncia, oculta el formulario y muestra la tabla de denuncias actualizada --}}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const formDenuncia = document.getElementById('form-denuncia');
+    const containerForm = document.getElementById('formulario-denuncia-container');
+    const containerTabla = document.getElementById('tabla-denuncia-container');
+
+    formDenuncia.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(formDenuncia);
+
+        fetch("{{ route('denuncia.store') }}", {
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Error en la solicitud");
+            return response.json();
+        })
+        .then(data => {
+            // Ocultar formulario
+            containerForm.style.display = 'none';
+
+            // Cargar tabla de denuncias
+            fetch("{{ route('denuncia.index') }}")
+                .then(res => res.text())
+                .then(html => {
+                    containerTabla.innerHTML = html;
+                    containerTabla.style.display = 'block';
+                })
+                .catch(() => {
+                    containerTabla.innerHTML = '<div class="alert alert-danger">Error al cargar la tabla de denuncias.</div>';
+                    containerTabla.style.display = 'block';
+                });
+        })
+        .catch(() => {
+            alert('Error al guardar la denuncia. Verifica los campos o revisa la consola (F12).');
+        });
+    });
+});
+</script>
+
+{{-- SCRIPT 8: Al hacer clic en "Show", oculta la tabla, muestra el detalle de la denuncia y carga formularios extra debajo --}}
+<script> 
+document.addEventListener("DOMContentLoaded", function () {
+    document.body.addEventListener("click", function (e) {
+        const btn = e.target.closest(".btn-show-denuncia");
+        if (!btn) return;
+
+        e.preventDefault();
+        const id = btn.getAttribute("data-id");
+
+        // Cargar la vista show
+        fetch(`/denuncia/${id}`)
+            .then(res => res.text())
+            .then(html => {
+                // Carga show
+                document.getElementById('tabla-denuncia-container').innerHTML = html;
+                document.getElementById('formulario-denuncia-container').style.display = 'none';
+
+                // Carga formularios debajo
+                fetch(`/formularios-secundarios/${id}`) // esta ruta la crearás abajo
+                    .then(r => r.text())
+                    .then(formularios => {
+                        const container = document.getElementById('formularios-extra-container');
+                        container.innerHTML = formularios;
+                        container.style.display = 'block';
+                    });
+            });
+    });
+});
+
+
+</script>
+
+
 
 
 
@@ -652,162 +741,4 @@ document.addEventListener("DOMContentLoaded", function () {
 </body>
 </html>
 
-
-<!--@extends('layouts.app')
-
-@section('content')
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">SLIM Tarija</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</nav>
-
-<div class="d-flex">
-
-<div class="bg-light border-end p-3" style="width: 250px; min-height: 100vh;">
-        <h5>Menú</h5>
-        <ul class="list-unstyled">
-            <li><button id="btn-mostrar-formularios" class="btn btn-outline-primary w-100 mb-2">Mostrar Formularios</button></li>
-        </ul>
-    </div>
-
-    <div class="container mt-4" style="flex-grow: 1;">
-        <div id="formularios-container" style="display: none;">
-            <h3>Registrar Denuncia</h3>
-
-            {{-- Documento --}}
-            @include('documento.form', [
-                'documento' => $documento,
-                'tiposDocumento' => $tiposDocumento
-            ])
-
-            <hr>
-
-            {{-- Víctima --}}
-            @include('victima.form', [
-                'victima' => $victima,
-                'documentos' => $documentos
-            ])
-
-            <hr>
-
-            {{-- Agresor --}}
-            @include('agresor.form', ['agresor' => $agresor])
-
-            <hr>
-
-            {{-- Domicilio --}}
-            @include('domicilio.form', [
-                'domicilio' => $domicilio,
-                'victimas' => $victimas,
-                'agresores' => $agresores
-            ])
-
-            <hr>
-
-            {{-- Domicilio Trabajo --}}
-            @include('domicilio-trabajo.form', [
-                'domicilioTrabajo' => $domicilioTrabajo,
-                'agresores' => $agresores
-            ])
-
-            <hr>
-
-            {{-- Denuncia --}}
-            @include('denuncia.form', [
-                'denuncia' => $denuncia,
-                'victimas' => $victimas,
-                'agresores' => $agresores,
-                'tiposViolencia' => $tiposViolencia,
-                'violencias' => $violencias
-            ])
-        </div>
-    </div>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const btnMostrar = document.getElementById('btn-mostrar-formularios');
-        const contenedor = document.getElementById('formularios-container');
-
-        btnMostrar.addEventListener('click', () => {
-            contenedor.style.display = 'block';
-            btnMostrar.disabled = true;
-            btnMostrar.textContent = 'Formularios Cargados';
-        });
-    });
-</script>
-@endsection
-
-            -->
-
-
-
-
-<!--@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <h3>Registrar Denuncia</h3>
-
-    
-    
-
-    {{-- Documento --}}
-    @include('documento.form', [
-        'documento' => $documento,
-        'tiposDocumento' => $tiposDocumento
-    ])
-
-    <hr>
-
-    {{-- Víctima --}}
-    @include('victima.form', [
-        'victima' => $victima,
-        'documentos' => $documentos
-    ])
-
-    <hr>
-
-    {{-- Agresor --}}
-    @include('agresor.form', ['agresor' => $agresor])
-
-    <hr>
-
-    {{-- Domicilio --}}
-    @include('domicilio.form', [
-        'domicilio' => $domicilio,
-        'victimas' => $victimas,
-        'agresores' => $agresores
-    ])
-
-    <hr>
-
-    {{-- Domicilio Trabajo --}}
-    @include('domicilio-trabajo.form', [
-        'domicilioTrabajo' => $domicilioTrabajo,
-        'agresores' => $agresores
-    ])
-
-    <hr>
-
-
-    {{-- Denuncia --}}
-    @include('denuncia.form', [
-        'denuncia' => $denuncia,
-        'victimas' => $victimas,
-        'agresores' => $agresores,
-        'tiposViolencia' => $tiposViolencia,
-        'violencias' => $violencias
-    ])
-
-</div>
-
-@endsection
 

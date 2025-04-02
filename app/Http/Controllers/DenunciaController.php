@@ -45,12 +45,16 @@ class DenunciaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(DenunciaRequest $request): RedirectResponse
-    {
-        Denuncia::create($request->validated());
 
+    public function store(Request $request)
+    {
+        $denuncia = Denuncia::create($request->all());
+
+        return response()->json($denuncia);
+
+        /*
         return Redirect::route('denuncia.index')
-            ->with('success', 'Denuncia created successfully.');
+            ->with('success', 'Denuncia created successfully.');*/
     }
 
     /**

@@ -215,7 +215,7 @@
     <!-- 🧍 Información Personal -->
     <div class="col-md-6">
         <div class="card card-form mb-4">
-            <h5 class="mb-4">🧍 Información Personal</h5>
+            <h5 class="mb-4">🧍 Información Personal de la Victima</h5>
 
             <div class="input-float">
                 <label for="nombre">Nombre</label>

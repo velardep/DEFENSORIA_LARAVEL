@@ -59,6 +59,22 @@ Route::get('/iniciar', [RegistrarDenunciaController::class, 'create'])->name('re
 
 
 
+Route::get('/formularios-secundarios/{id}', function ($id) {
+    // Puedes usar el ID si necesitas filtrar datos relacionados
+    return view('partials.formularios-secundarios', [
+        'documento' => new App\Models\Documento(),
+        'tiposDocumento' => App\Models\TipoDocumento::all(),
+        'victima' => new App\Models\Victima(),
+        'documentos' => App\Models\Documento::all(),
+        'agresor' => new App\Models\Agresor(),
+        'domicilio' => new App\Models\Domicilio(),
+        'domicilioTrabajo' => new App\Models\DomicilioTrabajo(),
+        'victimas' => App\Models\Victima::all(),
+        'agresores' => App\Models\Agresor::all(),
+    ]);
+});
+
+
 
 
 
