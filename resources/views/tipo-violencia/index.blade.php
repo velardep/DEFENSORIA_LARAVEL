@@ -16,9 +16,10 @@
                         </span>
 
                         <div class="float-right">
-                            <a href="{{ route('tipo-violencia.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                            <button onclick="cargarFormularioCrearTipoViolencia()" class="btn btn-primary btn-sm float-right">
                                 {{ __('Crear Nuevo') }}
-                            </a>
+                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -36,7 +37,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nombre</th>
-                                    <th>Condición</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -45,22 +45,20 @@
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td>{{ $tipo->nombre }}</td>
-                                        <td>{{ $tipo->condicion }}</td>
                                         <td>
-                                            <form action="{{ route('tipo-violencia.destroy', $tipo->id) }}" method="POST">
-                                                <a class="btn btn-sm btn-primary" href="{{ route('tipo-violencia.show', $tipo->id) }}">
-                                                    <i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}
-                                                </a>
-                                                <a class="btn btn-sm btn-success" href="{{ route('tipo-violencia.edit', $tipo->id) }}">
-                                                    <i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('¿Seguro que deseas eliminar?') ? this.closest('form').submit() : false;">
-                                                    <i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}
+                                            <form id="form-eliminar-tipo-violencia-{{ $tipo->id }}" data-id="{{ $tipo->id }}" class="d-inline">
+                                                <button type="button" class="btn btn-sm btn-primary" onclick="mostrarDetalleTipoViolencia({{ $tipo->id }})">
+                                                    <i class="fa fa-fw fa-eye"></i> Ver Detalles
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-success" onclick="cargarFormularioEditarTipoViolencia({{ $tipo->id }})">
+                                                    <i class="fa fa-fw fa-edit"></i> Editar
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminarTipoViolencia({{ $tipo->id }})">
+                                                    <i class="fa fa-fw fa-trash"></i> Eliminar
                                                 </button>
                                             </form>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>

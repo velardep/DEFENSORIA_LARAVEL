@@ -30,9 +30,36 @@ class DenunciaRequest extends FormRequest
 			'cod_slim' => 'string',
             'id_agresor' => 'required|exists:agresor,id',
             'id_victima' => 'required|exists:victima,id',
-            'id_tipo_violencia' => 'required|exists:tipo_violencia,id', // o como se llame la tabla
-            'id_violencia' => 'required|exists:violencia,id',
-			'condicion' => 'boolean',
+			'estado' => 'string',
+
+            'violencia_fisica' => 'array',
+            'violencia_psicologica' => 'array',
+            'violencia_sexual' => 'array',
+            'violencia_economica' => 'array',
+
+            'forma_ingreso' => 'string',
+            'denuncia_previa' => 'string',
+            'testimonio' => 'string',
+            'completada' => 'string',
+
+            'distrito' => 'string',
+            'zona_barrio' => 'string',
+			'avenida_calle' => 'string',
+			'nom_edificio' => 'string',
+			'num_vivienda' => 'string',
+			'lugar_domicilio' => 'string',
+			'especifique' => 'string',
+
+            'delitos_penales' => 'string',
+            'num_juzgado' => 'string',
+
+            'emblematico' => 'string',
+
+            'violencia_feminicida' => 'string'
+            
+
+
+
         ];
     }
 }

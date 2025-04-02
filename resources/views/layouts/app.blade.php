@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+   <!-- <title>{{ config('app.name', 'Laravel') }}</title>-->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -16,9 +16,10 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-    
-
-
+    <!-- Asegurar que los botones de atras y adelante no funcionen en el login -->
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 
 </head>
 <body>
@@ -38,9 +39,9 @@
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
+                    <!-- Right Side Of Navbar 
                     <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
+                         Authentication Links 
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -72,7 +73,7 @@
                                 </div>
                             </li>
                         @endguest
-                    </ul>
+                    </ul>-->
                 </div>
             </div>
         </nav>
@@ -81,10 +82,6 @@
             @yield('content')
         </main>
     </div>
-
-
     
-    @yield('scripts')
-
 </body>
 </html>

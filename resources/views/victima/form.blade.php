@@ -1,112 +1,3 @@
-<!--<div class="row padding-1 p-1">
-    <div class="col-md-12">
-        
-        <div class="form-group mb-2 mb20">
-            <label for="nombre" class="form-label">{{ __('Nombre') }}</label>
-            <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre', $victima?->nombre) }}" id="nombre" placeholder="Nombre">
-            {!! $errors->first('nombre', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="ap_paterno" class="form-label">{{ __('Ap Paterno') }}</label>
-            <input type="text" name="ap_paterno" class="form-control @error('ap_paterno') is-invalid @enderror" value="{{ old('ap_paterno', $victima?->ap_paterno) }}" id="ap_paterno" placeholder="Ap Paterno">
-            {!! $errors->first('ap_paterno', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="ap_materno" class="form-label">{{ __('Ap Materno') }}</label>
-            <input type="text" name="ap_materno" class="form-control @error('ap_materno') is-invalid @enderror" value="{{ old('ap_materno', $victima?->ap_materno) }}" id="ap_materno" placeholder="Ap Materno">
-            {!! $errors->first('ap_materno', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="sexo" class="form-label">{{ __('Sexo') }}</label>
-            <input type="text" name="sexo" class="form-control @error('sexo') is-invalid @enderror" value="{{ old('sexo', $victima?->sexo) }}" id="sexo" placeholder="Sexo">
-            {!! $errors->first('sexo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="lugr_nacimiento" class="form-label">{{ __('Lugr Nacimiento') }}</label>
-            <input type="text" name="lugr_nacimiento" class="form-control @error('lugr_nacimiento') is-invalid @enderror" value="{{ old('lugr_nacimiento', $victima?->lugr_nacimiento) }}" id="lugr_nacimiento" placeholder="Lugr Nacimiento">
-            {!! $errors->first('lugr_nacimiento', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="fecha_nacimiento" class="form-label">{{ __('Fecha Nacimiento') }}</label>
-            <input type="text" name="fecha_nacimiento" class="form-control @error('fecha_nacimiento') is-invalid @enderror" value="{{ old('fecha_nacimiento', $victima?->fecha_nacimiento) }}" id="fecha_nacimiento" placeholder="Fecha Nacimiento">
-            {!! $errors->first('fecha_nacimiento', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="edad" class="form-label">{{ __('Edad') }}</label>
-            <input type="text" name="edad" class="form-control @error('edad') is-invalid @enderror" value="{{ old('edad', $victima?->edad) }}" id="edad" placeholder="Edad">
-            {!! $errors->first('edad', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="residencia_habitual" class="form-label">{{ __('Residencia Habitual') }}</label>
-            <input type="text" name="residencia_habitual" class="form-control @error('residencia_habitual') is-invalid @enderror" value="{{ old('residencia_habitual', $victima?->residencia_habitual) }}" id="residencia_habitual" placeholder="Residencia Habitual">
-            {!! $errors->first('residencia_habitual', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="estado_civil" class="form-label">{{ __('Estado Civil') }}</label>
-            <input type="text" name="estado_civil" class="form-control @error('estado_civil') is-invalid @enderror" value="{{ old('estado_civil', $victima?->estado_civil) }}" id="estado_civil" placeholder="Estado Civil">
-            {!! $errors->first('estado_civil', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="rel_victima_agresor" class="form-label">{{ __('Rel Victima Agresor') }}</label>
-            <input type="text" name="rel_victima_agresor" class="form-control @error('rel_victima_agresor') is-invalid @enderror" value="{{ old('rel_victima_agresor', $victima?->rel_victima_agresor) }}" id="rel_victima_agresor" placeholder="Rel Victima Agresor">
-            {!! $errors->first('rel_victima_agresor', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="hijos" class="form-label">{{ __('Hijos') }}</label>
-            <input type="text" name="hijos" class="form-control @error('hijos') is-invalid @enderror" value="{{ old('hijos', $victima?->hijos) }}" id="hijos" placeholder="Hijos">
-            {!! $errors->first('hijos', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="logro_educativo" class="form-label">{{ __('Logro Educativo') }}</label>
-            <input type="text" name="logro_educativo" class="form-control @error('logro_educativo') is-invalid @enderror" value="{{ old('logro_educativo', $victima?->logro_educativo) }}" id="logro_educativo" placeholder="Logro Educativo">
-            {!! $errors->first('logro_educativo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="actividad" class="form-label">{{ __('Actividad') }}</label>
-            <input type="text" name="actividad" class="form-control @error('actividad') is-invalid @enderror" value="{{ old('actividad', $victima?->actividad) }}" id="actividad" placeholder="Actividad">
-            {!! $errors->first('actividad', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="ingreso" class="form-label">{{ __('Ingreso') }}</label>
-            <input type="text" name="ingreso" class="form-control @error('ingreso') is-invalid @enderror" value="{{ old('ingreso', $victima?->ingreso) }}" id="ingreso" placeholder="Ingreso">
-            {!! $errors->first('ingreso', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="monto" class="form-label">{{ __('Monto') }}</label>
-            <input type="text" name="monto" class="form-control @error('monto') is-invalid @enderror" value="{{ old('monto', $victima?->monto) }}" id="monto" placeholder="Monto">
-            {!! $errors->first('monto', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="idioma" class="form-label">{{ __('Idioma') }}</label>
-            <input type="text" name="idioma" class="form-control @error('idioma') is-invalid @enderror" value="{{ old('idioma', $victima?->idioma) }}" id="idioma" placeholder="Idioma">
-            {!! $errors->first('idioma', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="especifique_idioma" class="form-label">{{ __('Especifique Idioma') }}</label>
-            <input type="text" name="especifique_idioma" class="form-control @error('especifique_idioma') is-invalid @enderror" value="{{ old('especifique_idioma', $victima?->especifique_idioma) }}" id="especifique_idioma" placeholder="Especifique Idioma">
-            {!! $errors->first('especifique_idioma', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="id_domicilio" class="form-label">{{ __('Id Domicilio') }}</label>
-            <input type="text" name="id_domicilio" class="form-control @error('id_domicilio') is-invalid @enderror" value="{{ old('id_domicilio', $victima?->id_domicilio) }}" id="id_domicilio" placeholder="Id Domicilio">
-            {!! $errors->first('id_domicilio', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="id_documento" class="form-label">{{ __('Id Documento') }}</label>
-            <input type="text" name="id_documento" class="form-control @error('id_documento') is-invalid @enderror" value="{{ old('id_documento', $victima?->id_documento) }}" id="id_documento" placeholder="Id Documento">
-            {!! $errors->first('id_documento', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-
-    </div>
-    <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-    </div>
-</div>-->
-
-
-
-
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -121,7 +12,7 @@
 
     :root {
         --azul: #003049;
-        --rojo: #ff4800;
+        --rojo:rgb(0, 102, 255);
         --naranja: #000000;
         --amarillo: #1f99be;
         --beige: #f8f8f8;
@@ -145,12 +36,12 @@
 
     .input-float {
         position: relative;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
     }
 
     .input-float label {
         position: absolute;
-        top: -0.6rem;
+        top: -1rem;
         left: 2.6rem;
         background: var(--beige);
         padding: 0 0.4rem;
@@ -173,7 +64,7 @@
     .input-float input,
     .input-float select {
         width: 100%;
-        padding: 0.6rem 0.6rem 0.6rem 2.6rem;
+        padding: 1rem 0.6rem 0.6rem 2.6rem;
         border: none;
         border-bottom: 2px solid var(--amarillo);
         background: transparent;
@@ -193,11 +84,12 @@
         padding: 0.65rem 1.5rem;
         font-size: 1rem;
         border-radius: 30px;
-        background-color: var(--azul);
+        background-color: #1f99be; /* azul personalizado */
         border: none;
         color: white;
         transition: background 0.3s ease;
     }
+
 
     .btn-submit:hover {
         background-color: var(--rojo);
@@ -210,191 +102,492 @@
     }
 </style>
 
+<h4 style="margin-left: 16px; font-size: 2rem;"> Iniciar Ficha de Denuncia</h4>
 
-<div class="row">
-    <!-- 🧍 Información Personal -->
+<div class="row"> 
+    <!-- 🧍 Información Personal --> 
     <div class="col-md-6">
         <div class="card card-form mb-4">
-            <h5 class="mb-4">🧍 Información Personal</h5>
+            <h4 class="mb-4">Datos de la victima</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" 
+                        value="{{ old('nombre', $victima?->nombre) }}">
+                    </div>
+                </div>
 
-            <div class="input-float">
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" value="{{ old('nombre', $victima?->nombre) }}">
-            </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="ap_paterno">Apellido Paterno</label>
+                        <input type="text" name="ap_paterno" id="ap_paterno" value="{{ old('ap_paterno', $victima?->ap_paterno) }}">
+                    </div>
+                </div>
 
-            <div class="input-float">
-                <label for="ap_paterno">Apellido Paterno</label>
-                <input type="text" name="ap_paterno" id="ap_paterno" value="{{ old('ap_paterno', $victima?->ap_paterno) }}">
-            </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="ap_materno">Apellido Materno</label>
+                        <input type="text" name="ap_materno" id="ap_materno" value="{{ old('ap_materno', $victima?->ap_materno) }}">
+                    </div>
+                </div>
 
-            <div class="input-float">
-                <label for="ap_materno">Apellido Materno</label>
-                <input type="text" name="ap_materno" id="ap_materno" value="{{ old('ap_materno', $victima?->ap_materno) }}">
-            </div>
+                
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="tipo_documento">Tipo documento</label>
+                        <select name="tipo_documento" id="tipo_documento"> 
+                            <option value=""></option>
+                            <option value="Carnet de Identidad" {{ old('tipo_documento', $victima?->tipo_documento) == 'Carnet de Identidad' ? 'selected' : '' }}>Carnet de Identidad</option>
+                            <option value="RUN" {{ old('tipo_documento', $victima?->tipo_documento) == 'RUN' ? 'selected' : '' }}>RUN</option>
+                            <option value="Certificado de Nacimiento" {{ old('tipo_documento', $victima?->tipo_documento) == 'Certificado de Nacimiento' ? 'selected' : '' }}>Certificado de Nacimiento</option>
+                            <option value="No Tiene" {{ old('tipo_documento', $victima?->tipo_documento) == 'No Tiene' ? 'selected' : '' }}>No Tiene</option>
+                        </select>
+                    </div>
+                </div>
 
-            <div class="input-float">
-                <label for="sexo">Sexo</label>
-                <select name="sexo" id="sexo">
-                    <option value=""></option>
-                    <option value="Femenino" {{ old('sexo', $victima?->sexo) == 'Femenino' ? 'selected' : '' }}>Femenino</option>
-                    <option value="Masculino" {{ old('sexo', $victima?->sexo) == 'Masculino' ? 'selected' : '' }}>Masculino</option>
-                </select>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="num_documento">Numero de Documento</label>
+                        <input type="text" name="num_documento" id="num_documento" value="{{ old('num_documento', $victima?->num_documento) }}">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="expedido">Expedido</label>
+                        <select name="expedido" id="expedido">
+                            <option value=""></option>
+                            <option value="Tarija" {{ old('expedido', $victima?->expedido) == 'Tarija' ? 'selected' : '' }}>Tarija</option>
+                            <option value="Chuquisaca" {{ old('expedido', $victima?->expedido) == 'Chuquisaca' ? 'selected' : '' }}>Chuquisaca</option>
+                            <option value="Potosi" {{ old('expedido', $victima?->expedido) == 'Potosi' ? 'selected' : '' }}>Potosi</option>
+                            <option value="Oruro" {{ old('expedido', $victima?->expedido) == 'Oruro' ? 'selected' : '' }}>Oruro</option>
+                            <option value="Cochabamba" {{ old('expedido', $victima?->expedido) == 'Cochabamba' ? 'selected' : '' }}>Cochabamba</option>
+                            <option value="Santa Cruz" {{ old('expedido', $victima?->expedido) == 'Santa Cruz' ? 'selected' : '' }}>Santa Cruz</option>
+                            <option value="Beni" {{ old('expedido', $victima?->expedido) == 'Beni' ? 'selected' : '' }}>Beni</option>
+                            <option value="La Paz" {{ old('expedido', $victima?->expedido) == 'La Paz' ? 'selected' : '' }}>La Paz</option>
+                            <option value="Pando" {{ old('expedido', $victima?->expedido) == 'Pando' ? 'selected' : '' }}>Pando</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="sexo">Sexo</label>
+                        <select name="sexo" id="sexo">
+                            <option value=""></option>
+                            <option value="Femenino" {{ old('sexo', $victima?->sexo) == 'Femenino' ? 'selected' : '' }}>Femenino</option>
+                            <option value="Masculino" {{ old('sexo', $victima?->sexo) == 'Masculino' ? 'selected' : '' }}>Masculino</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="lugr_nacimiento">Lugar de Nacimiento</label>
+                        <select name="lugr_nacimiento" id="lugr_nacimiento">
+                            <option value=""></option>
+                            <option value="Este Municipio" {{ old('lugr_nacimiento', $victima?->lugr_nacimiento) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
+                            <option value="Otro municipio" {{ old('lugr_nacimiento', $victima?->lugr_nacimiento) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
+                            <option value="Otro Pais" {{ old('lugr_nacimiento', $victima?->lugr_nacimiento) == 'Otro Pais' ? 'selected' : '' }}>Otro Pais</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6" id="especifique-nacimiento-wrapper" style="display: none;">
+                    <div class="input-float">
+                        <label for="especifique_nacimiento">Especifique lugar</label>
+                        <input type="text" name="especifique_nacimiento" id="especifique_nacimiento" value="{{ old('especifique_nacimiento', $victima?->especifique_nacimiento) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', $victima?->fecha_nacimiento) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="edad">Edad</label>
+                        <input type="number" name="edad" id="edad" value="{{ old('edad', $victima?->edad) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="adulto_mayor">Adulto Mayor</label>
+                        <select name="adulto_mayor" id="adulto_mayor">
+                            <option value="">Seleccione</option>
+                            <option value="SI" {{ old('adulto_mayor', $victima?->adulto_mayor) == 'SI' ? 'selected' : '' }}>SI</option>
+                            <option value="No" {{ old('adulto_mayor', $victima?->adulto_mayor) == 'NO' ? 'selected' : '' }}>NO</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="residencia_habitual">Residencia Habitual</label>
+                        <select name="residencia_habitual" id="residencia_habitual">
+                            <option value=""></option>
+                            <option value="Este Municipio" {{ old('residencia_habitual', $victima?->residencia_habitual) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
+                            <option value="Otro municipio" {{ old('residencia_habitual', $victima?->residencia_habitual) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
+                            <option value="Otro Pais" {{ old('residencia_habitual', $victima?->residencia_habitual) == 'Otro Pais' ? 'selected' : '' }}>Otro Pais</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6" id="especifique-residencia-wrapper" style="display: none;">
+                    <div class="input-float">
+                        <label for="especifique_residencia">Especifique residencia</label>
+                        <input type="text" name="especifique_residencia" id="especifique_residencia" value="{{ old('especifique_residencia', $victima?->especifique_residencia) }}">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 🎂 Nacimiento y Edad -->
+
+
+
+
+
+
     <div class="col-md-6">
         <div class="card card-form mb-4">
-            <h5 class="mb-4">🎂 Nacimiento</h5>
+        <h5 class="mb-4"></h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="estado_civil">Estado Civil</label>
+                        <select name="estado_civil" id="estado_civil">
+                            <option value=""></option>
+                            <option value="Soltero(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Soltero(a)' ? 'selected' : '' }}>Soltero(a)</option>
+                            <option value="Casado(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Casado(a)' ? 'selected' : '' }}>Casado(a)</option>
+                            <option value="Divorciado(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Divorciado(a)' ? 'selected' : '' }}>Divorciado(a)</option>
+                            <option value="Concubino(a) – Unión Libre" {{ old('estado_civil', $victima?->estado_civil) == 'Concubino(a) – Unión Libre' ? 'selected' : '' }}>Concubino(a) – Unión Libre</option>
+                            <option value="Enamorado(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Enamorado(a)' ? 'selected' : '' }}>Enamorado(a)</option>
+                            <option value="Viudo(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Viudo(a)' ? 'selected' : '' }}>Viudo(a)</option>
+                        </select>
+                    </div>
+                </div>
 
-            <div class="input-float">
-                <label for="lugr_nacimiento">Lugar de Nacimiento</label>
-                <select name="lugr_nacimiento" id="lugr_nacimiento">
-                    <option value=""></option>
-                    <option value="Este Municipio" {{ old('lugr_nacimiento', $victima?->lugr_nacimiento) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
-                    <option value="Otro municipio" {{ old('lugr_nacimiento', $victima?->lugr_nacimiento) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
-                    <option value="Otro Pais" {{ old('lugr_nacimiento', $victima?->lugr_nacimiento) == 'Otro Pais' ? 'selected' : '' }}>Otro Pais</option>
-                </select>
-            </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="rel_victima_agresor">Relación con el Agresor</label>
+                        <select name="rel_victima_agresor" id="rel_victima_agresor">
+                                <option value=""></option>
+                                <option value="Esposo(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Esposo(a)' ? 'selected' : '' }}>Esposo(a)</option>
+                                <option value="Concubino(a) – Unión Libre" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Concubino(a) – Unión Libre' ? 'selected' : '' }}>Concubino(a) – Unión Libre</option>
+                                <option value="Enamorado(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Enamorado(a)' ? 'selected' : '' }}>Enamorado(a)</option>
+                                <option value="Ex-esposo(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Ex-esposo(a)' ? 'selected' : '' }}>Ex-esposo(a)</option>
+                                <option value="Ex-concubino(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Ex-concubino(a)' ? 'selected' : '' }}>Ex-concubino(a)</option>
+                                <option value="Ex-enamorado(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Ex-enamorado(a)' ? 'selected' : '' }}>Ex-enamorado(a)</option>
+                                <option value="Progenitores" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Progenitores' ? 'selected' : '' }}>Progenitores</option>
+                                <option value="Hijos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Hijos(as)' ? 'selected' : '' }}>Hijos(as)</option>
+                                <option value="Hermanos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Hermanos(as)' ? 'selected' : '' }}>Hermanos(as)</option>
+                                <option value="Abuelos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Abuelos(as)' ? 'selected' : '' }}>Abuelos(as)</option>
+                                <option value="Tíos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Tíos(as)' ? 'selected' : '' }}>Tíos(as)</option>
+                                <option value="Nietos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Nietos(as)' ? 'selected' : '' }}>Nietos(as)</option>
+                                <option value="Cuñados(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Cuñados(as)' ? 'selected' : '' }}>Cuñados(as)</option>
+                                <option value="Suegros(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Suegros(as)' ? 'selected' : '' }}>Suegros(as)</option>
+                                <option value="Nueras – Yernos" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Nueras – Yernos' ? 'selected' : '' }}>Nueras – Yernos</option>
+                                <option value="Primos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Primos(as)' ? 'selected' : '' }}>Primos(as)</option>
+                                <option value="Sobrinos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Sobrinos(as)' ? 'selected' : '' }}>Sobrinos(as)</option>
+                                <option value="Otros(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Otros(as)' ? 'selected' : '' }}>Otros(as)</option>
+                        </select>
+                    </div>
+                </div>
 
-            <div class="input-float">
-                <label for="especifique_nacimiento">Especifique lugar</label>
-                <input type="text" name="especifique_nacimiento" id="especifique_nacimiento" value="{{ old('especifique_nacimiento', $victima?->especifique_nacimiento) }}">
-            </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="hijos">Hijos</label>
+                        <input type="text" name="hijos" id="hijos" value="{{ old('hijos', $victima?->hijos) }}">
+                    </div>
+                </div>
 
-            <div class="input-float">
-                <label for="fecha_nacimiento">Fecha de Nacimiento</label>
-                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', $victima?->fecha_nacimiento) }}">
-            </div>
+                
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="logro_educativo">Logro Educativo</label>
+                        <select name="logro_educativo" id="logro_educativo">
+                            <option value=""></option>
+                            <option value="Ninguno" {{ old('logro_educativo', $victima?->logro_educativo) == 'Ninguno' ? 'selected' : '' }}>Ninguno</option>
+                            <option value="Lee y Escribe" {{ old('logro_educativo', $victima?->logro_educativo) == 'Lee y Escribe' ? 'selected' : '' }}>Lee y Escribe</option>
+                            <option value="Primaria" {{ old('logro_educativo', $victima?->logro_educativo) == 'Primaria' ? 'selected' : '' }}>Primaria</option>
+                            <option value="Secundaria" {{ old('logro_educativo', $victima?->logro_educativo) == 'Secundaria' ? 'selected' : '' }}>Secundaria</option>
+                            <option value="Tecnico" {{ old('logro_educativo', $victima?->logro_educativo) == 'Tecnico' ? 'selected' : '' }}>Tecnico</option>
+                            <option value="Superior" {{ old('logro_educativo', $victima?->logro_educativo) == 'Superior' ? 'selected' : '' }}>Superior</option>
+                            <option value="Universidad" {{ old('logro_educativo', $victima?->logro_educativo) == 'Universidad' ? 'selected' : '' }}>Universidad</option>
 
-            <div class="input-float">
-                <label for="edad">Edad</label>
-                <input type="number" name="edad" id="edad" value="{{ old('edad', $victima?->edad) }}">
-            </div>
-        </div>
-    </div>
+                        </select>
+                    </div>
+                </div>
 
-    <!-- 🏠 Residencia y Estado Civil -->
-    <div class="col-md-6">
-        <div class="card card-form mb-4">
-            <h5 class="mb-4">🏠 Residencia</h5>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="actividad">Actividad</label>
+                        <select name="actividad" id="actividad">
+                            <option value=""></option>
+                            <option value="No Trabaja" {{ old('actividad', $victima?->actividad) == 'No Trabaja' ? 'selected' : '' }}>No Trabaja</option>
+                            <option value="Trabaja" {{ old('actividad', $victima?->actividad) == 'Trabaja' ? 'selected' : '' }}>Trabaja</option>
+                            <option value="Labores de Casa" {{ old('actividad', $victima?->actividad) == 'Labores de Casa' ? 'selected' : '' }}>Labores de Casa</option>
+                            <option value="Estudiante" {{ old('actividad', $victima?->actividad) == 'Estudiante' ? 'selected' : '' }}>Estudiante</option>
+                        </select>
+                    </div>
+                </div>
 
-            <div class="input-float">
-                <label for="residencia_habitual">Residencia Habitual</label>
-                <select name="residencia_habitual" id="residencia_habitual">
-                    <option value=""></option>
-                    <option value="Este Municipio" {{ old('residencia_habitual', $victima?->residencia_habitual) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
-                    <option value="Otro municipio" {{ old('residencia_habitual', $victima?->residencia_habitual) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
-                    <option value="Otro Pais" {{ old('residencia_habitual', $victima?->residencia_habitual) == 'Otro Pais' ? 'selected' : '' }}>Otro Pais</option>
-                </select>
-            </div>
+                <div class="col-md-6" id="ingreso-wrapper" style="display: none;">
+                    <div class="input-float">
+                        <label for="ingreso">Ingreso</label>
+                        <select name="ingreso" id="ingreso">
+                            <option value=""></option>
+                            <option value="No Tiene" {{ old('ingreso', $victima?->ingreso) == 'No Tiene' ? 'selected' : '' }}>No Tiene</option>
+                            <option value="Diario" {{ old('ingreso', $victima?->ingreso) == 'Diario' ? 'selected' : '' }}>Diario</option>
+                            <option value="Semanal" {{ old('ingreso', $victima?->ingreso) == 'Semanal' ? 'selected' : '' }}>Semanal</option>
+                            <option value="Mensual" {{ old('ingreso', $victima?->ingreso) == 'Mensual' ? 'selected' : '' }}>Mensual</option>
+                        </select>
+                    </div>
+                </div>
 
-            <div class="input-float">
-                <label for="especifique_residencia">Especifique residencia</label>
-                <input type="text" name="especifique_residencia" id="especifique_residencia" value="{{ old('especifique_residencia', $victima?->especifique_residencia) }}">
-            </div>
-
-            <div class="input-float">
-                <label for="estado_civil">Estado Civil</label>
-                <select name="estado_civil" id="estado_civil">
-                    <option value=""></option>
-                    <option value="Soltero(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Soltero(a)' ? 'selected' : '' }}>Soltero(a)</option>
-                    <option value="Casado(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Casado(a)' ? 'selected' : '' }}>Casado(a)</option>
-                    <option value="Divorciado(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Divorciado(a)' ? 'selected' : '' }}>Divorciado(a)</option>
-                    <option value="Viudo(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Viudo(a)' ? 'selected' : '' }}>Viudo(a)</option>
-                </select>
-            </div>
-
-            <div class="input-float">
-                <label for="celular">Celular</label>
-                <input type="text" name="celular" id="celular" value="{{ old('celular', $victima?->celular) }}">
-            </div>
-        </div>
-    </div>
-
-    <!-- 👨‍👩‍👧 Familiaridad y Actividad -->
-    <div class="col-md-6">
-        <div class="card card-form mb-4">
-            <h5 class="mb-4">👨‍👩‍👧 Familia y Actividad</h5>
-
-            <div class="input-float">
-                <label for="rel_victima_agresor">Relación con el Agresor</label>
-                <input type="text" name="rel_victima_agresor" id="rel_victima_agresor" value="{{ old('rel_victima_agresor', $victima?->rel_victima_agresor) }}">
-            </div>
-
-            <div class="input-float">
-                <label for="hijos">Hijos</label>
-                <input type="text" name="hijos" id="hijos" value="{{ old('hijos', $victima?->hijos) }}">
-            </div>
-
-            <div class="input-float">
-                <label for="actividad">Actividad</label>
-                <input type="text" name="actividad" id="actividad" value="{{ old('actividad', $victima?->actividad) }}">
-            </div>
-        </div>
-    </div>
-
-    <!-- 🎓 Educación y Economía -->
-    <div class="col-md-6">
-        <div class="card card-form mb-4">
-            <h5 class="mb-4">🎓 Educación y Economía</h5>
-
-            <div class="input-float">
-                <label for="logro_educativo">Logro Educativo</label>
-                <input type="text" name="logro_educativo" id="logro_educativo" value="{{ old('logro_educativo', $victima?->logro_educativo) }}">
-            </div>
-
-            <div class="input-float">
-                <label for="ingreso">Ingreso</label>
-                <input type="text" name="ingreso" id="ingreso" value="{{ old('ingreso', $victima?->ingreso) }}">
-            </div>
-
-            <div class="input-float">
-                <label for="monto">Monto</label>
-                <input type="number" name="monto" id="monto" value="{{ old('monto', $victima?->monto) }}">
-            </div>
-        </div>
-    </div>
-
-    <!-- 🌍 Idioma y Documento -->
-    <div class="col-md-6">
-        <div class="card card-form mb-4">
-            <h5 class="mb-4">🌍 Idioma y Documento</h5>
-
-            <div class="input-float">
-                <label for="idioma">Idioma</label>
-                <select name="idioma" id="idioma">
-                    <option value="">Seleccione</option>
-                    <option value="Español" {{ old('idioma', $victima?->idioma) == 'Español' ? 'selected' : '' }}>Español</option>
-                    <option value="Quechua" {{ old('idioma', $victima?->idioma) == 'Quechua' ? 'selected' : '' }}>Quechua</option>
-                    <option value="Aymara" {{ old('idioma', $victima?->idioma) == 'Aymara' ? 'selected' : '' }}>Aymara</option>
-                    <option value="Otro" {{ old('idioma', $victima?->idioma) == 'Otro' ? 'selected' : '' }}>Otro</option>
-                </select>
-            </div>
-
-            <div class="input-float">
-                <label for="especifique_idioma">Especifique Idioma</label>
-                <input type="text" name="especifique_idioma" id="especifique_idioma" value="{{ old('especifique_idioma', $victima?->especifique_idioma) }}">
-            </div>
-
-            <div class="input-float">
-                <label for="id_documento">Documento</label>
-                <select name="id_documento" id="id_documento" required>
-                    <option value="">Seleccione un documento</option>
-                    @foreach ($documentos as $documento)
-                        <option value="{{ $documento->id }}"
-                            {{ old('id_documento', $victima->id_documento ?? '') == $documento->id ? 'selected' : '' }}>
-                            {{ $documento->numero }}
-                        </option>
-                    @endforeach
-                </select>
+                <div class="col-md-6" id="monto-wrapper" style="display: none;">
+                    <div class="input-float">
+                        <label for="monto">Monto Bs</label>
+                        <input type="number" name="monto" id="monto" value="{{ old('monto', $victima?->monto) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="idioma">Idioma</label>
+                        <select name="idioma" id="idioma">
+                            <option value=""></option>
+                            <option value="Castellano" {{ old('idioma', $victima?->idioma) == 'Castellano' ? 'selected' : '' }}>Castellano</option>
+                            <option value="Quechua" {{ old('idioma', $victima?->idioma) == 'Quechua' ? 'selected' : '' }}>Quechua</option>
+                            <option value="Aymara" {{ old('idioma', $victima?->idioma) == 'Aymara' ? 'selected' : '' }}>Aymara</option>
+                            <option value="Mojeño" {{ old('idioma', $victima?->idioma) == 'Mojeño' ? 'selected' : '' }}>Mojeño</option>
+                            <option value="Guarani" {{ old('idioma', $victima?->idioma) == 'Guarani' ? 'selected' : '' }}>Guarani</option>
+                            <option value="Extranjero" {{ old('idioma', $victima?->idioma) == 'Extranjero' ? 'selected' : '' }}>Extranjero</option>
+                            <option value="Otro" {{ old('idioma', $victima?->idioma) == 'Otro' ? 'selected' : '' }}>Otro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6" id="especifique_idioma-wrapper" style="display: none;">
+                    <div class="input-float">
+                        <label for="especifique_idioma">Especifique Idioma</label>
+                        <input type="text" name="especifique_idioma" id="especifique_idioma" value="{{ old('especifique_idioma', $victima?->especifique_idioma) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="celular">Celular</label>
+                        <input type="text" name="celular" id="celular" value="{{ old('celular', $victima?->celular) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="discapacidad">Discapacidad</label>
+                        <select name="discapacidad" id="discapacidad">
+                            <option value="">Seleccione</option>
+                            <option value="SI" {{ old('discapacidad', $victima?->discapacidad) == 'SI' ? 'selected' : '' }}>SI</option>
+                            <option value="No" {{ old('discapacidad', $victima?->discapacidad) == 'NO' ? 'selected' : '' }}>NO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="grado_discapacidad">Grado y Descripcion</label>
+                        <input type="text" name="grado_discapacidad" id="grado_discapacidad" value="{{ old('grado_discapacidad', $victima?->grado_discapacidad) }}">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Botón de guardar -->
-<div class="text-end mt-3">
-    <button type="submit" class="btn btn-submit">Guardar</button>
-</div>
+
+
+
+
+
+
+
+
+    <div class="card card-form mb-4">
+        <h5 class="mb-4">📅 Domicilio Victima</h5>
+        <div class="row">
+            <div class="col-md-3 input-float">
+                <label for="distrito">Distrito Urbano</label>
+                <select name="distrito" id="distrito">
+                    <option value=""></option>
+                    <option value="Distrito 1" {{ old('distrito', $victima?->distrito) == 'Distrito 1' ? 'selected' : '' }}>Distrito 1</option>
+                    <option value="Distrito 2" {{ old('distrito', $victima?->distrito) == 'Distrito 2' ? 'selected' : '' }}>Distrito 2</option>
+                    <option value="Distrito 3" {{ old('distrito', $victima?->distrito) == 'Distrito 3' ? 'selected' : '' }}>Distrito 3</option>
+                    <option value="Distrito 4" {{ old('distrito', $victima?->distrito) == 'Distrito 4' ? 'selected' : '' }}>Distrito 4</option>
+                    <option value="Distrito 5" {{ old('distrito', $victima?->distrito) == 'Distrito 5' ? 'selected' : '' }}>Distrito 5</option>
+                    <option value="Distrito 6" {{ old('distrito', $victima?->distrito) == 'Distrito 6' ? 'selected' : '' }}>Distrito 6</option>
+                    <option value="Distrito 7" {{ old('distrito', $victima?->distrito) == 'Distrito 7' ? 'selected' : '' }}>Distrito 7</option>
+                    <option value="Distrito 8" {{ old('distrito', $victima?->distrito) == 'Distrito 8' ? 'selected' : '' }}>Distrito 8</option>
+                    <option value="Distrito 9" {{ old('distrito', $victima?->distrito) == 'Distrito 9' ? 'selected' : '' }}>Distrito 9</option>
+                    <option value="Distrito 10" {{ old('distrito', $victima?->distrito) == 'Distrito 10' ? 'selected' : '' }}>Distrito 10</option>
+                    <option value="Distrito 11" {{ old('distrito', $victima?->distrito) == 'Distrito 11' ? 'selected' : '' }}>Distrito 11</option>
+                    <option value="Distrito 12" {{ old('distrito', $victima?->distrito) == 'Distrito 12' ? 'selected' : '' }}>Distrito 12</option>
+                    <option value="Distrito 13" {{ old('distrito', $victima?->distrito) == 'Distrito 13' ? 'selected' : '' }}>Distrito 13</option>
+                </select>            
+            </div>
+            <div class="col-md-3 input-float">
+                <label for="distrito_rural">Distrito Rural</label>
+                <input type="text" name="distrito_rural" id="distrito_rural" value="{{ old('distrito_rural', $victima?->distrito_rural) }}">     
+            </div>
+            <div class="col-md-3 input-float">
+                <label for="zona_barrio">Zona/Barrio</label>
+                <input type="text" name="zona_barrio" id="zona_barrio" value="{{ old('zona_barrio', $victima?->zona_barrio) }}">
+            </div>
+            <div class="col-md-3 input-float">
+                <label for="avenida_calle">Avenida/Calle</label>
+                <input type="text" name="avenida_calle" id="avenida_calle" value="{{ old('avenida_calle', $victima?->avenida_calle) }}">
+            </div>
+            <div class="col-md-3 input-float">
+                <label for="nom_edificio">Nombre del Edificio</label>
+                <input type="text" name="nom_edificio" id="nom_edificio" value="{{ old('nom_edificio', $victima?->nom_edificio) }}">
+            </div>
+            <div class="col-md-3 input-float">
+                <label for="num_piso_departamento">Numero Piso, Departamento</label>
+                <input type="text" name="num_piso_departamento" id="num_piso_departamento" value="{{ old('num_piso_departamento', $victima?->num_piso_departamento) }}">
+            </div>
+            <div class="col-md-3 input-float">
+                <label for="num_vivienda">Número de Vivienda</label>
+                <input type="text" name="num_vivienda" id="num_vivienda" value="{{ old('num_vivienda', $victima?->num_vivienda) }}">
+            </div>
+            <div class="col-md-3 input-float">
+                <label for="telefono_referencia">Teléfono de Referencia</label>
+                <input type="text" name="telefono_referencia" id="telefono_referencia" value="{{ old('telefono_referencia', $victima?->telefono_referencia) }}">
+            </div>
+            <div class="col-md-3 input-float">
+                <label for="lugar_domicilio">Lugar de Domicilio</label>
+                <select name="lugar_domicilio" id="lugar_domicilio">
+                    <option value=""></option>
+                    <option value="Este Municipio" {{ old('lugar_domicilio', $victima?->lugar_domicilio) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
+                    <option value="Otro Municipio" {{ old('lugar_domicilio', $victima?->lugar_domicilio) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
+                </select>
+            </div>
+            <div class="col-md-3 input-float" id="especifique-wrapper" style="display: none;">
+                <label for="espcifique">Especifique</label>
+                <input type="text" name="especifique" id="especifique" value="{{ old('especifique', $victima?->especifique) }}">
+            </div>
+            
+        </div>
+    </div>
+
+@if (empty($desdeResumen))
+    <div class="text-end mt-3">
+        <button type="submit" class="btn btn-warning">Iniciar Denuncia</button>
+    </div>
+@endif
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lugar de nacimiento
+        const selectNacimiento = document.getElementById('lugr_nacimiento');
+        const wrapperNacimiento = document.getElementById('especifique-nacimiento-wrapper');
+
+        function toggleEspecifiqueNacimiento() {
+            const val = selectNacimiento.value;
+            wrapperNacimiento.style.display = (val === 'Otro municipio' || val === 'Otro Pais') ? 'block' : 'none';
+        }
+
+        selectNacimiento.addEventListener('change', toggleEspecifiqueNacimiento);
+        toggleEspecifiqueNacimiento(); // Inicial
+
+        // Residencia habitual
+        const selectResidencia = document.getElementById('residencia_habitual');
+        const wrapperResidencia = document.getElementById('especifique-residencia-wrapper');
+
+        function toggleEspecifiqueResidencia() {
+            const val = selectResidencia.value;
+            wrapperResidencia.style.display = (val === 'Otro municipio' || val === 'Otro Pais') ? 'block' : 'none';
+        }
+
+        selectResidencia.addEventListener('change', toggleEspecifiqueResidencia);
+        toggleEspecifiqueResidencia(); // Inicial
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const actividadSelect = document.getElementById('actividad');
+        const ingresoWrapper = document.getElementById('ingreso-wrapper');
+        const montoWrapper = document.getElementById('monto-wrapper');
+
+        function toggleIngresoYMonto() {
+            const value = actividadSelect.value;
+            const mostrar = (value === 'Trabaja');
+            ingresoWrapper.style.display = mostrar ? 'block' : 'none';
+            montoWrapper.style.display = mostrar ? 'block' : 'none';
+        }
+
+        actividadSelect.addEventListener('change', toggleIngresoYMonto);
+        toggleIngresoYMonto(); // Ejecutar al cargar
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const idiomaSelect = document.getElementById('idioma');
+        const especifiqueIdiomaWrapper = document.getElementById('especifique_idioma-wrapper');
+
+        function toggleEspecifiqueIdioma() {
+            especifiqueIdiomaWrapper.style.display = (idiomaSelect.value === 'Otro') ? 'block' : 'none';
+        }
+
+        idiomaSelect.addEventListener('change', toggleEspecifiqueIdioma);
+        toggleEspecifiqueIdioma(); // Ejecutar al cargar
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const lugarDomicilioSelect = document.getElementById('lugar_domicilio');
+        const especifiqueWrapper = document.getElementById('especifique-wrapper');
+
+        function toggleEspecifiqueDomicilio() {
+            especifiqueWrapper.style.display = (lugarDomicilioSelect.value === 'Otro Municipio') ? 'block' : 'none';
+        }
+
+        lugarDomicilioSelect.addEventListener('change', toggleEspecifiqueDomicilio);
+        toggleEspecifiqueDomicilio(); // Ejecutar al cargar
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const discapacidadSelect = document.getElementById('discapacidad');
+        const gradoDiscapacidadDiv = document.getElementById('grado_discapacidad').closest('.col-md-6');
+
+        function toggleGradoDiscapacidad() {
+            if (discapacidadSelect.value === 'SI') {
+                gradoDiscapacidadDiv.style.display = 'block';
+            } else {
+                gradoDiscapacidadDiv.style.display = 'none';
+            }
+        }
+
+        discapacidadSelect.addEventListener('change', toggleGradoDiscapacidad);
+
+        toggleGradoDiscapacidad();
+    });
+
+</script>
+
+
+<script>
+// MANTENER TODO EN MAYUSCULAS
+document.addEventListener("DOMContentLoaded", function () {
+    const campos = document.querySelectorAll("input[type='text'], textarea");
+
+    campos.forEach(function (campo) {
+        campo.style.textTransform = "uppercase"; // visual
+        campo.addEventListener("input", function () {
+            const cursorInicio = this.selectionStart;
+            const cursorFin = this.selectionEnd;
+
+            this.value = this.value.toUpperCase(); // real
+            this.setSelectionRange(cursorInicio, cursorFin); // mantener posición del cursor
+        });
+    });
+});
+</script>
+

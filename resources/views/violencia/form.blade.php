@@ -1,27 +1,4 @@
-<!--<div class="row padding-1 p-1">
-    <div class="col-md-12">
-        
-        <div class="form-group mb-2 mb20">
-            <label for="nombre" class="form-label">{{ __('Nombre') }}</label>
-            <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre', $violencia?->nombre) }}" id="nombre" placeholder="Nombre">
-            {!! $errors->first('nombre', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="condicion" class="form-label">{{ __('Condicion') }}</label>
-            <input type="text" name="condicion" class="form-control @error('condicion') is-invalid @enderror" value="{{ old('condicion', $violencia?->condicion) }}" id="condicion" placeholder="Condicion">
-            {!! $errors->first('condicion', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="id_tipo_violencia" class="form-label">{{ __('Id Tipo Violencia') }}</label>
-            <input type="text" name="id_tipo_violencia" class="form-control @error('id_tipo_violencia') is-invalid @enderror" value="{{ old('id_tipo_violencia', $violencia?->id_tipo_violencia) }}" id="id_tipo_violencia" placeholder="Id Tipo Violencia">
-            {!! $errors->first('id_tipo_violencia', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
 
-    </div>
-    <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-    </div>
-</div>-->
 
 
 
@@ -102,28 +79,20 @@
             {!! $errors->first('nombre', '<div class="invalid-feedback d-block" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
-        <!-- Condición -->
-        <div class="col-md-6 input-material">
-            <i class="material-icons">check_circle</i>
-            <label for="condicion">Condición</label>
-            <input type="text" name="condicion"
-                   class="@error('condicion') is-invalid @enderror"
-                   value="{{ old('condicion', $violencia?->condicion) }}"
-                   id="condicion" placeholder="Condición">
-            {!! $errors->first('condicion', '<div class="invalid-feedback d-block" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-
         <!-- ID Tipo Violencia -->
         <div class="col-md-6 input-material">
             <i class="material-icons">tag</i>
-            <label for="id_tipo_violencia">ID Tipo Violencia</label>
-            <input type="text" name="id_tipo_violencia"
-                   class="@error('id_tipo_violencia') is-invalid @enderror"
-                   value="{{ old('id_tipo_violencia', $violencia?->id_tipo_violencia) }}"
-                   id="id_tipo_violencia" placeholder="ID Tipo Violencia">
+            <label for="id_tipo_violencia">Tipo de Violencia</label>
+            <select name="id_tipo_violencia" id="id_tipo_violencia" class="form-control @error('id_tipo_violencia') is-invalid @enderror">
+                <option value="">Seleccione un tipo</option>
+                @foreach ($tiposViolencia as $tipo)
+                    <option value="{{ $tipo->id }}" {{ old('id_tipo_violencia', $violencia?->id_tipo_violencia) == $tipo->id ? 'selected' : '' }}>
+                        {{ $tipo->nombre }}
+                    </option>
+                @endforeach
+            </select>
             {!! $errors->first('id_tipo_violencia', '<div class="invalid-feedback d-block" role="alert"><strong>:message</strong></div>') !!}
         </div>
-
     </div>
 
     <div class="text-end mt-4">

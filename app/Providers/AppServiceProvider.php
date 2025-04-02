@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
         \App\Domain\Repositories\RepositorioRolInterface::class,
         \App\Domain\Repositories\RepositorioRol::class
     );
+
 }
+
 
 }

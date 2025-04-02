@@ -41,7 +41,28 @@ class AgresorRequest extends FormRequest
             'monto' => 'string', 
 			'idioma' => 'string',
 			'especifique_idioma' => 'string',
-            'num_documento' => 'string'
+            'num_documento' => 'string',
+            'expedido' => 'string',
+            'tipo_documento' => 'string',
+
+            'distrito' => 'string',
+            'zona_barrio' => 'string',
+			'avenida_calle' => 'string',
+			'nom_edificio' => 'string',
+			'telefono_domicilio' => 'string',
+			'num_vivienda' => 'string',
+			'num_piso_departamento' => 'string',
+			'lugar_domicilio' => 'string',
+			'especifique' => 'string',
+
+
+            'nombre_empresa' => 'string',
+			'empresa_zona_barrio' => 'string',
+			'empresa_avenida_calle' => 'string',
+			'empresa_telefono' => 'string',
+			'empresa_num_edificio' => 'string',
+
+            'adulto_mayor' => 'string'
         ];
     }
 }

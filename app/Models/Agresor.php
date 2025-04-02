@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * Representa a una persona identificada como presunto agresor en una denuncia.
+ * Este modelo contiene datos personales, laborales y de residencia del agresor,
+ * y puede estar asociado a múltiples denuncias.
+ * 
  * Class Agresor
  *
  * @property $id
@@ -30,23 +34,46 @@ use Illuminate\Database\Eloquent\Model;
  * @property $id_domicilio
  * @property $id_domicilio_trabajo
  * @property $num_documento
+ * @property $expedido
+ * @property $tipo_documento
+ * 
+ * @property $distrito_rural
+ * @property $distrito
+ * @property $zona_barrio
+ * @property $avenida_calle
+ * @property $nom_edificio
+ * @property $telefono_domicilio
+ * @property $num_vivienda
+ * @property $num_piso_departamento
+ * @property $lugar_domicilio
+ * @property $especifique
+ * 
+ * @property $nombre_empresa
+ * @property $empresa_zona_barrio
+ * @property $empresa_avenida_calle
+ * @property $empresa_telefono
+ * @property $empresa_num_edificio
+ * 
+ * 
+ * @property $adulto_mayor
+ * 
+ * @property $provisional
+ * @property $user_id
+
  *
- * 
- * 
- * 
- * @property Documento $documento
- * @property Domicilio $domicilio
- * @property DomicilioTrabajo $domicilioTrabajo
- * @property Denuncium[] $denuncias
+ * @property Denuncia[] $denuncias
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Agresor extends Model
 {
-    public $timestamps = false; // 👈 Agrega esto
+    // No se registran timestamps automáticos (created_at / updated_at)
+    public $timestamps = false; 
 
-    protected $table = 'agresor'; // 👈 Laravel sabrá qué tabla usar
+    // Nombre de la tabla en la base de datos
+    protected $table = 'agresor'; 
 
+    // Paginación por defecto
     protected $perPage = 20;
 
     /**
@@ -55,41 +82,18 @@ class Agresor extends Model
      * @var array<int, string>
      */
     protected $fillable = ['nombre', 'ap_paterno', 'ap_materno', 'sexo','lugr_nacimiento', 'especifique_lugar',
-                            'fecha_nacimiento', 'edad', 'residencia_habitual', 'especifique_residencia', 'estado_civil', 
-                            'logro_educativo', 'ultimo_curso', 'actividad', 'especifique_actividad',
-                            'ingreso', 'monto',  'idioma', 'especifique_idioma', 'num_documento'];
+    'fecha_nacimiento', 'edad', 'residencia_habitual', 'especifique_residencia', 'estado_civil', 'logro_educativo', 
+    'ultimo_curso', 'actividad', 'especifique_actividad', 'ingreso', 'monto',  'idioma', 'especifique_idioma', 'num_documento', 
+    'expedido', 'tipo_documento', 'distrito', 'distrito_rural', 'zona_barrio', 'avenida_calle', 'nom_edificio', 'telefono_domicilio', 
+    'num_vivienda', 'num_piso_departamento', 'lugar_domicilio', 'especifique', 'nombre_empresa', 'empresa_zona_barrio',
+    'empresa_avenida_calle', 'empresa_telefono', 'empresa_num_edificio', 'provisional', 'user_id', 'adulto_mayor'];    
 
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function documento()
-    {
-        return $this->belongsTo(\App\Models\Documento::class, 'id_documento', 'id');
-    }
     
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function domicilio()
-    {
-        return $this->belongsTo(\App\Models\Domicilio::class, 'id_domicilio', 'id');
-    }
     
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function domicilioTrabajo()
-    {
-        return $this->belongsTo(\App\Models\DomicilioTrabajo::class, 'id_domicilio_trabajo', 'id');
-    }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+    // Relación: el agresor puede tener múltiples denuncias asociadas.
     public function denuncias()
     {
-        return $this->hasMany(\App\Models\Denuncium::class, 'id', 'id_agresor');
+        return $this->hasMany(\App\Models\Denuncia::class, 'id', 'id_agresor');
     }
     
 }

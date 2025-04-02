@@ -56,6 +56,25 @@
 									<th >Idioma</th>
 									<th >Especifique Idioma</th>
 									<th >Numero de Documento</th>
+                                    <th >Expedido</th>
+                                    <th >Tipo Docmuento</th>
+
+                                    <th >Zona Barrio</th>
+									<th >Avenida Calle</th>
+									<th >Nom Edificio</th>
+									<th >Telefono Domicilio</th>
+									<th >Num Vivienda</th>
+									<th >Num Piso Departamento</th>
+									<th >Lugar Domicilio</th>
+									<th >Especifique</th>
+
+                                    <th>Nombre Empresa</th>
+                                    <th>Zona Barrio</th>
+                                    <th>Avenida Calle</th>
+                                    <th>Teléfono Trabajo</th>
+                                    <th>N° Edificio</th>
+
+
 
                                         <th></th>
                                     </tr>
@@ -85,6 +104,24 @@
 										<td >{{ $agresor->idioma }}</td>
 										<td >{{ $agresor->especifique_idioma }}</td>
 										<td >{{ $agresor->num_documento }}</td>
+                                        <td >{{ $agresor->expedido }}</td>
+										<td >{{ $agresor->tipo_documento }}</td>
+
+                                        <td >{{ $agresor->zona_barrio }}</td>
+										<td >{{ $agresor->avenida_calle }}</td>
+										<td >{{ $agresor->nom_edificio }}</td>
+										<td >{{ $agresor->telefono_domicilio }}</td>
+										<td >{{ $agresor->num_vivienda }}</td>
+										<td >{{ $agresor->num_piso_departamento }}</td>
+										<td >{{ $agresor->lugar_domicilio }}</td>
+										<td >{{ $agresor->especifique }}</td>
+
+                                        <td>{{ $agresor->nombre_empresa }}</td>
+                                        <td>{{ $agresor->empresa_zona_barrio }}</td>
+                                        <td>{{ $agresor->empresa_avenida_calle }}</td>
+                                        <td>{{ $agresor->empresa_telefono }}</td>
+                                        <td>{{ $agresor->empresa_num_edificio }}</td>
+
 
                                             <td>
                                                 <form action="{{ route('agresor.destroy', $agresor->id) }}" method="POST">
