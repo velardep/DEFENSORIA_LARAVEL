@@ -387,14 +387,22 @@
         <div class="content-body">
             <div class="container-fluid">
                 <div id="formularios-container" style="display: none;">
+                    
                         <div class="card-header bg-black text-white">
                             <h4 class="mb-0"><i class="fas fa-clipboard-list me-2"></i> Registro de Denuncia</h4>
                         </div>
+
                         <div class="card-body">
-                            
+                        <!-- Tabla de denuncias (cargada dinámicamente) -->
+<div id="tabla-denuncias-container" class="mb-4"></div>
+<div class="text-end mb-3">
+    <button class="btn btn-primary" id="btn-abrir-formulario">➕ Crear nueva denuncia</button>
+</div>
+
+
 
                             {{-- Denuncia --}}
-                            <div id="formulario-denuncia-container">
+                            <div id="formulario-denuncia-container" style="display: none;">
                             <form id="form-denuncia">
                             @include('denuncia.form', [
                                 'denuncia' => $denuncia,
@@ -446,6 +454,51 @@
             });
         });
     </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const containerTabla = document.getElementById('tabla-denuncias-container');
+    
+    // Cargar automáticamente la tabla de denuncias
+    fetch("{{ route('denuncia.index') }}")
+        .then(res => res.text())
+        .then(html => {
+            containerTabla.innerHTML = html;
+            containerTabla.style.display = 'block';
+        })
+        .catch(() => {
+            containerTabla.innerHTML = '<div class="alert alert-danger">Error al cargar la tabla de denuncias.</div>';
+            containerTabla.style.display = 'block';
+        });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const btnCrear = document.getElementById('btn-abrir-formulario');
+    const formContainer = document.getElementById('formulario-denuncia-container');
+    const tablaContainer = document.getElementById('tabla-denuncia-container');
+
+    btnCrear.addEventListener('click', function () {
+        tablaContainer.style.display = 'none';
+        formContainer.style.display = 'block';
+        this.style.display = 'none'; // Oculta el botón si quieres
+    });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const btnCrear = document.getElementById('btn-abrir-formulario');
+    const formContainer = document.getElementById('formulario-denuncia-container');
+    const tablaContainer = document.getElementById('tabla-denuncia-container');
+
+    btnCrear.addEventListener('click', function () {
+        tablaContainer.style.display = 'none';     // Oculta la tabla
+        formContainer.style.display = 'block';     // Muestra el formulario
+        this.style.display = 'none';               // Oculta el botón de crear
+    });
+});
+</script>
 
 {{-- SCRIPT 1: Guarda documento y muestra mensaje --}}
 <script>
@@ -661,6 +714,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const containerForm = document.getElementById('formulario-denuncia-container');
     const containerTabla = document.getElementById('tabla-denuncia-container');
 
+    const tablaInicial = document.getElementById('tabla-denuncias-container'); // 👉 tabla inicial
+
+
     formDenuncia.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -680,6 +736,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             // Ocultar formulario
             containerForm.style.display = 'none';
+            if (tablaInicial) {
+                tablaInicial.style.display = 'none';
+            }
 
             // Cargar tabla de denuncias
             fetch("{{ route('denuncia.index') }}")
