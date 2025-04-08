@@ -197,162 +197,280 @@
 
 
 
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-form mb-4">
+            <h5 class="mb-4">🧍 Datos del Agresor</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" value="{{ old('nombre', $agresor?->nombre) }}">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="ap_paterno">Apellido Paterno</label>
+                        <input type="text" name="ap_paterno" id="ap_paterno" value="{{ old('ap_paterno', $agresor?->ap_paterno) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="ap_materno">Apellido Materno</label>
+                        <input type="text" name="ap_materno" id="ap_materno" value="{{ old('ap_materno', $agresor?->ap_materno) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="tipo_documento">Tipo documento</label>
+                        <input type="text" name="tipo_documento" id="tipo_documento" value="{{ old('tipo_documento', $agresor?->tipo_documento) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="num_documento">Numero de Documento</label>
+                        <input type="text" name="num_documento" id="num_documento" value="{{ old('num_documento', $agresor?->num_documento) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="expedido">Expedido</label>
+                        <input type="text" name="expedido" id="expedido" value="{{ old('expedido', $agresor?->expedido) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="sexo">Sexo</label>
+                        <select name="sexo" id="sexo">
+                            <option value=""></option>
+                            <option value="Femenino" {{ old('sexo', $agresor?->sexo) == 'Femenino' ? 'selected' : '' }}>Femenino</option>
+                            <option value="Masculino" {{ old('sexo', $agresor?->sexo) == 'Masculino' ? 'selected' : '' }}>Masculino</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="lugr_nacimiento">Lugar de Nacimiento</label>
+                        <select name="lugr_nacimiento" id="lugr_nacimiento">
+                            <option value=""></option>
+                            <option value="Este Municipio" {{ old('lugr_nacimiento', $agresor?->lugr_nacimiento) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
+                            <option value="Otro municipio" {{ old('lugr_nacimiento', $agresor?->lugr_nacimiento) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
+                            <option value="Otro Pais" {{ old('lugr_nacimiento', $agresor?->lugr_nacimiento) == 'Otro Pais' ? 'selected' : '' }}>Otro Pais</option>
+                        </select>
+                    </div>  
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="especifique_lugar">Especifique lugar</label>
+                        <input type="text" name="especifique_lugar" id="especifique_lugar" value="{{ old('especifique_lugar', $agresor?->especifique_lugar) }}">
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', $agresor?->fecha_nacimiento) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="edad">Edad</label>
+                        <input type="text" name="edad" id="edad" value="{{ old('edad', $agresor?->edad) }}">
+                    </div>  
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="residencia_habitual">Residencia Habitual</label>
+                        <select name="residencia_habitual" id="residencia_habitual">
+                            <option value=""></option>
+                            <option value="Este Municipio" {{ old('residencia_habitual', $agresor?->residencia_habitual) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
+                            <option value="Otro municipio" {{ old('residencia_habitual', $agresor?->residencia_habitual) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
+                            <option value="Otro Pais" {{ old('residencia_habitual', $agresor?->residencia_habitual) == 'Otro Pais' ? 'selected' : '' }}>Otro Pais</option>
+                        </select>
+                    </div>     
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="especifique_residencia">Especifique residencia</label>
+                        <input type="text" name="especifique_residencia" id="especifique_residencia" value="{{ old('especifique_residencia', $agresor?->especifique_residencia) }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <div class="col-md-6">
+        <div class="card card-form mb-4">
+        <h5 class="mb-4"></h5>
+            <div class="row">
+               
+
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="estado_civil">Estado Civil</label>
+                        <select name="estado_civil" id="estado_civil">
+                            <option value=""></option>
+                            <option value="Soltero(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Soltero(a)' ? 'selected' : '' }}>Soltero(a)</option>
+                            <option value="Casado(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Casado(a)' ? 'selected' : '' }}>Casado(a)</option>
+                            <option value="Divorciado(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Divorciado(a)' ? 'selected' : '' }}>Divorciado(a)</option>
+                            <option value="Viudo(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Viudo(a)' ? 'selected' : '' }}>Viudo(a)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="logro_educativo">Logro Educativo</label>
+                        <input type="text" name="logro_educativo" id="logro_educativo" value="{{ old('logro_educativo', $agresor?->logro_educativo) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="ultimo_curso">Último Curso</label>
+                        <input type="text" name="ultimo_curso" id="ultimo_curso" value="{{ old('ultimo_curso', $agresor?->ultimo_curso) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="actividad">Actividad</label>
+                        <input type="text" name="actividad" id="actividad" value="{{ old('actividad', $agresor?->actividad) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="especifique_actividad">Especifique Actividad</label>
+                        <input type="text" name="especifique_actividad" id="especifique_actividad" value="{{ old('especifique_actividad', $agresor?->especifique_actividad) }}">
+                    </div>  
+                </div>
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="ingreso">Ingreso</label>
+                        <input type="text" name="ingreso" id="ingreso" value="{{ old('ingreso', $agresor?->ingreso) }}">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="monto">Monto</label>
+                        <input type="text" name="monto" id="monto" value="{{ old('monto', $agresor?->monto) }}">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="idioma">Idioma</label>
+                        <select name="idioma" id="idioma">
+                            <option value="">Seleccione</option>
+                            <option value="Español" {{ old('idioma', $agresor?->idioma) == 'Español' ? 'selected' : '' }}>Español</option>
+                            <option value="Quechua" {{ old('idioma', $agresor?->idioma) == 'Quechua' ? 'selected' : '' }}>Quechua</option>
+                            <option value="Aymara" {{ old('idioma', $agresor?->idioma) == 'Aymara' ? 'selected' : '' }}>Aymara</option>
+                            <option value="Otro" {{ old('idioma', $agresor?->idioma) == 'Otro' ? 'selected' : '' }}>Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="input-float">
+                        <label for="especifique_idioma">Especifique Idioma</label>
+                        <input type="text" name="especifique_idioma" id="especifique_idioma" value="{{ old('especifique_idioma', $agresor?->especifique_idioma) }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-form mb-4">
+    <h5 class="mb-4">📅 Domicilio Agresor</h5>
+    <div class="row">
+        <div class="col-md-3 input-float">
+            <label for="zona_barrio">Zona/Barrio</label>
+            <input type="text" name="zona_barrio" id="zona_barrio" value="{{ old('zona_barrio', $agresor?->zona_barrio) }}">
+        </div>
+        <div class="col-md-3 input-float">
+            <label for="avenida_calle">Avenida/Calle</label>
+            <input type="text" name="avenida_calle" id="avenida_calle" value="{{ old('avenida_calle', $agresor?->avenida_calle) }}">
+        </div>
+        <div class="col-md-3 input-float">
+            <label for="nom_edificio">Nombre del Edificio</label>
+            <input type="text" name="nom_edificio" id="nom_edificio" value="{{ old('nom_edificio', $agresor?->nom_edificio) }}">
+        </div>
+        <div class="col-md-3 input-float">
+            <label for="num_piso_departamento">Numero Piso, Departamento</label>
+            <input type="text" name="num_piso_departamento" id="num_piso_departamento" value="{{ old('num_piso_departamento', $agresor?->num_piso_departamento) }}">
+        </div>
+        <div class="col-md-3 input-float">
+            <label for="num_vivienda">Número de Vivienda</label>
+            <input type="text" name="num_vivienda" id="num_vivienda" value="{{ old('num_vivienda', $agresor?->num_vivienda) }}">
+        </div>
+        <div class="col-md-3 input-float">
+            <label for="telefono_domicilio">Teléfono Domicilio</label>
+            <input type="text" name="telefono_domicilio" id="telefono_domicilio" value="{{ old('telefono_domicilio', $agresor?->telefono_domicilio) }}">
+        </div>
+        <div class="col-md-3 input-float">
+            <label for="lugar_domicilio">Lugar de Domicilio</label>
+            <select name="lugar_domicilio" id="lugar_domicilio">
+                <option value=""></option>
+                <option value="Este Municipio" {{ old('lugar_domicilio', $agresor?->lugar_domicilio) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
+                <option value="Otro Municipio" {{ old('lugar_domicilio', $agresor?->lugar_domicilio) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
+                <option value="Zona Sur" {{ old('lugar_domicilio', $agresor?->lugar_domicilio) == 'Zona Sur' ? 'selected' : '' }}>Zona Sur</option>
+                <option value="Zona Norte" {{ old('lugar_domicilio', $agresor?->lugar_domicilio) == 'Zona Norte' ? 'selected' : '' }}>Zona Norte</option>
+            </select>
+        </div>
+        <div class="col-md-3 input-float">
+            <label for="especifique">Especifique</label>
+            <input type="text" name="especifique" id="especifique" value="{{ old('especifique', $agresor?->especifique) }}">
+        </div>
+        
+
+        
+    </div>
+</div>
+
+
 
 
 <div class="card card-form mb-4">
-    <h5 class="mb-4">🧍‍♂️ Datos del Agresor</h5>
+    <h5 class="mb-4">📅 Direccion Laboral</h5>
     <div class="row">
-        <!-- Nombre -->
-        <div class="col-md-4 input-float">
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" value="{{ old('nombre', $agresor?->nombre) }}">
+    <div class="col-md-3 input-float">
+            <label for="nombre_empresa">Nombre de la empresa</label>
+            <input type="text" name="nombre_empresa" id="nombre_empresa" value="{{ old('nombre_empresa', 
+            $agresor?->nombre_empresa) }}">
         </div>
-
-        <!-- Apellido Paterno -->
-        <div class="col-md-4 input-float">
-            <label for="ap_paterno">Apellido Paterno</label>
-            <input type="text" name="ap_paterno" id="ap_paterno" value="{{ old('ap_paterno', $agresor?->ap_paterno) }}">
+        <div class="col-md-3 input-float">
+            <label for="empresa_zona_barrio">Zona/Barrio</label>
+            <input type="text" name="empresa_zona_barrio" id="empresa_zona_barrio" value="{{ old('empresa_zona_barrio', 
+            $agresor?->empresa_zona_barrio) }}">
         </div>
-
-        <!-- Apellido Materno -->
-        <div class="col-md-4 input-float">
-            <label for="ap_materno">Apellido Materno</label>
-            <input type="text" name="ap_materno" id="ap_materno" value="{{ old('ap_materno', $agresor?->ap_materno) }}">
+        <div class="col-md-3 input-float">
+            <label for="empresa_avenida_calle">Avenida/Calle</label>
+            <input type="text" name="empresa_avenida_calle" id="empresa_avenida_calle" value="{{ old('empresa_avenida_calle', 
+            $agresor?->empresa_avenida_calle) }}">
         </div>
-
-       <!-- Sexo -->
-       <div class="col-md-4 input-float">
-            <label for="sexo">Sexo</label>
-            <select name="sexo" id="sexo">
-                <option value=""></option>
-                <option value="Femenino" {{ old('sexo', $agresor?->sexo) == 'Femenino' ? 'selected' : '' }}>Femenino</option>
-                <option value="Masculino" {{ old('sexo', $agresor?->sexo) == 'Masculino' ? 'selected' : '' }}>Masculino</option>
-            </select>
+        <div class="col-md-3 input-float">
+            <label for="empresa_telefono">Telefono empresa</label>
+            <input type="text" name="empresa_telefono" id="empresa_telefono" value="{{ old('empresa_telefono', 
+            $agresor?->empresa_telefono) }}">
         </div>
-
-        <!-- Lugar de nacimiento -->
-        <div class="col-md-4 input-float">
-            <label for="lugr_nacimiento">Lugar de Nacimiento</label>
-            <select name="lugr_nacimiento" id="lugr_nacimiento">
-                <option value=""></option>
-                <option value="Este Municipio" {{ old('lugr_nacimiento', $agresor?->lugr_nacimiento) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
-                <option value="Otro municipio" {{ old('lugr_nacimiento', $agresor?->lugr_nacimiento) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
-                <option value="Otro Pais" {{ old('lugr_nacimiento', $agresor?->lugr_nacimiento) == 'Otro Pais' ? 'selected' : '' }}>Otro Pais</option>
-            </select>
+        <div class="col-md-3 input-float">
+            <label for="empresa_num_edificio">Número de Vivienda</label>
+            <input type="text" name="empresa_num_edificio" id="empresa_num_edificio" value="{{ old('empresa_num_edificio', 
+            $agresor?->empresa_num_edificio) }}">
         </div>
-
-        <!-- Especifique Lugar -->
-        <div class="col-md-4 input-float">
-            <label for="especifique_lugar">Especifique lugar</label>
-            <input type="text" name="especifique_lugar" id="especifique_lugar" value="{{ old('especifique_lugar', $agresor?->especifique_lugar) }}">
-        </div>
-
-        <!-- Fecha nacimiento -->
-        <div class="col-md-4 input-float">
-            <label for="fecha_nacimiento">Fecha de Nacimiento</label>
-            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', $agresor?->fecha_nacimiento) }}">
-        </div>
-
-        <!-- Edad -->
-        <div class="col-md-4 input-float">
-            <label for="edad">Edad</label>
-            <input type="text" name="edad" id="edad" value="{{ old('edad', $agresor?->edad) }}">
-        </div>
-
-        <!-- Residencia habitual -->
-        <div class="col-md-4 input-float">
-            <label for="residencia_habitual">Residencia Habitual</label>
-            <select name="residencia_habitual" id="residencia_habitual">
-                <option value=""></option>
-                <option value="Este Municipio" {{ old('residencia_habitual', $agresor?->residencia_habitual) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
-                <option value="Otro municipio" {{ old('residencia_habitual', $agresor?->residencia_habitual) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
-                <option value="Otro Pais" {{ old('residencia_habitual', $agresor?->residencia_habitual) == 'Otro Pais' ? 'selected' : '' }}>Otro Pais</option>
-            </select>
-        </div>
-
-        <!-- Especifique Residencia -->
-        <div class="col-md-4 input-float">
-            <label for="especifique_residencia">Especifique residencia</label>
-            <input type="text" name="especifique_residencia" id="especifique_residencia" value="{{ old('especifique_residencia', $agresor?->especifique_residencia) }}">
-        </div>
-
-       <!-- Estado civil -->
-       <div class="col-md-4 input-float">
-            <label for="estado_civil">Estado Civil</label>
-            <select name="estado_civil" id="estado_civil">
-                <option value=""></option>
-                <option value="Soltero(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Soltero(a)' ? 'selected' : '' }}>Soltero(a)</option>
-                <option value="Casado(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Casado(a)' ? 'selected' : '' }}>Casado(a)</option>
-                <option value="Divorciado(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Divorciado(a)' ? 'selected' : '' }}>Divorciado(a)</option>
-                <option value="Viudo(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Viudo(a)' ? 'selected' : '' }}>Viudo(a)</option>
-            </select>
-        </div>
-
-        <!-- Logro Educativo -->
-        <div class="col-md-4 input-float">
-            <label for="logro_educativo">Logro Educativo</label>
-            <input type="text" name="logro_educativo" id="logro_educativo" value="{{ old('logro_educativo', $agresor?->logro_educativo) }}">
-        </div>
-
-        <!-- Último Curso -->
-        <div class="col-md-4 input-float">
-            <label for="ultimo_curso">Último Curso</label>
-            <input type="text" name="ultimo_curso" id="ultimo_curso" value="{{ old('ultimo_curso', $agresor?->ultimo_curso) }}">
-        </div>
-
-        <!-- Actividad -->
-        <div class="col-md-4 input-float">
-            <label for="actividad">Actividad</label>
-            <input type="text" name="actividad" id="actividad" value="{{ old('actividad', $agresor?->actividad) }}">
-        </div>
-
-
-        <!-- Especifique Actividad -->
-        <div class="col-md-4 input-float">
-            <label for="especifique_actividad">Especifique Actividad</label>
-            <input type="text" name="especifique_actividad" id="especifique_actividad" value="{{ old('especifique_actividad', $agresor?->especifique_actividad) }}">
-        </div>
+      
 
         
-        <!-- Ingreso -->
-        <div class="col-md-4 input-float">
-            <label for="ingreso">Ingreso</label>
-            <input type="text" name="ingreso" id="ingreso" value="{{ old('ingreso', $agresor?->ingreso) }}">
-        </div>
-
-        <!-- Monto -->
-        <div class="col-md-4 input-float">
-            <label for="monto">Monto</label>
-            <input type="text" name="monto" id="monto" value="{{ old('monto', $agresor?->monto) }}">
-        </div>
-
-        <!-- Idioma -->
-        <div class="col-md-4 input-float">
-            <label for="idioma">Idioma</label>
-            <select name="idioma" id="idioma">
-                <option value="">Seleccione</option>
-                <option value="Español" {{ old('idioma', $agresor?->idioma) == 'Español' ? 'selected' : '' }}>Español</option>
-                <option value="Quechua" {{ old('idioma', $agresor?->idioma) == 'Quechua' ? 'selected' : '' }}>Quechua</option>
-                <option value="Aymara" {{ old('idioma', $agresor?->idioma) == 'Aymara' ? 'selected' : '' }}>Aymara</option>
-                <option value="Otro" {{ old('idioma', $agresor?->idioma) == 'Otro' ? 'selected' : '' }}>Otro</option>
-            </select>
-        </div>
-
-        <!-- Especifique Idioma -->
-        <div class="col-md-4 input-float">
-            <label for="especifique_idioma">Especifique Idioma</label>
-            <input type="text" name="especifique_idioma" id="especifique_idioma" value="{{ old('especifique_idioma', $agresor?->especifique_idioma) }}">
-        </div>
-
-          <!-- Num Documento -->
-        <div class="col-md-4 input-float">
-            <label for="num_documento">Numero de Documento</label>
-            <input type="text" name="num_documento" id="num_documento" value="{{ old('num_documento', $agresor?->num_documento) }}">
-        </div>
-
-    </div>
-
-    <div class="text-end mt-4">
-        <button type="submit" class="btn btn-submit">Guardar</button>
     </div>
 </div>
+
+
+        
+
+<!-- Botón de guardar 
+<div class="text-end mt-3">
+    <button type="submit" class="btn btn-submit">Guardar</button>
+</div>-->
+

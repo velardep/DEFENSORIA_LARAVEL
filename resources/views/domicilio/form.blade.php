@@ -155,53 +155,52 @@
 
 
 <div class="card card-form mb-4">
-    <h5 class="mb-4">📅 Domicilio</h5>
+    <h5 class="mb-4">📅 Domicilio Victima / Agresor</h5>
     <div class="row">
-        <div class="col-md-4 input-float">
-            <label for="zona_barrio">Zona Barrio</label>
+        <div class="col-md-3 input-float">
+            <label for="zona_barrio">Zona/Barrio</label>
             <input type="text" name="zona_barrio" id="zona_barrio" value="{{ old('zona_barrio', $domicilio?->zona_barrio) }}">
         </div>
-        <div class="col-md-4 input-float">
-            <label for="avenida_calle">Avenida Calle</label>
+        <div class="col-md-3 input-float">
+            <label for="avenida_calle">Avenida/Calle</label>
             <input type="text" name="avenida_calle" id="avenida_calle" value="{{ old('avenida_calle', $domicilio?->avenida_calle) }}">
         </div>
-        <div class="col-md-4 input-float">
+        <div class="col-md-3 input-float">
             <label for="nom_edificio">Nombre del Edificio</label>
             <input type="text" name="nom_edificio" id="nom_edificio" value="{{ old('nom_edificio', $domicilio?->nom_edificio) }}">
         </div>
-        <div class="col-md-4 input-float">
-            <label for="telefono_domicilio">Teléfono Domicilio</label>
-            <input type="text" name="telefono_domicilio" id="telefono_domicilio" value="{{ old('telefono_domicilio', $domicilio?->telefono_domicilio) }}">
+        <div class="col-md-3 input-float">
+            <label for="num_piso_departamento">Numero Piso, Departamento</label>
+            <input type="text" name="num_piso_departamento" id="num_piso_departamento" value="{{ old('num_piso_departamento', $domicilio?->num_piso_departamento) }}">
         </div>
-        <div class="col-md-4 input-float">
-            <label for="num_distrito">Número de Distrito</label>
-            <input type="text" name="num_distrito" id="num_distrito" value="{{ old('num_distrito', $domicilio?->num_distrito) }}">
-        </div>
-        <div class="col-md-4 input-float">
+        <div class="col-md-3 input-float">
             <label for="num_vivienda">Número de Vivienda</label>
             <input type="text" name="num_vivienda" id="num_vivienda" value="{{ old('num_vivienda', $domicilio?->num_vivienda) }}">
         </div>
-        <div class="col-md-4 input-float">
-            <label for="num_piso_departamento">Piso/Departamento</label>
-            <input type="text" name="num_piso_departamento" id="num_piso_departamento" value="{{ old('num_piso_departamento', $domicilio?->num_piso_departamento) }}">
+        <div class="col-md-3 input-float">
+            <label for="telefono_domicilio">Teléfono Domicilio</label>
+            <input type="text" name="telefono_domicilio" id="telefono_domicilio" value="{{ old('telefono_domicilio', $domicilio?->telefono_domicilio) }}">
         </div>
-        
-        <div class="col-md-4 input-float">
+        <div class="col-md-3 input-float">
             <label for="lugar_domicilio">Lugar de Domicilio</label>
             <select name="lugar_domicilio" id="lugar_domicilio">
-                <option value="">Seleccione lugar</option>
+                <option value=""></option>
                 <option value="Este Municipio" {{ old('lugar_domicilio', $domicilio?->lugar_domicilio) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
                 <option value="Otro Municipio" {{ old('lugar_domicilio', $domicilio?->lugar_domicilio) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
                 <option value="Zona Sur" {{ old('lugar_domicilio', $domicilio?->lugar_domicilio) == 'Zona Sur' ? 'selected' : '' }}>Zona Sur</option>
                 <option value="Zona Norte" {{ old('lugar_domicilio', $domicilio?->lugar_domicilio) == 'Zona Norte' ? 'selected' : '' }}>Zona Norte</option>
             </select>
         </div>
-        <div class="col-md-4 input-float">
-            <label for="especifique">Especifique</label>
+        <div class="col-md-3 input-float">
+            <label for="espcifique">Especifique</label>
             <input type="text" name="especifique" id="especifique" value="{{ old('especifique', $domicilio?->especifique) }}">
         </div>
+        <div class="col-md-3 input-float">
+            <label for="num_distrito">Número de Distrito</label>
+            <input type="text" name="num_distrito" id="num_distrito" value="{{ old('num_distrito', $domicilio?->num_distrito) }}">
+        </div>
 
-        <div class="col-md-4 input-float">
+        <div class="col-md-3 input-float">
             <label for="persona">Persona</label>
             <select id="persona" name="persona" onchange="togglePersona()" class="form-control">
                 <option value="">Seleccione</option>
@@ -210,7 +209,7 @@
             </select>
         </div>
 
-        <div class="col-md-4 input-float" id="select_victima" style="display:none;">
+        <div class="col-md-3 input-float" id="select_victima" style="display:none;">
             <label for="id_victima">Seleccionar Víctima</label>
             <select name="id_victima" class="form-control">
                 <option value="">Seleccione</option>
@@ -222,7 +221,7 @@
             </select>
         </div>
 
-        <div class="col-md-4 input-float" id="select_agresor" style="display:none;">
+        <div class="col-md-3 input-float" id="select_agresor" style="display:none;">
             <label for="id_agresor">Seleccionar Agresor</label>
             <select name="id_agresor" class="form-control">
                 <option value="">Seleccione</option>

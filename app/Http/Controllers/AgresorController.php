@@ -41,6 +41,9 @@ class AgresorController extends Controller
      {
          $agresor = Agresor::create($request->all());
  
+         
+
+
          return response()->json($agresor);
      }
 

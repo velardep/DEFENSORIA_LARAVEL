@@ -32,7 +32,7 @@ class DenunciaRequest extends FormRequest
             'id_victima' => 'required|exists:victima,id',
             'id_tipo_violencia' => 'required|exists:tipo_violencia,id', // o como se llame la tabla
             'id_violencia' => 'required|exists:violencia,id',
-			'condicion' => 'boolean',
+			'condicion' => 'nullable|boolean',
         ];
     }
 }

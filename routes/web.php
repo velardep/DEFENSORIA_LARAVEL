@@ -76,8 +76,20 @@ Route::get('/formularios-secundarios/{id}', function ($id) {
 
 
 
+Route::get('/api/victimas-y-agresores', function () {
+    return response()->json([
+        'victimas' => \App\Models\Victima::select('id', 'nombre', 'ap_paterno')->get(),
+        'agresores' => \App\Models\Agresor::select('id', 'nombre', 'ap_paterno')->get(),
+    ]);
+});
 
 
+// En web.php o api.php
+Route::get('/api/victimas', fn() => \App\Models\Victima::all());
+Route::get('/api/agresores', fn() => \App\Models\Agresor::all());
+
+
+Route::get('/denuncias/buscar', [DenunciaController::class, 'buscar'])->name('denuncia.buscar');
 
 
 

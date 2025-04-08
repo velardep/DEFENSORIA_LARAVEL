@@ -26,6 +26,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property $idioma
  * @property $especifique_idioma
  * @property $id_documento
+ * 
+ * @property $zona_barrio
+ * @property $avenida_calle
+ * @property $nom_edificio
+ * @property $telefono_domicilio
+ * @property $num_vivienda
+ * @property $num_piso_departamento
+ * @property $lugar_domicilio
+ * @property $especifique
  *
  * @property Documento $documento
  * @property Denuncium[] $denuncias
@@ -47,7 +56,9 @@ class Victima extends Model
      */
     protected $fillable = ['nombre', 'ap_paterno', 'ap_materno', 'sexo', 'lugr_nacimiento', 'fecha_nacimiento', 'edad', 
     'residencia_habitual', 'estado_civil', 'rel_victima_agresor', 'hijos', 'logro_educativo', 'actividad', 'ingreso', 
-    'monto', 'idioma', 'especifique_idioma', 'id_documento', 'especifique_residencia', 'celular', 'especifique_nacimiento'];
+    'monto', 'idioma', 'especifique_idioma', 'especifique_residencia', 'celular', 'especifique_nacimiento',
+    'num_documento', 'expedido', 'tipo_documento', 'zona_barrio', 'avenida_calle', 'nom_edificio', 'telefono_domicilio', 
+    'num_vivienda', 'num_piso_departamento', 'lugar_domicilio', 'especifique'];
 
 
     /**

@@ -47,4 +47,7 @@ class RegistrarDenunciaController extends Controller
         
         
     }
+
+
+    
 }

@@ -303,8 +303,21 @@
 							</a>
 						</div>
 					</li>
+                    <li><a href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-025-dashboard"></i>
+							<span class="nav-text">ADMINISTRACION</span>
+						</a>
+                        <ul aria-expanded="false">
+                        
+
+
+
+
+
                     
-                            
+                    
+
+                        
                     <li>
                         <a href="javascript:void(0);" id="btn-mostrar-formularios">
                             <i class="fas fa-clipboard-list"></i>
@@ -328,7 +341,34 @@
 
                         </ul>
                    
-					
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+						<i class="flaticon-050-info"></i>
+							<span class="nav-text">Apps</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="./app-profile.html">Profile</a></li>
+							<li><a href="./post-details.html">Post Details</a></li>
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="./email-compose.html">Compose</a></li>
+                                    <li><a href="./email-inbox.html">Inbox</a></li>
+                                    <li><a href="./email-read.html">Read</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./app-calender.html">Calendar</a></li>
+							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="./ecom-product-grid.html">Product Grid</a></li>
+									<li><a href="./ecom-product-list.html">Product List</a></li>
+									<li><a href="./ecom-product-detail.html">Product Details</a></li>
+									<li><a href="./ecom-product-order.html">Order</a></li>
+									<li><a href="./ecom-checkout.html">Checkout</a></li>
+									<li><a href="./ecom-invoice.html">Invoice</a></li>
+									<li><a href="./ecom-customers.html">Customers</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
                    
                 </ul>
 				<div class="copyright">
@@ -361,10 +401,12 @@
 
 
                             <div id="tramo1-victima-agresor">
+                               
                                 {{-- VÍCTIMA --}}
                                 <div id="victima-section">
                                     <form id="form-victima">
                                     @csrf
+
                                         @include('victima.form', [
                                             'victima' => $victima,
                                             'documentos' => $documentos
@@ -373,26 +415,68 @@
                                     </form>
                                     <hr>
                                 </div>
+
                                 {{-- AGRESOR --}}
                                 <div id="agresor-section" style="display: none;">
                                     <form id="form-agresor">
-                                    @csrf
-
-                                        @include('agresor.form', ['agresor' => $agresor
-                                        ])
-                                        <div class="text-end mt-3">
-                                            <button type="submit" class="btn btn-submit">Guardar</button>
-                                        </div>
+                                        @include('agresor.form', ['agresor' => $agresor])
                                         <div id="agresor-table-container" class="mt-4"></div>
                                     </form>
                                     <hr>
                                 </div>
+                            </div>
+
+                            <div id="tramo2-domicilio" style="display: none;">
+
+                                {{-- DOMICILIO --}}
+                                <div id="domicilio-section-victima" style="display: none;">
+                                    <form id="form-domicilio-victima">
+                                        @include('domicilio.form', [
+                                            'domicilio' => $domicilio,
+                                            'victimas' => $victimas,
+                                            'agresores' => $agresores
+                                        ])
+                                        <div id="domicilio-table-container" class="mt-4"></div>
+                                    </form>
+                                    <hr>
+                                </div>
+
+                                {{-- DOMICILIO AGRESOR --}}
+                                <div id="domicilio-section-agresor" style="display: none;">
+                                    <form id="form-domicilio-agresor">
+                                        @include('domicilio.form', [
+                                            'domicilio' => $domicilio,
+                                            'victimas' => $victimas,
+                                            'agresores' => $agresores
+                                        ])
+                                        <div id="domicilio-table-container" class="mt-4"></div>
+                                    </form>
+                                    <hr>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button id="btn-continuar-domicilios" class="btn btn-primary mt-3">📩 Continuar con Domicilios</button>
+                            </div>
+
+
+                                {{-- DOMICILIO TRABAJO --}}
+                                <div id="domicilio-trabajo-section" style="display: none;">
+                                    <form id="form-domicilio-trabajo">
+
+                                        @include('domicilio-trabajo.form', [
+                                            'domicilioTrabajo' => $domicilioTrabajo,
+                                            'agresores' => $agresores
+                                        ])
+                                        <div id="domicilio-trabajo-table-container" class="mt-4"></div>
+
+                                    </form>
+                                </div>
+                           
 
                                 {{-- DENUNCIA --}}
                                 <div id="denuncia-section" style="display: none;">
                                     <form id="form-denuncia">
-                                    @csrf
-
                                         @include('denuncia.form', [
                                             'denuncia' => $denuncia,
                                             'victimas' => $victimas,
@@ -400,15 +484,11 @@
                                             'tiposViolencia' => $tiposViolencia,
                                             'violencias' => $violencias
                                         ])
-                                        <div class="text-end mt-3">
-                                            <button type="submit" class="btn btn-submit">Guardar</button>
-                                        </div>
                                     </form>
                                 </div>
                                 <div id="denuncia-table-container" class="mt-4"></div>
-                            </div>
 
-                            
+                            </div>
                     </div>
                 </div>
 
@@ -420,31 +500,31 @@
 
 
                 <div id="formulario-filtros-denuncias" style="display: none;" class="card p-4">
-            <form method="GET" action="{{ route('denuncia.buscar') }}">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Año</label>
-                        <input type="number" name="anio" class="form-control" placeholder="Ej: 2020">
-                    </div>
-                    <div class="col-md-3">
-                        <label>Municipio</label>
-                        <input type="text" name="municipio" class="form-control">
-                    </div>
-                    <div class="col-md-3">
-                        <label>Tipo de Violencia</label>
-                        <select name="id_tipo_violencia" class="form-control">
-                            <option value="">-- Todos --</option>
-                            @foreach($tiposViolencia as $tipo)
-                                <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-3 d-flex align-items-end">
-                        <button type="submit" class="btn btn-primary w-100">🔍 Buscar</button>
-                    </div>
+                    <form method="GET" action="{{ route('denuncia.buscar') }}">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Año</label>
+                                <input type="number" name="anio" class="form-control" placeholder="Ej: 2020">
+                            </div>
+                            <div class="col-md-3">
+                                <label>Municipio</label>
+                                <input type="text" name="municipio" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label>Tipo de Violencia</label>
+                                <select name="id_tipo_violencia" class="form-control">
+                                    <option value="">-- Todos --</option>
+                                    @foreach($tiposViolencia as $tipo)
+                                        <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">🔍 Buscar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
 
 
             </div>
@@ -462,230 +542,251 @@
     <!-- Scripts -->
     <script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/chart.js/Chart.bundle.min.js') }}"></script>
+ SCRIPTquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.min.js') }}"></script>
     <script src="{{ asset('assets/js/deznav-init.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const btnMostrar = document.getElementById('btn-mostrar-formularios');
+            const contenedor = document.getElementById('formularios-container');
+
+            btnMostrar.addEventListener('click', () => {
+                contenedor.style.display = 'block';
+                btnMostrar.disabled = true;
+                //btnMostrar.textContent = 'Formularios Cargados';
+            });
+        });
+    </script>
 
 
 <script>
-// Mostrar solo los formularios iniciales (víctima y su domicilio)
-document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById('btn-mostrar-formularios');
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('form-victima');
 
-    btn.addEventListener('click', () => {
-        document.getElementById('formularios-container').style.display = 'block';
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // ⚠️ evita recargar página
 
-        // Mostrar tramo 1
-        document.getElementById('victima-section').style.display = 'block';
-
-        // Ocultar otros tramos
-        document.getElementById('agresor-section').style.display = 'none';
-        document.getElementById('domicilio-section-agresor').style.display = 'none';
-        document.getElementById('domicilio-trabajo-section').style.display = 'none';
-        document.getElementById('denuncia-section').style.display = 'none';
-        document.getElementById('contenedor-tabla-denuncias').style.display = 'none';
-    });
-});
-
-
-// Muestra el contenedor de formularios y oculta la tabla de denuncias
-document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById('btn-mostrar-formularios');
-    btn.addEventListener('click', () => {
-        document.getElementById('formularios-container').style.display = 'block';
-        document.getElementById('contenedor-tabla-denuncias').style.display = 'none';
-    });
-});
-
-// Mostrar contenedor inicial y formulario de víctima
-document.addEventListener("DOMContentLoaded", () => {
-    const btnMostrar = document.getElementById('btn-mostrar-formularios');
-    btnMostrar.addEventListener('click', () => {
-        document.getElementById('formularios-container').style.display = 'block';
-        document.getElementById('victima-section').style.display = 'block';
-        document.getElementById('agresor-section').style.display = 'none';
-        document.getElementById('contenedor-tabla-denuncias').style.display = 'none';
-    });
-});
-
-
-
-// INSERSION DE VICTIMAS
-document.addEventListener("DOMContentLoaded", () => {
-    const formVictima = document.getElementById('form-victima');
-    if (!formVictima) return;
-
-    formVictima.addEventListener('submit', e => {
-        e.preventDefault();
-
-        const formData = new FormData(formVictima);
+        const formData = new FormData(form);
 
         fetch("{{ route('victimas.store') }}", {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'X-CSRF-TOKEN': formVictima.querySelector('input[name="_token"]').value
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
             },
             body: formData
         })
-        .then(res => {
-            if (res.ok) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Víctima guardada correctamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('victima-table-container').innerHTML = `
+                <div class="alert alert-success">
+                    👤 Víctima guardada: <strong>${data.nombre} ${data.ap_paterno}</strong>
+                </div>
+            `;
+            form.reset();
 
-                formVictima.reset();
-
-                // Ocultar víctima y mostrar agresor
-                document.getElementById('victima-section').style.display = 'none';
-                document.getElementById('agresor-section').style.display = 'block';
-            } else {
-                throw new Error('Error de respuesta');
-            }
+            // Mostrar sección agresor
+            document.getElementById('agresor-section').style.display = 'block';
         })
-        .catch(() => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error de conexión',
-                text: 'Intenta nuevamente más tarde.'
-            });
-        });
+        .catch(() => alert('❌ Error al guardar víctima.'));
     });
 });
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('form-agresor');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch("{{ route('agresor.store') }}", {
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            },
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('agresor-table-container').innerHTML = `
+                <div class="alert alert-success">
+                    👨 Agresor guardado: <strong>${data.nombre} ${data.ap_paterno}</strong>
+                </div>
+            `;
+            form.reset();
+
+            // Mostrar botón continuar
+            document.getElementById('btn-continuar-domicilios').style.display = 'block';
+        })
+        .catch(() => alert('❌ Error al guardar agresor.'));
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById('btn-continuar-domicilios');
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        // Ocultar tramo 1
+        document.getElementById('victima-section').style.display = 'none';
+        document.getElementById('agresor-section').style.display = 'none';
+        btn.style.display = 'none';
+
+        // 👉 Recargar los select de víctima y agresor en el formulario de domicilio directamente desde la API
+        Promise.all([
+            fetch('/api/victimas').then(r => r.json()),
+            fetch('/api/agresores').then(r => r.json())
+        ]).then(([victimas, agresores]) => {
+            // Llenar selects
+            const victimaSelects = document.querySelectorAll('select[name="id_victima"]');
+            const agresorSelects = document.querySelectorAll('select[name="id_agresor"]');
+
+            victimaSelects.forEach(select => {
+                select.innerHTML = victimas.map(v =>
+                    `<option value="${v.id}">${v.nombre} ${v.ap_paterno}</option>`
+                ).join('');
+            });
+
+            agresorSelects.forEach(select => {
+                select.innerHTML = agresores.map(a =>
+                    `<option value="${a.id}">${a.nombre} ${a.ap_paterno}</option>`
+                ).join('');
+            });
+
+            // Mostrar tramo2 con selects actualizados
+            document.getElementById('tramo2-domicilio').style.display = 'block';
+            document.getElementById('domicilio-section-victima').style.display = 'block';
+        }).catch(() => alert('❌ Error al actualizar los selects.'));
+    });
+});
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('form-domicilio-victima');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+
+        fetch("{{ route('domicilio.store') }}", {
+            method: "POST",
+            headers: { 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value },
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('domicilio-table-container').innerHTML = `
+                <div class="alert alert-success">
+                    🏠 Domicilio víctima guardado: <strong>${data.zona_barrio}</strong>
+                </div>
+            `;
+            form.reset();
+            document.getElementById('domicilio-section-agresor').style.display = 'block';
+        })
+        .catch(() => alert('❌ Error al guardar domicilio de víctima.'));
+    });
+});
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('form-domicilio-agresor');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+
+        fetch("{{ route('domicilio.store') }}", {
+            method: "POST",
+            headers: { 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value },
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('domicilio-table-container').innerHTML = `
+                <div class="alert alert-success">
+                    🏠 Domicilio agresor guardado: <strong>${data.zona_barrio}</strong>
+                </div>
+            `;
+            form.reset();
+            document.getElementById('denuncia-section').style.display = 'block';
+        })
+        .catch(() => alert('❌ Error al guardar domicilio de víctima.'));
+    });
+});
+
+
+
 
 
 /*
-// INSERSION DE AGRESORES
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById('form-agresor');
-    if (!form) return;
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('form-domicilio-agresor');
 
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', function (e) {
         e.preventDefault();
-
         const formData = new FormData(form);
 
-        fetch("{{ route('agresor.store') }}", {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value
-            },
+        fetch("{{ route('domicilio.store') }}", {
+            method: "POST",
+            headers: { 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value },
             body: formData
         })
-        .then(async res => {
-            if (res.ok) {
-                // Puedes intentar obtener el JSON si esperas uno, o solo mostrar el mensaje
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Agresor guardado correctamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                form.reset();
-                // Ocultar víctima y mostrar agresor
-                document.getElementById('victima-section').style.display = 'none';
-                document.getElementById('agresor-section').style.display = 'none';
-                document.getElementById('denuncia-section').style.display = 'block';
-            } else {
-                throw new Error("Respuesta no válida");
-            }
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('domicilio-table-container').innerHTML = `
+                <div class="alert alert-success">
+                    🏠 Domicilio agresor guardado: <strong>${data.zona_barrio}</strong>
+                </div>
+            `;
+            form.reset();
+            document.getElementById('domicilio-trabajo-section').style.display = 'block';
         })
-        
+        .catch(() => alert('❌ Error al guardar domicilio de agresor.'));
     });
 });*/
 
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('form-domicilio-trabajo');
 
-
-// INSERSIÓN DE AGRESORES
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById('form-agresor');
-    if (!form) return;
-
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', function (e) {
         e.preventDefault();
-
         const formData = new FormData(form);
 
-        fetch("{{ route('agresor.store') }}", {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value
-            },
+        fetch("{{ route('domicilio-trabajos.store') }}", {
+            method: "POST",
+            headers: { 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value },
             body: formData
         })
-        .then(async res => {
-            if (res.ok) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Agresor guardado correctamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-
-                form.reset();
-
-                // Ocultar víctima y agresor, mostrar denuncia
-                document.getElementById('victima-section').style.display = 'none';
-                document.getElementById('agresor-section').style.display = 'none';
-                document.getElementById('denuncia-section').style.display = 'block';
-
-                // ACTUALIZAR SELECTS DE DENUNCIA
-                actualizarSelectsVictimaAgresor();
-            } else {
-                throw new Error("Respuesta no válida");
-            }
-        });
+        .then(res => res.json())
+        .then(data => {
+            alert("✅ Domicilio de trabajo guardado correctamente");
+            form.reset();
+            document.getElementById('denuncia-section').style.display = 'block';
+        })
+        .catch(() => alert('❌ Error al guardar domicilio de trabajo.'));
     });
 });
 
-// ACTUALIZAR SELECTS DE DENUNCIA (VICTIMA Y AGRESOR)
-function actualizarSelectsVictimaAgresor() {
-    fetch('/api/victimas-y-agresores')
-        .then(res => res.json())
-        .then(data => {
-            const selectVictima = document.getElementById('id_victima');
-            const selectAgresor = document.getElementById('id_agresor');
 
-            if (!selectVictima || !selectAgresor) return;
 
-            // Limpiar opciones
-            selectVictima.innerHTML = '<option value="">Seleccione una víctima</option>';
-            selectAgresor.innerHTML = '<option value="">Seleccione un agresor</option>';
 
-            let ultimaVictimaId = null;
-            let ultimoAgresorId = null;
 
-            // Insertar nuevas víctimas
-            data.victimas.forEach(v => {
-                const opt = document.createElement('option');
-                opt.value = v.id;
-                opt.textContent = `${v.nombre} ${v.ap_paterno}`;
-                selectVictima.appendChild(opt);
-                ultimaVictimaId = v.id;
-            });
 
-            // Insertar nuevos agresores
-            data.agresores.forEach(a => {
-                const opt = document.createElement('option');
-                opt.value = a.id;
-                opt.textContent = `${a.nombre} ${a.ap_paterno}`;
-                selectAgresor.appendChild(opt);
-                ultimoAgresorId = a.id;
-            });
-
-            // Seleccionar automáticamente los últimos insertados
-            if (ultimaVictimaId) selectVictima.value = ultimaVictimaId;
-            if (ultimoAgresorId) selectAgresor.value = ultimoAgresorId;
-        });
-}
-
-// INSERSION DE DENUNCIA
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('form-denuncia');
-    if (!form) return;
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -698,44 +799,31 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: formData
         })
-        .then(res => {
-            if (!res.ok) throw new Error('Error en el guardado');
-            return res.json();
-        })
+        .then(res => res.json())
         .then(data => {
-            Swal.fire({
-                icon: 'success',
-                title: '📄 Denuncia guardada correctamente',
-                showConfirmButton: false,
-                timer: 1500
-            });
+            // ✅ Mostrar mensaje
+            alert("📄 Denuncia guardada correctamente");
 
+            // ✅ Limpiar formulario
             form.reset();
 
             // Ocultar todos los formularios
-            ['victima-section', 'agresor-section', 'denuncia-section',
-             'tramo2-domicilio', 'domicilio-section-victima',
-             'domicilio-section-agresor', 'domicilio-trabajo-section']
-            .forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.style.display = 'none';
-            });
+            document.getElementById('victima-section').style.display = 'none';
+            document.getElementById('agresor-section').style.display = 'none';
+            document.getElementById('tramo2-domicilio').style.display = 'none';
+            document.getElementById('domicilio-section-victima').style.display = 'none';
+            document.getElementById('domicilio-section-agresor').style.display = 'none';
+            document.getElementById('domicilio-trabajo-section').style.display = 'none';
+            document.getElementById('denuncia-section').style.display = 'none';
 
-            // Actualizar la tabla de denuncias si querés
+            // ✅ Cargar tabla de denuncias actualizada
             fetch("{{ route('denuncia.index') }}")
                 .then(res => res.text())
                 .then(html => {
-                    const container = document.getElementById('denuncia-table-container');
-                    if (container) container.innerHTML = html;
+                    document.getElementById('denuncia-table-container').innerHTML = html;
                 });
         })
-        .catch(() => {
-            Swal.fire({
-                icon: 'error',
-                title: '❌ Error al guardar la denuncia',
-                text: 'Revisa los campos obligatorios o vuelve a intentarlo.'
-            });
-        });
+        .catch(() => alert('❌ Error al guardar la denuncia.'));
     });
 });
 
@@ -745,6 +833,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+//SCRIPT QUE ACTIVA EL BOTON DE MIS CASOS 
+document.addEventListener("DOMContentLoaded", function () {
+    const btnVerDenuncias = document.getElementById('btn-mostrar-denuncias');
+
+    btnVerDenuncias.addEventListener('click', function () {
+        // Ocultar los demás
+        document.getElementById('formularios-container').style.display = 'none';
+        document.getElementById('formulario-filtros-denuncias').style.display = 'none';
+
+        // Limpia el contenedor y lo muestra
+        const contenedor = document.getElementById('contenedor-tabla-denuncias');
+        contenedor.innerHTML = '';
+        contenedor.style.display = 'block';
+
+        // Carga la tabla de denuncias
+        fetch("{{ route('denuncia.index') }}")
+            .then(res => res.text())
+            .then(html => {
+                contenedor.innerHTML = html;
+            })
+            .catch(() => alert('❌ Error al cargar las denuncias.'));
+    });
+});
+
+
+//SCRIPT QUE ACTIVA EL BOTON DE REGISTRAR DENUNCIA
+document.addEventListener("DOMContentLoaded", function () {
+    const btnMostrarFormularios = document.getElementById('btn-mostrar-formularios');
+
+    btnMostrarFormularios.addEventListener('click', function () {
+        // Mostrar los formularios y ocultar la tabla
+        
+        document.getElementById('formularios-container').style.display = 'block';
+        document.getElementById('contenedor-tabla-denuncias').style.display = 'none';
+    });
+});
+
+
+
+
+
+//SCRIPT QUE ACTIVA EL BOTON DE BUSCAR DENUNCIAS
+document.addEventListener("DOMContentLoaded", function () {
+    const btnMostrarFiltros = document.getElementById('btn-buscar-denuncias');
+    const formulario = document.getElementById('formulario-filtros-denuncias');
+
+    btnMostrarFiltros.addEventListener('click', function () {
+        // Muestra el formulario
+        formulario.style.display = 'block';
+
+        // Ocultar los demás
+        document.getElementById('formularios-container').style.display = 'none';
+        document.getElementById('contenedor-tabla-denuncias').style.display = 'none';
+    });
+});
 
 
 

@@ -12,6 +12,10 @@ use Illuminate\View\View;
 
 
 
+use Carbon\Carbon;
+
+
+
 class DenunciaController extends Controller
 {
     /**
@@ -95,4 +99,36 @@ class DenunciaController extends Controller
         return Redirect::route('denuncia.index')
             ->with('success', 'Denuncia deleted successfully');
     }
+
+
+
+    public function buscar(Request $request)
+    {
+        $anio = $request->input('anio');
+        $municipio = $request->input('municipio');
+        $tipoViolencia = $request->input('id_tipo_violencia');
+    
+        $query = Denuncia::query();
+    
+        // 🔍 Filtro por año
+        if ($anio) {
+            $query->whereYear('fecha', $anio);
+        }
+    
+        // 🔍 Filtro por municipio
+        if ($municipio) {
+            $query->where('municipio', 'like', '%' . $municipio . '%');
+        }
+    
+        // 🔍 Filtro por tipo de violencia
+        if ($tipoViolencia) {
+            $query->where('id_tipo_violencia', $tipoViolencia);
+        }
+    
+        // 🔄 Obtener resultados
+        $denuncias = $query->with(['victima', 'agresor', 'tipoviolencias', 'violencia'])->get();
+    
+        return view('denuncia.index', compact('denuncias'));
+    }
+    
 }

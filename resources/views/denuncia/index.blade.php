@@ -62,19 +62,19 @@
                             <!--<table class="table table-striped table-hover">-->
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
+                                     <!--   <th>No</th> -->
                                         
 									<th >Fecha</th>
-									<th >Departamento</th>
+									<!--<th >Departamento</th>-->
 									<th >Nombre Servicio</th>
 									<th >Municipio</th>
 									<th >Num Caso</th>
 									<th >Cod Slim</th>
 									<th >Nombre Agresor</th>
 									<th >Victima</th>
-									<th >Tipo de Violencia</th>
-                                    <th >Violencia</th>
-									<th >Condicion</th>
+									<th >Violencia</th>
+                                    <th >Delito</th>
+									<!--<th >Condicion</th>-->
 
                                         <th></th>
                                     </tr>
@@ -82,10 +82,10 @@
                                 <tbody>
                                     @foreach ($denuncias as $denuncia)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                         <!--   <td>{{ ++$i }}</td> -->
                                             
 										<td >{{ $denuncia->fecha }}</td>
-										<td >{{ $denuncia->departamento }}</td>
+										<!--<td >{{ $denuncia->departamento }}</td>-->
 										<td >{{ $denuncia->nombre_servicio }}</td>
 										<td >{{ $denuncia->municipio }}</td>
 										<td >{{ $denuncia->num_caso }}</td>
@@ -96,7 +96,7 @@
                                         <td>{{ $denuncia->violencia->nombre ?? 'N/A' }}</td>
 
 
-										<td >{{ $denuncia->condicion }}</td>
+										<!--<td >{{ $denuncia->condicion }}</td>-->
 
                                             <td>
                                                 <form action="{{ route('denuncia.destroy', $denuncia->id) }}" method="POST">

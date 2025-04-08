@@ -42,9 +42,21 @@ class VictimaRequest extends FormRequest
 			'ingreso' => 'string',
             'monto' => 'string',
 			'idioma' => 'string',
+            'num_documento' => 'string',
+            'expedido' => 'string',
+            'tipo_docmuento' => 'string',
+
+            'zona_barrio' => 'string',
+			'avenida_calle' => 'string',
+			'nom_edificio' => 'string',
+			'telefono_domicilio' => 'string',
+			'num_vivienda' => 'string',
+			'num_piso_departamento' => 'string',
+			'lugar_domicilio' => 'string',
+			'especifique' => 'string'
 
             
-            'id_documento' => ['required', 'integer', Rule::exists('documento', 'id')],
+            /*'id_documento' => ['required', 'integer', Rule::exists('documento', 'id')],*/
             
 
 
