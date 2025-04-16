@@ -102,16 +102,7 @@
             {!! $errors->first('nombre', '<div class="invalid-feedback d-block" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
-        <!-- Condición -->
-        <div class="col-md-6 input-material">
-            <i class="material-icons">check_circle</i>
-            <label for="condicion">Condición</label>
-            <input type="text" name="condicion"
-                   class="@error('condicion') is-invalid @enderror"
-                   value="{{ old('condicion', $violencia?->condicion) }}"
-                   id="condicion" placeholder="Condición">
-            {!! $errors->first('condicion', '<div class="invalid-feedback d-block" role="alert"><strong>:message</strong></div>') !!}
-        </div>
+        
 
         <!-- ID Tipo Violencia -->
         <div class="col-md-6 input-material">

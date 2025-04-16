@@ -166,7 +166,47 @@
     .btn-submit:hover {
         background-color: var(--rojo);
     }
+
+    .select2-container--default .select2-selection--multiple {
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid var(--amarillo);
+        border-radius: 0;
+        padding-left: 2.6rem;
+        min-height: 40px;
+        font-family: cursive;
+        font-size: 1rem;
+        color: var(--azul);
+    }
+
+    .select2-container--default .select2-selection--multiple:focus,
+    .select2-container--default .select2-selection--multiple:active {
+        border-bottom: 2px solid var(--rojo);
+        outline: none;
+        box-shadow: 0 2px 10px rgba(246, 140, 45, 0.15);
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: var(--azul);
+        border: none;
+        color: white;
+        padding: 0.2rem 0.5rem;
+        margin-top: 6px;
+        font-size: 0.85rem;
+        border-radius: 15px;
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+        color: white;
+        margin-right: 5px;
+    }
+
+    /* Elimina margen extra */
+    .select2-container {
+        width: 100% !important;
+    }
 </style>
+
 
 <div class="card card-form mb-4">
     <h5 class="mb-4">📝 Datos de la denuncia</h5>
@@ -248,38 +288,23 @@
             </select>
         </div>
 
-        {{-- Tipo de Violencia --}}
-        <div class="col-md-6 input-float">
-            <label for="id_tipo_violencia">Tipo de Violencia *</label>
-            <select name="id_tipo_violencia" id="id_tipo_violencia" class="form-select-custom">
-                <option value="">Seleccione un tipo</option>
-                @foreach ($tiposViolencia as $tipo)
-                    <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
-                @endforeach
-            </select>
-        </div>
 
-        {{-- Violencia --}}
-<div class="col-md-6 input-float">
-    <label for="id_violencia">Violencia *</label>
-    <select name="id_violencia" id="id_violencia" class="form-select-custom">
-        <option value="">Seleccione un tipo</option>
-        @foreach ($violencias as $violencia)
-            <option value="{{ $violencia->id }}" data-tipo="{{ $violencia->id_tipo_violencia }}">
-                {{ $violencia->nombre }}
-            </option>
-        @endforeach
-    </select>
-</div>
-
-
-        {{-- Condición --}}
+        {{-- Estado --}}
         <div class="col-md-6 input-float">
             <i class="material-icons">assignment_ind</i>
-            <label for="condicion">Condición</label>
-            <input type="text" name="condicion" id="condicion"
-                   class="@error('condicion') is-invalid @enderror"
-                   value="{{ old('condicion', $denuncia?->condicion) }}">
+            <label for="estado">Estado</label>
+            <input type="text" name="estado" id="estado"
+                   class="@error('estado') is-invalid @enderror"
+                   value="{{ old('estado', $denuncia?->estado) }}">
+        </div>
+
+        {{-- Completada --}}
+        <div class="col-md-6 input-float">
+            <i class="material-icons">assignment_ind</i>
+            <label for="completada">Completada</label>
+            <input type="text" name="completada" id="completada"
+                   class="@error('completada') is-invalid @enderror"
+                   value="{{ old('completada', $denuncia?->completada) }}">
         </div>
     </div>
 
@@ -290,24 +315,253 @@
 
 
 
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-form mb-4">
+            <h5 class="mb-4">🧍 Testimonio</h5>
+            <div class="row">
+                {{-- Forma de Ingreso --}}
+                <div class="col-md-6 input-float">
+                    <label for="forma_ingreso">Forma de Ingreso</label>
+                    <input type="text" name="forma_ingreso" id="forma_ingreso"
+                        class="@error('forma_ingreso') is-invalid @enderror"
+                        value="{{ old('forma_ingreso', $denuncia?->forma_ingreso) }}">
+                </div>
+
+                {{-- Denuncia Previa --}}
+                <div class="col-md-6 input-float">
+                    <label for="denuncia_previa">Existe alguna denuncia previa?</label>
+                    <input type="text" name="denuncia_previa" id="denuncia_previa"
+                        class="@error('denuncia_previa') is-invalid @enderror"
+                        value="{{ old('denuncia_previa', $denuncia?->denuncia_previa) }}">
+                </div>
+
+<!--NO ES LO MAS OPTIMO, LA LOGICA SE DESPLIEGA A LA VISTA Y SU MANTENIMIENTO SERA MAS DIFICIL, PERO ES LA OPCION MAS SIMPLE Y FUNCINAL-->
+
+                <!--VIOLENCIA ECONOMICA-->
+                @php
+                    $violenciaEconomica = \App\Models\Violencia::where('id_tipo_violencia', 1)->get();
+                @endphp
+
+                <div class="col-12 input-float">
+                    <label for="violencia_economica">Violencia Económica</label>
+                    <select name="violencia_economica[]" id="violencia_economica" class="form-select select2" multiple>
+                        @foreach ($violenciaEconomica as $v)
+                            <option value="{{ $v->nombre }}">{{ $v->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <!-- PSICOLÓGICA -->
+                @php
+                    $violenciaPsicologica = \App\Models\Violencia::where('id_tipo_violencia', 2)->get();
+                @endphp
+
+                <div class="col-12 input-float">
+                    <label for="violencia_psicologica">Violencia Psicologica</label>
+                    <select name="violencia_psicologica[]" id="violencia_psicologica" class="form-select select2" multiple>
+                        @foreach ($violenciaPsicologica as $v)
+                            <option value="{{ $v->nombre }}">{{ $v->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- SEXUAL -->
+                @php
+                    $violenciaSexual = \App\Models\Violencia::where('id_tipo_violencia', 3)->get();
+                @endphp
+
+                <div class="col-12 input-float">
+                    <label for="violencia_sexual">Violencia Sexual</label>
+                    <select name="violencia_sexual[]" id="violencia_sexual" class="form-select select2" multiple>
+                        @foreach ($violenciaSexual as $v)
+                            <option value="{{ $v->nombre }}">{{ $v->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+
+                <!-- FÍSICA -->
+                @php
+                    $violenciaFisica = \App\Models\Violencia::where('id_tipo_violencia', 4)->get();
+                @endphp
+
+                <div class="col-12 input-float">
+                    <label for="violencia_fisica">Violencia Fisica</label>
+                    <select name="violencia_fisica[]" id="violencia_fisica" class="form-select select2" multiple>
+                        @foreach ($violenciaFisica as $v)
+                            <option value="{{ $v->nombre }}">{{ $v->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+
+
+                <!--
+                <div class="col-12 input-float">
+                    <label for="violencia_fisica">Violencia física</label>
+                    <select name="violencia_fisica[]" id="violencia_fisica" class="form-select select2" multiple>
+                        <option value="Golpes">Golpes (puñetes, patadas, etc)</option>
+                        <option value="Empujones">Empujones</option>
+                        <option value="Uso de objetos">Uso de objetos</option>
+                        <option value="Quemaduras">Quemaduras</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+
+                <div class="col-12 input-float">
+                    <label for="violencia_sexual">Violencia Sexual</label>
+                    <select name="violencia_sexual[]" id="violencia_sexual" class="form-select select2" multiple>
+                        <option value="Abuso">Abuso</option>
+                        <option value="Manoseo">Manoseo</option>
+                        <option value="Ver peliculas pornograficas">Ver peliculas pornograficas</option>
+                    </select>
+                </div>
+
+                <div class="col-12 input-float">
+                    <label for="violencia_psicologica">Violencia Psicologica</label>
+                    <select name="violencia_psicologica[]" id="violencia_psicologica" class="form-select select2" multiple>
+                        <option value="Insultos">Insultos</option>
+                        <option value="Denigracion">Denigracion</option>
+                    </select>
+                </div>
+
+                <div class="col-12 input-float">
+                    <label for="violencia_economica">Violencia Economica</label>
+                    <select name="violencia_economica[]" id="violencia_economica" class="form-select select2" multiple>
+                        <option value="Robo">Robo</option>
+                        <option value="Estafa">Estafa</option>
+                        <option value="Hurto">Hurto</option>
+                    </select>
+                </div> 
+-->
+                
+                {{-- Testimonio --}}
+                <div class="col-12 input-float">
+                    <label for="testimonio">Testimonio</label>
+                    <input type="text" name="testimonio" id="testimonio"
+                        class="@error('testimonio') is-invalid @enderror"
+                        value="{{ old('testimonio', $denuncia?->testimonio) }}">
+                </div>
+
+                <!-- DELITOS -->
+                @php
+                    $delitosLista = \App\Models\Delito::all();
+                @endphp
+
+                <div class="col-12 input-float">
+                    <label for="delitos_penales">Delitos Penales</label>
+                    <select name="delitos_penales[]" class="form-select select2" multiple>
+                        @foreach ($delitosLista as $delito)
+                            <option value="{{ $delito->nombre_delito }}">{{ $delito->nombre_delito }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+
+
+                <div class="col-12 input-float">
+    <label for="emblematico" class="form-label">¿Caso Emblemático?</label>
+    <select name="emblematico" id="emblematico" class="form-select">
+        <option value="NO" selected>NO</option>
+        <option value="SI">SI</option>
+    </select>
+</div>
+
+
+
+            </div>
+
+                <!--DELITOS 
+                <div class="col-12 input-float">
+                    <label for="delitos_penales">Delitos Penales</label>
+                    <select name="delitos_penales[]" id="delitos_penales" class="form-select select2" multiple>
+                        <option value="Feminicidio">Feminicidio</option>
+                        <option value="Pornografia">Pornografia</option>
+                        <option value="Proxenetismo">Proxenetismo</option>
+                    </select>
+                </div>-->
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="col-md-6">
+        <div class="card card-form mb-4">
+        <h5 class="mb-4">🧍 Lugar de la Agresion</h5>
+            <div class="row">
+
+               <!-- <div class="col-md-12 mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="copiar-domicilio-victima">
+                        <label class="form-check-label" for="copiar-domicilio-victima">
+                            📍 Mismo lugar que la dirección actual de la víctima
+                        </label>
+                    </div>
+                </div>-->
+
+<!-- meter datos de domicilio-->
+                <div class="col-md-6 input-float">
+                    <label for="zona_barrio">Zona/Barrio</label>
+                    <input type="text" name="zona_barrio" id="zona_barrio" value="{{ old('zona_barrio', $denuncia?->zona_barrio) }}">
+                </div>
+                <div class="col-md-6 input-float">
+                    <label for="avenida_calle">Avenida/Calle</label>
+                    <input type="text" name="avenida_calle" id="avenida_calle" value="{{ old('avenida_calle', $denuncia?->avenida_calle) }}">
+                </div>
+                <div class="col-md-6 input-float">
+                    <label for="nom_edificio">Nombre del Edificio</label>
+                    <input type="text" name="nom_edificio" id="nom_edificio" value="{{ old('nom_edificio', $denuncia?->nom_edificio) }}">
+                </div>
+                <div class="col-md-6 input-float">
+                    <label for="num_vivienda">Número de Vivienda</label>
+                    <input type="text" name="num_vivienda" id="num_vivienda" value="{{ old('num_vivienda', $denuncia?->num_vivienda) }}">
+                </div>
+                <div class="col-md-6 input-float">
+                    <label for="lugar_domicilio">Lugar de Domicilio</label>
+                    <select name="lugar_domicilio" id="lugar_domicilio">
+                        <option value=""></option>
+                        <option value="Este Municipio" {{ old('lugar_domicilio', $denuncia?->lugar_domicilio) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
+                        <option value="Otro Municipio" {{ old('lugar_domicilio', $denuncia?->lugar_domicilio) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
+                        <option value="Zona Sur" {{ old('lugar_domicilio', $denuncia?->lugar_domicilio) == 'Zona Sur' ? 'selected' : '' }}>Zona Sur</option>
+                        <option value="Zona Norte" {{ old('lugar_domicilio', $denuncia?->lugar_domicilio) == 'Zona Norte' ? 'selected' : '' }}>Zona Norte</option>
+                    </select>
+                </div>
+                <div class="col-md-6 input-float">
+                    <label for="espcifique">Especifique</label>
+                    <input type="text" name="especifique" id="especifique" value="{{ old('especifique', $denuncia?->especifique) }}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 {{-- Filtro dinámico sin usar AJAX --}}
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+/*document.addEventListener('DOMContentLoaded', function () {
     const tipoSelect = document.getElementById('id_tipo_violencia');
-    const violenciaSelect = document.getElementById('id_violencia');
-    const todasLasOpciones = Array.from(violenciaSelect.options);
+    const violenciaelect = document.getElementById('id_violencia');
+    const todasLasOpciones = Array.from(violenciaelect.options);
 
     tipoSelect.addEventListener('change', function () {
         const tipoId = this.value;
 
         // Limpiar y agregar solo las que coincidan
-        violenciaSelect.innerHTML = '<option value="">Seleccione un accion</option>';
+        violenciaelect.innerHTML = '<option value="">Seleccione un accion</option>';
 
         const opcionesFiltradas = todasLasOpciones.filter(option => {
             return option.dataset.tipo === tipoId;
         });
 
-        opcionesFiltradas.forEach(option => violenciaSelect.appendChild(option));
+        opcionesFiltradas.forEach(option => violenciaelect.appendChild(option));
     });
-});
+});*/
 </script>
+

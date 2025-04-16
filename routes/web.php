@@ -12,8 +12,12 @@ use App\Http\Controllers\DomicilioController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\DenunciaController;
 use App\Http\Controllers\AgresorController;
+use App\Http\Controllers\DelitoController;
+use App\Http\Controllers\AccionController;
 
 
+Route::resource('delitos', DelitoController::class);
+Route::resource('accions', AccionController::class);
 
 
 
@@ -28,6 +32,9 @@ Route::resource('denuncia', DenunciaController::class);
 Route::resource('agresor', AgresorController::class);
 
 
+Route::get('/denuncias/{id}/acciones', function ($id) {
+    return Denuncia::find($id)->acciones()->orderBy('fecha')->get();
+});
 
 
 
@@ -57,6 +64,22 @@ Route::get('/iniciar', [RegistrarDenunciaController::class, 'create'])->name('re
 
 
 
+/*Route::get('/denuncias/resumen/{id}', function ($id) {
+    $denuncia = \App\Models\Denuncia::with(['victima', 'agresor'])->findOrFail($id);
+    return view('denuncia.resumen', compact('denuncia'));
+});*/
+Route::get('/denuncias/resumen/{id}', function ($id) {
+    $denuncia = \App\Models\Denuncia::with(['victima', 'agresor', 'acciones'])->findOrFail($id);
+    return view('denuncia.resumen', compact('denuncia'));
+});
+
+use App\Models\Accion;
+Route::get('/acciones/formulario/{id}', function ($id) {
+    $accion = new Accion();
+    $accion->denuncia_id = $id;
+
+    return view('accions.create', compact('accion'));
+});
 
 
 Route::get('/formularios-secundarios/{id}', function ($id) {
@@ -89,15 +112,39 @@ Route::get('/api/victimas', fn() => \App\Models\Victima::all());
 Route::get('/api/agresores', fn() => \App\Models\Agresor::all());
 
 
+
+Route::get('/denuncias/buscar', [App\Http\Controllers\DenunciaController::class, 'buscar'])->name('denuncia.buscar');
+
+
+Route::post('/denuncias/buscar', [DenunciaController::class, 'buscar'])->name('denuncia.buscar');
+
+
+// CHECK BOX PARA RELLENAR LUGAR DE AGRESION 
+/*Route::get('/api/victima/{id}', function ($id) {
+    $victima = App\Models\Victima::findOrFail($id);
+    return response()->json([
+        'zona_barrio' => $victima->zona_barrio,
+        'avenida_calle' => $victima->avenida_calle,
+        'nombre_edificio' => $victima->nombre_edificio,
+        'num_vivienda' => $victima->num_vivienda,
+        'lugar_domicilio' => $victima->lugar_domicilio,
+        'especifique' => $victima->especifique,
+    ]);
+});*/
+
+
 Route::get('/denuncias/buscar', [DenunciaController::class, 'buscar'])->name('denuncia.buscar');
 
 
 
-Route::get('/test', function () {
+/*Route::get('/test', function () {
     return 'Laravel está funcionando correctamente';
-});
+});*/
 
 
+Route::get('/denuncias/emblematicos', [DenunciaController::class, 'emblematicos'])->name('denuncia.emblematicos');
+
+Route::post('/denuncia/estado/{id}', [DenunciaController::class, 'actualizarEstado']);
 
 
 

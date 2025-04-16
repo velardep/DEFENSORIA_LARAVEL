@@ -22,6 +22,9 @@
 	<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
 
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
 
 	
@@ -312,21 +315,57 @@
                         </a>
                     </li>
 
+                    <!--FALTA-->
+                    <li>
+                        <a href="javascript:void(0);" id="btn-buscar-personas">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span class="nav-text">Buscar Personas</span>
+                        </a>
+                    </li>
+                    <!--FALTA-->
                     <li>
                         <a href="javascript:void(0);" id="btn-mostrar-denuncias">
                             <i class="fas fa-clipboard-list"></i>
                             <span class="nav-text">Mis Casos</span>
                         </a>
                     </li>
-
+                    <!--FALTA-->
+                    <li>
+                        <a href="javascript:void(0);" id="btn-casos-incompletos">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span class="nav-text">Casos Incompletos</span>
+                        </a>
+                    </li>
+                    <!--FALTA-->
+                    <li>
+                        <a href="javascript:void(0);" id="btn-mostrar-formularios">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span class="nav-text">Archivados</span>
+                        </a>
+                    </li>
+                    <!--FALTA-->
+                    <li>
+                        <a href="javascript:void(0);" id="btn-mostrar-emblematicos">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span class="nav-text">Emblematicos</span>
+                        </a>
+                    </li>
+                    <!--FALTA-->
                     <li>
                         <a href="javascript:void(0);" id="btn-buscar-denuncias">
                             <i class="fas fa-clipboard-list"></i>
                             <span class="nav-text">Explorar Denuncias</span>
                         </a>
                     </li>
+                    <!--FALTA-->
+                    <li>
+                        <a href="javascript:void(0);" id="btn-mostrar-reportes">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span class="nav-text">Reportes</span>
+                        </a>
+                    </li>
 
-                        </ul>
+                </ul>
                    
 					
                    
@@ -352,14 +391,8 @@
         <div class="content-body">
             <div class="container-fluid">
                 <div id="formularios-container" style="display: none;">
-                    
-                        <div class="card-header bg-black text-white">
-                            <h4 class="mb-0"><i class="fas fa-clipboard-list me-2"></i> Registro de Denuncia</h4>
-                        </div>
 
                         <div class="card-body">
-
-
                             <div id="tramo1-victima-agresor">
                                 {{-- VÍCTIMA --}}
                                 <div id="victima-section">
@@ -381,7 +414,7 @@
                                         @include('agresor.form', ['agresor' => $agresor
                                         ])
                                         <div class="text-end mt-3">
-                                            <button type="submit" class="btn btn-submit">Guardar</button>
+                                            <button type="submit" class="btn btn-submit">Continuar</button>
                                         </div>
                                         <div id="agresor-table-container" class="mt-4"></div>
                                     </form>
@@ -400,51 +433,59 @@
                                             'tiposViolencia' => $tiposViolencia,
                                             'violencias' => $violencias
                                         ])
-                                        <div class="text-end mt-3">
-                                            <button type="submit" class="btn btn-submit">Guardar</button>
+                                        <div class="text-end mt-3" id="btn-finalizar-wrapper" style="display: none;">
+                                            <button type="submit" class="btn btn-submit">Finalizar</button>
                                         </div>
                                     </form>
                                 </div>
-                                <div id="denuncia-table-container" class="mt-4"></div>
+                                    <div id="denuncia-table-container" class="mt-4"></div>
+                            </div>                          
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Botón CANCELAR general -->
+                <div class="text-end mt-3" id="btn-cancelar-denuncia" style="display: none;">
+                    <button type="button" class="btn btn-danger">Cancelar</button>
+                </div>
+
+                
+
+                <!-- Contenedor de resumen de la denuncia -->
+                <div id="resumen-section" style="display: none;"></div>
+
+
+                <!-- Contenedor para mostrar los casos -->
+                <div id="contenedor-tabla-denuncias" style="display: none;"></div>
+
+
+
+                <div id="formulario-busqueda-denuncias" style="display: none;" class="card p-4">
+                <h4 style="margin-left: 16px; font-size: 2rem;"> Buscar</h4>
+
+                    <form id="form-buscar-denuncias">
+                        <div class="row">
+                            <div class="col-md-4">
+                             <label>Nombre</label>
+                                <input type="text" name="nombre" class="form-control" placeholder="Buscar por nombre">
                             </div>
-
-                            
-                    </div>
+                            <div class="col-md-4">
+                                <label>Año</label>
+                                <input type="number" name="anio" class="form-control" placeholder="Ej: 2025">
+                            </div>
+                            <div class="col-md-4 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
-                <div 
-                    id="contenedor-tabla-denuncias" style="display: none;">
-                </div>
+                <div id="resultados-busqueda-denuncias" style="display: none;" class="mt-4"></div>
 
 
 
 
-                <div id="formulario-filtros-denuncias" style="display: none;" class="card p-4">
-            <form method="GET" action="{{ route('denuncia.buscar') }}">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Año</label>
-                        <input type="number" name="anio" class="form-control" placeholder="Ej: 2020">
-                    </div>
-                    <div class="col-md-3">
-                        <label>Municipio</label>
-                        <input type="text" name="municipio" class="form-control">
-                    </div>
-                    <div class="col-md-3">
-                        <label>Tipo de Violencia</label>
-                        <select name="id_tipo_violencia" class="form-control">
-                            <option value="">-- Todos --</option>
-                            @foreach($tiposViolencia as $tipo)
-                                <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-3 d-flex align-items-end">
-                        <button type="submit" class="btn btn-primary w-100">🔍 Buscar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
 
 
             </div>
@@ -453,7 +494,7 @@
         <!-- Footer -->
         <div class="footer">
             <div class="copyright text-center">
-                <p>Desarrollado con 💙 por SLIM Tarija</p>
+                <p>Desarrollado con 💙 por Paolo</p>
             </div>
         </div>
 
@@ -469,27 +510,82 @@
 
 
 <script>
-// Mostrar solo los formularios iniciales (víctima y su domicilio)
+
+/*Cancelar denuncia y limpiar formularios
+Qué hace: Muestra el botón "Cancelar" al iniciar una denuncia y, al hacer clic en él, 
+oculta todos los formularios, limpia los datos y oculta el botón nuevamente.*/
+document.addEventListener("DOMContentLoaded", () => {
+    const btnCancelar = document.getElementById('btn-cancelar-denuncia');
+    const btnIniciar = document.getElementById('btn-mostrar-formularios');
+
+    // Mostrar botón cancelar al iniciar denuncia
+    btnIniciar.addEventListener('click', () => {
+        btnCancelar.style.display = 'block';
+    });
+
+    // Al hacer clic en cancelar
+    btnCancelar.querySelector('button').addEventListener('click', () => {
+        // Ocultar formularios
+        ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
+         'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section']
+        .forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+
+        // Limpiar formularios (opcional)
+        ['form-victima', 'form-agresor', 'form-denuncia'].forEach(formId => {
+            const f = document.getElementById(formId);
+            if (f) f.reset();
+        });
+
+        // Ocultar botón cancelar
+        btnCancelar.style.display = 'none';
+    });
+});
+
+
+
+
+/*Mostrar solo los formularios iniciales (víctima y su domicilio)
+Qué hace: Muestra el contenedor de formularios y solo la sección de la víctima, 
+ocultando todas las demás secciones (agresor, denuncia, búsqueda, tabla, etc.).*/
 document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById('btn-mostrar-formularios');
 
     btn.addEventListener('click', () => {
-        document.getElementById('formularios-container').style.display = 'block';
+        // Ocultar todas las demás secciones
+        [
+            'formularios-container',
+            'victima-section',
+            'agresor-section',
+            'denuncia-section',
+            'domicilio-section-victima',
+            'domicilio-section-agresor',
+            'domicilio-trabajo-section',
+            'resumen-section',
+            'contenedor-tabla-denuncias',
+            'formulario-busqueda-denuncias',
+            'resultados-busqueda-denuncias'
+        ].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
 
-        // Mostrar tramo 1
+        // Mostrar contenedor principal y tramo 1
+        document.getElementById('formularios-container').style.display = 'block';
         document.getElementById('victima-section').style.display = 'block';
 
-        // Ocultar otros tramos
-        document.getElementById('agresor-section').style.display = 'none';
-        document.getElementById('domicilio-section-agresor').style.display = 'none';
-        document.getElementById('domicilio-trabajo-section').style.display = 'none';
-        document.getElementById('denuncia-section').style.display = 'none';
-        document.getElementById('contenedor-tabla-denuncias').style.display = 'none';
+        // Historial para navegación
+        history.pushState({ vista: 'formulario' }, '', '#formulario');
     });
 });
 
 
-// Muestra el contenedor de formularios y oculta la tabla de denuncias
+
+/*Mostrar formulario y ocultar tabla de denuncias
+Qué hace: Muestra el formulario de denuncia y oculta la tabla de denuncias. Es redundante 
+con el anterior pero útil si lo tienes por separado para otros botones.*/
 document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById('btn-mostrar-formularios');
     btn.addEventListener('click', () => {
@@ -498,7 +594,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Mostrar contenedor inicial y formulario de víctima
+
+
+/*Mostrar solo formulario de víctima
+Qué hace: Muestra el contenedor principal y la sección de víctima, ocultando específicamente 
+la de agresor y tabla de denuncias.*/
 document.addEventListener("DOMContentLoaded", () => {
     const btnMostrar = document.getElementById('btn-mostrar-formularios');
     btnMostrar.addEventListener('click', () => {
@@ -511,7 +611,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// INSERSION DE VICTIMAS
+/*Guardar víctima y mostrar agresor
+Qué hace: Envía el formulario de víctima por AJAX. Si se guarda correctamente, limpia el formulario, 
+oculta la sección víctima y muestra la del agresor.*/ 
 document.addEventListener("DOMContentLoaded", () => {
     const formVictima = document.getElementById('form-victima');
     if (!formVictima) return;
@@ -557,8 +659,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/*
-// INSERSION DE AGRESORES
+
+/* Guardar agresor y mostrar denuncia
+Qué hace: Envía el formulario del agresor. Si se guarda correctamente, oculta víctima y 
+agresor, muestra el formulario de denuncia y actualiza los selects.*/
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById('form-agresor');
     if (!form) return;
@@ -568,47 +672,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const formData = new FormData(form);
 
-        fetch("{{ route('agresor.store') }}", {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value
-            },
-            body: formData
-        })
-        .then(async res => {
-            if (res.ok) {
-                // Puedes intentar obtener el JSON si esperas uno, o solo mostrar el mensaje
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Agresor guardado correctamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                form.reset();
-                // Ocultar víctima y mostrar agresor
-                document.getElementById('victima-section').style.display = 'none';
-                document.getElementById('agresor-section').style.display = 'none';
-                document.getElementById('denuncia-section').style.display = 'block';
-            } else {
-                throw new Error("Respuesta no válida");
-            }
-        })
         
-    });
-});*/
-
-
-
-// INSERSIÓN DE AGRESORES
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById('form-agresor');
-    if (!form) return;
-
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-
         fetch("{{ route('agresor.store') }}", {
             method: 'POST',
             headers: {
@@ -626,6 +690,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 form.reset();
+                document.getElementById('btn-finalizar-wrapper').style.display = 'block';
+
 
                 // Ocultar víctima y agresor, mostrar denuncia
                 document.getElementById('victima-section').style.display = 'none';
@@ -641,7 +707,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// ACTUALIZAR SELECTS DE DENUNCIA (VICTIMA Y AGRESOR)
+
+
+/*Actualizar selects de víctima y agresor
+Qué hace: Llama a la API para obtener la lista de víctimas y agresores y actualiza 
+los <select> en el formulario de denuncia con los últimos registros.*/
 function actualizarSelectsVictimaAgresor() {
     fetch('/api/victimas-y-agresores')
         .then(res => res.json())
@@ -682,7 +752,11 @@ function actualizarSelectsVictimaAgresor() {
         });
 }
 
-// INSERSION DE DENUNCIA
+
+
+/*Guardar denuncia y mostrar resumen
+Qué hace: Guarda la denuncia vía AJAX. Si se guarda bien, oculta los formularios, 
+limpia todo y muestra el resumen recién generado.*/
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('form-denuncia');
     if (!form) return;
@@ -712,6 +786,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             form.reset();
 
+            document.getElementById('btn-cancelar-denuncia').style.display = 'none';
+
+            document.getElementById('btn-finalizar-wrapper').style.display = 'none';
+
+
+
             // Ocultar todos los formularios
             ['victima-section', 'agresor-section', 'denuncia-section',
              'tramo2-domicilio', 'domicilio-section-victima',
@@ -721,12 +801,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (el) el.style.display = 'none';
             });
 
-            // Actualizar la tabla de denuncias si querés
-            fetch("{{ route('denuncia.index') }}")
+            // Mostrar resumen del caso recién creado
+            fetch(`/denuncias/resumen/${data.id}`)
                 .then(res => res.text())
                 .then(html => {
-                    const container = document.getElementById('denuncia-table-container');
-                    if (container) container.innerHTML = html;
+                    const resumen = document.getElementById('resumen-section');
+                    if (resumen) {
+                        resumen.innerHTML = html;
+                        resumen.style.display = 'block';
+                    }
                 });
         })
         .catch(() => {
@@ -741,6 +824,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+/*Inicializar Select2 para tipos de violencia
+Qué hace: Aplica el plugin Select2 en los campos select para seleccionar múltiples 
+tipos de violencia de forma elegante y funcional.*/
+document.addEventListener("DOMContentLoaded", () => {
+    $('.select2').select2({
+        tags: true,
+        placeholder: "Seleccione o escriba...",
+        width: '100%'
+    });
+});
 
 
 
@@ -750,10 +843,391 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+/*Mostrar tabla de denuncias registradas
+Qué hace: Muestra la tabla con las denuncias y oculta todas las secciones anteriores. 
+También cambia la URL para mantener el historial.*/
+document.addEventListener("DOMContentLoaded", () => {
+    const btnMisCasos = document.getElementById('btn-mostrar-denuncias');
+    btnMisCasos.addEventListener('click', () => {
+        // Ocultar todos los formularios y secciones extra
+        ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
+         'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
+         'resumen-section', 'btn-cancelar-denuncia', 'formulario-busqueda-denuncias','formulario-busqueda-denuncias',
+            'resultados-busqueda-denuncias']
+        .forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+
+        // Mostrar contenedor de denuncias
+        const contenedor = document.getElementById('contenedor-tabla-denuncias');
+        contenedor.style.display = 'block';
+
+
+
+
+
+        // Cambiar la URL y estado del historial
+        history.pushState({ vista: 'tabla' }, '', '#mis-casos');
+
+
+
+
+
+        // Cargar contenido desde el index de denuncias
+        fetch("{{ route('denuncia.index') }}")
+            .then(res => res.text())
+            .then(html => {
+                contenedor.innerHTML = html;
+            });
+    });
+});
+
+
+   
+
+
+/*Mostrar buscador de personas y resultados
+Qué hace: Muestra el formulario de búsqueda de denuncias y su contenedor de resultados, 
+ocultando todo lo demás. También realiza la búsqueda por AJAX. */
+document.addEventListener("DOMContentLoaded", () => {
+    const btnBuscarDenuncias = document.getElementById('btn-buscar-personas');
+    const formulario = document.getElementById('formulario-busqueda-denuncias');
+    const resultados = document.getElementById('resultados-busqueda-denuncias');
+
+    btnBuscarDenuncias.addEventListener('click', () => {
+        // Oculta lo demás
+        ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
+         'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
+         'resumen-section', 'contenedor-tabla-denuncias', 'btn-cancelar-denuncia']
+        .forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+
+        // Muestra solo el buscador
+        formulario.style.display = 'block';
+        resultados.style.display = 'block';
+        resultados.innerHTML = ''; // limpia antes de buscar
+
+
+        history.pushState({ vista: 'buscar' }, '', '#buscar');
+
+
+
+
+
+    });
+
+    // Manejador del submit de búsqueda
+    const form = document.getElementById('form-buscar-denuncias');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+
+        fetch("{{ route('denuncia.buscar') }}", {
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: formData
+        })
+        .then(res => res.text())
+        .then(html => {
+            resultados.innerHTML = html;
+        })
+        .catch(() => {
+            resultados.innerHTML = `<div class="alert alert-danger">Error al buscar denuncias.</div>`;
+        });
+    });
+});
+
+
+
+
+/*Mostrar casos emblemáticos
+Qué hace: Oculta todos los formularios y secciones y muestra la tabla de denuncias filtradas por 
+emblemáticas, además de cambiar la URL.*/
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById('btn-mostrar-emblematicos');
+    btn.addEventListener('click', () => {
+        // Ocultar todos los formularios y otras secciones
+        ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
+         'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
+         'resumen-section', 'btn-cancelar-denuncia','formulario-busqueda-denuncias',
+            'resultados-busqueda-denuncias']
+        .forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+
+        const contenedor = document.getElementById('contenedor-tabla-denuncias');
+        contenedor.style.display = 'block';
+
+
+
+        history.pushState({ vista: 'emblematicos' }, '', '#emblematicos');
+
+
+
+
+
+        fetch("{{ route('denuncia.emblematicos') }}")
+            .then(res => res.text())
+            .then(html => {
+                contenedor.innerHTML = html;
+            });
+    });
+});
+
+
+
+
+/*Mostrar resumen de una denuncia
+Qué hace: Al hacer clic en el botón de resumen, oculta todo, carga y muestra el resumen 
+de una denuncia específica sin recargar la página*/
+document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("click", function (e) {
+        const boton = e.target.closest(".btn-ver-resumen");
+        if (!boton) return;
+
+        const denunciaId = boton.dataset.id;
+
+        // Ocultar todo lo demás
+        ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
+         'contenedor-tabla-denuncias', 'resumen-section', 'btn-cancelar-denuncia', 
+         'formulario-busqueda-denuncias', 'resultados-busqueda-denuncias']
+        .forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+
+        // Mostrar el resumen
+        const contenedorResumen = document.getElementById("resumen-section");
+        contenedorResumen.style.display = "block";
+        contenedorResumen.innerHTML = '<div class="p-4 text-center">Cargando resumen...</div>';
+
+
+
+
+        history.pushState({ vista: 'resumen' }, '', '#resumen');
+
+
+
+
+        fetch(`/denuncias/resumen/${denunciaId}`)
+            .then(res => res.text())
+            .then(html => {
+                contenedorResumen.innerHTML = html;
+            })
+            .catch(() => {
+                contenedorResumen.innerHTML = '<div class="alert alert-danger">❌ Error al cargar el resumen</div>';
+            });
+    });
+});
+
+
+
+/*Mostrar formulario para registrar acciones
+Qué hace: Muestra un formulario para registrar acciones relacionadas a la 
+denuncia actual. El formulario se inserta dinámicamente en el resumen.*/
+document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("click", function (e) {
+        const btnAcciones = e.target.closest("#btn-ver-acciones");
+        if (!btnAcciones) return;
+
+        const denunciaId = btnAcciones.dataset.id;
+
+        fetch(`/acciones/formulario/${denunciaId}`)
+            .then(response => response.text())
+            .then(html => {
+                // Insertar el formulario debajo del resumen
+                const resumen = document.getElementById("resumen-section");
+
+                // Elimina cualquier formulario anterior si ya existe
+                const existente = document.getElementById("acciones-form-container");
+                if (existente) existente.remove();
+
+                // Crear contenedor
+                const contenedor = document.createElement("div");
+                contenedor.id = "acciones-form-container";
+                contenedor.innerHTML = html;
+                resumen.appendChild(contenedor);
+
+                // Scroll al formulario
+                contenedor.scrollIntoView({ behavior: "smooth" });
+            })
+            .catch(() => {
+                alert("❌ Error al cargar el formulario de acciones.");
+            });
+    });
+});
+
+
+/*Guardar acción y recargar resumen
+Qué hace: Guarda una nueva acción mediante AJAX, y al finalizar con éxito, recarga 
+automáticamente el resumen actualizado sin recargar la página.*/
+document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("submit", function (e) {
+        const form = e.target.closest("form");
+        if (!form || !form.action.includes("/accions")) return;
+
+        e.preventDefault(); // Evitamos la redirección por defecto
+
+        const formData = new FormData(form);
+        const denunciaId = form.querySelector('input[name="denuncia_id"]')?.value;
+
+        fetch(form.action, {
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": form.querySelector('input[name="_token"]').value
+            },
+            body: formData
+        })
+        .then(res => {
+            if (!res.ok) throw new Error();
+            return res.text(); // Porque tu store redirige, no devuelve JSON
+        })
+        .then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Acción guardada',
+                showConfirmButton: false,
+                timer: 1200
+            });
+
+            // Recargar la vista de resumen
+            return fetch(`/denuncias/resumen/${denunciaId}`);
+        })
+        .then(res => res.text())
+        .then(html => {
+            const resumen = document.getElementById("resumen-section");
+            if (resumen) {
+                resumen.innerHTML = html;
+                resumen.scrollIntoView({ behavior: "smooth" });
+            }
+        })
+        .catch(() => {
+            Swal.fire({
+                icon: 'error',
+                title: '❌ Error',
+                text: 'No se pudo guardar la acción. Intenta nuevamente.'
+            });
+        });
+    });
+});
+
+
+
+function mostrarFormularioEstado(id, estadoActual) {
+    const contenedor = document.getElementById('formulario-estado-container');
+    contenedor.innerHTML = `
+        <form id="form-editar-estado" style="background: #f8f9fa; padding: 15px; border: 1px solid #ddd;">
+            @csrf
+            <input type="hidden" name="id" value="${id}">
+            <label for="estado-select">Nuevo estado:</label>
+            <select name="estado" id="estado-select" class="form-control mb-2">
+                <option value="Recepcion" ${estadoActual === 'Recepcion' ? 'selected' : ''}>Recepción</option>
+                <option value="Investigación" ${estadoActual === 'Investigación' ? 'selected' : ''}>Investigación</option>
+                <option value="Concluido" ${estadoActual === 'Concluido' ? 'selected' : ''}>Concluido</option>
+                <option value="Archivado" ${estadoActual === 'Archivado' ? 'selected' : ''}>Archivado</option>
+            </select>
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </form>
+    `;
+    contenedor.style.display = 'block';
+
+    document.getElementById('form-editar-estado').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const id = formData.get('id');
+
+        fetch(`/denuncia/estado/${id}`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            },
+            body: formData
+        })
+        .then(res => {
+            if (!res.ok) throw new Error();
+            return res.text();
+        })
+        .then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Estado actualizado correctamente',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            // Recargar resumen
+            return fetch(`/denuncias/resumen/${id}`);
+        })
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById("resumen-section").innerHTML = html;
+        })
+        .catch(() => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al actualizar el estado',
+            });
+        });
+    });
+}
+
+
+
+/*Navegación entre vistas con historial
+Qué hace: Detecta cuando el usuario usa el botón "atrás" del navegador (popstate) y muestra u 
+oculta las secciones correspondientes según el estado almacenado en la URL. */
+window.addEventListener('popstate', (event) => {
+    const vista = event.state?.vista || '';
+
+    // Ocultar todo
+    ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
+     'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
+     'resumen-section', 'contenedor-tabla-denuncias',
+     'formulario-busqueda-denuncias', 'resultados-busqueda-denuncias',
+     'btn-cancelar-denuncia'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+    });
+
+    switch (vista) {
+        case 'formulario':
+            document.getElementById('formularios-container').style.display = 'block';
+            document.getElementById('victima-section').style.display = 'block';
+            break;
+        case 'buscar':
+            document.getElementById('formulario-busqueda-denuncias').style.display = 'block';
+            document.getElementById('resultados-busqueda-denuncias').style.display = 'block';
+            break;
+        case 'mis-casos':
+        case 'tabla':
+            document.getElementById('contenedor-tabla-denuncias').style.display = 'block';
+            break;
+        case 'resumen':
+            document.getElementById('resumen-section').style.display = 'block';
+            break;
+        case 'emblematicos':
+            document.getElementById('contenedor-tabla-denuncias').style.display = 'block';
+            break;
+        default:
+            break;
+    }
+});
 
 </script>
 
 
+<!-- jQuery (necesario para Select2) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
 

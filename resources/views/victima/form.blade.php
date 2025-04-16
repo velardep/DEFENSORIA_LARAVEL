@@ -211,6 +211,7 @@
     }
 </style>
 
+<h4 style="margin-left: 16px; font-size: 2rem;"> Iniciar Ficha de Denuncia</h4>
 
 <div class="row">
     <!-- 🧍 Información Personal -->

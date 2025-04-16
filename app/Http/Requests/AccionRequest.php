@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ViolenciaRequest extends FormRequest
+class AccionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,10 @@ class ViolenciaRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'nombre' => 'string',
-            'id_tipo_violencia' => 'required|exists:tipo_violencia,id', // o como se llame la tabla
+			'acciones' => 'string',
+			'tecnico' => 'string',
+            'fecha' => 'date',
+            'denuncia_id' => 'required|exists:denuncia,id'
 
         ];
     }

@@ -17,8 +17,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property $id_agresor
  * @property $id_tipo_violencia
  * @property $id_victima
- * @property $condicion
+ * @property $estado
  * @property $id_violencia
+ * 
+ * @property $forma_ingreso
+ * @property $denuncia_previa
+ * @property $testimonio
+ * 
+ * @property $completada
+ * 
+ * @property $delitos_penales
  *
  * @property Agresor $agresor
  * @property Victima $victima
@@ -40,7 +48,10 @@ class Denuncia extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['fecha', 'departamento', 'nombre_servicio', 'municipio', 'num_caso', 'cod_slim', 'id_agresor', 'id_tipo_violencia', 'id_victima', 'condicion', 'id_violencia'];
+    protected $fillable = ['fecha', 'departamento', 'nombre_servicio', 'municipio', 'num_caso', 
+    'cod_slim', 'id_agresor', 'id_victima', 'estado', 'violencia_fisica', 'violencia_psicologica',
+    'violencia_sexual', 'violencia_economica', 'forma_ingreso', 'denuncia_previa', 'testimonio', 'completada',
+    'zona_barrio', 'avenida_calle', 'nom_edificio', 'num_vivienda', 'lugar_domicilio', 'especifique', 'delitos_penales', 'emblematico'];
 
 
     /**
@@ -74,5 +85,14 @@ class Denuncia extends Model
     {
         return $this->belongsTo(\App\Models\Violencia::class, 'id_violencia', 'id');
     }
+
+    public function acciones()
+    {
+        return $this->hasMany(\App\Models\Accion::class, 'denuncia_id', 'id');
+    }
+    
+    
+
+
     
 }

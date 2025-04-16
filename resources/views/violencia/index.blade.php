@@ -33,7 +33,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nombre</th>
-                                    <th>Condición</th>
                                     <th>Id Tipo Violencia</th>
                                     <th></th>
                                 </tr>
@@ -43,7 +42,6 @@
                                     <tr>
                                         <td>{{ ++$i  }}</td>
                                         <td>{{ $violencia->nombre }}</td>
-                                        <td>{{ $violencia->condicion }}</td>
                                         <td>{{ $violencia->id_tipo_violencia }}</td>
                                         <td>
                                             <form action="{{ route('violencia.destroy', $violencia->id) }}" method="POST">

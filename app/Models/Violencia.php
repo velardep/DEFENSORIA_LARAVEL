@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property $id
  * @property $nombre
- * @property $condicion
  * @property $id_tipo_violencia
  *
  * @property TipoViolencia $tipoViolencia
@@ -30,7 +29,7 @@ class Violencia extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['nombre', 'condicion', 'id_tipo_violencia'];
+    protected $fillable = ['nombre', 'id_tipo_violencia'];
 
 
     /**
