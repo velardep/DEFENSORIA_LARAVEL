@@ -14,6 +14,8 @@ use App\Http\Controllers\DenunciaController;
 use App\Http\Controllers\AgresorController;
 use App\Http\Controllers\DelitoController;
 use App\Http\Controllers\AccionController;
+use App\Http\Controllers\RegistrarDenunciaController;
+use App\Models\Accion;
 
 
 Route::resource('delitos', DelitoController::class);
@@ -39,41 +41,30 @@ Route::get('/denuncias/{id}/acciones', function ($id) {
 
 
 
-/*use App\Models\Domicilio;
-use App\Models\Documento;
-use App\Models\DomicilioTrabajo;
-use App\Models\Agresor;
-use App\Models\Victima;
-use App\Models\TipoDocumento;
 
 
-Route::get('/iniciar', function () {
-    return view('iniciar', [
-        'domicilio' => new Domicilio(),
-        'documento' => new Documento(),
-        'domicilioTrabajo' => new DomicilioTrabajo(),
-        'agresores' => Agresor::all(),
-        'victimas' => Victima::all(),
-        'tiposDocumento' => TipoDocumento::all()
-    ]);
-})->name('iniciar');*/
-
-use App\Http\Controllers\RegistrarDenunciaController;
 
 Route::get('/iniciar', [RegistrarDenunciaController::class, 'create'])->name('registrar.denuncia');
 
 
 
-/*Route::get('/denuncias/resumen/{id}', function ($id) {
-    $denuncia = \App\Models\Denuncia::with(['victima', 'agresor'])->findOrFail($id);
-    return view('denuncia.resumen', compact('denuncia'));
-});*/
+
 Route::get('/denuncias/resumen/{id}', function ($id) {
     $denuncia = \App\Models\Denuncia::with(['victima', 'agresor', 'acciones'])->findOrFail($id);
     return view('denuncia.resumen', compact('denuncia'));
 });
 
-use App\Models\Accion;
+
+
+
+Route::get('/victimas/detalle/{id}', function ($id) {
+    $victima = \App\Models\Victima::findOrFail($id);
+    return view('denuncia.detalle_victima', compact('victima'));
+});
+
+
+
+
 Route::get('/acciones/formulario/{id}', function ($id) {
     $accion = new Accion();
     $accion->denuncia_id = $id;
@@ -113,10 +104,73 @@ Route::get('/api/agresores', fn() => \App\Models\Agresor::all());
 
 
 
-Route::get('/denuncias/buscar', [App\Http\Controllers\DenunciaController::class, 'buscar'])->name('denuncia.buscar');
-
-
 Route::post('/denuncias/buscar', [DenunciaController::class, 'buscar'])->name('denuncia.buscar');
+Route::get('/denuncias/buscar', [DenunciaController::class, 'buscar'])->name('denuncia.buscar');
+
+
+Route::post('/victimas/buscar', [VictimaController::class, 'buscar'])->name('victima.buscar');
+Route::get('/victimas/buscar', [VictimaController::class, 'buscar'])->name('victima.buscar');
+
+
+
+Route::get('/denuncias/emblematicos', [DenunciaController::class, 'emblematicos'])->name('denuncia.emblematicos');
+
+Route::post('/denuncia/estado/{id}', [DenunciaController::class, 'actualizarEstado']);
+Route::post('/denuncia/testimonio/{id}', [DenunciaController::class, 'actualizarTestimonio']);
+
+
+Route::get('/api/delitos', function () {
+    return \App\Models\Delito::all();
+});
+Route::post('/denuncia/delitos/{id}', [DenunciaController::class, 'actualizarDelitos']);
+Route::get('/denuncias/delitos/{id}', [DenunciaController::class, 'mostrarDelitos']);
+
+
+Route::post('/denuncia/violencias/{id}', [DenunciaController::class, 'actualizarViolencias']);
+Route::get('/api/violencias', function () {
+    return response()->json([
+        'economica' => \App\Models\Violencia::where('id_tipo_violencia', 1)->get(),
+        'psicologica' => \App\Models\Violencia::where('id_tipo_violencia', 2)->get(),
+        'sexual' => \App\Models\Violencia::where('id_tipo_violencia', 3)->get(),
+        'fisica' => \App\Models\Violencia::where('id_tipo_violencia', 4)->get(),
+    ]);
+});
+
+
+
+Route::get('/', function () {
+    return view(view: 'index
+    ');
+});
+
+
+
+
+
+/*use App\Models\Domicilio;
+use App\Models\Documento;
+use App\Models\DomicilioTrabajo;
+use App\Models\Agresor;
+use App\Models\Victima;
+use App\Models\TipoDocumento;
+
+
+Route::get('/iniciar', function () {
+    return view('iniciar', [
+        'domicilio' => new Domicilio(),
+        'documento' => new Documento(),
+        'domicilioTrabajo' => new DomicilioTrabajo(),
+        'agresores' => Agresor::all(),
+        'victimas' => Victima::all(),
+        'tiposDocumento' => TipoDocumento::all()
+    ]);
+})->name('iniciar');*/
+
+
+
+/*Route::get('/test', function () {
+    return 'Laravel está funcionando correctamente';
+});*/
 
 
 // CHECK BOX PARA RELLENAR LUGAR DE AGRESION 
@@ -133,26 +187,6 @@ Route::post('/denuncias/buscar', [DenunciaController::class, 'buscar'])->name('d
 });*/
 
 
-Route::get('/denuncias/buscar', [DenunciaController::class, 'buscar'])->name('denuncia.buscar');
-
-
-
-/*Route::get('/test', function () {
-    return 'Laravel está funcionando correctamente';
-});*/
-
-
-Route::get('/denuncias/emblematicos', [DenunciaController::class, 'emblematicos'])->name('denuncia.emblematicos');
-
-Route::post('/denuncia/estado/{id}', [DenunciaController::class, 'actualizarEstado']);
-
-
-
-
-Route::get('/', function () {
-    return view(view: 'index
-    ');
-});
 
 /*Route::get('roles/{idrol}/edit', [RolController::class, 'edit']);
 

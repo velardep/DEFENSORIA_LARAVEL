@@ -91,4 +91,21 @@ class VictimaController extends Controller
         return Redirect::route('victimas.index')
             ->with('success', 'Victima deleted successfully');
     }
+
+
+    public function buscar(Request $request)
+    {
+        $query = Victima::query();
+        
+    
+        if ($request->nombre) {
+            $query->where('nombre', 'like', '%' . $request->nombre . '%');
+        }
+    
+        
+    
+        $victimas = $query->get();
+    
+        return view('denuncia.tabla_victimas', compact('victimas'));
+    }
 }

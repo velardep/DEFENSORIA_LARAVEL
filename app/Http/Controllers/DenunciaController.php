@@ -159,6 +159,9 @@ class DenunciaController extends Controller
     public function buscar(Request $request)
 {
     $query = Denuncia::query()->with(['victima', 'agresor']);
+    if ($request->num_caso) {
+        $query->where('num_caso', $request->num_caso);
+    }
 
     if ($request->nombre) {
         $query->whereHas('victima', function ($q) use ($request) {
@@ -174,6 +177,10 @@ class DenunciaController extends Controller
 
     return view('denuncia.tabla', compact('denuncias'));
 }
+
+
+
+
 
 
 public function filtrarAjax(Request $request)
@@ -207,6 +214,45 @@ public function actualizarEstado(Request $request, $id)
 }
 
 
+
+public function actualizarTestimonio(Request $request, $id)
+{
+    $denuncia = Denuncia::findOrFail($id);
+    $denuncia->testimonio = $request->input('testimonio');
+    $denuncia->save();
+
+    return response('ok');
+}
+
+
+public function actualizarDelitos(Request $request, $id)
+{
+    $denuncia = Denuncia::findOrFail($id);
+    $denuncia->delitos_penales = json_encode($request->input('delitos_penales', []));
+    $denuncia->save();
+
+    return response('ok');
+}
+
+public function mostrarDelitos($id)
+{
+    $denuncia = Denuncia::findOrFail($id);
+    return view('denuncia.partials.delitos', compact('denuncia'));
+}
+
+public function actualizarViolencias(Request $request, $id)
+{
+    $denuncia = Denuncia::findOrFail($id);
+
+    $denuncia->violencia_economica = json_encode($request->input('violencia_economica', []));
+    $denuncia->violencia_psicologica = json_encode($request->input('violencia_psicologica', []));
+    $denuncia->violencia_sexual = json_encode($request->input('violencia_sexual', []));
+    $denuncia->violencia_fisica = json_encode($request->input('violencia_fisica', []));
+
+    $denuncia->save();
+
+    return response()->json(['success' => true]);
+}
 
     
 }

@@ -134,6 +134,48 @@
 
             <div id="contenedor-acciones" style="display:none;"></div>
         </div>
+
+        {{--Actualizaciones --}}
+        <div class="resumen-card mb-3">
+            <h4>Editar Detalles</h4>
+                <!-- Botón para abrir el formulario de editar estado -->
+            <button class="btn btn-warning btn-sm" onclick="mostrarFormularioEstado({{ $denuncia->id }}, '{{ $denuncia->estado }}')">
+                📝 Editar Estado
+            </button>
+
+            <!-- Contenedor donde se cargará el formulario -->
+            <div id="formulario-estado-container" style="display:none; margin-top: 20px;"></div>  
+
+
+            <!-- Botón que abre el formulario -->
+            <button class="btn btn-outline-primary btn-sm" onclick="mostrarFormularioTestimonio({{ $denuncia->id }}, '{{ $denuncia->testimonio }}')">
+                ✍️ Editar Testimonio
+            </button>
+
+            <!-- Contenedor donde se cargará el formulario -->
+            <div id="formulario-testimonio-container" class="mt-3"></div>
+
+
+
+            <button class="btn btn-warning" onclick="mostrarFormularioDelitos({{ $denuncia->id }}, '{{ $denuncia->delitos_penales }}')">
+                ✏️ Editar Delitos
+            </button>
+
+            <div id="formulario-delitos-container" class="mt-2"></div>
+
+
+
+            <button class="btn btn-warning mb-2" onclick="mostrarFormularioViolencias({{ $denuncia->id }}, '{{ $denuncia->violencia_economica }}', '{{ $denuncia->violencia_psicologica }}', '{{ $denuncia->violencia_sexual }}', '{{ $denuncia->violencia_fisica }}')">
+                ✏️ Editar Violencias
+            </button>
+
+
+            <div id="formulario-violencias-container"></div>
+
+
+
+
+        </div>
     </div>
 
     {{-- Detalles del Caso --}}
@@ -152,16 +194,8 @@
                 <p><strong>Fecha:</strong> {{ $denuncia->fecha }}</p>
                 <p><strong>Estado:</strong> {{ $denuncia->estado }}</p>
                 <p><strong>Emblemático:</strong> {{ $denuncia->emblematico }}</p>
-
-                <!-- Botón para abrir el formulario de editar estado -->
-<button class="btn btn-warning btn-sm" onclick="mostrarFormularioEstado({{ $denuncia->id }}, '{{ $denuncia->estado }}')">
-    📝 Editar Estado
-</button>
-
-<!-- Contenedor donde se cargará el formulario -->
-<div id="formulario-estado-container" style="display:none; margin-top: 20px;"></div>
-
-                
+                <p><strong>Testimonio:</strong> {{ $denuncia->testimonio }}</p>
+     
         </div>
         
     </div>
@@ -169,6 +203,7 @@
   
 
   
+
 
 
 
