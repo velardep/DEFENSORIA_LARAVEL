@@ -71,6 +71,8 @@
 									<th >Municipio</th>-->
 									<th >Num Caso</th>
 									<th >Cod Slim</th>
+                                    <th >Num Juzgado</th>
+
 									<th >Nombre Agresor</th>
 									<th >Victima</th>
                                    <!-- <th >V Fisica</th>
@@ -114,6 +116,8 @@
 										<!--<td >{{ $denuncia->municipio }}</td>-->
 										<td >{{ $denuncia->num_caso }}</td>
 										<td >{{ $denuncia->cod_slim }}</td>
+                                        <td >{{ $denuncia->num_juzgado }}</td>
+
 										<td>{{ $denuncia->agresor->nombre ?? 'N/A' }}</td>
                                         <td>{{ $denuncia->victima->nombre ?? 'N/A' }}</td>
 

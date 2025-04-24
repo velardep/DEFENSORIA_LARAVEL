@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $testimonio
  * 
  * @property $completada
+ * @property $num_juzgado
  * 
  * @property $delitos_penales
  *
@@ -51,7 +52,8 @@ class Denuncia extends Model
     protected $fillable = ['fecha', 'departamento', 'nombre_servicio', 'municipio', 'num_caso', 
     'cod_slim', 'id_agresor', 'id_victima', 'estado', 'violencia_fisica', 'violencia_psicologica',
     'violencia_sexual', 'violencia_economica', 'forma_ingreso', 'denuncia_previa', 'testimonio', 'completada',
-    'zona_barrio', 'avenida_calle', 'nom_edificio', 'num_vivienda', 'lugar_domicilio', 'especifique', 'delitos_penales', 'emblematico'];
+    'zona_barrio', 'avenida_calle', 'nom_edificio', 'num_vivienda', 'lugar_domicilio', 'especifique', 'delitos_penales', 
+    'emblematico', 'num_juzgado'];
 
 
     /**

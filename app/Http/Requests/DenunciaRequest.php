@@ -51,9 +51,10 @@ class DenunciaRequest extends FormRequest
 			'especifique' => 'string',
 
             'delitos_penales' => 'string',
+            'num_juzgado' => 'string',
 
             'emblematico' => 'string'
-
+            
 
 
 

@@ -285,7 +285,7 @@
 				<ul class="metismenu" id="menu">
 					<li class="dropdown header-profile">
 						<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-							<img src="assets/images/usuario.png" width="20" alt=""/>
+							<!--<img src="assets/images/usuario.png" width="20" alt=""/>-->
 							<div class="header-info ms-3">
 								<span class="font-w600 "><b>Usuario</b></span>
 								<small class="text-end font-w400">usuario@gmail.com</small>
@@ -307,7 +307,15 @@
 						</div>
 					</li>
                     
-                            
+                    
+                    <li>
+                        <a href="javascript:void(0);" id="btn-inicio">
+                            <i class="fas fa-home"></i> <span class="nav-text">Inicio</span>
+                        </a>
+                    </li>
+
+
+
                     <li>
                         <a href="javascript:void(0);" id="btn-mostrar-formularios">
                             <i class="fas fa-clipboard-list"></i>
@@ -338,7 +346,7 @@
                     </li>
                     <!--FALTA-->
                     <li>
-                        <a href="javascript:void(0);" id="btn-mostrar-formularios">
+                        <a href="javascript:void(0);" id="btn-mostrar-archivados">
                             <i class="fas fa-clipboard-list"></i>
                             <span class="nav-text">Archivados</span>
                         </a>
@@ -462,6 +470,8 @@
                 <!-- Contenedor para mostrar los mis casos -->
                 <div id="contenedor-tabla-denuncias" style="display: none;"></div>
 
+                <!-- Contenedor para mostrar los mis casos archivados-->
+                <div id="contenedor-tabla-archivados-denuncias" style="display: none;"></div>
 
                 <!-- Buscador de denuncias con filtros-->
                 <div id="formulario-busqueda-denuncias" style="display: none;" class="card p-4">
@@ -515,6 +525,29 @@
 
 
 
+                <!-- Contenedor de Reportes PDF -->
+                <div id="seccion-reportes" style="display: none;" class="card p-4">
+                    <h4>📊 Generar Reportes</h4>
+                        <a href="{{ route('reportes.emblematicos.pdf') }}" class="btn btn-danger mt-3" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Generar Reporte PDF - Casos Emblemáticos
+                        </a>
+                        <a href="{{ route('reporte.victimas.pdf') }}" target="_blank" class="btn btn-danger mt-3">
+                            <i class="fas fa-file-pdf"></i> Generar PDF de Victimas
+                        </a>
+
+                                <!-- Contenedor de Reportes EXCEL -->
+                        <a href="{{ route('reportes.excel') }}" class="btn btn-success mt-3" target="_blank">
+                            <i class="fas fa-file-excel"></i> Generar Excel - Casos Emblemáticos
+                        </a>
+                </div>
+
+
+                <!-- Contenedor de bienvenida -->
+                <div id="bienvenida-section" style="display: none;">
+                    <h1 class="text-center mt-5">👋 ¡Bienvenido al Sistema SLIM!</h2>
+                    <p class="text-center">Selecciona una opción del menú para comenzar.</p>
+                </div>
+
 
 
 
@@ -543,6 +576,41 @@
 
 <script>
 
+document.addEventListener("DOMContentLoaded", () => {
+    const btnInicio = document.getElementById('btn-inicio');
+    const bienvenida = document.getElementById('bienvenida-section');
+
+    btnInicio.addEventListener("click", () => {
+        // Ocultar todo lo demás
+        [
+            'formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
+            'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
+            'resumen-section', 'contenedor-tabla-denuncias', 'detalle-victima-section',
+            'formulario-busqueda-denuncias', 'resultados-busqueda-denuncias',
+            'formulario-busqueda-victimas', 'resultados-busqueda-victimas',
+            'seccion-reportes', 'contenedor-tabla-archivados-denuncias'
+        ].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+
+        // Mostrar bienvenida
+        bienvenida.style.display = 'block';
+
+        // Actualizar URL sin recargar
+        history.pushState({ vista: 'inicio' }, '', '#inicio');
+    });
+});
+
+
+
+
+
+
+
+
+
+
 /*Cancelar denuncia y limpiar formularios
 Qué hace: Muestra el botón "Cancelar" al iniciar una denuncia y, al hacer clic en él, 
 oculta todos los formularios, limpia los datos y oculta el botón nuevamente.*/
@@ -559,7 +627,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btnCancelar.querySelector('button').addEventListener('click', () => {
         // Ocultar formularios
         ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
-         'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section']
+         'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section','bienvenida-section']
         .forEach(id => {
             const el = document.getElementById(id);
             if (el) el.style.display = 'none';
@@ -598,7 +666,12 @@ document.addEventListener("DOMContentLoaded", () => {
             'resumen-section',
             'contenedor-tabla-denuncias',
             'formulario-busqueda-denuncias',
-            'resultados-busqueda-denuncias'
+            'resultados-busqueda-denuncias',
+            'formulario-busqueda-victimas', 
+            'resultados-busqueda-victimas',
+            'seccion-reportes',
+            'bienvenida-section',
+            'contenedor-tabla-archivados-denuncias'
         ].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.style.display = 'none';
@@ -827,7 +900,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Ocultar todos los formularios
             ['victima-section', 'agresor-section', 'denuncia-section',
              'tramo2-domicilio', 'domicilio-section-victima',
-             'domicilio-section-agresor', 'domicilio-trabajo-section']
+             'domicilio-section-agresor', 'domicilio-trabajo-section', 'bienvenida-section']
             .forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.style.display = 'none';
@@ -885,7 +958,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
          'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
          'resumen-section', 'btn-cancelar-denuncia', 'formulario-busqueda-denuncias','formulario-busqueda-denuncias',
-            'resultados-busqueda-denuncias', 'formulario-busqueda-victimas', 'resultados-busqueda-victimas']
+            'resultados-busqueda-denuncias', 'formulario-busqueda-victimas', 'resultados-busqueda-victimas', 'seccion-reportes',
+        'bienvenida-section', 'contenedor-tabla-archivados-denuncias']
         .forEach(id => {
             const el = document.getElementById(id);
             if (el) el.style.display = 'none';
@@ -928,7 +1002,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
          'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
          'resumen-section', 'contenedor-tabla-denuncias', 'btn-cancelar-denuncia', 
-         'formulario-busqueda-victimas', 'resultados-busqueda-victimas']
+         'formulario-busqueda-victimas', 'resultados-busqueda-victimas', 'seccion-reportes', 'bienvenida-section',
+        'contenedor-tabla-archivados-denuncias']
         .forEach(id => {
             const el = document.getElementById(id);
             if (el) el.style.display = 'none';
@@ -983,7 +1058,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
          'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
          'resumen-section', 'contenedor-tabla-denuncias', 'btn-cancelar-denuncia',
-        'formulario-busqueda-denuncias', 'resultados-busqueda-denuncias']
+        'formulario-busqueda-denuncias', 'resultados-busqueda-denuncias', 'seccion-reportes', 'bienvenida-section',
+    'contenedor-tabla-archivados-denuncias']
         .forEach(id => {
             const el = document.getElementById(id);
             if (el) el.style.display = 'none';
@@ -1035,7 +1111,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
          'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
          'resumen-section', 'btn-cancelar-denuncia','formulario-busqueda-denuncias',
-            'resultados-busqueda-denuncias', 'formulario-busqueda-victimas', 'resultados-busqueda-victimas']
+        'resultados-busqueda-denuncias', 'formulario-busqueda-victimas', 'resultados-busqueda-victimas', 'seccion-reportes',
+        'bienvenida-section', 'contenedor-tabla-archivados-denuncias']
         .forEach(id => {
             const el = document.getElementById(id);
             if (el) el.style.display = 'none';
@@ -1063,6 +1140,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+/*Mostrar casos archivados
+Qué hace: Oculta todos los formularios y secciones y muestra la tabla de denuncias filtradas por 
+archivados, además de cambiar la URL.*/
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById('btn-mostrar-archivados');
+    btn.addEventListener('click', () => {
+        // Ocultar todos los formularios y otras secciones
+        ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
+         'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
+         'resumen-section', 'btn-cancelar-denuncia','formulario-busqueda-denuncias',
+        'resultados-busqueda-denuncias', 'formulario-busqueda-victimas', 'resultados-busqueda-victimas', 'seccion-reportes',
+        'bienvenida-section','contenedor-tabla-denuncias']
+        .forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+
+        const contenedor = document.getElementById('contenedor-tabla-archivados-denuncias');
+        contenedor.style.display = 'block';
+
+
+
+        history.pushState({ vista: 'archivados' }, '', '#archivados');
+
+
+
+
+
+        fetch("{{ route('denuncia.archivados') }}")
+            .then(res => res.text())
+            .then(html => {
+                contenedor.innerHTML = html;
+            });
+    });
+});
+
+
+
+
+
+
+
+
 /*Mostrar resumen de una denuncia
 Qué hace: Al hacer clic en el botón de resumen, oculta todo, carga y muestra el resumen 
 de una denuncia específica sin recargar la página*/
@@ -1076,7 +1196,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Ocultar todo lo demás
         ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
          'contenedor-tabla-denuncias', 'resumen-section', 'btn-cancelar-denuncia', 
-         'formulario-busqueda-denuncias', 'resultados-busqueda-denuncias']
+         'formulario-busqueda-denuncias', 'resultados-busqueda-denuncias', 'seccion-reportes', 'bienvenida-section']
         .forEach(id => {
             const el = document.getElementById(id);
             if (el) el.style.display = 'none';
@@ -1125,7 +1245,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ['formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
          'contenedor-tabla-denuncias', 'resumen-section', 'btn-cancelar-denuncia', 
          'formulario-busqueda-denuncias', 'resultados-busqueda-denuncias', 'formulario-busqueda-victimas',
-        'resultados-busqueda-victimas']
+        'resultados-busqueda-victimas', 'seccion-reportes', 'bienvenida-section']
         .forEach(id => {
             const el = document.getElementById(id);
             if (el) el.style.display = 'none';
@@ -1162,29 +1282,6 @@ document.addEventListener("DOMContentLoaded", () => {
         
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1476,11 +1573,6 @@ function mostrarFormularioDelitos(id, delitosActualesJson) {
 
 
 
-
-
-
-
-
 // Mostrar y editar las violencias de un caso
 function mostrarFormularioViolencias(id, economicaJson, psicologicaJson, sexualJson, fisicaJson) {
     const economica = JSON.parse(economicaJson || '[]');
@@ -1561,6 +1653,31 @@ function mostrarFormularioViolencias(id, economicaJson, psicologicaJson, sexualJ
 
 
 
+// ESPACIO PARA PONER Y CREAR REPORTES 
+document.addEventListener("DOMContentLoaded", () => {
+    const btnMostrarReportes = document.getElementById('btn-mostrar-reportes');
+    btnMostrarReportes.addEventListener('click', () => {
+        // Ocultar todo lo demás
+        [
+            'formularios-container', 'victima-section', 'agresor-section', 'denuncia-section',
+            'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
+            'resumen-section', 'contenedor-tabla-denuncias', 'detalle-victima-section',
+            'formulario-busqueda-denuncias', 'resultados-busqueda-denuncias',
+            'formulario-busqueda-victimas', 'resultados-busqueda-victimas', 'btn-cancelar-denuncia', 'bienvenida-section'
+        ].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+
+        const reportes = document.getElementById('seccion-reportes');
+        reportes.style.display = 'block';
+        history.pushState({ vista: 'reportes' }, '', '#reportes');
+    });
+});
+
+
+
+
 
 
 
@@ -1577,7 +1694,8 @@ window.addEventListener('popstate', (event) => {
      'domicilio-section-victima', 'domicilio-section-agresor', 'domicilio-trabajo-section',
      'resumen-section', 'contenedor-tabla-denuncias',
      'formulario-busqueda-denuncias', 'resultados-busqueda-denuncias',
-     'btn-cancelar-denuncia'].forEach(id => {
+     'btn-cancelar-denuncia'
+    ].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
     });
@@ -1609,6 +1727,10 @@ window.addEventListener('popstate', (event) => {
         case 'emblematicos':
             document.getElementById('contenedor-tabla-denuncias').style.display = 'block';
             break;
+    case 'reportes':
+    document.getElementById('seccion-reportes').style.display = 'block';
+    break;
+
         default:
             break;
     }

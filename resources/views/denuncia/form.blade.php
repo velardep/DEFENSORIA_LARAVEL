@@ -298,16 +298,26 @@
                    value="{{ old('estado', $denuncia?->estado) }}">
         </div>
 
-        {{-- Completada --}}
+        {{-- Completada
         <div class="col-md-6 input-float">
             <i class="material-icons">assignment_ind</i>
             <label for="completada">Completada</label>
             <input type="text" name="completada" id="completada"
                    class="@error('completada') is-invalid @enderror"
                    value="{{ old('completada', $denuncia?->completada) }}">
+        </div> --}}
+
+
+        {{-- Juzgado --}}
+        <div class="col-md-6 input-float">
+            <i class="material-icons">assignment_ind</i>
+            <label for="num_juzgado">Numero de Juzgado</label>
+            <input type="text" name="num_juzgado" id="num_juzgado"
+                   class="@error('num_juzgado') is-invalid @enderror"
+                   value="{{ old('num_juzgado', $denuncia?->num_juzgado) }}">
         </div>
     </div>
-
+    num_juzgado
     <!--<div class="text-end mt-4">
         <button type="submit" class="btn btn-submit">Guardar</button>
     </div>-->
@@ -399,44 +409,6 @@
 
 
 
-                <!--
-                <div class="col-12 input-float">
-                    <label for="violencia_fisica">Violencia física</label>
-                    <select name="violencia_fisica[]" id="violencia_fisica" class="form-select select2" multiple>
-                        <option value="Golpes">Golpes (puñetes, patadas, etc)</option>
-                        <option value="Empujones">Empujones</option>
-                        <option value="Uso de objetos">Uso de objetos</option>
-                        <option value="Quemaduras">Quemaduras</option>
-                        <option value="Otros">Otros</option>
-                    </select>
-                </div>
-
-                <div class="col-12 input-float">
-                    <label for="violencia_sexual">Violencia Sexual</label>
-                    <select name="violencia_sexual[]" id="violencia_sexual" class="form-select select2" multiple>
-                        <option value="Abuso">Abuso</option>
-                        <option value="Manoseo">Manoseo</option>
-                        <option value="Ver peliculas pornograficas">Ver peliculas pornograficas</option>
-                    </select>
-                </div>
-
-                <div class="col-12 input-float">
-                    <label for="violencia_psicologica">Violencia Psicologica</label>
-                    <select name="violencia_psicologica[]" id="violencia_psicologica" class="form-select select2" multiple>
-                        <option value="Insultos">Insultos</option>
-                        <option value="Denigracion">Denigracion</option>
-                    </select>
-                </div>
-
-                <div class="col-12 input-float">
-                    <label for="violencia_economica">Violencia Economica</label>
-                    <select name="violencia_economica[]" id="violencia_economica" class="form-select select2" multiple>
-                        <option value="Robo">Robo</option>
-                        <option value="Estafa">Estafa</option>
-                        <option value="Hurto">Hurto</option>
-                    </select>
-                </div> 
--->
                 
                 {{-- Testimonio --}}
                 <div class="col-12 input-float">
@@ -463,26 +435,16 @@
 
 
                 <div class="col-12 input-float">
-    <label for="emblematico" class="form-label">¿Caso Emblemático?</label>
-    <select name="emblematico" id="emblematico" class="form-select">
-        <option value="NO" selected>NO</option>
-        <option value="SI">SI</option>
-    </select>
-</div>
+                    <label for="emblematico" class="form-label">¿Caso Emblemático?</label>
+                    <select name="emblematico" id="emblematico" class="form-select">
+                        <option value="NO" selected>NO</option>
+                        <option value="SI">SI</option>
+                    </select>
+                </div>
 
 
 
             </div>
-
-                <!--DELITOS 
-                <div class="col-12 input-float">
-                    <label for="delitos_penales">Delitos Penales</label>
-                    <select name="delitos_penales[]" id="delitos_penales" class="form-select select2" multiple>
-                        <option value="Feminicidio">Feminicidio</option>
-                        <option value="Pornografia">Pornografia</option>
-                        <option value="Proxenetismo">Proxenetismo</option>
-                    </select>
-                </div>-->
         </div>
     </div>
 
@@ -496,14 +458,7 @@
         <h5 class="mb-4">🧍 Lugar de la Agresion</h5>
             <div class="row">
 
-               <!-- <div class="col-md-12 mb-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="copiar-domicilio-victima">
-                        <label class="form-check-label" for="copiar-domicilio-victima">
-                            📍 Mismo lugar que la dirección actual de la víctima
-                        </label>
-                    </div>
-                </div>-->
+               
 
 <!-- meter datos de domicilio-->
                 <div class="col-md-6 input-float">
@@ -543,25 +498,7 @@
 
 
 
-{{-- Filtro dinámico sin usar AJAX --}}
 <script>
-/*document.addEventListener('DOMContentLoaded', function () {
-    const tipoSelect = document.getElementById('id_tipo_violencia');
-    const violenciaelect = document.getElementById('id_violencia');
-    const todasLasOpciones = Array.from(violenciaelect.options);
 
-    tipoSelect.addEventListener('change', function () {
-        const tipoId = this.value;
-
-        // Limpiar y agregar solo las que coincidan
-        violenciaelect.innerHTML = '<option value="">Seleccione un accion</option>';
-
-        const opcionesFiltradas = todasLasOpciones.filter(option => {
-            return option.dataset.tipo === tipoId;
-        });
-
-        opcionesFiltradas.forEach(option => violenciaelect.appendChild(option));
-    });
-});*/
 </script>
 

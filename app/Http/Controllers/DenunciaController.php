@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\DenunciaRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-
-
 use App\Models\Delito;
 
 
@@ -90,6 +88,16 @@ class DenunciaController extends Controller
         ->get();
 
     return view('denuncia.tabla', compact('denuncias'));
+}
+
+
+public function archivados()
+{
+    $denuncias = Denuncia::where('estado', 'Archivado')
+        ->with(['victima', 'agresor']) // si usas relaciones
+        ->get();
+
+    return view('denuncia.tabla_archivados', compact('denuncias'));
 }
 
 
@@ -253,6 +261,10 @@ public function actualizarViolencias(Request $request, $id)
 
     return response()->json(['success' => true]);
 }
+
+
+
+
 
     
 }

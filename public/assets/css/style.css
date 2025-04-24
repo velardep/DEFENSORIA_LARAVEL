@@ -12245,7 +12245,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   top: 7.5rem;
   padding-top: 0;
   z-index: 6;
-  background-color: #D12D27  !important;
+  background-color: #2F2F2F  !important;
   transition: all .2s ease;
   box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.02); }
 
@@ -12257,7 +12257,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 }
 
 .deznav-scroll ul.metismenu li a:hover {
-    color: yellow !important; /* Color al pasar el mouse */
+    color: blue !important; /* Color al pasar el mouse */
 }
 
 .deznav-scroll ul.metismenu li a i {

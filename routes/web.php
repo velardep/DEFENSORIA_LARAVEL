@@ -40,10 +40,6 @@ Route::get('/denuncias/{id}/acciones', function ($id) {
 
 
 
-
-
-
-
 Route::get('/iniciar', [RegistrarDenunciaController::class, 'create'])->name('registrar.denuncia');
 
 
@@ -115,6 +111,10 @@ Route::get('/victimas/buscar', [VictimaController::class, 'buscar'])->name('vict
 
 Route::get('/denuncias/emblematicos', [DenunciaController::class, 'emblematicos'])->name('denuncia.emblematicos');
 
+Route::get('/denuncias/archivados', [DenunciaController::class, 'archivados'])->name('denuncia.archivados');
+
+
+
 Route::post('/denuncia/estado/{id}', [DenunciaController::class, 'actualizarEstado']);
 Route::post('/denuncia/testimonio/{id}', [DenunciaController::class, 'actualizarTestimonio']);
 
@@ -143,6 +143,18 @@ Route::get('/', function () {
     ');
 });
 
+//REPORTES PDF
+use App\Http\Controllers\ReporteController;
+
+
+Route::get('/reportes/emblematicos/pdf', [ReporteController::class, 'generarReportePDF'])->name('reportes.emblematicos.pdf');
+Route::get('/reportes/victimas/pdf', [ReporteController::class, 'victimasPDF'])->name('reporte.victimas.pdf');
+
+
+//REPORTES EXCEL
+use App\Exports\EmblematicosExport;
+
+Route::get('/reportes/emblematicos/excel', [ReporteController::class, 'exportarEmblematicos'])->name('reportes.excel');
 
 
 
