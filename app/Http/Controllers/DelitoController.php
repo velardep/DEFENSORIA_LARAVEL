@@ -35,13 +35,19 @@ class DelitoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(DelitoRequest $request): RedirectResponse
+    /*public function store(DelitoRequest $request): RedirectResponse
     {
         Delito::create($request->validated());
 
         return response()->json(['message' => 'Acción registrada con éxito']);
 
-    }
+    }*/
+    public function store(DelitoRequest $request): RedirectResponse
+{
+    Delito::create($request->validated());
+    return redirect()->route('delitos.index')->with('success', 'Acción registrada con éxito');
+}
+
 
     /**
      * Display the specified resource.

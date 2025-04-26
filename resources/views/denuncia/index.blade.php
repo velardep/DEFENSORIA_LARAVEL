@@ -100,6 +100,9 @@
 									<th >Estado</th>
 
                                     <th >Emblematico</th>
+                                    <th >Acciones</th>
+                                    <th >Reporte</th>
+
 
                                         <th></th>
                                     </tr>
@@ -164,6 +167,11 @@
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button> 
                                                 </form>-->
                                             </td>
+                                            <td>
+                    <a href="{{ route('reporte.denuncia.pdf', $denuncia->id) }}" class="btn btn-danger" target="_blank">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

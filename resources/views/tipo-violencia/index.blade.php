@@ -36,7 +36,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nombre</th>
-                                    <th>Condición</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -45,7 +44,6 @@
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td>{{ $tipo->nombre }}</td>
-                                        <td>{{ $tipo->condicion }}</td>
                                         <td>
                                             <form action="{{ route('tipo-violencia.destroy', $tipo->id) }}" method="POST">
                                                 <a class="btn btn-sm btn-primary" href="{{ route('tipo-violencia.show', $tipo->id) }}">

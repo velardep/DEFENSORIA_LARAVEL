@@ -200,13 +200,13 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card card-form mb-4">
-            <h5 class="mb-4">🧍 Datos del Agresor</h5>
+            <h5 class="mb-4">Datos del Agresor</h5>
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-float">
                         <label for="nombre">Nombre</label>
                         <input type="text" name="nombre" id="nombre" value="{{ old('nombre', $agresor?->nombre) }}">
-                    </div>
+                    </div> 
                 </div>
 
                 <div class="col-md-6">
@@ -224,7 +224,13 @@
                 <div class="col-md-6">
                     <div class="input-float">
                         <label for="tipo_documento">Tipo documento</label>
-                        <input type="text" name="tipo_documento" id="tipo_documento" value="{{ old('tipo_documento', $agresor?->tipo_documento) }}">
+                        <select name="tipo_documento" id="tipo_documento">
+                            <option value=""></option>
+                            <option value="Carnet de Identidad" {{ old('tipo_documento', $agresor?->tipo_documento) == 'Carnet de Identidad' ? 'selected' : '' }}>Carnet de Identidad</option>
+                            <option value="RUN" {{ old('tipo_documento', $agresor?->tipo_documento) == 'RUN' ? 'selected' : '' }}>RUN</option>
+                            <option value="Certificado de Nacimiento" {{ old('tipo_documento', $agresor?->tipo_documento) == 'Certificado de Nacimiento' ? 'selected' : '' }}>Certificado de Nacimiento</option>
+                            <option value="No Tiene" {{ old('tipo_documento', $agresor?->tipo_documento) == 'No Tiene' ? 'selected' : '' }}>No Tiene</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -236,7 +242,18 @@
                 <div class="col-md-6">
                     <div class="input-float">
                         <label for="expedido">Expedido</label>
-                        <input type="text" name="expedido" id="expedido" value="{{ old('expedido', $agresor?->expedido) }}">
+                        <select name="expedido" id="expedido">
+                            <option value=""></option>
+                            <option value="Tarija" {{ old('expedido', $agresor?->expedido) == 'Tarija' ? 'selected' : '' }}>Tarija</option>
+                            <option value="Chuquisaca" {{ old('expedido', $agresor?->expedido) == 'Chuquisaca' ? 'selected' : '' }}>Chuquisaca</option>
+                            <option value="Potosi" {{ old('expedido', $agresor?->expedido) == 'Potosi' ? 'selected' : '' }}>Potosi</option>
+                            <option value="Oruro" {{ old('expedido', $agresor?->expedido) == 'Oruro' ? 'selected' : '' }}>Oruro</option>
+                            <option value="Cochabamba" {{ old('expedido', $agresor?->expedido) == 'Cochabamba' ? 'selected' : '' }}>Cochabamba</option>
+                            <option value="Santa Cruz" {{ old('expedido', $agresor?->expedido) == 'Santa Cruz' ? 'selected' : '' }}>Santa Cruz</option>
+                            <option value="Beni" {{ old('expedido', $agresor?->expedido) == 'Beni' ? 'selected' : '' }}>Beni</option>
+                            <option value="La Paz" {{ old('expedido', $agresor?->expedido) == 'La Paz' ? 'selected' : '' }}>La Paz</option>
+                            <option value="Pando" {{ old('expedido', $agresor?->expedido) == 'Pando' ? 'selected' : '' }}>Pando</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -267,7 +284,6 @@
                         <label for="especifique_lugar">Especifique lugar</label>
                         <input type="text" name="especifique_lugar" id="especifique_lugar" value="{{ old('especifique_lugar', $agresor?->especifique_lugar) }}">
                     </div>
-                    
                 </div>
                 <div class="col-md-6">
                     <div class="input-float">
@@ -316,6 +332,8 @@
                             <option value="Soltero(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Soltero(a)' ? 'selected' : '' }}>Soltero(a)</option>
                             <option value="Casado(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Casado(a)' ? 'selected' : '' }}>Casado(a)</option>
                             <option value="Divorciado(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Divorciado(a)' ? 'selected' : '' }}>Divorciado(a)</option>
+                            <option value="Concubino(a) – Unión Libre" {{ old('estado_civil', $agresor?->estado_civil) == 'Concubino(a) – Unión Libre' ? 'selected' : '' }}>Concubino(a) – Unión Libre</option>
+                            <option value="Enamorado(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Enamorado(a)' ? 'selected' : '' }}>Enamorado(a)</option>
                             <option value="Viudo(a)" {{ old('estado_civil', $agresor?->estado_civil) == 'Viudo(a)' ? 'selected' : '' }}>Viudo(a)</option>
                         </select>
                     </div>
@@ -473,4 +491,5 @@
 <div class="text-end mt-3">
     <button type="submit" class="btn btn-submit">Guardar</button>
 </div>-->
+
 

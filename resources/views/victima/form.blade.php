@@ -213,11 +213,11 @@
 
 <h4 style="margin-left: 16px; font-size: 2rem;"> Iniciar Ficha de Denuncia</h4>
 
-<div class="row">
-    <!-- 🧍 Información Personal -->
+<div class="row"> 
+    <!-- 🧍 Información Personal --> 
     <div class="col-md-6">
         <div class="card card-form mb-4">
-            <h5 class="mb-4">🧍 Datos de la victima</h5>
+            <h5 class="mb-4">Datos de la victima</h5>
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-float">
@@ -300,7 +300,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" id="especifique-nacimiento-wrapper" style="display: none;">
                     <div class="input-float">
                         <label for="especifique_nacimiento">Especifique lugar</label>
                         <input type="text" name="especifique_nacimiento" id="especifique_nacimiento" value="{{ old('especifique_nacimiento', $victima?->especifique_nacimiento) }}">
@@ -331,7 +331,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6" id="especifique-residencia-wrapper" style="display: none;">
                     <div class="input-float">
                         <label for="especifique_residencia">Especifique residencia</label>
                         <input type="text" name="especifique_residencia" id="especifique_residencia" value="{{ old('especifique_residencia', $victima?->especifique_residencia) }}">
@@ -359,6 +359,8 @@
                             <option value="Soltero(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Soltero(a)' ? 'selected' : '' }}>Soltero(a)</option>
                             <option value="Casado(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Casado(a)' ? 'selected' : '' }}>Casado(a)</option>
                             <option value="Divorciado(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Divorciado(a)' ? 'selected' : '' }}>Divorciado(a)</option>
+                            <option value="Concubino(a) – Unión Libre" {{ old('estado_civil', $victima?->estado_civil) == 'Concubino(a) – Unión Libre' ? 'selected' : '' }}>Concubino(a) – Unión Libre</option>
+                            <option value="Enamorado(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Enamorado(a)' ? 'selected' : '' }}>Enamorado(a)</option>
                             <option value="Viudo(a)" {{ old('estado_civil', $victima?->estado_civil) == 'Viudo(a)' ? 'selected' : '' }}>Viudo(a)</option>
                         </select>
                     </div>
@@ -368,11 +370,25 @@
                     <div class="input-float">
                         <label for="rel_victima_agresor">Relación con el Agresor</label>
                         <select name="rel_victima_agresor" id="rel_victima_agresor">
-                            <option value=""></option>
-                            <option value="Esposo(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Esposo(a)' ? 'selected' : '' }}>Esposo(a)</option>
-                            <option value="Enamorado(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Enamorado(a)' ? 'selected' : '' }}>Enamorado(a)</option>
-                            <option value="Suegro(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Suegro(a)' ? 'selected' : '' }}>Suegro(a)</option>
-                            <option value="Hemano(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Hemano(a)' ? 'selected' : '' }}>Hemano(a)</option>
+                                <option value=""></option>
+                                <option value="Esposo(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Esposo(a)' ? 'selected' : '' }}>Esposo(a)</option>
+                                <option value="Concubino(a) – Unión Libre" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Concubino(a) – Unión Libre' ? 'selected' : '' }}>Concubino(a) – Unión Libre</option>
+                                <option value="Enamorado(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Enamorado(a)' ? 'selected' : '' }}>Enamorado(a)</option>
+                                <option value="Ex-esposo(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Ex-esposo(a)' ? 'selected' : '' }}>Ex-esposo(a)</option>
+                                <option value="Ex-concubino(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Ex-concubino(a)' ? 'selected' : '' }}>Ex-concubino(a)</option>
+                                <option value="Ex-enamorado(a)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Ex-enamorado(a)' ? 'selected' : '' }}>Ex-enamorado(a)</option>
+                                <option value="Progenitores" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Progenitores' ? 'selected' : '' }}>Progenitores</option>
+                                <option value="Hijos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Hijos(as)' ? 'selected' : '' }}>Hijos(as)</option>
+                                <option value="Hermanos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Hermanos(as)' ? 'selected' : '' }}>Hermanos(as)</option>
+                                <option value="Abuelos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Abuelos(as)' ? 'selected' : '' }}>Abuelos(as)</option>
+                                <option value="Tíos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Tíos(as)' ? 'selected' : '' }}>Tíos(as)</option>
+                                <option value="Nietos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Nietos(as)' ? 'selected' : '' }}>Nietos(as)</option>
+                                <option value="Cuñados(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Cuñados(as)' ? 'selected' : '' }}>Cuñados(as)</option>
+                                <option value="Suegros(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Suegros(as)' ? 'selected' : '' }}>Suegros(as)</option>
+                                <option value="Nueras – Yernos" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Nueras – Yernos' ? 'selected' : '' }}>Nueras – Yernos</option>
+                                <option value="Primos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Primos(as)' ? 'selected' : '' }}>Primos(as)</option>
+                                <option value="Sobrinos(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Sobrinos(as)' ? 'selected' : '' }}>Sobrinos(as)</option>
+                                <option value="Otros(as)" {{ old('rel_victima_agresor', $victima?->rel_victima_agresor) == 'Otros(as)' ? 'selected' : '' }}>Otros(as)</option>
                         </select>
                     </div>
                 </div>
@@ -405,7 +421,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6" id="ingreso-wrapper" style="display: none;">
                     <div class="input-float">
                         <label for="ingreso">Ingreso</label>
                         <select name="ingreso" id="ingreso">
@@ -418,9 +434,9 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6" id="monto-wrapper" style="display: none;">
                     <div class="input-float">
-                        <label for="monto">Monto</label>
+                        <label for="monto">Monto Bs</label>
                         <input type="number" name="monto" id="monto" value="{{ old('monto', $victima?->monto) }}">
                     </div>
                 </div>
@@ -436,7 +452,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" id="especifique_idioma-wrapper" style="display: none;">
                     <div class="input-float">
                         <label for="especifique_idioma">Especifique Idioma</label>
                         <input type="text" name="especifique_idioma" id="especifique_idioma" value="{{ old('especifique_idioma', $victima?->especifique_idioma) }}">
@@ -494,11 +510,9 @@
                     <option value=""></option>
                     <option value="Este Municipio" {{ old('lugar_domicilio', $victima?->lugar_domicilio) == 'Este Municipio' ? 'selected' : '' }}>Este Municipio</option>
                     <option value="Otro Municipio" {{ old('lugar_domicilio', $victima?->lugar_domicilio) == 'Otro Municipio' ? 'selected' : '' }}>Otro Municipio</option>
-                    <option value="Zona Sur" {{ old('lugar_domicilio', $victima?->lugar_domicilio) == 'Zona Sur' ? 'selected' : '' }}>Zona Sur</option>
-                    <option value="Zona Norte" {{ old('lugar_domicilio', $victima?->lugar_domicilio) == 'Zona Norte' ? 'selected' : '' }}>Zona Norte</option>
                 </select>
             </div>
-            <div class="col-md-3 input-float">
+            <div class="col-md-3 input-float" id="especifique-wrapper" style="display: none;">
                 <label for="espcifique">Especifique</label>
                 <input type="text" name="especifique" id="especifique" value="{{ old('especifique', $victima?->especifique) }}">
             </div>
@@ -510,3 +524,74 @@
 <div class="text-end mt-3">
     <button type="submit" class="btn btn-submit">Iniciar Denuncia</button>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lugar de nacimiento
+        const selectNacimiento = document.getElementById('lugr_nacimiento');
+        const wrapperNacimiento = document.getElementById('especifique-nacimiento-wrapper');
+
+        function toggleEspecifiqueNacimiento() {
+            const val = selectNacimiento.value;
+            wrapperNacimiento.style.display = (val === 'Otro municipio' || val === 'Otro Pais') ? 'block' : 'none';
+        }
+
+        selectNacimiento.addEventListener('change', toggleEspecifiqueNacimiento);
+        toggleEspecifiqueNacimiento(); // Inicial
+
+        // Residencia habitual
+        const selectResidencia = document.getElementById('residencia_habitual');
+        const wrapperResidencia = document.getElementById('especifique-residencia-wrapper');
+
+        function toggleEspecifiqueResidencia() {
+            const val = selectResidencia.value;
+            wrapperResidencia.style.display = (val === 'Otro municipio' || val === 'Otro Pais') ? 'block' : 'none';
+        }
+
+        selectResidencia.addEventListener('change', toggleEspecifiqueResidencia);
+        toggleEspecifiqueResidencia(); // Inicial
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const actividadSelect = document.getElementById('actividad');
+        const ingresoWrapper = document.getElementById('ingreso-wrapper');
+        const montoWrapper = document.getElementById('monto-wrapper');
+
+        function toggleIngresoYMonto() {
+            const value = actividadSelect.value;
+            const mostrar = (value === 'Trabaja');
+            ingresoWrapper.style.display = mostrar ? 'block' : 'none';
+            montoWrapper.style.display = mostrar ? 'block' : 'none';
+        }
+
+        actividadSelect.addEventListener('change', toggleIngresoYMonto);
+        toggleIngresoYMonto(); // Ejecutar al cargar
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const idiomaSelect = document.getElementById('idioma');
+        const especifiqueIdiomaWrapper = document.getElementById('especifique_idioma-wrapper');
+
+        function toggleEspecifiqueIdioma() {
+            especifiqueIdiomaWrapper.style.display = (idiomaSelect.value === 'Otro') ? 'block' : 'none';
+        }
+
+        idiomaSelect.addEventListener('change', toggleEspecifiqueIdioma);
+        toggleEspecifiqueIdioma(); // Ejecutar al cargar
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const lugarDomicilioSelect = document.getElementById('lugar_domicilio');
+        const especifiqueWrapper = document.getElementById('especifique-wrapper');
+
+        function toggleEspecifiqueDomicilio() {
+            especifiqueWrapper.style.display = (lugarDomicilioSelect.value === 'Otro Municipio') ? 'block' : 'none';
+        }
+
+        lugarDomicilioSelect.addEventListener('change', toggleEspecifiqueDomicilio);
+        toggleEspecifiqueDomicilio(); // Ejecutar al cargar
+    });
+</script>

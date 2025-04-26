@@ -330,6 +330,12 @@
                             <span class="nav-text">Buscar Personas</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="javascript:void(0);" id="btn-buscar-denuncias">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span class="nav-text">Explorar Denuncias</span>
+                        </a>
+                    </li>
                     <!--FALTA-->
                     <li>
                         <a href="javascript:void(0);" id="btn-mostrar-denuncias">
@@ -338,12 +344,7 @@
                         </a>
                     </li>
                     <!--FALTA-->
-                    <li>
-                        <a href="javascript:void(0);" id="btn-casos-incompletos">
-                            <i class="fas fa-clipboard-list"></i>
-                            <span class="nav-text">Casos Incompletos</span>
-                        </a>
-                    </li>
+                    
                     <!--FALTA-->
                     <li>
                         <a href="javascript:void(0);" id="btn-mostrar-archivados">
@@ -359,17 +360,18 @@
                         </a>
                     </li>
                     <!--FALTA-->
-                    <li>
-                        <a href="javascript:void(0);" id="btn-buscar-denuncias">
-                            <i class="fas fa-clipboard-list"></i>
-                            <span class="nav-text">Explorar Denuncias</span>
-                        </a>
-                    </li>
+                    
                     <!--FALTA-->
                     <li>
                         <a href="javascript:void(0);" id="btn-mostrar-reportes">
                             <i class="fas fa-clipboard-list"></i>
                             <span class="nav-text">Reportes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" id="btn-casos-incompletos">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span class="nav-text">Casos Incompletos</span>
                         </a>
                     </li>
 
@@ -557,6 +559,7 @@
         </div>
 
         <!-- Footer -->
+        
         <div class="footer">
             <div class="copyright text-center">
                 <p>Desarrollado con 💙 por Paolo</p>
@@ -1675,6 +1678,66 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
+
+
+
+// Funcion para poder desplegar el form para editar al agresor
+function mostrarFormularioEditarAgresor(idAgresor, idDenuncia) {
+    const contenedor = document.getElementById("formulario-agresor-container");
+    contenedor.innerHTML = '<div class="p-2 text-center">Cargando...</div>';
+    contenedor.style.display = "block";
+
+    fetch(`/agresor/${idAgresor}/editar-resumen`)
+        .then(res => res.text())
+        .then(html => {
+            contenedor.innerHTML = html;
+
+            const form = document.getElementById("form-editar-agresor");
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+
+                fetch(`/agresor/${idAgresor}`, {
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: formData
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error();
+                    return res.json();
+                })
+                .then(() => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Datos del agresor actualizados',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    // Volver a cargar el resumen
+                    return fetch(`/denuncias/resumen/${idDenuncia}`);
+                })
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('resumen-section').innerHTML = html;
+                    history.pushState({ vista: 'resumen' }, '', '#resumen');
+                })
+                .catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al actualizar los datos del agresor',
+                    });
+                });
+            });
+        })
+        .catch(() => {
+            contenedor.innerHTML = '<div class="alert alert-danger">❌ Error al cargar el formulario.</div>';
+        });
+}
 
 
 

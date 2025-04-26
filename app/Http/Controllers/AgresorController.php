@@ -79,13 +79,19 @@ class AgresorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AgresorRequest $request, Agresor $agresor): RedirectResponse
+    /*public function update(AgresorRequest $request, Agresor $agresor): RedirectResponse
     {
         $agresor->update($request->validated());
 
-        return Redirect::route('agresor.index')
-            ->with('success', 'Agresor updated successfully');
-    }
+        return redirect()->route('denuncia.resumen', ['id' => $agresor->denuncia_id]);
+
+    }*/
+    public function update(AgresorRequest $request, Agresor $agresor): RedirectResponse
+{
+    $agresor->update($request->all());
+    return redirect()->route('denuncia.resumen', ['id' => $agresor->denuncia_id]);
+}
+
 
     public function destroy($id): RedirectResponse
     {
@@ -94,4 +100,27 @@ class AgresorController extends Controller
         return Redirect::route('agresor.index')
             ->with('success', 'Agresor deleted successfully');
     }
+
+
+
+
+    public function editarDesdeResumen($id)
+    {
+        $agresor = Agresor::findOrFail($id);
+        return view('agresor.formulario_edicion', compact('agresor'));
+    }
+    
+    public function actualizarDesdeResumen(Request $request, $id)
+    {
+        $agresor = Agresor::findOrFail($id);
+        $agresor->update($request->all());
+    
+        return response()->json(['success' => true]);
+    }
+    
+
 }
+
+
+
+

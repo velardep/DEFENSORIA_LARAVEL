@@ -56,6 +56,8 @@
                 <th>Víctima</th>
                 <th>Estado</th>
                 <th>Acciones</th>
+                <th>Reporte</th>
+
             </tr>
         </thead>
         <tbody>
@@ -72,6 +74,12 @@
                         <i class="fas fa-eye"></i> Acciones
                     </button>
                 </td>
+                <td>
+                    <a href="{{ route('reporte.denuncia.pdf', $denuncia->id) }}" class="btn btn-danger" target="_blank">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </td>
+
             </tr>
             @empty
                 <tr>

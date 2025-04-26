@@ -146,15 +146,23 @@ Route::get('/', function () {
 //REPORTES PDF
 use App\Http\Controllers\ReporteController;
 
+Route::get('/reportes/victimas/pdf', [ReporteController::class, 'victimasPDF'])->name('reporte.victimas.pdf');
 
 Route::get('/reportes/emblematicos/pdf', [ReporteController::class, 'generarReportePDF'])->name('reportes.emblematicos.pdf');
-Route::get('/reportes/victimas/pdf', [ReporteController::class, 'victimasPDF'])->name('reporte.victimas.pdf');
+
+Route::get('/reportes/denuncia/{id}/pdf', [ReporteController::class, 'reportePorDenuncia'])->name('reporte.denuncia.pdf');
 
 
 //REPORTES EXCEL
 use App\Exports\EmblematicosExport;
 
 Route::get('/reportes/emblematicos/excel', [ReporteController::class, 'exportarEmblematicos'])->name('reportes.excel');
+
+
+// routes/web.php
+Route::get('/agresor/{id}/editar-resumen', [AgresorController::class, 'editarDesdeResumen']);
+Route::post('/agresor/{id}', [AgresorController::class, 'actualizarDesdeResumen']);
+
 
 
 

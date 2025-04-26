@@ -317,7 +317,6 @@
                    value="{{ old('num_juzgado', $denuncia?->num_juzgado) }}">
         </div>
     </div>
-    num_juzgado
     <!--<div class="text-end mt-4">
         <button type="submit" class="btn btn-submit">Guardar</button>
     </div>-->

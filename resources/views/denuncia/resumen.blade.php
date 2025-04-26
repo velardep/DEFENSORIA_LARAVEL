@@ -90,6 +90,8 @@
                     <span class="text-muted">{{ $denuncia->victima->nombre }} {{ $denuncia->victima->ap_paterno }}</span><br>
                     <small class="text-muted">{{ $denuncia->victima->tipo_documento ?? 'CI' }}: {{ $denuncia->victima->num_documento ?? 'No registrado' }}</small><br>
                     <small class="text-muted">Sexo: {{ $denuncia->victima->sexo }}</small>
+                    <small class="text-muted">Edad: {{ $denuncia->victima->edad }}</small>
+
                 </div>
             </div>
 
@@ -102,10 +104,24 @@
                     <strong>Agresor:</strong><br>
                     <span class="text-muted">{{ $denuncia->agresor->nombre }} {{ $denuncia->agresor->ap_paterno }}</span><br>
                     <small class="text-muted">{{ $denuncia->agresor->tipo_documento ?? 'CI' }}: {{ $denuncia->agresor->num_documento ?? 'No registrado' }}</small><br>
-                    <small class="text-muted">Sexo: {{ $denuncia->agresor->sexo }}</small>
+                    <small class="text-muted">Sexo: {{ $denuncia->agresor->sexo }}</small><br>
+                    <small class="text-muted">Sexo: {{ $denuncia->agresor->edad }}</small><br>
+
                 </div>
             </div>
+
+
+
+
+
+
         </div>
+
+        <div class="resumen-card mb-3">
+        <p><strong>Testimonio:</strong> {{ $denuncia->testimonio }}</p>
+
+        </div>
+
 
 
         {{-- Card Historial de Acciones --}}
@@ -181,27 +197,35 @@
     {{-- Detalles del Caso --}}
     <div class="col-md-4">
         <div class="resumen-card bg-light border">
-            <!--<h4>📄 Detalles del Caso</h4>
-            <div class="detalle-item"><strong>Código SLIM:</strong> {{ $denuncia->cod_slim }}</div>
-            <div class="detalle-item"><strong>Fecha:</strong> {{ $denuncia->fecha }}</div>
-            <div class="detalle-item"><strong>Estado:</strong> {{ $denuncia->estado }}</div>-->
-            <h4>Resumen del Caso</h4>
+            <!--<h4>📄 Detalles del Caso</h4></div>-->
+            <h4>Detalles</h4>
                 <hr>
-
-                <h5>Datos del Caso</h5>
                 <p><strong>Código SLIM:</strong> {{ $denuncia->cod_slim }}</p>
                 <p><strong>Número de Caso:</strong> {{ $denuncia->num_caso }}</p>
                 <p><strong>Fecha:</strong> {{ $denuncia->fecha }}</p>
                 <p><strong>Estado:</strong> {{ $denuncia->estado }}</p>
                 <p><strong>Emblemático:</strong> {{ $denuncia->emblematico }}</p>
-                <p><strong>Testimonio:</strong> {{ $denuncia->testimonio }}</p>
                 <p><strong>Numero de Juzgado:</strong> {{ $denuncia->num_juzgado }}</p>
 
         </div>
         
     </div>
 
-  
+
+    {{-- Complementar datos del agresor --}}
+    <div class="card p-4 mb-4" style="width: 95%; margin: auto;">
+        <h5 class="mb-3">🧍 Datos del Agresor</h5>
+        <div class="text-end">
+            <button class="btn btn-outline-primary btn-lg px-5 w-100" onclick="mostrarFormularioEditarAgresor({{ $denuncia->agresor->id }}, {{ $denuncia->id }})">
+                ✍️ Complementar Datos del Agresor
+            </button>
+        </div>
+
+        <div id="formulario-agresor-container" style="display: none;" class="mt-4"></div>
+        <input type="hidden" id="denuncia-id-global" value="{{ $denuncia->id }}">
+    </div>
+
+    
 
   
 

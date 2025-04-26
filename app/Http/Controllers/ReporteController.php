@@ -32,6 +32,15 @@ public function victimasPDF()
     return $pdf->download('victimas.pdf');
 }
 
+public function reportePorDenuncia($id)
+{
+    $denuncia = \App\Models\Denuncia::with(['victima', 'agresor', 'acciones'])->findOrFail($id);
+
+    $pdf = \PDF::loadView('reportes.denuncia_pdf', compact('denuncia'));
+    return $pdf->download('denuncia_' . $denuncia->num_caso . '.pdf');
+}
+
+
 
 
 
