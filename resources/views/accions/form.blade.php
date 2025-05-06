@@ -1,37 +1,3 @@
-<!--<div class="row padding-1 p-1">
-    <div class="col-md-12">
-        
-        <div class="form-group mb-2 mb20">
-            <label for="acciones" class="form-label">{{ __('Acciones') }}</label>
-            <input type="text" name="acciones" class="form-control @error('acciones') is-invalid @enderror" value="{{ old('acciones', $accion?->acciones) }}" id="acciones" placeholder="Acciones">
-            {!! $errors->first('acciones', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="fecha" class="form-label">{{ __('Fecha') }}</label>
-            <input type="date" name="fecha" class="form-control @error('fecha') is-invalid @enderror" 
-                value="{{ old('fecha', $accion?->fecha) }}" id="fecha" placeholder="Fecha">
-            {!! $errors->first('fecha', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="tecnico" class="form-label">{{ __('Tecnico') }}</label>
-            <input type="text" name="tecnico" class="form-control @error('tecnico') is-invalid @enderror" value="{{ old('tecnico', $accion?->tecnico) }}" id="tecnico" placeholder="Tecnico">
-            {!! $errors->first('tecnico', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="denuncia_id" class="form-label">{{ __('Denuncia Id') }}</label>
-            <input type="text" name="denuncia_id" class="form-control @error('denuncia_id') is-invalid @enderror" 
-       value="{{ old('denuncia_id', $accion?->denuncia_id) }}" id="denuncia_id" placeholder="Denuncia Id" readonly>
-
-        </div>
-
-    </div>
-    <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-    </div>
-</div>-->
-
-
-
 <!-- Estilos requeridos -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">

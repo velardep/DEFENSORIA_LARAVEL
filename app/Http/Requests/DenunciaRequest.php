@@ -53,7 +53,9 @@ class DenunciaRequest extends FormRequest
             'delitos_penales' => 'string',
             'num_juzgado' => 'string',
 
-            'emblematico' => 'string'
+            'emblematico' => 'string',
+
+            'violencia_feminicida' => 'string'
             
 
 

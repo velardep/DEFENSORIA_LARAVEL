@@ -23,7 +23,6 @@ class TipoViolenciaRequest extends FormRequest
     {
         return [
 			'nombre' => 'string',
-			'condicion' => 'boolean',
         ];
     }
 }

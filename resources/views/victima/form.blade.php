@@ -1,112 +1,3 @@
-<!--<div class="row padding-1 p-1">
-    <div class="col-md-12">
-        
-        <div class="form-group mb-2 mb20">
-            <label for="nombre" class="form-label">{{ __('Nombre') }}</label>
-            <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre', $victima?->nombre) }}" id="nombre" placeholder="Nombre">
-            {!! $errors->first('nombre', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="ap_paterno" class="form-label">{{ __('Ap Paterno') }}</label>
-            <input type="text" name="ap_paterno" class="form-control @error('ap_paterno') is-invalid @enderror" value="{{ old('ap_paterno', $victima?->ap_paterno) }}" id="ap_paterno" placeholder="Ap Paterno">
-            {!! $errors->first('ap_paterno', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="ap_materno" class="form-label">{{ __('Ap Materno') }}</label>
-            <input type="text" name="ap_materno" class="form-control @error('ap_materno') is-invalid @enderror" value="{{ old('ap_materno', $victima?->ap_materno) }}" id="ap_materno" placeholder="Ap Materno">
-            {!! $errors->first('ap_materno', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="sexo" class="form-label">{{ __('Sexo') }}</label>
-            <input type="text" name="sexo" class="form-control @error('sexo') is-invalid @enderror" value="{{ old('sexo', $victima?->sexo) }}" id="sexo" placeholder="Sexo">
-            {!! $errors->first('sexo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="lugr_nacimiento" class="form-label">{{ __('Lugr Nacimiento') }}</label>
-            <input type="text" name="lugr_nacimiento" class="form-control @error('lugr_nacimiento') is-invalid @enderror" value="{{ old('lugr_nacimiento', $victima?->lugr_nacimiento) }}" id="lugr_nacimiento" placeholder="Lugr Nacimiento">
-            {!! $errors->first('lugr_nacimiento', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="fecha_nacimiento" class="form-label">{{ __('Fecha Nacimiento') }}</label>
-            <input type="text" name="fecha_nacimiento" class="form-control @error('fecha_nacimiento') is-invalid @enderror" value="{{ old('fecha_nacimiento', $victima?->fecha_nacimiento) }}" id="fecha_nacimiento" placeholder="Fecha Nacimiento">
-            {!! $errors->first('fecha_nacimiento', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="edad" class="form-label">{{ __('Edad') }}</label>
-            <input type="text" name="edad" class="form-control @error('edad') is-invalid @enderror" value="{{ old('edad', $victima?->edad) }}" id="edad" placeholder="Edad">
-            {!! $errors->first('edad', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="residencia_habitual" class="form-label">{{ __('Residencia Habitual') }}</label>
-            <input type="text" name="residencia_habitual" class="form-control @error('residencia_habitual') is-invalid @enderror" value="{{ old('residencia_habitual', $victima?->residencia_habitual) }}" id="residencia_habitual" placeholder="Residencia Habitual">
-            {!! $errors->first('residencia_habitual', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="estado_civil" class="form-label">{{ __('Estado Civil') }}</label>
-            <input type="text" name="estado_civil" class="form-control @error('estado_civil') is-invalid @enderror" value="{{ old('estado_civil', $victima?->estado_civil) }}" id="estado_civil" placeholder="Estado Civil">
-            {!! $errors->first('estado_civil', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="rel_victima_agresor" class="form-label">{{ __('Rel Victima Agresor') }}</label>
-            <input type="text" name="rel_victima_agresor" class="form-control @error('rel_victima_agresor') is-invalid @enderror" value="{{ old('rel_victima_agresor', $victima?->rel_victima_agresor) }}" id="rel_victima_agresor" placeholder="Rel Victima Agresor">
-            {!! $errors->first('rel_victima_agresor', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="hijos" class="form-label">{{ __('Hijos') }}</label>
-            <input type="text" name="hijos" class="form-control @error('hijos') is-invalid @enderror" value="{{ old('hijos', $victima?->hijos) }}" id="hijos" placeholder="Hijos">
-            {!! $errors->first('hijos', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="logro_educativo" class="form-label">{{ __('Logro Educativo') }}</label>
-            <input type="text" name="logro_educativo" class="form-control @error('logro_educativo') is-invalid @enderror" value="{{ old('logro_educativo', $victima?->logro_educativo) }}" id="logro_educativo" placeholder="Logro Educativo">
-            {!! $errors->first('logro_educativo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="actividad" class="form-label">{{ __('Actividad') }}</label>
-            <input type="text" name="actividad" class="form-control @error('actividad') is-invalid @enderror" value="{{ old('actividad', $victima?->actividad) }}" id="actividad" placeholder="Actividad">
-            {!! $errors->first('actividad', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="ingreso" class="form-label">{{ __('Ingreso') }}</label>
-            <input type="text" name="ingreso" class="form-control @error('ingreso') is-invalid @enderror" value="{{ old('ingreso', $victima?->ingreso) }}" id="ingreso" placeholder="Ingreso">
-            {!! $errors->first('ingreso', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="monto" class="form-label">{{ __('Monto') }}</label>
-            <input type="text" name="monto" class="form-control @error('monto') is-invalid @enderror" value="{{ old('monto', $victima?->monto) }}" id="monto" placeholder="Monto">
-            {!! $errors->first('monto', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="idioma" class="form-label">{{ __('Idioma') }}</label>
-            <input type="text" name="idioma" class="form-control @error('idioma') is-invalid @enderror" value="{{ old('idioma', $victima?->idioma) }}" id="idioma" placeholder="Idioma">
-            {!! $errors->first('idioma', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="especifique_idioma" class="form-label">{{ __('Especifique Idioma') }}</label>
-            <input type="text" name="especifique_idioma" class="form-control @error('especifique_idioma') is-invalid @enderror" value="{{ old('especifique_idioma', $victima?->especifique_idioma) }}" id="especifique_idioma" placeholder="Especifique Idioma">
-            {!! $errors->first('especifique_idioma', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="id_domicilio" class="form-label">{{ __('Id Domicilio') }}</label>
-            <input type="text" name="id_domicilio" class="form-control @error('id_domicilio') is-invalid @enderror" value="{{ old('id_domicilio', $victima?->id_domicilio) }}" id="id_domicilio" placeholder="Id Domicilio">
-            {!! $errors->first('id_domicilio', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="id_documento" class="form-label">{{ __('Id Documento') }}</label>
-            <input type="text" name="id_documento" class="form-control @error('id_documento') is-invalid @enderror" value="{{ old('id_documento', $victima?->id_documento) }}" id="id_documento" placeholder="Id Documento">
-            {!! $errors->first('id_documento', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-
-    </div>
-    <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-    </div>
-</div>-->
-
-
-
-
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -217,12 +108,13 @@
     <!-- 🧍 Información Personal --> 
     <div class="col-md-6">
         <div class="card card-form mb-4">
-            <h5 class="mb-4">Datos de la victima</h5>
+            <h4 class="mb-4">Datos de la victima</h4>
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-float">
                         <label for="nombre">Nombre</label>
-                        <input type="text" name="nombre" id="nombre" value="{{ old('nombre', $victima?->nombre) }}">
+                        <input type="text" name="nombre" id="nombre" 
+                        value="{{ old('nombre', $victima?->nombre) }}">
                     </div>
                 </div>
 
@@ -244,7 +136,7 @@
                 <div class="col-md-6">
                     <div class="input-float">
                         <label for="tipo_documento">Tipo documento</label>
-                        <select name="tipo_documento" id="tipo_documento">
+                        <select name="tipo_documento" id="tipo_documento"> 
                             <option value=""></option>
                             <option value="Carnet de Identidad" {{ old('tipo_documento', $victima?->tipo_documento) == 'Carnet de Identidad' ? 'selected' : '' }}>Carnet de Identidad</option>
                             <option value="RUN" {{ old('tipo_documento', $victima?->tipo_documento) == 'RUN' ? 'selected' : '' }}>RUN</option>

@@ -3,114 +3,169 @@
 namespace App\Http\Controllers;
 
 use App\Models\Denuncia;
+use App\Models\Asignacion;
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\DenunciaRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Delito;
+use App\Models\Oficina; 
 
+use  \App\Models\Victima;
 
 use Carbon\Carbon;
 
 
-
+// Gestion de Denuncia
 class DenunciaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
+    // Listado de denuncias visibles según rol
     public function index(Request $request): View
     {
-        $denuncias = Denuncia::with(['agresor', 'victima', 'tipoviolencias', 'violencia'])->paginate(50);
+        $user = auth()->user();
 
-    return view('denuncia.index', compact('denuncias'))
-        ->with('i', ($request->input('page', 1) - 1) * $denuncias->perPage());
+        if ($user->rol_id == 1) {
+            // Admin: ve todo
+            $denuncias = Denuncia::with(['agresor', 'victima', 'tipoviolencias', 'violencia'])
+                ->paginate(50);
+        } elseif ($user->rol_id == 2) {
+            // Abogado: ve lo que crea y lo que se le asigna
+            $denuncias = Denuncia::with(['agresor', 'victima', 'tipoviolencias', 'violencia'])
+                ->where('user_id', $user->id)
+                ->orWhereIn('id', function($query) use ($user) {
+                    $query->select('denuncia_id')
+                        ->from('asignaciones')
+                        ->where('user_id', $user->id);
+                })
+                ->paginate(50);
+            } else {
+                // Psicólogos, Trabajadores Sociales, etc.: solo lo asignado Y que coincida oficina actual de denuncia
+                $denuncias = Denuncia::with(['agresor', 'victima', 'tipoviolencias', 'violencia'])
+                    ->whereHas('asignaciones', function ($query) use ($user) {
+                        $query->where('user_id', $user->id);
+                    })
+                    ->where('oficina_id', $user->oficina_id)
+                    ->paginate(50);
+            }
+
+        return view('denuncia.index', compact('denuncias'))
+            ->with('i', ($request->input('page', 1) - 1) * $denuncias->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
+    // Vista para crear una nueva denuncia
     public function create(): View
     {
+        /* Prepara y envía a la vista de creación todos los datos necesarios: víctimas, agresores, 
+        tipos y subtipos de violencia, y delitos. Esta vista es el punto inicial del formulario de denuncia, 
+        que se llena tras registrar a la víctima y al agresor.*/
+
         $agresores = \App\Models\Agresor::all();
         $victimas = \App\Models\Victima::all();
         $tiposViolencia = \App\Models\TipoViolencia::all();
-        //$violencias = \App\Models\Violencia::all();
-        $violencia = \App\Models\Violencia::all()->groupBy('id_tipo_violencia');
-        
-
+        $violencia = \App\Models\Violencia::all()->groupBy('id_tipo_violencia');        
         $delitos = Delito::all();
-
-
-
         $denuncia = new Denuncia();
 
         return view('denuncia.create', compact('denuncia', 'agresores', 
         'victimas', 'tiposViolencia', 'violencia', 'delitos'));
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
-
+    // Guarda una nueva denuncia completa
      public function store(Request $request)
-     {
-         $data = $request->all();
-     
-         $data['delitos_penales'] = json_encode($request->input('delitos_penales', []));
-
-
-
-
-         $data['violencia_fisica'] = json_encode($request->input('violencia_fisica', []));
-         $data['violencia_psicologica'] = json_encode($request->input('violencia_psicologica', []));
-         $data['violencia_sexual'] = json_encode($request->input('violencia_sexual', []));
-         $data['violencia_economica'] = json_encode($request->input('violencia_economica', []));
-
-
-         $data['emblematico'] = $request->input('emblematico', 'NO'); // default: NO
-
-     
-         $denuncia = Denuncia::create($data);
-
-
-     
-         return response()->json($denuncia);
-     }
-     
-
-    public function emblematicos()
-{
-    $denuncias = Denuncia::where('emblematico', 'SI')
-        ->with(['victima', 'agresor']) // si usas relaciones
-        ->get();
-
-    return view('denuncia.tabla', compact('denuncias'));
-}
-
-
-public function archivados()
-{
-    $denuncias = Denuncia::where('estado', 'Archivado')
-        ->with(['victima', 'agresor']) // si usas relaciones
-        ->get();
-
-    return view('denuncia.tabla_archivados', compact('denuncias'));
-}
-
-
-    /*public function store(Request $request)
     {
-        $denuncia = Denuncia::create($request->all());
+        $data = $request->all();
 
+        /* Este método toma todos los datos del formulario, codifica arrays (como tipos de violencia o delitos penales), 
+        agrega metadatos como el usuario y oficina actual, y guarda la denuncia. 
+        Posteriormente, actualiza la víctima relacionada para asociarle el denuncia_id, permitiendo identificar si ya tiene 
+        una denuncia vinculada.*/
+
+        $data['delitos_penales'] = json_encode($request->input('delitos_penales', []));
+        $data['violencia_fisica'] = json_encode($request->input('violencia_fisica', []));
+        $data['violencia_psicologica'] = json_encode($request->input('violencia_psicologica', []));
+        $data['violencia_sexual'] = json_encode($request->input('violencia_sexual', []));
+        $data['violencia_economica'] = json_encode($request->input('violencia_economica', []));
+        $data['violencia_feminicida'] = json_encode($request->input('violencia_feminicida', []));
+
+        $data['emblematico'] = $request->input('emblematico', 'NO'); // default: NO
+
+        $data['provisional'] = false; // También aquí marcamos provisional
+
+        $data['user_id'] = auth()->id(); // Asociar al usuario actual
+        $data['oficina_id'] = auth()->user()->oficina_id; // Asociar la oficina del usuario actual (esto te faltaba)
+
+        $denuncia = Denuncia::create($data);
+
+        Victima::where('id', $denuncia->id_victima) // Aquí se actualiza la víctima relacionada
+        ->update(['denuncia_id' => $denuncia->id]);
+        
         return response()->json($denuncia);
-    }*/
+    }
 
-    /**
-     * Display the specified resource.
-     */
+    // Filtra denuncias marcadas como emblemáticas 
+    public function emblematicos()
+    {
+        $query = Denuncia::where('emblematico', 'SI')
+            ->with(['victima', 'agresor']);
+     
+        if (auth()->user()->rol_id != 1) { // Si NO es admin 
+            $query->where('user_id', auth()->id());
+        }
+     
+        $denuncias = $query->get();
+     
+        return view('denuncia.tabla', compact('denuncias'));
+    }
+     
+    // Muestra denuncias archivadas 
+    // También respeta el rol del usuario para mostrar solo las suyas si no es administrador.
+     public function archivados()
+     {
+        $query = Denuncia::where('estado', 'Archivado')
+            ->with(['victima', 'agresor']);
+     
+        if (auth()->user()->rol_id != 1) { // Si NO es admin
+            $query->where('user_id', auth()->id());
+        }
+     
+        $denuncias = $query->get();
+     
+        return view('denuncia.tabla_archivados', compact('denuncias'));
+     }
+
+    // Muestra denuncias no marcadas como completas 
+    /*Filtra denuncias con provisional = false, es decir, aquellas que aún no han sido marcadas como concluidas.*/ 
+    public function incompletos()
+    {
+        $query = Denuncia::where('provisional', false)
+            ->with(['victima', 'agresor']);
+     
+        if (auth()->user()->rol_id != 1) { // Si NO es admin
+            $query->where('user_id', auth()->id());
+        }
+     
+        $denuncias = $query->get();
+     
+        return view('denuncia.tabla_incompletos', compact('denuncias'));
+    }
+     
+    // Marca una denuncia como finalizada 
+    /*Actualiza el campo provisional de la denuncia a true, 
+    indicando que ya está completa. Esto se puede hacer de forma manual desde la interfaz.*/
+    public function marcarCompleto($id)
+    {
+        $denuncia = Denuncia::findOrFail($id);
+        $denuncia->provisional = true;
+        $denuncia->save();
+     
+        return response('OK', 200);
+    }
+     
+    // Detalle individual de una denuncia
     public function show($id): View
     {
         $denuncia = Denuncia::find($id);
@@ -118,9 +173,7 @@ public function archivados()
         return view('denuncia.show', compact('denuncia'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Muestra la vista de edición
     public function edit($id): View
     {
         $denuncia = Denuncia::find($id);
@@ -128,16 +181,9 @@ public function archivados()
         return view('denuncia.edit', compact('denuncia'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    /*public function update(DenunciaRequest $request, Denuncia $denuncia): RedirectResponse
-    {
-        $denuncia->update($request->validated());
-
-        return Redirect::route('denuncia.index')
-            ->with('success', 'Denuncia updated successfully');
-    }*/
+    // Actualiza los datos validados de una denuncia
+    /* Modifica una denuncia ya existente con nuevos datos validados. 
+    Si la solicitud es AJAX, devuelve JSON; de lo contrario, redirige a la lista de denuncias.*/
     public function update(DenunciaRequest $request, Denuncia $denuncia)
     {
         $denuncia->update($request->validated());
@@ -150,10 +196,7 @@ public function archivados()
             ->with('success', 'Denuncia updated successfully');
     }
     
-
-    
-
-
+    // Elimina una denuncia
     public function destroy($id): RedirectResponse
     {
         Denuncia::find($id)->delete();
@@ -162,109 +205,186 @@ public function archivados()
             ->with('success', 'Denuncia deleted successfully');
     }
 
-
-
+    // Filtra denuncias desde el formulario de búsqueda
     public function buscar(Request $request)
-{
-    $query = Denuncia::query()->with(['victima', 'agresor']);
-    if ($request->num_caso) {
-        $query->where('num_caso', $request->num_caso);
-    }
+    {
+        /* Permite buscar denuncias por número de caso, nombre de la víctima o año de registro. 
+        Aplica restricciones según el rol del usuario.*/
+        $query = Denuncia::query()->with(['victima', 'agresor']);
 
-    if ($request->nombre) {
-        $query->whereHas('victima', function ($q) use ($request) {
-            $q->where('nombre', 'like', '%' . $request->nombre . '%');
-        });
-    }
+        if (auth()->user()->rol_id != 1) { // Si NO es admin
+            $query->where('user_id', auth()->id());
+        }
 
-    if ($request->anio) {
-        $query->whereYear('fecha', $request->anio);
-    }
+        if ($request->cod_slim) {
+            $query->where('cod_slim', $request->cod_slim);
+        }
 
-    $denuncias = $query->get();
-
-    return view('denuncia.tabla', compact('denuncias'));
-}
-
-
-
-
-
-
-public function filtrarAjax(Request $request)
-{
-    $nombre = $request->nombre;
-    $anio = $request->anio;
-
-    $denuncias = Denuncia::with(['victima', 'agresor'])
-        ->when($nombre, function ($query, $nombre) {
-            $query->whereHas('victima', function ($q) use ($nombre) {
-                $q->where('nombre', 'LIKE', "%$nombre%");
+        if ($request->nombre) {
+            $query->whereHas('victima', function ($q) use ($request) {
+                $q->where('nombre', 'like', '%' . $request->nombre . '%');
             });
-        })
-        ->when($anio, function ($query, $anio) {
-            $query->whereYear('fecha', $anio);
-        })
-        ->latest()
-        ->get();
+        }
 
-    return view('denuncia.tabla', compact('denuncias'))->render();
-}
+        if ($request->anio) {
+            $query->whereYear('fecha', $request->anio);
+        }
 
+        $denuncias = $query->get();
 
-public function actualizarEstado(Request $request, $id)
-{
-    $denuncia = Denuncia::findOrFail($id);
-    $denuncia->estado = $request->input('estado');
-    $denuncia->save();
+        return view('denuncia.tabla', compact('denuncias'));
+    }
 
-    return response('OK', 200);
-}
+    // Filtra denuncias por AJAX 
+    public function filtrarAjax(Request $request)
+    {
+        /* Realiza la misma lógica que buscar, pero está diseñada para ser usada con peticiones AJAX, 
+        devolviendo solo la vista renderizada para insertar en la interfaz */
+        $nombre = $request->nombre;
+        $anio = $request->anio;
 
+        $denuncias = Denuncia::with(['victima', 'agresor'])
+            ->when(auth()->user()->rol_id != 1, function ($query) {
+                $query->where('user_id', auth()->id());
+            })
+            ->when($nombre, function ($query, $nombre) {
+                $query->whereHas('victima', function ($q) use ($nombre) {
+                    $q->where('nombre', 'LIKE', "%$nombre%");
+                });
+            })
+            ->when($anio, function ($query, $anio) {
+                $query->whereYear('fecha', $anio);
+            })
+            ->latest()
+            ->get();
 
+        return view('denuncia.tabla', compact('denuncias'))->render();
+    }
 
-public function actualizarTestimonio(Request $request, $id)
-{
-    $denuncia = Denuncia::findOrFail($id);
-    $denuncia->testimonio = $request->input('testimonio');
-    $denuncia->save();
+    // Edita el estado de una denuncia
+    public function actualizarEstado(Request $request, $id)
+    {
+        $denuncia = Denuncia::findOrFail($id);
+        $denuncia->estado = $request->input('estado');
+        $denuncia->save();
 
-    return response('ok');
-}
+        return response('OK', 200);
+    }
 
+    // Modifica el testimonio asociado
+    public function actualizarTestimonio(Request $request, $id)
+    {
+        $denuncia = Denuncia::findOrFail($id);
+        $denuncia->testimonio = $request->input('testimonio');
+        $denuncia->save();
 
-public function actualizarDelitos(Request $request, $id)
-{
-    $denuncia = Denuncia::findOrFail($id);
-    $denuncia->delitos_penales = json_encode($request->input('delitos_penales', []));
-    $denuncia->save();
+        return response('ok');
+    }
 
-    return response('ok');
-}
+    // Actualiza los delitos penales asociados
+    public function actualizarDelitos(Request $request, $id)
+    {
+        $denuncia = Denuncia::findOrFail($id);
+        $denuncia->delitos_penales = json_encode($request->input('delitos_penales', []));
+        $denuncia->save();
 
-public function mostrarDelitos($id)
-{
-    $denuncia = Denuncia::findOrFail($id);
-    return view('denuncia.partials.delitos', compact('denuncia'));
-}
+        return response('ok');
+    }
 
-public function actualizarViolencias(Request $request, $id)
-{
-    $denuncia = Denuncia::findOrFail($id);
+    // Carga la sección de delitos penales
+    public function mostrarDelitos($id)
+    {
+        $denuncia = Denuncia::findOrFail($id);
+        return view('denuncia.partials.delitos', compact('denuncia'));
+    }
 
-    $denuncia->violencia_economica = json_encode($request->input('violencia_economica', []));
-    $denuncia->violencia_psicologica = json_encode($request->input('violencia_psicologica', []));
-    $denuncia->violencia_sexual = json_encode($request->input('violencia_sexual', []));
-    $denuncia->violencia_fisica = json_encode($request->input('violencia_fisica', []));
+    // Edita los tipos de violencia registrados
+    public function actualizarViolencias(Request $request, $id)
+    {
+        $denuncia = Denuncia::findOrFail($id);
 
-    $denuncia->save();
+        $denuncia->violencia_economica = json_encode($request->input('violencia_economica', []));
+        $denuncia->violencia_psicologica = json_encode($request->input('violencia_psicologica', []));
+        $denuncia->violencia_sexual = json_encode($request->input('violencia_sexual', []));
+        $denuncia->violencia_fisica = json_encode($request->input('violencia_fisica', []));
+        $denuncia->violencia_feminicida = json_encode($request->input('violencia_feminicida', []));
 
-    return response()->json(['success' => true]);
-}
+        $denuncia->save();
 
+        return response()->json(['success' => true]);
+    }
 
+    // Muestra tabla de denuncias derivables
+    public function tablaDerivar()
+    {
+        $denuncias = Denuncia::with(['victima', 'user.oficina'])
+            ->orderBy('id', 'desc')
+            ->get();
 
+        return view('denuncia.tabla_derivar', compact('denuncias'));
+    }
 
+    // Deriva una denuncia a otra oficina 
+    public function derivar(Request $request, $id)
+    {
+        /* Permite asignar una nueva oficina y abogado a una denuncia. Si aún no ha sido derivada, 
+        también modifica su num_caso agregando un sufijo con el nombre de la oficina original. Marca la denuncia como derivada.*/
+        $denuncia = Denuncia::findOrFail($id);
 
-    
+        $nuevoOficinaId = $request->input('oficina_id');
+        $nuevoAbogadoId = $request->input('abogado_id');
+
+        // Buscar la oficina origen
+        $oficinaOrigen = \App\Models\Oficina::find($denuncia->oficina_id);
+
+        if (!$denuncia->es_derivada) {
+            $oficinaNombre = str_replace(' ', '', $oficinaOrigen->nombre);
+            $denuncia->num_caso = $denuncia->num_caso . '-' . strtoupper($oficinaNombre);
+        }
+
+        $denuncia->oficina_id = $nuevoOficinaId;
+        $denuncia->user_id = $nuevoAbogadoId;
+        $denuncia->es_derivada = true;
+        $denuncia->save();
+
+ 
+        return response()->json(['success' => true]);
+    }
+
+    // Muestra la tabla de denuncias con información relacionada para asignación de técnicos.
+    public function tablaAsignar() {
+
+        $denuncias = Denuncia::with(['victima', 'user.oficina', 'asignaciones.user'])->get();
+        return view('denuncia.tabla_asignar', compact('denuncias'));
+
+    }
+
+    // Asigna múltiples técnicos a una denuncia específica.
+    public function asignar(Request $request, $id){
+        try {
+            
+            // Obtiene el array de IDs de técnicos enviados desde el formularios
+            $tecnicos = $request->input('user_id', []);
+            $denuncia = Denuncia::findOrFail($id);
+
+            // Recorre cada técnico y crea una nueva asignación.
+            foreach ($tecnicos as $userId) {
+                Asignacion::create([
+                    'denuncia_id' => $id,
+                    'user_id' => $userId,
+                    'fecha' => $request->input('fecha') ?? now(),
+                    'oficina_id' => $denuncia->oficina_id 
+                ]);
+            }
+
+            return response()->json(['success' => true]);
+
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+                'line' => $e->getLine()
+            ], 500);
+        }
+    }
 }

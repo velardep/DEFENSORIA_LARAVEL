@@ -8,15 +8,12 @@
     <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
+                <form method="POST" action="{{ route('accions.store') }}"  role="form" enctype="multipart/form-data">
+                    @csrf
 
-                
-                        <form method="POST" action="{{ route('accions.store') }}"  role="form" enctype="multipart/form-data">
-                            @csrf
+                    @include('accions.form')
 
-                            @include('accions.form')
-
-                        </form>
-                   
+                </form>   
             </div>
         </div>
     </section>

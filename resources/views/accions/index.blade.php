@@ -11,7 +11,6 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-
                             <span id="card_title">
                                 {{ __('Accions') }}
                             </span>
@@ -34,13 +33,11 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
-                                        
-									<th >Acciones</th>
-									<th >Fecha Hora</th>
-									<th >Tecnico</th>
-									<th >Denuncia Id</th>
-
+                                        <th>No</th>    
+                                        <th >Acciones</th>
+                                        <th >Fecha Hora</th>
+                                        <th >Tecnico</th>
+                                        <th >Denuncia Id</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -48,19 +45,21 @@
                                     @foreach ($accions as $accion)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-										<td >{{ $accion->acciones }}</td>
-										<td >{{ $accion->fecha }}</td>
-										<td >{{ $accion->tecnico }}</td>
-										<td >{{ $accion->denuncia_id }}</td>
-
+                                            <td >{{ $accion->acciones }}</td>
+                                            <td >{{ $accion->fecha }}</td>
+                                            <td >{{ $accion->tecnico }}</td>
+                                            <td >{{ $accion->denuncia_id }}</td>
                                             <td>
                                                 <form action="{{ route('accions.destroy', $accion->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('accions.show', $accion->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('accions.edit', $accion->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button 
+                                                        type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); 
+                                                        confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i 
+                                                        class="fa fa-fw fa-trash"></i> {{ __('Delete') }}
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>

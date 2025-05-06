@@ -19,24 +19,22 @@
                     </div>
 
                     <div class="card-body bg-white">
-                        
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Acciones:</strong>
-                                    {{ $accion->acciones }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Fecha Hora:</strong>
-                                    {{ $accion->fecha_hora }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Tecnico:</strong>
-                                    {{ $accion->tecnico }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Denuncia Id:</strong>
-                                    {{ $accion->denuncia_id }}
-                                </div>
-
+                        <div class="form-group mb-2 mb20">
+                            <strong>Acciones:</strong>
+                            {{ $accion->acciones }}
+                        </div>
+                        <div class="form-group mb-2 mb20">
+                            <strong>Fecha Hora:</strong>
+                            {{ $accion->fecha_hora }}
+                        </div>
+                        <div class="form-group mb-2 mb20">
+                            <strong>Tecnico:</strong>
+                            {{ $accion->tecnico }}
+                        </div>
+                        <div class="form-group mb-2 mb20">
+                            <strong>Denuncia Id:</strong>
+                            {{ $accion->denuncia_id }}
+                        </div>
                     </div>
                 </div>
             </div>

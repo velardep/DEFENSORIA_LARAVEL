@@ -90,21 +90,13 @@
 									<th >Num Vivienda</th>
 									<th >Lugar Domicilio</th>
 									<th >Especifique</th>
-                                    <th> Delitos Penales</th>-->
-
-
-                                    
-
-
-								
+                                    <th> Delitos Penales</th>-->							
 									<th >Estado</th>
-
                                     <th >Emblematico</th>
+                                    <th> Completa</th>
                                     <th >Acciones</th>
                                     <th >Reporte</th>
-
-
-                                        <th></th>
+                                    <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -148,6 +140,8 @@
  
 										<td >{{ $denuncia->estado }}</td>
                                         <td >{{ $denuncia->emblematico }}</td>
+                                        <td>{{ $denuncia->provisional ? 'SI' : 'NO' }}</td>
+
 
 
                                             

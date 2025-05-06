@@ -9,22 +9,21 @@ use App\Http\Requests\AccionRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+// Gestion de acciones asociadas a una denuncia
 class AccionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Muestra el listado de lostas las acciones registradas
     public function index(Request $request): View
     {
-        $accions = Accion::paginate();
+        $accions = Accion::where('user_id', auth()->id())->paginate();
+
+        //$accions = Accion::paginate();
 
         return view('accions.index', compact('accions'))
             ->with('i', ($request->input('page', 1) - 1) * $accions->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Muestra el formulario para crear una nueva accion
     public function create(): View
     {
         $accion = new Accion();
@@ -32,20 +31,28 @@ class AccionController extends Controller
         return view('accions.create', compact('accion'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(AccionRequest $request): RedirectResponse
+    // Guarda una nueva accion en la base de datos
+    /*public function store(AccionRequest $request): RedirectResponse
     {
         Accion::create($request->validated());
 
         return Redirect::route('accions.index')
             ->with('success', 'Accion created successfully.');
+    }*/
+    public function store(AccionRequest $request): RedirectResponse
+    {
+        $data = $request->validated();
+        $data['user_id'] = auth()->id(); // ✅ Asignar el usuario que crea la acción
+        $data['oficina_id'] = auth()->user()->oficina_id;
+
+
+        Accion::create($data);
+
+        return Redirect::route('accions.index')
+            ->with('success', 'Acción creada exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Muestra el detalle de una acción específica
     public function show($id): View
     {
         $accion = Accion::find($id);
@@ -53,9 +60,7 @@ class AccionController extends Controller
         return view('accions.show', compact('accion'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Muestra el formulario de edición para una acción específica.
     public function edit($id): View
     {
         $accion = Accion::find($id);
@@ -63,9 +68,7 @@ class AccionController extends Controller
         return view('accions.edit', compact('accion'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Actualiza una acción existente
     public function update(AccionRequest $request, Accion $accion): RedirectResponse
     {
         $accion->update($request->validated());
@@ -74,6 +77,7 @@ class AccionController extends Controller
             ->with('success', 'Accion updated successfully');
     }
 
+    // Elimina una acción de la base de datos según su ID
     public function destroy($id): RedirectResponse
     {
         Accion::find($id)->delete();
@@ -82,14 +86,18 @@ class AccionController extends Controller
             ->with('success', 'Accion deleted successfully');
     }
 
-
+    // Muestra todas las acciones asociadas a una denuncia específica.
+    /* Filtra por el campo denuncia_id, ordena las acciones por fecha 
+    ascendente, y carga la vista accions.lista,*/
     public function porDenuncia($id)
-{
-    $acciones = Accion::where('denuncia_id', $id)
-        ->orderBy('fecha', 'asc')
-        ->get();
+    {
+        $acciones = Accion::where('denuncia_id', $id)
+        ->where('user_id', auth()->id()) // ✅ Solo acciones del usuario actual
 
-    return view('accions.lista', compact('acciones', 'id'));
-}
+            ->orderBy('fecha', 'asc')
+            ->get();
+
+        return view('accions.lista', compact('acciones', 'id'));
+    }
 
 }

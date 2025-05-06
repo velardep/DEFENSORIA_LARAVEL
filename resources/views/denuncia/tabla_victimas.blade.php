@@ -43,7 +43,7 @@
         color: #999;
     }
 </style>
-<h4 style="margin-left: 16px; font-size: 2rem;"> Casos</h4>
+<h4 style="margin-left: 16px; font-size: 2rem;"> Victimas</h4>
 
 <div class="tabla-victimas-container">
     <table class="tabla-victimas">
@@ -55,7 +55,9 @@
 				<th >Sexo</th>
 				<th >Fecha Nacimiento</th>
 				<th >Edad</th>
-                <th>Acciones</th>
+                <th> Denuncia</th>
+
+                <th> Acciones</th>
 		
             </tr>
         </thead>
@@ -68,6 +70,8 @@
 			    <td >{{ $victima->sexo }}</td>
 				<td >{{ $victima->fecha_nacimiento }}</td>
 				<td >{{ $victima->edad }}</td>
+                <td >{{ $victima->denuncia ? $victima->denuncia->cod_slim : '—' }}</td>
+
                 <td>
                     <button type="button" class="btn btn-info btn-ver-detalle-victima" data-id="{{ $victima->id }}">
                         <i class="fas fa-eye"></i> Detalles

@@ -57,6 +57,8 @@
                 <th>Estado</th>
                 <th>Acciones</th>
                 <th>Reporte</th>
+                <th>Completa</th>
+
 
             </tr>
         </thead>
@@ -69,6 +71,9 @@
                 <td>{{ $denuncia->agresor->nombre ?? 'N/A' }}</td>
                 <td>{{ $denuncia->victima->nombre ?? 'N/A' }}</td>
                 <td>{{ $denuncia->estado }}</td>
+                <td>{{ $denuncia->provisional ? 'SI' : 'NO' }}</td>
+
+                
                 <td>
                     <button type="button" class="btn btn-info btn-ver-resumen" data-id="{{ $denuncia->id }}">
                         <i class="fas fa-eye"></i> Acciones

@@ -32,9 +32,10 @@ return [
     |
     */
 
-    'lifetime' => (int) env('SESSION_LIFETIME', 120),
+    'lifetime' => (int) env('SESSION_LIFETIME', 120),  //cada session dura 2 hs de inactividad antes que se cierre
 
-    'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
+    'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false), //Si el navegador se cierra, la session sigue viva 
+    //                                                                         hasta que pasen las 2 hr
 
     /*
     |--------------------------------------------------------------------------

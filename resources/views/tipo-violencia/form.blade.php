@@ -1,22 +1,4 @@
-<!--<div class="row padding-1 p-1">
-    <div class="col-md-12">
-        
-        <div class="form-group mb-2 mb20">
-            <label for="nombre" class="form-label">{{ __('Nombre') }}</label>
-            <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre', $tipoViolencia?->nombre) }}" id="nombre" placeholder="Nombre">
-            {!! $errors->first('nombre', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="condicion" class="form-label">{{ __('Condicion') }}</label>
-            <input type="text" name="condicion" class="form-control @error('condicion') is-invalid @enderror" value="{{ old('condicion', $tipoViolencia?->condicion) }}" id="condicion" placeholder="Condicion">
-            {!! $errors->first('condicion', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
 
-    </div>
-    <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-    </div>
-</div>-->
 
 
 
@@ -97,20 +79,11 @@
             {!! $errors->first('nombre', '<div class="invalid-feedback d-block" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
-        <!-- Condición -->
-        <div class="col-md-6 input-material">
-            <i class="material-icons">check_circle</i>
-            <label for="condicion">Condición</label>
-            <input type="text" name="condicion"
-                   class="@error('condicion') is-invalid @enderror"
-                   value="{{ old('condicion', $tipoViolencia?->condicion) }}"
-                   id="condicion" placeholder="Condición">
-            {!! $errors->first('condicion', '<div class="invalid-feedback d-block" role="alert"><strong>:message</strong></div>') !!}
-        </div>
+       
 
     </div>
 
     <div class="text-end mt-4">
-        <button type="submit" class="btn btn-primary btn-submit">{{ __('Submit') }}</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
 </div>

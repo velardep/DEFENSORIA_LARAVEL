@@ -9,24 +9,20 @@ use App\Http\Requests\TipoViolenciaRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+// Gestion de Tipos de Violencias
 class TipoViolenciaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Muestra el listado de tipos de violencia
     public function index(Request $request): View
     {
-        // Paginación con preservación de parámetros de consulta
-        $tipoViolencias = TipoViolencia::paginate(10)->withQueryString();
+        $tipoViolencias = TipoViolencia::paginate(50)->withQueryString();
 
         return view('tipo-violencia.index', ['tipoViolencias' => $tipoViolencias])
             ->with('i', ($request->input('page', 1) - 1) * $tipoViolencias->perPage());
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Muestra el formulario para crear un nuevo tipo de violencia
     public function create(): View
     {
         $tipoViolencia = new TipoViolencia();
@@ -34,9 +30,7 @@ class TipoViolenciaController extends Controller
         return view('tipo-violencia.create', compact('tipoViolencia'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Guarda el nuevo tipo de violencia
     public function store(TipoViolenciaRequest $request): RedirectResponse
     {
         TipoViolencia::create($request->validated());
@@ -45,9 +39,7 @@ class TipoViolenciaController extends Controller
             ->with('success', 'Tipo de Violencia creado correctamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Muestra detalles de un tipo de violencia
     public function show($id): View
     {
         $tipoViolencia = TipoViolencia::findOrFail($id);
@@ -55,9 +47,7 @@ class TipoViolenciaController extends Controller
         return view('tipo-violencia.show', compact('tipoViolencia'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Muestra el formulario de edición de tipo de violencia
     public function edit($id): View
     {
         $tipoViolencia = TipoViolencia::findOrFail($id);
@@ -65,27 +55,32 @@ class TipoViolenciaController extends Controller
         return view('tipo-violencia.edit', compact('tipoViolencia'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Actualiza tipo de violencia
     public function update(TipoViolenciaRequest $request, $id): RedirectResponse
-{
-    $tipoViolencia = TipoViolencia::findOrFail($id);
-    $tipoViolencia->update($request->validated());
-
-    return Redirect::route('tipo-violencia.index')
-        ->with('success', 'Tipo de Violencia actualizado correctamente.');
-}
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id): RedirectResponse
     {
-        TipoViolencia::findOrFail($id)->delete();
+        $tipoViolencia = TipoViolencia::findOrFail($id);
+        $tipoViolencia->update($request->validated());
 
         return Redirect::route('tipo-violencia.index')
-            ->with('success', 'Tipo de Violencia eliminado correctamente.');
+            ->with('success', 'Tipo de Violencia actualizado correctamente.');
+    }
+
+    // Elimina el tipo de violencia
+    public function destroy($id)
+    {
+        try {
+            $tipoViolencia = TipoViolencia::findOrFail($id);
+            $tipoViolencia->delete();
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'TipoViolencia eliminada correctamente'
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No se puede eliminar porque está asociada a otros datos'
+            ], 400);
+        }
     }
 }

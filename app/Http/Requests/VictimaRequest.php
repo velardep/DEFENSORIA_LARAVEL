@@ -56,7 +56,6 @@ class VictimaRequest extends FormRequest
 			'especifique' => 'string'
 
             
-            /*'id_documento' => ['required', 'integer', Rule::exists('documento', 'id')],*/
             
 
 

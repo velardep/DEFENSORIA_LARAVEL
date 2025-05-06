@@ -23,7 +23,7 @@ class ViolenciaRequest extends FormRequest
     {
         return [
 			'nombre' => 'string',
-            'id_tipo_violencia' => 'required|exists:tipo_violencia,id', // o como se llame la tabla
+            'id_tipo_violencia' => 'required|exists:tipo_violencia,id', 
 
         ];
     }

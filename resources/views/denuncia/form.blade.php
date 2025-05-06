@@ -1,78 +1,3 @@
-<!--<div class="row padding-1 p-1">
-    <div class="col-md-12">
-        
-        <div class="form-group mb-2 mb20">
-            <label for="fecha" class="form-label">{{ __('Fecha') }}</label>
-            <input type="text" name="fecha" class="form-control @error('fecha') is-invalid @enderror" value="{{ old('fecha', $denuncia?->fecha) }}" id="fecha" placeholder="Fecha">
-            {!! $errors->first('fecha', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="departamento" class="form-label">{{ __('Departamento') }}</label>
-            <input type="text" name="departamento" class="form-control @error('departamento') is-invalid @enderror" value="{{ old('departamento', $denuncia?->departamento) }}" id="departamento" placeholder="Departamento">
-            {!! $errors->first('departamento', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="nombre_servicio" class="form-label">{{ __('Nombre Servicio') }}</label>
-            <input type="text" name="nombre_servicio" class="form-control @error('nombre_servicio') is-invalid @enderror" value="{{ old('nombre_servicio', $denuncia?->nombre_servicio) }}" id="nombre_servicio" placeholder="Nombre Servicio">
-            {!! $errors->first('nombre_servicio', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="municipio" class="form-label">{{ __('Municipio') }}</label>
-            <input type="text" name="municipio" class="form-control @error('municipio') is-invalid @enderror" value="{{ old('municipio', $denuncia?->municipio) }}" id="municipio" placeholder="Municipio">
-            {!! $errors->first('municipio', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="num_caso" class="form-label">{{ __('Num Caso') }}</label>
-            <input type="text" name="num_caso" class="form-control @error('num_caso') is-invalid @enderror" value="{{ old('num_caso', $denuncia?->num_caso) }}" id="num_caso" placeholder="Num Caso">
-            {!! $errors->first('num_caso', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="cod_slim" class="form-label">{{ __('Cod Slim') }}</label>
-            <input type="text" name="cod_slim" class="form-control @error('cod_slim') is-invalid @enderror" value="{{ old('cod_slim', $denuncia?->cod_slim) }}" id="cod_slim" placeholder="Cod Slim">
-            {!! $errors->first('cod_slim', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-
-<div class="form-group">
-    <label for="id_agresor">Agresor</label>
-    <select name="id_agresor" class="form-control" required>
-        <option value="">Seleccione un agresor</option>
-        @foreach ($agresores as $agresor)
-            <option value="{{ $agresor->id }}">{{ $agresor->nombre }} {{ $agresor->ap_paterno }} {{ $agresor->ap_materno }}</option>
-        @endforeach
-    </select>
-</div>
-
-<div class="form-group">
-    <label for="id_victima">Víctima</label>
-    <select name="id_victima" class="form-control" required>
-        <option value="">Seleccione una víctima</option>
-        @foreach ($victimas as $victima)
-            <option value="{{ $victima->id }}">{{ $victima->nombre }} {{ $victima->ap_paterno }} {{ $victima->ap_materno }}</option>
-        @endforeach
-    </select>
-</div>
-
-<div class="form-group">
-    <label for="id_tipo_violencia">Tipo de Violencia</label>
-    <select name="id_tipo_violencia" class="form-control" required>
-        <option value="">Seleccione un tipo</option>
-        @foreach ($tiposViolencia as $tipo)
-            <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
-        @endforeach
-    </select>
-</div>
-
-        <div class="form-group mb-2 mb20">
-            <label for="condicion" class="form-label">{{ __('Condicion') }}</label>
-            <input type="text" name="condicion" class="form-control @error('condicion') is-invalid @enderror" value="{{ old('condicion', $denuncia?->condicion) }}" id="condicion" placeholder="Condicion">
-            {!! $errors->first('condicion', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-
-    </div>
-    <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-    </div>
-</div> -->
 
 <!-- Material Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -293,19 +218,16 @@
         <div class="col-md-6 input-float">
             <i class="material-icons">assignment_ind</i>
             <label for="estado">Estado</label>
-            <input type="text" name="estado" id="estado"
-                   class="@error('estado') is-invalid @enderror"
-                   value="{{ old('estado', $denuncia?->estado) }}">
+            <select name="estado" id="estado">
+                <option value=""></option>
+                <option value="Recepcion" {{ old('estado', $denuncia?->estado) == 'Recepcion' ? 'selected' : '' }}>Recepcion</option>
+                <option value="Investigacion" {{ old('estado', $denuncia?->estado) == 'Investigacion' ? 'selected' : '' }}>Investigacion</option>
+                <option value="Concluido" {{ old('estado', $denuncia?->estado) == 'Concluido' ? 'selected' : '' }}>Concluido de Casa</option>
+                <option value="Archivado" {{ old('estado', $denuncia?->estado) == 'Archivado' ? 'selected' : '' }}>Archivado</option>
+            </select>   
         </div>
 
-        {{-- Completada
-        <div class="col-md-6 input-float">
-            <i class="material-icons">assignment_ind</i>
-            <label for="completada">Completada</label>
-            <input type="text" name="completada" id="completada"
-                   class="@error('completada') is-invalid @enderror"
-                   value="{{ old('completada', $denuncia?->completada) }}">
-        </div> --}}
+        
 
 
         {{-- Juzgado --}}
@@ -407,6 +329,19 @@
                 </div>
 
 
+                 <!-- FEMINICIDA -->
+                 @php
+                    $violenciaFeminicida = \App\Models\Violencia::where('id_tipo_violencia', 5)->get();
+                @endphp
+
+                <div class="col-12 input-float">
+                    <label for="violencia_feminicida">Violencia Feminicida</label>
+                    <select name="violencia_feminicida[]" id="violencia_feminicida" class="form-select select2" multiple>
+                        @foreach ($violenciaFeminicida as $v)
+                            <option value="{{ $v->nombre }}">{{ $v->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
                 
                 {{-- Testimonio --}}

@@ -89,8 +89,8 @@
                     <strong>Víctima:</strong><br>
                     <span class="text-muted">{{ $denuncia->victima->nombre }} {{ $denuncia->victima->ap_paterno }}</span><br>
                     <small class="text-muted">{{ $denuncia->victima->tipo_documento ?? 'CI' }}: {{ $denuncia->victima->num_documento ?? 'No registrado' }}</small><br>
-                    <small class="text-muted">Sexo: {{ $denuncia->victima->sexo }}</small>
-                    <small class="text-muted">Edad: {{ $denuncia->victima->edad }}</small>
+                    <small class="text-muted">Sexo: {{ $denuncia->victima->sexo }}</small><br>
+                    <small class="text-muted">Edad: {{ $denuncia->victima->edad }}</small><br>
 
                 </div>
             </div>
@@ -105,7 +105,7 @@
                     <span class="text-muted">{{ $denuncia->agresor->nombre }} {{ $denuncia->agresor->ap_paterno }}</span><br>
                     <small class="text-muted">{{ $denuncia->agresor->tipo_documento ?? 'CI' }}: {{ $denuncia->agresor->num_documento ?? 'No registrado' }}</small><br>
                     <small class="text-muted">Sexo: {{ $denuncia->agresor->sexo }}</small><br>
-                    <small class="text-muted">Sexo: {{ $denuncia->agresor->edad }}</small><br>
+                    <small class="text-muted">Edad: {{ $denuncia->agresor->edad }}</small><br>
 
                 </div>
             </div>
@@ -118,7 +118,14 @@
         </div>
 
         <div class="resumen-card mb-3">
-        <p><strong>Testimonio:</strong> {{ $denuncia->testimonio }}</p>
+            <p><strong>Testimonio:</strong> {{ $denuncia->testimonio }}</p>
+            <!-- Botón que abre el formulario -->
+            <button class="btn btn-outline-primary btn-lg px-5 w-100" onclick="mostrarFormularioTestimonio({{ $denuncia->id }}, '{{ $denuncia->testimonio }}')">
+                Editar Testimonio
+            </button>
+
+            <!-- Contenedor donde se cargará el formulario -->
+            <div id="formulario-testimonio-container" class="mt-3"></div>
 
         </div>
 
@@ -162,27 +169,20 @@
                 <!-- Contenedor donde se cargará el formulario -->
                 <div id="formulario-estado-container" style="display:none; margin-top: 20px;"></div>  
 
-
-                <!-- Botón que abre el formulario -->
-                <button class="btn btn-outline-primary btn-lg px-5 w-100" onclick="mostrarFormularioTestimonio({{ $denuncia->id }}, '{{ $denuncia->testimonio }}')">
-                    ✍️ Editar Testimonio
-                </button>
-
-                <!-- Contenedor donde se cargará el formulario -->
-                <div id="formulario-testimonio-container" class="mt-3"></div>
-
-
-
                 <button class="btn btn-outline-primary btn-lg px-5 w-100" onclick="mostrarFormularioDelitos({{ $denuncia->id }}, '{{ $denuncia->delitos_penales }}')">
-                    ✏️ Editar Delitos
+                    Editar Delitos
                 </button>
 
                 <div id="formulario-delitos-container" class="mt-2"></div>
 
-
-
-                <button class="btn btn-outline-primary btn-lg px-5 w-100" onclick="mostrarFormularioViolencias({{ $denuncia->id }}, '{{ $denuncia->violencia_economica }}', '{{ $denuncia->violencia_psicologica }}', '{{ $denuncia->violencia_sexual }}', '{{ $denuncia->violencia_fisica }}')">
-                    ✏️ Editar Violencias
+                <button class="btn btn-outline-primary btn-lg px-5 w-100" onclick="mostrarFormularioViolencias({{ $denuncia->id }}, 
+                '{{ $denuncia->violencia_economica }}', 
+                '{{ $denuncia->violencia_psicologica }}', 
+                '{{ $denuncia->violencia_sexual }}', 
+                '{{ $denuncia->violencia_fisica }}', 
+                '{{ $denuncia->violencia_feminicida }}')">
+                
+                    Editar Violencias
                 </button>
 
 
@@ -206,6 +206,16 @@
                 <p><strong>Estado:</strong> {{ $denuncia->estado }}</p>
                 <p><strong>Emblemático:</strong> {{ $denuncia->emblematico }}</p>
                 <p><strong>Numero de Juzgado:</strong> {{ $denuncia->num_juzgado }}</p>
+                <p><strong>Completado:</strong> {{ $denuncia->provisional ? 'SI' : 'NO' }}</p>
+
+                <p><strong>Encargado de Apertura:</strong> {{ $denuncia->user->nombre ?? 'N/A' }}</p>
+
+
+                <button class="btn btn-outline-success btn-lg px-5 w-100" onclick="mostrarFormularioCompletar({{ $denuncia->id }})">
+                    ✅ Marcar como Completa
+                </button>
+                <div id="formulario-completar-container" style="display:none; margin-top: 20px;"></div>
+           
 
         </div>
         
@@ -214,23 +224,16 @@
 
     {{-- Complementar datos del agresor --}}
     <div class="card p-4 mb-4" style="width: 95%; margin: auto;">
-        <h5 class="mb-3">🧍 Datos del Agresor</h5>
+        <h5 class="mb-3">Datos del Agresor</h5>
         <div class="text-end">
             <button class="btn btn-outline-primary btn-lg px-5 w-100" onclick="mostrarFormularioEditarAgresor({{ $denuncia->agresor->id }}, {{ $denuncia->id }})">
-                ✍️ Complementar Datos del Agresor
+                Complementar Datos del Agresor
             </button>
         </div>
 
         <div id="formulario-agresor-container" style="display: none;" class="mt-4"></div>
         <input type="hidden" id="denuncia-id-global" value="{{ $denuncia->id }}">
     </div>
-
-    
-
-  
-
-
-
 
 
 </div>
