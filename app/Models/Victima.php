@@ -29,14 +29,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property $especifique_idioma
  * @property $id_documento
  * 
+ * @property $distrito
+ * @property $distrito_rural
  * @property $zona_barrio
  * @property $avenida_calle
  * @property $nom_edificio
- * @property $telefono_domicilio
+ * @property $telefono_referencia
  * @property $num_vivienda
  * @property $num_piso_departamento
  * @property $lugar_domicilio
  * @property $especifique
+ * 
+ * @property $discapacidad
+ * @property $grado_discapacidad
+ * 
+ * @property $adulto_mayor
  * 
  * @property $provisional
  * @property $user_id
@@ -65,8 +72,9 @@ class Victima extends Model
     protected $fillable = ['nombre', 'ap_paterno', 'ap_materno', 'sexo', 'lugr_nacimiento', 'fecha_nacimiento', 'edad', 
     'residencia_habitual', 'estado_civil', 'rel_victima_agresor', 'hijos', 'logro_educativo', 'actividad', 'ingreso', 
     'monto', 'idioma', 'especifique_idioma', 'especifique_residencia', 'celular', 'especifique_nacimiento',
-    'num_documento', 'expedido', 'tipo_documento', 'zona_barrio', 'avenida_calle', 'nom_edificio', 'telefono_domicilio', 
-    'num_vivienda', 'num_piso_departamento', 'lugar_domicilio', 'especifique', 'provisional', 'user_id', 'denuncia_id'];
+    'num_documento', 'expedido', 'tipo_documento', 'distrito', 'distrito_rural', 'zona_barrio', 'avenida_calle', 'nom_edificio', 'telefono_referencia', 
+    'num_vivienda', 'num_piso_departamento', 'lugar_domicilio', 'especifique', 'provisional', 'user_id', 'denuncia_id',
+    'adulto_mayor', 'discapacidad', 'grado_discapacidad'];
 
     /**
      * Relacion muchos a uno. Una victima puede tener muchas denuncias.
@@ -108,4 +116,9 @@ class Victima extends Model
      * 
      */
     
+     public function familiares()
+    {
+        return $this->hasMany(FamiliaVictima::class);
+    }
+
 }

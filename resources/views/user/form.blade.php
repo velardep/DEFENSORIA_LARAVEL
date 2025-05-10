@@ -12,8 +12,8 @@
             {!! $errors->first('email', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="mb-3">
-    <label for="password" class="form-label">Contraseña</label>
-    <input type="password" name="password" class="form-control" required>
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" name="password" class="form-control" required>
         </div>
 
         <div class="form-group">

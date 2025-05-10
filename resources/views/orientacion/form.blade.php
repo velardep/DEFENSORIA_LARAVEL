@@ -297,13 +297,13 @@
         {{-- Tipo de Orientación (Select) --}}
         <div class="col-md-6 input-float">
             <i class="material-icons">category</i>
-            <label for="tipo_orientacion">Tipo de Orientación</label>
-            <select name="tipo_orientacion" id="tipo_orientacion"
-                    class="@error('tipo_orientacion') is-invalid @enderror">
+            <label for="orientacion">Tipo de Orientación</label>
+            <select name="orientacion" id="orientacion"
+                    class="@error('orientacion') is-invalid @enderror">
                 <option value="">Seleccione una opción</option>
-                <option value="Psicologico" {{ old('tipo_orientacion') == 'Psicologico' ? 'selected' : '' }}>Psicológico</option>
-                <option value="Legal" {{ old('tipo_orientacion') == 'Legal' ? 'selected' : '' }}>Legal</option>
-                <option value="Social" {{ old('tipo_orientacion') == 'Social' ? 'selected' : '' }}>Social</option>
+                <option value="Psicologico" {{ old('orientacion') == 'Psicologico' ? 'selected' : '' }}>Psicológico</option>
+                <option value="Legal" {{ old('orientacion') == 'Legal' ? 'selected' : '' }}>Legal</option>
+                <option value="Social" {{ old('orientacion') == 'Social' ? 'selected' : '' }}>Social</option>
             </select>
         </div>
 
@@ -329,3 +329,30 @@
 </div>
 
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Buscar la card que contiene el título "Datos de la Orientación"
+    const cards = document.querySelectorAll('.card-form');
+
+    cards.forEach(function (card) {
+        const titulo = card.querySelector('h5')?.textContent || '';
+        if (titulo.includes("Datos de la Orientación")) {
+            const inputs = card.querySelectorAll("input[type='text'], textarea");
+
+            inputs.forEach(function (input) {
+                input.style.textTransform = "uppercase"; // visualmente
+
+                input.addEventListener("input", function () {
+                    const start = this.selectionStart;
+                    const end = this.selectionEnd;
+                    const upper = this.value.toUpperCase();
+                    if (this.value !== upper) {
+                        this.value = upper;
+                        this.setSelectionRange(start, end);
+                    }
+                });
+            });
+        }
+    });
+});
+</script>

@@ -57,7 +57,7 @@ class Denuncia extends Model
      */
     protected $fillable = ['fecha', 'departamento', 'nombre_servicio', 'municipio', 'num_caso', 
     'cod_slim', 'id_agresor', 'id_victima', 'estado', 'violencia_fisica', 'violencia_psicologica',
-    'violencia_sexual', 'violencia_economica', 'forma_ingreso', 'denuncia_previa', 'testimonio',
+    'violencia_sexual', 'violencia_economica', 'forma_ingreso', 'denuncia_previa', 'testimonio', 'distrito', 'distrito_rural',
     'zona_barrio', 'avenida_calle', 'nom_edificio', 'num_vivienda', 'lugar_domicilio', 'especifique', 'delitos_penales', 
     'emblematico', 'num_juzgado', 'provisional', 'user_id', 'oficina_id', 'es_derivada', 'violencia_feminicida'];
     

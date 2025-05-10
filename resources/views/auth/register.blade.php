@@ -37,6 +37,9 @@
                             </div>
                         </div>
 
+
+
+
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
                             <div class="col-md-6">
@@ -59,6 +62,12 @@
                             </div>
                         </div>
 
+
+
+
+
+
+                        
                         <div class="row mb-3">
                             <label for="rol_id" class="col-md-4 col-form-label text-md-end">Rol</label>
                             <div class="col-md-6">

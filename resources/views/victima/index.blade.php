@@ -59,10 +59,11 @@
                                     <th >Numero de Documento</th>
                                     <th >Expedido</th>
                                     <th >Tipo Docmuento</th>
+                                    <th >distrito</th>
                                     <th >Zona Barrio</th>
 									<th >Avenida Calle</th>
 									<th >Nom Edificio</th>
-									<th >Telefono Domicilio</th>
+									<th >Telefono de Referencia</th>
 									<th >Num Vivienda</th>
 									<th >Num Piso Departamento</th>
 									<th >Lugar Domicilio</th>
@@ -98,10 +99,11 @@
                                         <td >{{ $victima->num_documento }}</td>
                                         <td >{{ $victima->expedido }}</td>
 										<td >{{ $victima->tipo_documento }}</td>
+                                        <td >{{ $victima->distrito }}</td>
                                         <td >{{ $victima->zona_barrio }}</td>
 										<td >{{ $victima->avenida_calle }}</td>
 										<td >{{ $victima->nom_edificio }}</td>
-										<td >{{ $victima->telefono_domicilio }}</td>
+										<td >{{ $victima->telefono_referencia }}</td>
 										<td >{{ $victima->num_vivienda }}</td>
 										<td >{{ $victima->num_piso_departamento }}</td>
 										<td >{{ $victima->lugar_domicilio }}</td>

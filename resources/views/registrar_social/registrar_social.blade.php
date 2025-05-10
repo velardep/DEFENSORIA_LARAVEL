@@ -345,19 +345,23 @@
                     <h4 style="margin-left: 16px; font-size: 2rem;"> Buscar Caso</h4>
                     <form id="form-buscar-denuncias">
                         <div class="row">
-                            <div class="col-md-4">
-                             <label>Codigo de Caso</label>
-                                <input type="text" name="num_caso" class="form-control" placeholder="Buscar por codigo de caso">
+                            <div class="col-md-3">
+                             <label>Codigo SLIM</label>
+                                <input type="text" name="cod_slim" class="form-control" placeholder="S1.2.3.4 - codigo de caso">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                              <label>Nombre</label>
                                 <input type="text" name="nombre" class="form-control" placeholder="Buscar por nombre">
                             </div>
-                            <div class="col-md-4">
-                                <label>Año</label>
-                                <input type="number" name="anio" class="form-control" placeholder="Ej: 2025">
+                            <div class="col-md-3">
+                                <label>Desde</label>
+                                <input type="date" name="fecha_inicio" class="form-control">
                             </div>
-                            <div class="col-md-4 d-flex align-items-end">
+                            <div class="col-md-3">
+                                <label>Hasta</label>
+                                <input type="date" name="fecha_fin" class="form-control">
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
                                 <button type="submit" class="btn btn-primary w-100">Buscar</button>
                             </div>
                         </div>
@@ -515,7 +519,6 @@
 <script>
 
     // ------------------------------ORIENTACIONES-----------------------------------
-
     // Mostrar contenedor principal de orientaciones y cargar la tabla
     document.addEventListener('DOMContentLoaded', function () {
         const btnMostrarOrientacion = document.getElementById('btn-mostrar-orientacion');
@@ -735,7 +738,6 @@
     }
 
     // ------------------------------INTERVENCIONES-----------------------------------
-
     // Mostrar contenedor principal de intervenciones y cargar la tabla
     document.addEventListener('DOMContentLoaded', function () {
         const btnMostrarIntervencion = document.getElementById('btn-mostrar-intervencion');
@@ -955,8 +957,9 @@
         document.getElementById('tabla-intervenciones').style.display = 'block';
     }
 
-    // ------------------------------BOTN DE INICIO-----------------------------------
 
+
+    // ------------------------------BOTON INICIAR DENUNCIA ---------------------------------------------------------------------------
     // Boton de inicio
     document.addEventListener("DOMContentLoaded", () => {
         const btnInicio = document.getElementById('btn-inicio');
@@ -1127,6 +1130,17 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
 
+            // ✅ Validar que el campo nombre no esté vacío
+            const nombre = form.querySelector('[name="nombre"]');
+            if (!nombre || nombre.value.trim() === '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Campo requerido',
+                    text: 'Por favor, ingrese el nombre del agresor. Si no se cuenta con el nombre llenar con "Agresor"'
+                });
+                return; // No continúa si el campo está vacío
+            }
+
             const formData = new FormData(form);        
             fetch("{{ route('agresor.store') }}", {
                 method: 'POST',
@@ -1259,7 +1273,7 @@
             .catch(() => {
                 Swal.fire({
                     icon: 'error',
-                    title: '❌ Error al guardar la denuncia',
+                    title: 'Error al guardar la denuncia',
                     text: 'Revisa los campos obligatorios o vuelve a intentarlo.'
                 });
             });
@@ -1276,6 +1290,7 @@
         });
     });
 
+    // ---------------------------------MIS CASOS--------------------------------------------------------------------------------
     // Mostrar tabla de denuncias registradas
     document.addEventListener("DOMContentLoaded", () => {
         const btnMisCasos = document.getElementById('btn-mostrar-denuncias');
@@ -1318,6 +1333,8 @@
         });
     });
 
+
+    //-------------------------EXPLORAR DENUNCIAS ----------------------------------------------------------------------------------------
     // Muestra el formulario de búsqueda de denuncias y su contenedor de resultados, 
     document.addEventListener("DOMContentLoaded", () => {
         const btnBuscarDenuncias = document.getElementById('btn-buscar-denuncias');
@@ -1378,6 +1395,8 @@
         });
     });
 
+
+    // --------------------------------BUSCAR VICTIMAS-----------------------------------------------------------------------------------
     // Muestra el formulario de búsqueda de victimas y su contenedor de resultados, 
     document.addEventListener("DOMContentLoaded", () => {
         const btnBuscarVictimas = document.getElementById('btn-buscar-victimas');
@@ -1479,6 +1498,8 @@
         }
     });
 
+
+    //---------------------------------------EMBLEMATICOS--------------------------------------------------------------------------
     // Oculta todos los formularios y secciones y muestra la tabla de denuncias filtradas por emblemáticas, 
     document.addEventListener("DOMContentLoaded", () => {
         const btn = document.getElementById('btn-mostrar-emblematicos');
@@ -1517,6 +1538,8 @@
         });
     });
 
+
+    // ---------------------------------ARCHIVADOS----------------------------------------------------------------------------------
     // Oculta todos los formularios y secciones y muestra la tabla de denuncias filtradas por archivados
     document.addEventListener("DOMContentLoaded", () => {
         const btn = document.getElementById('btn-mostrar-archivados');
@@ -1555,6 +1578,8 @@
         });
     });
 
+
+    //------------------------------------VER RESUMEN DE CADA DENUNCIA----------------------------------------------------------------
     // Al hacer clic en el botón de resumen, oculta todo, carga y muestra el resumen de una denuncia específica 
     document.addEventListener("DOMContentLoaded", () => {
         document.addEventListener("click", function (e) {
@@ -1643,6 +1668,8 @@
         });
     });
 
+
+    // ---------------------------------------------REGISTRAR ACCIONES --------------------------------------------------------
     // Muestra el formulario para registrar acciones relacionadas a la denuncia actual.
     document.addEventListener("DOMContentLoaded", () => {
         document.addEventListener("click", function (e) {
@@ -1727,6 +1754,8 @@
         });
     });
 
+
+    //--------------------------------ACTUALIZAR EL ESTADO DE LA DENUNCIA------------------------------------------------------------
     // BOTON Y FORM PARA ACTUALIZAR EL ESTADO DE LA DENUNCIA
     function mostrarFormularioEstado(id, estadoActual) {
         const contenedor = document.getElementById('formulario-estado-container');
@@ -1787,7 +1816,9 @@
         });
     }
 
-    // BOTON Y FORM PARA ACTUALIZAR EL Testimnio DE LA DENUNCIA
+
+    //------------------------------ACTUALIZAR EL TESTIMONIO------------------------------------------------------------------------
+    // BOTON Y FORM PARA ACTUALIZAR EL TESTIMONIO DE LA DENUNCIA
     function mostrarFormularioTestimonio(id, testimonioActual) {
         const contenedor = document.getElementById('formulario-testimonio-container');
         contenedor.innerHTML = `
@@ -1795,17 +1826,20 @@
                 @csrf
                 <input type="hidden" name="id" value="${id}">
                 <label for="testimonio-select">Nuevo testimonio:</label>
-                <input type="text" name="testimonio" class="form-control mb-2" value="${testimonioActual}">
+                <input type="text" name="testimonio" class="form-control mb-2" value="${testimonioActual}" style="text-transform: uppercase;">
                 <button type="submit" class="btn btn-success">Guardar</button>
             </form>
         `;
-        contenedor.style.display = 'block';
 
         document.getElementById('form-editar-testimonio').addEventListener('submit', function (e) {
             e.preventDefault();
 
+            // 🔠 Forzar a mayúsculas antes de enviar
+            this.testimonio.value = this.testimonio.value.toUpperCase();
+
             const formData = new FormData(this);
             const id = formData.get('id');
+
 
             fetch(`/denuncia/testimonio/${id}`, {
                 method: 'POST',
@@ -1842,6 +1876,8 @@
         });
     }
 
+
+    //----------------------------------------------ACTUALIZAR DELITOS -------------------------------------------------------------
     // BOTON Y FORM DE DELITOS
     function mostrarFormularioDelitos(id, delitosActualesJson) {
         let delitosActuales = [];
@@ -1912,6 +1948,8 @@
             });
     }
 
+
+    //------------------------------------ACTUALIZAR VIOLENCIAS----------------------------------------------------------------
     // Mostrar y editar las violencias de un caso
     function mostrarFormularioViolencias(id, economicaJson, psicologicaJson, sexualJson, fisicaJson, feminicidaJson) {
         // Convertimos los datos JSON recibidos en arrays de JavaScript o usamos un array vacío si vienen vacíos
@@ -2004,6 +2042,8 @@
             });
     }
 
+
+    //--------------------------------------------------GENERAR REPORTES--------------------------------------------------------------
     // ESPACIO PARA PONER Y CREAR REPORTES 
     document.addEventListener("DOMContentLoaded", () => {
         const btnMostrarReportes = document.getElementById('btn-mostrar-reportes');
@@ -2034,6 +2074,8 @@
         });
     });
 
+
+    //-----------------------------------------EDITAR O COMPLEMENTAR DATOS DE UN AGRESOR-------------------------------------------------
     // Funcion para poder desplegar el form para editar al agresor
     function mostrarFormularioEditarAgresor(idAgresor, idDenuncia) {
         const contenedor = document.getElementById("formulario-agresor-container");
@@ -2046,7 +2088,15 @@
                 contenedor.innerHTML = html;
 
                 const form = document.getElementById("form-editar-agresor");
-
+                if (form) {
+                    const inputs = form.querySelectorAll("input[type='text'], textarea");
+                    inputs.forEach(input => {
+                        input.style.textTransform = "uppercase"; // Visual
+                        input.addEventListener("input", () => {
+                            input.value = input.value.toUpperCase(); // Lógica real
+                        });
+                    });
+                } 
                 form.addEventListener("submit", function (e) {
                     e.preventDefault();
                     const formData = new FormData(this);
@@ -2089,8 +2139,132 @@
             .catch(() => {
                 contenedor.innerHTML = '<div class="alert alert-danger">Error al cargar el formulario.</div>';
             });
+     
     }
 
+
+    //-----------------------------------------EDITAR O COMPLEMENTAR DATOS DE UNA VICTIMA-------------------------------------------------
+    // Funcion para poder desplegar el form para editar al victima
+    function mostrarFormularioEditarVictima(idVictima, idDenuncia) {
+    const contenedor = document.getElementById("formulario-victima-container");
+    contenedor.innerHTML = '<div class="p-2 text-center">Cargando...</div>';
+    contenedor.style.display = "block";
+
+    fetch(`/victima/${idVictima}/editar-resumen`)
+        .then(res => res.text())
+        .then(html => {
+            contenedor.innerHTML = html;
+
+            const form = document.getElementById("form-editar-victima");
+            if (form) {
+                const inputs = form.querySelectorAll("input[type='text'], textarea");
+                inputs.forEach(input => {
+                    input.style.textTransform = "uppercase"; // Visual
+                    input.addEventListener("input", () => {
+                        input.value = input.value.toUpperCase(); // Lógica real
+                    });
+                });
+            }            
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+
+                fetch(`/victima/${idVictima}`, {
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: formData
+                })
+                    .then(res => {
+                        if (!res.ok) throw new Error();
+                        return res.json();
+                    })
+                    .then(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Datos de la víctima actualizados',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                        return fetch(`/denuncias/resumen/${idDenuncia}`);
+                    })
+                    .then(res => res.text())
+                    .then(html => {
+                        document.getElementById('resumen-section').innerHTML = html;
+                        history.pushState({ vista: 'resumen' }, '', '#resumen');
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error al actualizar los datos de la víctima',
+                        });
+                    });
+            });
+        })
+        .catch(() => {
+            contenedor.innerHTML = '<div class="alert alert-danger">Error al cargar el formulario.</div>';
+        });
+    }
+
+    //-----------------------------------------AGREGAR FAMILIA DE LA VICTIMA----------------------------------------------------------
+    // Funcion para agregar familiares a una victima
+    function mostrarFormularioFamiliarVictima(victimaId, denunciaId) {
+    const contenedor = document.getElementById("formulario-familiar-container");
+    contenedor.innerHTML = '<div class="p-2 text-center">Cargando...</div>';
+    contenedor.style.display = "block";
+
+    fetch(`/familia-victima/create?victima_id=${victimaId}`)
+        .then(res => res.text())
+        .then(html => {
+            contenedor.innerHTML = html;
+
+            const form = document.querySelector("#form-familia-victima");
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+
+                fetch("/familia-victima", {
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: formData
+                })
+                .then(() => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Familiar guardado correctamente',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    return fetch(`/denuncias/resumen/${denunciaId}`);
+                })
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById("resumen-section").innerHTML = html;
+                    history.pushState({ vista: 'resumen' }, '', '#resumen');
+                })
+                .catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al guardar el familiar',
+                    });
+                });
+
+            });
+        })
+        .catch(() => {
+            contenedor.innerHTML = '<div class="alert alert-danger">Error al cargar el formulario.</div>';
+        });
+    }
+
+
+    //-------------------------------------------------INCOMPLETOS-----------------------------------------------------------
     // Boton para mostrar casos incompletos
     document.addEventListener("DOMContentLoaded", () => {
         const btnIncompletos = document.getElementById('btn-mostrar-incompletos');
@@ -2299,7 +2473,11 @@
                 break;
             case 'tabla_orientaciones':
                 document.getElementById('formularios-orientacion-container').style.display = 'block';
-                break;            
+                break;    
+            case 'tabla_intervenciones':
+                document.getElementById('formularios-intervencion-container').style.display = 'block';
+                break;
+        
             case 'reportes':
                 document.getElementById('seccion-reportes').style.display = 'block';
                 break;

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Documento
+    Familia Victimas
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Documento') }}
+                                {{ __('Familia Victimas') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('documento.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('familia-victima.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -36,26 +36,36 @@
                                     <tr>
                                         <th>No</th>
                                         
-									<th >Numero</th>
-									<th >Expedido</th>
-									<th >Id Tipo Documento</th>
+									<th >Nombre</th>
+									<th >Apellidos</th>
+									<th >Parentesco</th>
+									<th >Sexo</th>
+									<th >Edad</th>
+									<th >Ocupacion</th>
+									<th >Observacion</th>
+									<th >Victima Id</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($documentos as $documento)
+                                    @foreach ($familiaVictimas as $familiaVictima)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-										<td >{{ $documento->numero }}</td>
-										<td >{{ $documento->expedido }}</td>
-                                        <td >{{ $documento->tipoDocumento->nombre ?? 'N/A' }}</td>
+										<td >{{ $familiaVictima->nombre }}</td>
+										<td >{{ $familiaVictima->apellidos }}</td>
+										<td >{{ $familiaVictima->parentesco }}</td>
+										<td >{{ $familiaVictima->sexo }}</td>
+										<td >{{ $familiaVictima->edad }}</td>
+										<td >{{ $familiaVictima->ocupacion }}</td>
+										<td >{{ $familiaVictima->observacion }}</td>
+										<td >{{ $familiaVictima->victima_id }}</td>
 
                                             <td>
-                                                <form action="{{ route('documento.destroy', $documento->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('documento.show', $documento->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('documento.edit', $documento->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('familia-victima.destroy', $familiaVictima->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('familia-victima.show', $familiaVictima->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('familia-victima.edit', $familiaVictima->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -68,15 +78,8 @@
                         </div>
                     </div>
                 </div>
-{!! $documentos->links() !!}
+                {!! $familiaVictimas->withQueryString()->links() !!}
             </div>
         </div>
     </div>
 @endsection
-
-
-
-
-
-
-

@@ -149,7 +149,7 @@
         {{-- Número de Caso --}}
         <div class="col-md-4 input-float">
             <i class="material-icons">confirmation_number</i>
-            <label for="num_caso">Número de caso *</label>
+            <label for="num_caso">Numero CUD *</label>
             <input type="text" name="num_caso" id="num_caso"
                    class="@error('num_caso') is-invalid @enderror"
                    value="{{ old('num_caso', $denuncia?->num_caso) }}">
@@ -391,10 +391,42 @@
         <div class="card card-form mb-4">
         <h5 class="mb-4">🧍 Lugar de la Agresion</h5>
             <div class="row">
-
-               
-
-<!-- meter datos de domicilio-->
+                <div class="col-md-6 input-float">
+                <label for="distrito">Distrito Urbano</label>
+                    <select name="distrito" id="distrito">
+                        <option value=""></option>
+                        <option value="Distrito 1 (El Molino)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 1 (El Molino)' ? 'selected' : '' }}>Distrito 1 (El Molino)</option>
+                        <option value="Distrito 2 (San Roque)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 2 (San Roque)' ? 'selected' : '' }}>Distrito 2 (San Roque)</option>
+                        <option value="Distrito 3 (Las Panosas)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 3 (Las Panosas)' ? 'selected' : '' }}>Distrito 3 (Las Panosas)</option>
+                        <option value="Distrito 4 (La Pampa)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 4 (La Pampa)' ? 'selected' : '' }}>Distrito 4 (La Pampa)</option>
+                        <option value="Distrito 5 (Villa Fatima)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 5 (Villa Fatima)' ? 'selected' : '' }}>Distrito 5 (Villa Fatima)</option>
+                        <option value="Distrito 6 (Tomatitas)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 6 (Tomatitas)' ? 'selected' : '' }}>Distrito 6 (Tomatitas)</option>
+                        <option value="Distrito 7 (Zona Mercado Campesion)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 7 (Zona Mercado Campesion)' ? 'selected' : '' }}>Distrito 7 (Zona Mercado Campesion)</option>
+                        <option value="Distrito 8 (Zona Villa Avaroa)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 8 (Zona Villa Avaroa)' ? 'selected' : '' }}>Distrito 8 (Zona Villa Avaroa)</option>
+                        <option value="Distrito 9 (Zona Palmarcito)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 9 (Zona Palmarcito)' ? 'selected' : '' }}>Distrito 9 (Zona Palmarcito)</option>
+                        <option value="Distrito 10 (Zona Morros Blancos)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 10 (Zona Morros Blancos)' ? 'selected' : '' }}>Distrito 10 (Zona Morros Blancos)</option>
+                        <option value="Distrito 11 (ZonaSan Geronimo)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 11 (ZonaSan Geronimo)' ? 'selected' : '' }}>Distrito 11 (ZonaSan Geronimo)</option>
+                        <option value="Distrito 12 (Zona Miraflores)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 12 (Zona Miraflores)' ? 'selected' : '' }}>Distrito 12 (Zona Miraflores)</option>
+                        <option value="Distrito 13 (Zona SENAC)" {{ old('distrito', $denuncia?->distrito) == 'Distrito 13 (Zona SENAC)' ? 'selected' : '' }}>Distrito 13 (Zona SENAC)</option>
+                    </select>
+                </div>
+                <div class="col-md-6 input-float">
+                    <label for="distrito_rural">Distrito Rural</label>
+                    <select name="distrito_rural" id="distrito_rural">
+                        <option value=""></option>
+                        <option value="San Andres" {{ old('distrito_rural', $denuncia?->distrito) == 'San Andres' ? 'selected' : '' }}>San Andres</option>
+                        <option value="Tolomosa" {{ old('distrito_rural', $denuncia?->distrito) == 'Tolomosa' ? 'selected' : '' }}>Tolomosa</option>
+                        <option value="Sella Cercado" {{ old('distrito_rural', $denuncia?->distrito) == 'Sella Cercado' ? 'selected' : '' }}>Sella Cercado</option>
+                        <option value="Santa Ana" {{ old('distrito_rural', $denuncia?->distrito) == 'Santa Ana' ? 'selected' : '' }}>Santa Ana</option>
+                        <option value="San Agustin" {{ old('distrito_rural', $denuncia?->distrito) == 'San Agustin' ? 'selected' : '' }}>San Agustin</option>
+                        <option value="Papachacra" {{ old('distrito_rural', $denuncia?->distrito) == 'Papachacra' ? 'selected' : '' }}>Papachacra</option>
+                        <option value="Alto España" {{ old('distrito_rural', $denuncia?->distrito) == 'Alto España' ? 'selected' : '' }}>Alto España</option>
+                        <option value="Lazareto" {{ old('distrito_rural', $denuncia?->distrito) == 'Lazareto' ? 'selected' : '' }}>Lazareto</option>
+                        <option value="San Mateo" {{ old('distrito_rural', $denuncia?->distrito) == 'San Mateo' ? 'selected' : '' }}>San Mateo</option>
+                        <option value="Yesera" {{ old('distrito_rural', $denuncia?->distrito) == 'Yesera' ? 'selected' : '' }}>Yesera</option>
+                        <option value="Junacas" {{ old('distrito_rural', $denuncia?->distrito) == 'Junacas' ? 'selected' : '' }}>Junacas</option>
+                    </select>            
+                </div>
                 <div class="col-md-6 input-float">
                     <label for="zona_barrio">Zona/Barrio</label>
                     <input type="text" name="zona_barrio" id="zona_barrio" value="{{ old('zona_barrio', $denuncia?->zona_barrio) }}">

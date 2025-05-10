@@ -51,19 +51,19 @@
                         <div class="row g-2 align-items-end mb-4">
                             <div class="col-md-3">
                                 <label for="num_ficha" class="form-label">Número de Ficha</label>
-                                <input type="text" class="form-control" name="num_ficha" placeholder="Ej: 12345">
+                                <input type="text" class="form-control" name="num_ficha" placeholder="--/----">
                             </div>
                             <div class="col-md-3">
-                                <label for="num_equipo" class="form-label">Número de Equipo</label>
-                                <input type="text" class="form-control" name="num_equipo" placeholder="Ej: 002">
+                                <label for="num_equipo" class="form-label">Equipo</label>
+                                <input type="text" class="form-control" name="num_equipo" placeholder="">
                             </div>
                             <div class="col-md-4">
                                 <label for="nombre_usuaria" class="form-label">Nombre de Usuaria</label>
-                                <input type="text" class="form-control" name="nombre_usuaria" placeholder="Ej: María Pérez">
+                                <input type="text" class="form-control" name="nombre_usuaria" placeholder="Ej: MARIA PEREZ">
                             </div>
                             <div class="col-md-2 d-grid mt-2">
-            <button type="button" class="btn btn-danger" onclick="buscarIntervenciones()">🔍 Buscar</button>
-        </div>
+                                <button type="button" class="btn btn-danger" onclick="buscarIntervenciones()">🔍 Buscar</button>
+                            </div>
                         </div>
                     </form>
 
@@ -75,7 +75,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>Num Ficha</th>
-                                        <th>Num Equipo</th>
+                                        <th>Equipo</th>
                                         <th>Num TAR</th>
                                         <th>Nombre Usuaria</th>
                                         <th>Acciones</th>

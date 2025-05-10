@@ -16,6 +16,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\OficinaController;
+use App\Http\Controllers\FamiliaVictimaController;
 
 use App\Http\Controllers\OrientacionController;
 use App\Http\Controllers\IntervencionController;
@@ -25,6 +26,9 @@ use App\Http\Controllers\ReporteController;
 
 
 use App\Models\Accion;
+
+use App\Models\Denuncia;
+
 
 
 // routes/web.php
@@ -85,6 +89,15 @@ Route::get('/psicologico', [RegistrarDenunciaController::class, 'create'])
 Route::get('/admin/asignar', [DenunciaController::class, 'vistaAsignar'])
     ->middleware('auth')
     ->name('admin.asignar');
+
+
+// Muestra la tabla de denuncias en la vista del Administrador
+Route::get('/admin/tabla-denuncias', function () {
+    $denuncias = Denuncia::with(['victima', 'agresor'])->get();
+    return view('denuncia.tabla_denuncias_admin', compact('denuncias'));
+});
+
+Route::delete('/denuncias/{id}', [DenunciaController::class, 'destroy']);
 
 
 // ========== REGISTRO MANUAL ==========
@@ -157,6 +170,11 @@ Route::resource('roles', RoleController::class);
 Route::resource('oficinas', OficinaController::class);
 Route::resource('asignaciones', AsignacionController::class);
 
+Route::resource('familia-victima', FamiliaVictimaController::class);
+
+Route::get('/familia-victima/create', [FamiliaVictimaController::class, 'createFromResumen'])
+     ->name('familia-victima.create');
+
 
 // Rutas especiales para Orientaciones
 // Buscador personalizado
@@ -203,7 +221,7 @@ Route::get('/denuncias/{id}/acciones', function ($id) {
 
 // Muestra la vista resumen de una denuncia, incluyendo víctima, agresor y acciones
 Route::get('/denuncias/resumen/{id}', function ($id) {
-    $denuncia = \App\Models\Denuncia::with(['victima', 'agresor', 'acciones'])->findOrFail($id);
+    $denuncia = \App\Models\Denuncia::with(['victima', 'agresor', 'acciones', 'victima.familiares'])->findOrFail($id);
     return view('denuncia.resumen', compact('denuncia'));
 });
 
@@ -365,6 +383,8 @@ Route::get('/agresor/{id}/editar-resumen', [AgresorController::class, 'editarDes
 Route::post('/agresor/{id}', [AgresorController::class, 'actualizarDesdeResumen']);
 
 
+Route::get('victima/{id}/editar-resumen', [VictimaController::class, 'editarDesdeResumen']);
+Route::post('victima/{id}', [VictimaController::class, 'actualizarDesdeResumen']);
 
 
 /*Route::get('phpinfo', function () {

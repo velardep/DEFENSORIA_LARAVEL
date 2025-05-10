@@ -45,7 +45,7 @@
 </style>
 <h4 style="margin-left: 16px; font-size: 2rem;"> Casos Todo</h4>
 
-<div class="tabla-denuncias-container">
+<div class="tabla-denuncias-admin">
     <table class="tabla-denuncias">
         <thead>
             <tr>
@@ -65,11 +65,7 @@
         </thead>
         <tbody>
             @forelse ($denuncias as $denuncia)
-            <tr @if($denuncia->estado === 'Archivado') 
-                    style="background-color:rgb(255, 211, 205);" {{-- gris para archivado --}}
-                @elseif($denuncia->emblematico === 'SI') 
-                    style="background-color: #fff3cd;" {{-- amarillo para emblemático --}}
-                @endif>
+            <tr>
                 <td>{{ $denuncia->fecha }}</td>
                 <td>{{ $denuncia->num_caso }}</td>
                 <td>{{ $denuncia->cod_slim }}</td>
@@ -81,15 +77,16 @@
 
 
                 <td>
-                    <button type="button" class="btn btn-info btn-ver-resumen" data-id="{{ $denuncia->id }}">
-                        <i class="fas fa-eye"></i> Acciones
-                    </button>
-                </td>
-                <td>
-                    <a href="{{ route('reporte.denuncia.pdf', $denuncia->id) }}" class="btn btn-danger" target="_blank">
-                        <i class="fas fa-file-pdf"></i> PDF
-                    </a>
-                </td>
+    <button type="button" class="btn btn-primary btn-ver-detalles" data-id="{{ $denuncia->id }}">
+        <i class="fas fa-search"></i> Ver Detalles
+    </button>
+</td>
+<td>
+    <button type="button" class="btn btn-danger btn-eliminar-denuncia" data-id="{{ $denuncia->id }}">
+        <i class="fas fa-trash"></i> Eliminar
+    </button>
+</td>
+
 
             </tr>
             @empty

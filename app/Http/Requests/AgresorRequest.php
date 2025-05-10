@@ -45,6 +45,7 @@ class AgresorRequest extends FormRequest
             'expedido' => 'string',
             'tipo_documento' => 'string',
 
+            'distrito' => 'string',
             'zona_barrio' => 'string',
 			'avenida_calle' => 'string',
 			'nom_edificio' => 'string',
@@ -59,7 +60,9 @@ class AgresorRequest extends FormRequest
 			'empresa_zona_barrio' => 'string',
 			'empresa_avenida_calle' => 'string',
 			'empresa_telefono' => 'string',
-			'empresa_num_edificio' => 'string'
+			'empresa_num_edificio' => 'string',
+
+            'adulto_mayor' => 'string'
         ];
     }
 }

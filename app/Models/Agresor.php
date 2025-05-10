@@ -36,7 +36,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property $num_documento
  * @property $expedido
  * @property $tipo_documento
- *
+ * 
+ * @property $distrito_rural
+ * @property $distrito
  * @property $zona_barrio
  * @property $avenida_calle
  * @property $nom_edificio
@@ -51,6 +53,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property $empresa_avenida_calle
  * @property $empresa_telefono
  * @property $empresa_num_edificio
+ * 
+ * 
+ * @property $adulto_mayor
  * 
  * @property $provisional
  * @property $user_id
@@ -79,9 +84,9 @@ class Agresor extends Model
     protected $fillable = ['nombre', 'ap_paterno', 'ap_materno', 'sexo','lugr_nacimiento', 'especifique_lugar',
     'fecha_nacimiento', 'edad', 'residencia_habitual', 'especifique_residencia', 'estado_civil', 'logro_educativo', 
     'ultimo_curso', 'actividad', 'especifique_actividad', 'ingreso', 'monto',  'idioma', 'especifique_idioma', 'num_documento', 
-    'expedido', 'tipo_documento', 'zona_barrio', 'avenida_calle', 'nom_edificio', 'telefono_domicilio', 
+    'expedido', 'tipo_documento', 'distrito', 'distrito_rural', 'zona_barrio', 'avenida_calle', 'nom_edificio', 'telefono_domicilio', 
     'num_vivienda', 'num_piso_departamento', 'lugar_domicilio', 'especifique', 'nombre_empresa', 'empresa_zona_barrio',
-    'empresa_avenida_calle', 'empresa_telefono', 'empresa_num_edificio', 'provisional', 'user_id'];    
+    'empresa_avenida_calle', 'empresa_telefono', 'empresa_num_edificio', 'provisional', 'user_id', 'adulto_mayor'];    
 
     
     

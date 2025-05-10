@@ -85,37 +85,89 @@
                 <div class="icon-circle bg-warning text-white me-3">
                     <i class="material-icons">person</i>
                 </div>
-                <div>
+                <div class="w-100">
                     <strong>Víctima:</strong><br>
-                    <span class="text-muted">{{ $denuncia->victima->nombre }} {{ $denuncia->victima->ap_paterno }}</span><br>
-                    <small class="text-muted">{{ $denuncia->victima->tipo_documento ?? 'CI' }}: {{ $denuncia->victima->num_documento ?? 'No registrado' }}</small><br>
-                    <small class="text-muted">Sexo: {{ $denuncia->victima->sexo }}</small><br>
-                    <small class="text-muted">Edad: {{ $denuncia->victima->edad }}</small><br>
-
+                    <div class="row">
+                        <div class="col-md-6">
+                            <small class="text-muted">Nombre: {{ $denuncia->victima->nombre }} {{ $denuncia->victima->ap_paterno }}</small><br>
+                            <small class="text-muted">Documento: {{ $denuncia->victima->tipo_documento ?? 'CI' }}: {{ $denuncia->victima->num_documento ?? 'No registrado' }}</small><br>
+                        </div>
+                        <div class="col-md-6">
+                            <small class="text-muted">Sexo: {{ $denuncia->victima->sexo }}</small><br>
+                            <small class="text-muted">Edad: {{ $denuncia->victima->edad }}</small>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+
+            {{-- Familiares --}}
+            @if($denuncia->victima->familiares->isEmpty())
+                <div class="d-flex align-items-start mb-4">
+                    <div class="icon-circle bg-secondary text-white me-3">
+                        <i class="material-icons">group</i>
+                    </div>
+                    <div>
+                        <strong>Familiares:</strong><br>
+                        <span class="text-muted">No se han registrado familiares aún.</span>
+                    </div>
+                </div>
+            @else
+                @foreach($denuncia->victima->familiares as $familiar)
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="icon-circle bg-secondary text-white me-3">
+                            <i class="material-icons">group</i>
+                        </div>
+                        <div class="w-100">
+                            <strong>Familiar:</strong><br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <small class="text-muted">Nombre: {{ $familiar->nombre }} {{ $familiar->apellidos }}</small><br>
+                                    <small class="text-muted">Parentesco: {{ $familiar->parentesco }}</small><br>
+                                    <small class="text-muted">Sexo: {{ $familiar->sexo }}</small><br>
+                                </div>
+                                <div class="col-md-6">
+                                    <small class="text-muted">Edad: {{ $familiar->edad }}</small><br>
+                                    <small class="text-muted">Ocupación: {{ $familiar->ocupacion }}</small><br>
+                                    <small class="text-muted">Observación: {{ $familiar->observacion }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+
             {{-- Agresor --}}
-            <div class="d-flex align-items-start">
+            <div class="d-flex align-items-start mb-4">
                 <div class="icon-circle bg-danger text-white me-3">
                     <i class="material-icons">person</i>
                 </div>
-                <div>
+                <div class="w-100">
                     <strong>Agresor:</strong><br>
-                    <span class="text-muted">{{ $denuncia->agresor->nombre }} {{ $denuncia->agresor->ap_paterno }}</span><br>
-                    <small class="text-muted">{{ $denuncia->agresor->tipo_documento ?? 'CI' }}: {{ $denuncia->agresor->num_documento ?? 'No registrado' }}</small><br>
-                    <small class="text-muted">Sexo: {{ $denuncia->agresor->sexo }}</small><br>
-                    <small class="text-muted">Edad: {{ $denuncia->agresor->edad }}</small><br>
-
+                    <div class="row">
+                        <div class="col-md-6">
+                            <small class="text-muted">Nombre: {{ $denuncia->agresor->nombre }} {{ $denuncia->agresor->ap_paterno }}</small><br>
+                            <small class="text-muted">Documento: {{ $denuncia->agresor->tipo_documento ?? 'CI' }}: {{ $denuncia->agresor->num_documento ?? 'No registrado' }}</small><br>
+                        </div>
+                        <div class="col-md-6">
+                            <small class="text-muted">Sexo: {{ $denuncia->agresor->sexo }}</small><br>
+                            <small class="text-muted">Edad: {{ $denuncia->agresor->edad }}</small>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-
-
-
-
-
         </div>
+        
+    {{-- Botón para añadir familiar --}}
+        <div class="resumen-card mb-3">
+            <p><strong>Agregar Familiar</strong>
+            <button class="btn btn-outline-success btn-lg px-5 w-100" onclick="mostrarFormularioFamiliarVictima({{ $denuncia->victima->id }}, {{ $denuncia->id }})">
+                Añadir Familiar
+            </button>
+        </div>
+
+        <div id="formulario-familiar-container" style="display: none;" class="mt-4"></div>
 
         <div class="resumen-card mb-3">
             <p><strong>Testimonio:</strong> {{ $denuncia->testimonio }}</p>
@@ -201,7 +253,7 @@
             <h4>Detalles</h4>
                 <hr>
                 <p><strong>Código SLIM:</strong> {{ $denuncia->cod_slim }}</p>
-                <p><strong>Número de Caso:</strong> {{ $denuncia->num_caso }}</p>
+                <p><strong>Número CUD:</strong> {{ $denuncia->num_caso }}</p>
                 <p><strong>Fecha:</strong> {{ $denuncia->fecha }}</p>
                 <p><strong>Estado:</strong> {{ $denuncia->estado }}</p>
                 <p><strong>Emblemático:</strong> {{ $denuncia->emblematico }}</p>
@@ -234,6 +286,21 @@
         <div id="formulario-agresor-container" style="display: none;" class="mt-4"></div>
         <input type="hidden" id="denuncia-id-global" value="{{ $denuncia->id }}">
     </div>
+
+
+    {{-- Complementar datos de la víctima --}}
+<div class="card p-4 mb-4" style="width: 95%; margin: auto;">
+    <h5 class="mb-3">Datos de la Víctima</h5>
+    <div class="text-end">
+        <button class="btn btn-outline-primary btn-lg px-5 w-100" onclick="mostrarFormularioEditarVictima({{ $denuncia->victima->id }}, {{ $denuncia->id }})">
+            Complementar Datos de la Víctima
+        </button>
+    </div>
+
+    <div id="formulario-victima-container" style="display: none;" class="mt-4"></div>
+</div>
+
+
 
 
 </div>

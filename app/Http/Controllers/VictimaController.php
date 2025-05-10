@@ -143,4 +143,18 @@ class VictimaController extends Controller
         return view('denuncia.tabla_victimas', compact('victimas'));
     }
     
+    public function editarDesdeResumen($id)
+{
+    $victima = Victima::findOrFail($id);
+    return view('victima.formulario_edicion', compact('victima'));
+}
+
+public function actualizarDesdeResumen(Request $request, $id)
+{
+    $victima = Victima::findOrFail($id);
+    $victima->update($request->all());
+
+    return response()->json(['success' => true]);
+}
+
 }

@@ -207,6 +207,12 @@
                     </li>-->
 
                     <li>
+                        <a href="javascript:void(0);" id="btn-mostrar-denuncia">
+                            <i class="fas fa-folder-open"></i> Denuncias
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="javascript:void(0);" id="btn-mostrar-derivar">
                             <i class="fas fa-random"></i> Derivar Denuncias
                         </a>
@@ -293,6 +299,13 @@
                 <div id="contenedor-formulario-delito" style="display: none;"></div><!-- Aquí se carga el formulario de crear/editar delito -->
                 <div id="contenedor-show-delito" style="display: none;"></div><!-- Aquí se carga el detalle del delito -->
 
+
+
+                <div id="contenedor-tabla-denuncias" style="display: none;"></div>
+
+                <div id="contenedor-detalle-denuncia" style="display: none;"></div>
+
+
             </div>
         </div>
 
@@ -354,6 +367,98 @@
 
 
 <script>
+document.getElementById('btn-mostrar-denuncia').addEventListener('click', function () {
+    const contenedor = document.getElementById('contenedor-tabla-denuncias');
+
+    // Ocultar otros contenedores si los hay
+    document.querySelectorAll('[id^="contenedor-"]').forEach(div => div.style.display = 'none');
+
+    // Mostrar el contenedor y cargar contenido
+    contenedor.innerHTML = '<div class="p-3">Cargando denuncias...</div>';
+    contenedor.style.display = 'block';
+
+    fetch('/admin/tabla-denuncias')
+        .then(res => res.text())
+        .then(html => {
+            contenedor.innerHTML = html;
+            history.pushState({ vista: 'tabla-denuncias' }, '', '#tabla-denuncias');
+        })
+        .catch(() => {
+            contenedor.innerHTML = '<div class="alert alert-danger">Error al cargar la tabla.</div>';
+        });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Mostrar resumen de denuncia
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('.btn-ver-detalles')) {
+            const id = e.target.closest('.btn-ver-detalles').dataset.id;
+            const contenedor = document.getElementById('contenedor-detalle-denuncia');
+            contenedor.innerHTML = '<div class="p-2 text-center">Cargando detalles...</div>';
+            contenedor.style.display = 'block';
+
+            fetch(`/denuncias/resumen/${id}`)
+                .then(res => res.text())
+                .then(html => {
+                    contenedor.innerHTML = html;
+                    history.pushState({ vista: 'detalle-denuncia' }, '', `#detalle-${id}`);
+                })
+                .catch(() => {
+                    contenedor.innerHTML = '<div class="alert alert-danger">Error al cargar los detalles.</div>';
+                });
+        }
+    });
+
+    // Eliminar denuncia
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('.btn-eliminar-denuncia')) {
+            const id = e.target.closest('.btn-eliminar-denuncia').dataset.id;
+
+            Swal.fire({
+                title: '¿Eliminar esta denuncia?',
+                text: 'Esta acción no se puede deshacer.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    fetch(`/denuncias/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        }
+                    })
+                    .then(res => {
+                        if (!res.ok) throw new Error();
+                        return res.json();
+                    })
+                    .then(() => {
+                        Swal.fire('Eliminado', 'La denuncia fue eliminada.', 'success');
+                        // Opcional: recargar tabla
+                        return fetch('/admin/tabla-denuncias');
+                    })
+                    .then(res => res.text())
+                    .then(html => {
+                        document.querySelector('.tabla-denuncias-admin').innerHTML = html;
+                    })
+                    .catch(() => {
+                        Swal.fire('Error', 'No se pudo eliminar la denuncia.', 'error');
+                    });
+                }
+            });
+        }
+    });
+
+});
+
+
+
+
+
+
 //--------------------SCRIPTS PARA MANEJAR ASIGNACIONES------------------
 document.addEventListener("DOMContentLoaded", () => {
 

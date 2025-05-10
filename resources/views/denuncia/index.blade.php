@@ -162,10 +162,10 @@
                                                 </form>-->
                                             </td>
                                             <td>
-                    <a href="{{ route('reporte.denuncia.pdf', $denuncia->id) }}" class="btn btn-danger" target="_blank">
-                        <i class="fas fa-file-pdf"></i> PDF
-                    </a>
-                </td>
+                                                <a href="{{ route('reporte.denuncia.pdf', $denuncia->id) }}" class="btn btn-danger" target="_blank">
+                                                    <i class="fas fa-file-pdf"></i> PDF
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

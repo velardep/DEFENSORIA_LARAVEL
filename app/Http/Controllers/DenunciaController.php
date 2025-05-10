@@ -98,6 +98,15 @@ class DenunciaController extends Controller
         $data['user_id'] = auth()->id(); // Asociar al usuario actual
         $data['oficina_id'] = auth()->user()->oficina_id; // Asociar la oficina del usuario actual (esto te faltaba)
 
+
+        // 🚀 Concatenar las iniciales al código SLIM
+        $oficina = auth()->user()->oficina;
+        $codigoBase = $request->input('cod_slim'); // Por ejemplo: 25/2024
+        $data['cod_slim'] = $oficina->codigo_slim . '-' . $codigoBase;
+        // Resultado: "SLIM Central - S1/25/2024"
+        
+
+
         $denuncia = Denuncia::create($data);
 
         Victima::where('id', $denuncia->id_victima) // Aquí se actualiza la víctima relacionada
@@ -197,13 +206,14 @@ class DenunciaController extends Controller
     }
     
     // Elimina una denuncia
-    public function destroy($id): RedirectResponse
-    {
-        Denuncia::find($id)->delete();
+    public function destroy($id)
+{
+    $denuncia = Denuncia::findOrFail($id);
+    $denuncia->delete();
 
-        return Redirect::route('denuncia.index')
-            ->with('success', 'Denuncia deleted successfully');
-    }
+    return response()->json(['mensaje' => 'Denuncia eliminada']);
+}
+
 
     // Filtra denuncias desde el formulario de búsqueda
     public function buscar(Request $request)
@@ -211,11 +221,17 @@ class DenunciaController extends Controller
         /* Permite buscar denuncias por número de caso, nombre de la víctima o año de registro. 
         Aplica restricciones según el rol del usuario.*/
         $query = Denuncia::query()->with(['victima', 'agresor']);
-
         if (auth()->user()->rol_id != 1) { // Si NO es admin
-            $query->where('user_id', auth()->id());
+            $query->where(function ($q) {
+                $q->where('user_id', auth()->id())
+                  ->orWhereIn('id', function ($sub) {
+                      $sub->select('denuncia_id')
+                          ->from('asignaciones')
+                          ->where('user_id', auth()->id());
+                  });
+            });
         }
-
+        
         if ($request->cod_slim) {
             $query->where('cod_slim', $request->cod_slim);
         }
@@ -225,10 +241,14 @@ class DenunciaController extends Controller
                 $q->where('nombre', 'like', '%' . $request->nombre . '%');
             });
         }
-
-        if ($request->anio) {
-            $query->whereYear('fecha', $request->anio);
+        if ($request->fecha_inicio && $request->fecha_fin) {
+            $query->whereBetween('fecha', [$request->fecha_inicio, $request->fecha_fin]);
+        } elseif ($request->fecha_inicio) {
+            $query->whereDate('fecha', '>=', $request->fecha_inicio);
+        } elseif ($request->fecha_fin) {
+            $query->whereDate('fecha', '<=', $request->fecha_fin);
         }
+        
 
         $denuncias = $query->get();
 
@@ -240,21 +260,40 @@ class DenunciaController extends Controller
     {
         /* Realiza la misma lógica que buscar, pero está diseñada para ser usada con peticiones AJAX, 
         devolviendo solo la vista renderizada para insertar en la interfaz */
+        $cod_slim = $request->cod_slim;
         $nombre = $request->nombre;
         $anio = $request->anio;
 
         $denuncias = Denuncia::with(['victima', 'agresor'])
             ->when(auth()->user()->rol_id != 1, function ($query) {
-                $query->where('user_id', auth()->id());
+                $query->where(function ($q) {
+                    $q->where('user_id', auth()->id())
+                      ->orWhereIn('id', function ($sub) {
+                          $sub->select('denuncia_id')
+                              ->from('asignaciones')
+                              ->where('user_id', auth()->id());
+                      });
+                });
             })
+            
+            ->when($cod_slim, function ($query, $cod_slim) {
+                $query->where('cod_slim', 'LIKE', "%$cod_slim%");
+            })            
             ->when($nombre, function ($query, $nombre) {
                 $query->whereHas('victima', function ($q) use ($nombre) {
                     $q->where('nombre', 'LIKE', "%$nombre%");
                 });
             })
-            ->when($anio, function ($query, $anio) {
-                $query->whereYear('fecha', $anio);
+            ->when($request->fecha_inicio && $request->fecha_fin, function ($query) use ($request) {
+                $query->whereBetween('fecha', [$request->fecha_inicio, $request->fecha_fin]);
             })
+            ->when($request->fecha_inicio && !$request->fecha_fin, function ($query) use ($request) {
+                $query->whereDate('fecha', '>=', $request->fecha_inicio);
+            })
+            ->when($request->fecha_fin && !$request->fecha_inicio, function ($query) use ($request) {
+                $query->whereDate('fecha', '<=', $request->fecha_fin);
+            })
+            
             ->latest()
             ->get();
 

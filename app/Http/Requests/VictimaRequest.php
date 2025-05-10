@@ -45,17 +45,22 @@ class VictimaRequest extends FormRequest
             'num_documento' => 'string',
             'expedido' => 'string',
             'tipo_docmuento' => 'string',
-
+ 
+            'distrito' => 'string',
             'zona_barrio' => 'string',
 			'avenida_calle' => 'string',
 			'nom_edificio' => 'string',
-			'telefono_domicilio' => 'string',
+			'telefono_referencia' => 'string',
 			'num_vivienda' => 'string',
 			'num_piso_departamento' => 'string',
 			'lugar_domicilio' => 'string',
-			'especifique' => 'string'
+			'especifique' => 'string',
 
-            
+            'adulto_mayor' => 'string',
+
+            'discapacidad' => 'string',
+            'grado_discapacidad' => 'string'
+
             
 
 

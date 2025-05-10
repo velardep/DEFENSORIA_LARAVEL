@@ -77,7 +77,7 @@
 
 
 
-<div id="contenedor-tabla" class="tabla-container">
+                        <div id="contenedor-tabla" class="tabla-container">
                             <h4 class="ms-2 mb-3 fs-4">📋 Lista de Orientaciones Registradas</h4>
 
                             <table id="miTablaOrientaciones" class="table table-striped table-hover tabla-denuncias">

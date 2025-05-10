@@ -33,4 +33,12 @@ class Oficina extends Model
     protected $fillable = ['nombre', 'direccion'];
 
 
+    public function getInicialesAttribute()
+{
+    // Ejemplo: "Central" => "CN", "Defensoría de la Mujer" => "DM"
+    return collect(explode(' ', $this->nombre))
+        ->map(fn($palabra) => strtoupper(substr($palabra, 0, 1)))
+        ->join('');
+}
+
 }

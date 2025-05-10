@@ -208,3 +208,31 @@
 
     </div>
 </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Solo afecta los inputs de texto dentro de la card de intervención
+    const cardIntervencion = document.querySelector('.card-form h5')?.textContent.includes('Intervención')
+        ? document.querySelector('.card-form')
+        : null;
+
+    if (cardIntervencion) {
+        const inputs = cardIntervencion.querySelectorAll("input[type='text'], textarea");
+
+        inputs.forEach(function (input) {
+            input.style.textTransform = "uppercase"; // visual
+
+            input.addEventListener("input", function () {
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+                const upper = this.value.toUpperCase();
+                if (this.value !== upper) {
+                    this.value = upper;
+                    this.setSelectionRange(start, end);
+                }
+            });
+        });
+    }
+});
+</script>

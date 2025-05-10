@@ -4,8 +4,7 @@
     <thead>
         <tr>
             <th>Numero de Ficha</th>
-            <th>Numero de Equipo</th>
-    
+            <th>Equipo</th>
             <th>Num TAR</th>
             <th>Nombre Usuaria</th>
            

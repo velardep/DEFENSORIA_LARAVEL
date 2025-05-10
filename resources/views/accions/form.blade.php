@@ -135,42 +135,58 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card-form">
+
             <div class="input-float">
                 <i class="material-icons">edit</i>
                 <label for="acciones">Acciones</label>
-                <input type="text" name="acciones" class="form-control @error('acciones') is-invalid @enderror"
-                       value="{{ old('acciones', $accion?->acciones) }}" id="acciones" placeholder="Acciones">
+                <input type="text" name="acciones" id="acciones"
+                       class="form-control @error('acciones') is-invalid @enderror"
+                       value="{{ old('acciones', $accion?->acciones) }}"
+                       placeholder="Acciones"
+                       style="text-transform: uppercase;"
+                       oninput="this.value = this.value.toUpperCase();">
                 {!! $errors->first('acciones', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
             </div>
 
             <div class="input-float">
                 <i class="material-icons">event</i>
                 <label for="fecha">Fecha</label>
-                <input type="date" name="fecha" class="form-control @error('fecha') is-invalid @enderror"
-                       value="{{ old('fecha', $accion?->fecha) }}" id="fecha" placeholder="Fecha">
+                <input type="date" name="fecha" id="fecha"
+                       class="form-control @error('fecha') is-invalid @enderror"
+                       value="{{ old('fecha', $accion?->fecha) }}"
+                       placeholder="Fecha">
                 {!! $errors->first('fecha', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
             </div>
 
             <div class="input-float">
                 <i class="material-icons">person</i>
                 <label for="tecnico">Técnico</label>
-                <input type="text" name="tecnico" class="form-control @error('tecnico') is-invalid @enderror"
-                       value="{{ old('tecnico', $accion?->tecnico) }}" id="tecnico" placeholder="Técnico">
+                <input type="text" name="tecnico" id="tecnico"
+                       class="form-control @error('tecnico') is-invalid @enderror"
+                       value="{{ old('tecnico', $accion?->tecnico) }}"
+                       placeholder="Técnico"
+                       style="text-transform: uppercase;"
+                       oninput="this.value = this.value.toUpperCase();">
                 {!! $errors->first('tecnico', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
             </div>
 
             <div class="input-float">
                 <i class="material-icons">assignment_ind</i>
                 <label for="denuncia_id">Denuncia ID</label>
-                <input type="text" name="denuncia_id" class="form-control @error('denuncia_id') is-invalid @enderror"
-                       value="{{ old('denuncia_id', $accion?->denuncia_id) }}" id="denuncia_id" placeholder="Denuncia ID" readonly>
-                {!! $errors->first('denuncia_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+                <input type="hidden" name="denuncia_id" value="{{ old('denuncia_id', $denuncia_id ?? $accion?->denuncia_id) }}">
             </div>
 
             <div class="text-end mt-4">
                 <button type="submit" class="btn-submit">Guardar</button>
             </div>
+
         </div>
     </div>
 </div>
+
+
+
+
+
+
 

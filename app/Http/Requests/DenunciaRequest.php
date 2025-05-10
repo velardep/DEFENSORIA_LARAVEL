@@ -42,7 +42,7 @@ class DenunciaRequest extends FormRequest
             'testimonio' => 'string',
             'completada' => 'string',
 
-
+            'distrito' => 'string',
             'zona_barrio' => 'string',
 			'avenida_calle' => 'string',
 			'nom_edificio' => 'string',
