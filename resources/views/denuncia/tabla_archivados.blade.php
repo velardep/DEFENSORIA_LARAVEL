@@ -50,7 +50,7 @@
         <thead>
             <tr>
                 <th>Fecha</th>
-                <th>Num Caso</th>
+                <th>Numero CUD</th>
                 <th>Cod Slim</th>
                 <th>Agresor</th>
                 <th>Víctima</th>

@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>Fecha</th>
-            <th>Número de Caso</th>
+            <th>Numero CUD</th>
             <th>Víctima</th>
             <th>Abogado Creador</th>
             <th>Oficina</th>

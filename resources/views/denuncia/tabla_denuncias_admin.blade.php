@@ -50,7 +50,7 @@
         <thead>
             <tr>
                 <th>Fecha</th>
-                <th>Num Caso</th>
+                <th>Numero CUD</th>
                 <th>Cod Slim</th>
                 <th>Agresor</th>
                 <th>Víctima</th>
@@ -77,15 +77,15 @@
 
 
                 <td>
-    <button type="button" class="btn btn-primary btn-ver-detalles" data-id="{{ $denuncia->id }}">
-        <i class="fas fa-search"></i> Ver Detalles
-    </button>
-</td>
-<td>
-    <button type="button" class="btn btn-danger btn-eliminar-denuncia" data-id="{{ $denuncia->id }}">
-        <i class="fas fa-trash"></i> Eliminar
-    </button>
-</td>
+                    <button type="button" class="btn btn-primary btn-ver-detalles" data-id="{{ $denuncia->id }}">
+                        <i class="fas fa-search"></i> Ver Detalles
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger btn-eliminar-denuncia" data-id="{{ $denuncia->id }}">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </td>
 
 
             </tr>

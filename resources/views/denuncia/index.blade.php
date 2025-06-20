@@ -69,7 +69,7 @@
 									<!--<th >Departamento</th>
 									<th >Nombre Servicio</th>
 									<th >Municipio</th>-->
-									<th >Num Caso</th>
+									<th >Numero CUD</th>
 									<th >Cod Slim</th>
                                     <th >Num Juzgado</th>
 

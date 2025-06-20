@@ -300,9 +300,8 @@
                 <div id="contenedor-show-delito" style="display: none;"></div><!-- Aquí se carga el detalle del delito -->
 
 
-
+                <!--Contenedor de Denuncias-->
                 <div id="contenedor-tabla-denuncias" style="display: none;"></div>
-
                 <div id="contenedor-detalle-denuncia" style="display: none;"></div>
 
 

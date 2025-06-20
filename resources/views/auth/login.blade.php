@@ -222,20 +222,20 @@ body {
                                             @enderror
                                         </div>
 
-                                        <!-- Recordarme -->
+                                        <!-- Recordarme 
                                         <div class="col-md-6">
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="remember">Recordarme</label>
                                             </div>
-                                        </div>
+                                        </div>-->
 
-                                        <!-- Olvidaste contraseña -->
+                                        <!-- Olvidaste contraseña 
                                         <div class="col-md-6 text-end">
                                             @if (Route::has('password.request'))
                                                 <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
                                             @endif
-                                        </div>
+                                        </div>-->
 
                                         <!-- Botón Ingresar -->
                                         <div class="col-12">
