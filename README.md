@@ -8,7 +8,7 @@
 
 Aplicación web desarrollada con Laravel que permite registrar, administrar y hacer seguimiento de denuncias o procesos, facilitando la labor del personal mediante una plataforma segura y escalable.
 
-## ⚙️ Requisitos del sistema
+## Requisitos del sistema
 
 - PHP ≥ 8.0  
 - Composer  
@@ -43,7 +43,7 @@ php artisan storage:link
 chmod -R 775 storage bootstrap/cache
 ```
 
-## ▶Ejecución en entorno local
+## Ejecución en entorno local
 
 ```bash
 php artisan serve
