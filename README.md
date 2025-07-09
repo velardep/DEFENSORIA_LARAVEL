@@ -4,7 +4,7 @@
   </a>
 </p>
 
-## 📌 Sistema de Gestión de Denuncias – Defensoría SLIM
+## Sistema de Gestión de Denuncias – Defensoría SLIM
 
 Aplicación web desarrollada con Laravel que permite registrar, administrar y hacer seguimiento de denuncias o procesos, facilitando la labor del personal mediante una plataforma segura y escalable.
 
@@ -15,7 +15,7 @@ Aplicación web desarrollada con Laravel que permite registrar, administrar y ha
 - MySQL (u otro motor compatible con Laravel)  
 - Extensiones PHP necesarias: `openssl`, `pdo`, `mbstring`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`, `fileinfo`
 
-## 🧩 Instalación del proyecto
+## Instalación del proyecto
 
 ```bash
 # Clonar el repositorio
@@ -43,7 +43,7 @@ php artisan storage:link
 chmod -R 775 storage bootstrap/cache
 ```
 
-## ▶️ Ejecución en entorno local
+## ▶Ejecución en entorno local
 
 ```bash
 php artisan serve
@@ -51,7 +51,7 @@ php artisan serve
 
 Abrir en el navegador: `http://127.0.0.1:8000`
 
-## 🛠️ Comandos útiles
+## Comandos útiles
 
 ```bash
 # Limpiar caché y configuración
@@ -64,7 +64,7 @@ php artisan migrate:fresh --seed
 php artisan test
 ```
 
-## 🧰 Tecnologías usadas
+## Tecnologías usadas
 
 - Laravel (Framework PHP – MVC)  
 - Blade, Bootstrap (Frontend)  
@@ -72,7 +72,7 @@ php artisan test
 - Eloquent ORM, Migraciones, Seeders  
 - Validación, Autenticación, Middleware  
 
-## 📸 Capturas de pantalla
+## Capturas de pantalla
 
 A continuación, algunas vistas del sistema en funcionamiento:
 
@@ -96,15 +96,15 @@ A continuación, algunas vistas del sistema en funcionamiento:
     <em>Panel de administración</em>
 </p>
 
-## 📄 Documentación
+## Documentación
 
 - [Manual de Usuario (PDF)](docs/Manual_Usuario.pdf)
 - [Manual de Administrador (PDF)](docs/Manual_Administrador.pdf)
 
-## 👩‍💼 Destinado a
+## Destinado a
 
 Personal técnico y administrativo para facilitar la gestión y trazabilidad de denuncias de violencia.
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está licenciado bajo la licencia MIT.
