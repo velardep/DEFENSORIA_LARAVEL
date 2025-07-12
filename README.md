@@ -50,6 +50,13 @@ php artisan serve
 
 Abrir en el navegador: `http://127.0.0.1:8000`
 
+## Usuarios y Contraseñas de prueba
+correo: alan@gmail.com
+contraseña: 123
+
+correo: admin@gmail.com
+contraseña: 123456
+
 ## Comandos útiles
 
 ```bash
