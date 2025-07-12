@@ -12,7 +12,7 @@ Aplicación web desarrollada con Laravel que permite registrar, administrar y ha
 
 - PHP ≥ 8.0  
 - Composer  
-- MySQL (u otro motor compatible con Laravel)  
+- MySQL, PpostreSQL (u otro motor compatible con Laravel)  
 - Extensiones PHP necesarias: `openssl`, `pdo`, `mbstring`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`, `fileinfo`
 
 ## Instalación del proyecto
@@ -33,15 +33,14 @@ php artisan key:generate
 
 # Configurar .env con tus credenciales de base de datos
 
-# Ejecutar migraciones (y seeders si existen)
-php artisan migrate
-
 # Crear enlace simbólico para almacenamiento (si se usan archivos)
 php artisan storage:link
 
 # Asignar permisos adecuados (en Linux)
 chmod -R 775 storage bootstrap/cache
 ```
+
+## Restaurar base de datos backup_SLIM.sql en el motor de base de datos seleccionado
 
 ## Ejecución en entorno local
 
